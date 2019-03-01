@@ -378,7 +378,7 @@ able to organize those fields around meaningful concepts:
 
 <br />
 
-This screenshot is from [Vandal](https://graphiti-api.github.io/graphiti/guides/vandal), the Graphiti UI.
+This screenshot is from [Vandal](/guides/vandal), the Graphiti UI.
 
 Because we started with a better abstraction, we ended with a more
 intuitive
@@ -402,9 +402,9 @@ a welcome email when we `POST /employees` but not when we `POST
 logic by default, but wants to re-use everything else. In other words,
 Resources form your graph, but Endpoints *expose* that graph to the
 outside world (and hold relevant logic around exposure). Read more in
-our [Endpoints Guide](/guides/concepts/endpoints).
+our [Endpoints Guide]({{site.github.url}}/guides/concepts/endpoints).
 
-The third reason is lazy-loading with [Links](https://graphiti-api.github.io/graphiti/guides/concepts/links), which we'll cover in a bit.
+The third reason is lazy-loading with [Links]({{site.github.url}}/guides/concepts/links), which we'll cover in a bit.
 
 #### Schema
 
@@ -447,7 +447,7 @@ Not true.
 Years before GraphQL came out, respected developers from different
 companies and backgrounds came together and began the discussion on how to improve REST
 APIs. This wasn't a project pushed by a hundred-billion dollar
-company; it was an organic, community-driven effort. The result was the [JSON:API](https://jsonapi.org) standard,
+company; it was an organic, community-driven effort. The result was the [JSON:API]({{site.github.url}}https://jsonapi.org) standard,
 which tackled granular queries long ago:
 
 {% highlight ruby %}

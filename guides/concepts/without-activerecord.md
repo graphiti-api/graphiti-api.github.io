@@ -84,7 +84,7 @@ query object we'll modify as params come in. In the case of
 ActiveRecord, we might want an `ActiveRecord::Relation` like
 `Post.all`. For our example, we'll modify a simple ruby hash.
 
-Finally, we're [resolving that scope](/graphiti/guides/concepts/resources#resolve),
+Finally, we're [resolving that scope]({{site.github.url}}/guides/concepts/resources#resolve),
 returning the full dataset for now. The contract of `#resolve` is to
 return an array of model instances, hence `DATA.map { |d| Post.new(d)
 }`.
