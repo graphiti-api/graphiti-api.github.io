@@ -31,9 +31,7 @@ exclude:
   - Gemfile.lock
 
 github:
-  #url: 'http://localhost:4000'
-  url: 'https://graphiti-api.github.io/graphiti'
-  #url: 'https://richmolj.github.io/t'
+  url: 'https://www.graphiti.dev'
 defaults:
   - scope:
       path: "assets/img"
