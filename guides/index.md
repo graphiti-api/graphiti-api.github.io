@@ -39,6 +39,8 @@ But ideally, read everything 🙂
     * [Spraypaint JS Client]({{site.github.url}}/js)
   * ## Tutorial
     * [Step-By-Step]({{site.github.url}}/tutorial)
+  * ## Cookbooks
+    * [Usage Without ActiveRecord]({{site.github.url}}/cookbooks/without-activerecord)
   * ## Sample Apps
     * [Rails](https://github.com/graphiti-api/employee_directory)
     * [Sinatra](https://github.com/graphiti-api/sinatra_example)

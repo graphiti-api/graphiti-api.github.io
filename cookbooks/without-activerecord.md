@@ -9,8 +9,10 @@ Graphiti was build to be used with any ORM or datastore, from PostgreSQL
 to elasticsearch to `Net::HTTP`. In fact, Graphiti itself is tested with
 Plain Old Ruby Objects (POROs).
 
-This guide will show how to customize a resource around a particular datastore, and how to package those
-customizations into a reusable adapter.
+This cookbook will show how to customize a resource around a particular datastore, and how to package those
+customizations into a reusable adapter. We'll use an in-memory datastore
+and Plain Old Ruby Objects (POROs) here, but the lessons apply to any
+datastore.
 
 For working code, see [this branch of the sample application](https://github.com/graphiti-api/employee_directory/blob/poro/app/resources/post_resource.rb).
 
@@ -18,15 +20,20 @@ We'll start with this PORO model:
 
 {% highlight ruby %}
 class Post
+  # Define getters/setters
+  # e.g. post.title = 'foo'
+  ATTRS = [:id, :title]
+  ATTRS.each { |a| attr_accessor(a) }
+
+  # Instantiate with hash of attributes
+  # e.g. Post.new(title: 'foo')
   def initialize(attrs = {})
     attrs.each_pair { |k,v| send(:"#{k}=", v) }
   end
 
-  ATTRS = [:id, :title]
-  ATTRS.each { |a| attr_accessor(a) }
-
   # This part only needed for our particular
   # persistence implementation; you may not need it
+  # e.g. post.attributes # => { title: 'foo' }
   def attributes
     {}.tap do |attrs|
       ATTRS.each do |name|
@@ -40,6 +47,8 @@ end
 And this in-memory datastore:
 
 {% highlight ruby %}
+# If we were working with more than just Posts, we'd need a 'type'
+# field here as well, to simulate a table name.
 DATA = [
   { id: 1, title: 'Graphiti' },
   { id: 2, title: 'is' },
@@ -82,9 +91,11 @@ implemented.
 We're also supplying an explicit `base_scope`. This is the beginning
 query object we'll modify as params come in. In the case of
 ActiveRecord, we might want an `ActiveRecord::Relation` like
-`Post.all`. For our example, we'll modify a simple ruby hash.
+`Post.all`. For our example, we'll modify a simple ruby hash (keep in
+mind the premise of building a hash of options and passing it off to a
+client can apply to any datastore).
 
-Finally, we're [resolving that scope]({{site.github.url}}/guides/concepts/resources#resolve),
+Finally, we're [resolving that scope](/graphiti/guides/concepts/resources#resolve),
 returning the full dataset for now. The contract of `#resolve` is to
 return an array of model instances, hence `DATA.map { |d| Post.new(d)
 }`.
@@ -203,4 +214,116 @@ These are the overrides for persistence operations. You are encouraged
 
 ## Adapters
 
-Coming soon...
+OK so we have all our read and write operations working correctly. But
+if we had multiple Resources all using an in-memory datastore, you'd see
+this logic repeated all over the place. Let's create an adapter to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+up this logic.
+
+There isn't much more to do than copy/paste what we've already done.
+Let's start with our `base_scope`, sorting, and pagination:
+
+{% highlight ruby %}
+class POROAdapter < Graphiti::Adapters::Abstract
+  def base_scope(*)
+    { sort: {}, filters: {} }
+  end
+
+  def paginate(scope, current, per)
+    scope.merge!(current_page: current, per_page: per)
+  end
+
+  def order(scope, att, dir)
+    scope[:sort].merge!(attribute: att, direction: dir)
+    scope
+  end
+
+  def resolve(scope)
+    data = DATA
+    if sort = scope[:sort].presence
+      data = data.sort_by { |d| d[sort[:attribute].to_sym] }
+      data = data.reverse if sort[:direction] == :desc
+    end
+    start = (scope[:current_page] - 1) * scope[:per_page]
+    stop  = start + scope[:per_page]
+    data  = data[start...stop]
+
+    data.map { |d| resource.model.new(d) }
+  end
+end
+{% endhighlight %}
+
+There's really nothing here we haven't seen before. We're taking the
+code we originally wrote, and sticking it into the interface defined by
+`Graphiti::Adapters::Abstract`.
+
+There's a *little* more to do with filtering:
+
+{% highlight ruby %}
+def filter(scope, attribute, value)
+  scope[:filters][attribute] = value
+  scope
+end
+alias :filter_string_eq :filter
+alias :filter_integer_eq :filter
+alias :filter_date_eq :filter
+# ... etc ...
+{% endhighlight %}
+
+The logic is the same, but we have a separate method for each filter
+operator. This allows us to query differently based on the type - for
+instance, ActiveRecord will default to case-insensitive for strings, but
+straight equality for integers. If you don't need operator-specific
+logic, just `alias` as you see here.
+
+You may want to limit the default operators we expect to work with a
+given type. Let's say your backend allows straight equality for strings,
+but doesn't support `prefix`, `suffix`, etc. You can specify this in
+your adapter:
+
+{% highlight ruby %}
+def self.default_operators
+  super.tap do |built_in|
+    built_in[:string] = [:eq]
+  end
+end
+
+# or avoid super altogether
+
+def self.default_operators
+  {
+    string: [:eq],
+    integer: [:eq]
+    # ... etc ...
+  }
+end
+{% endhighlight %}
+
+**That's it for reads**. For writes, I'll post the entire adapter code
+below - again, it's just copy/pasting what we already wrote into a
+slightly different format.
+
+{% highlight ruby %}
+def destroy(model)
+  Post::DATA.reject! { |d| d[:id].to_s == model.id.to_s }
+  model
+end
+
+def save(model)
+  attrs = model.attributes.dup
+  attrs[:id] ||= Post::DATA.length + 1
+  if existing = Post::DATA.find { |d| d[:id].to_s == attrs[:id].to_s }
+    existing.merge!(attrs)
+  else
+    Post::DATA << attrs
+  end
+  model
+end
+
+# For wrapping persistence operations in a DB transactions
+# Our in-memory DB doesn't have transactions, so just yield
+def transaction(*)
+  yield
+end
+{% endhighlight %}
+
+That's really it. [See the working code in Employee Directory here](https://github.com/graphiti-api/employee_directory/blob/poro/app/resources/post_resource.rb).
