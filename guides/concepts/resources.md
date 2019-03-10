@@ -11,7 +11,6 @@ Resources
   * [Limiting Behavior](#limiting-behavior)
   * [Default Behavior](#default-behavior)
   * [Customizing Display](#customizing-display)
-    * [Explicit Serializers](#explicit-serializers)
   * [Types](#types)
 * 3 [Querying](#querying)
   * [Query Interface](#query-interface)
@@ -46,7 +45,7 @@ Resources
     * [Expanded Example](#expanded-example)
   * [Validation Errors](#validation-errors)
 * 8 [Context](#context)
-* 9 Adapters
+* 9 [Adapters](#adapters)
 </div>
 
 <div markdown="1" class="col-md-8">
@@ -124,10 +123,6 @@ end
 {% endhighlight %}
 
 `@object` will be an instance of your model.
-
-##### 2.3.1 Explicit Serializers
-
-TODO
 
 #### 2.4 Types
 
@@ -1649,6 +1644,15 @@ Graphiti.with_context(ctx) do
   PostResource.all
 end
 {% endhighlight %}
+
+## 9 Adapters
+
+Common resource overrides can be packaged into an Adapter for code
+re-use. The most common example is using a different client/datastore
+than ActiveRecord/RelationalDB.
+
+[Adapters are best explained in our 'Without ActiveRecord'
+Cookbook]({{site.github.url}}/cookbooks/without-activerecord).
 
 <br />
 <br />
