@@ -99,6 +99,17 @@ def admin?
 end
 {% endhighlight %}
 
+When guarding the `:readable` flag, the method can optionally accept the
+model instance being serialized as an argument:
+
+{% highlight ruby %}
+attribute :name, :string, readable: :allowed?
+
+def allowed?(model_instance)
+  model_instance.internal == false
+end
+{% endhighlight %}
+
 #### 2.2 Default Behavior
 
 By default, attributes are enabled for all behavior. You may want to
