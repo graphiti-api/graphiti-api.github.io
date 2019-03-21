@@ -16,3 +16,4 @@ spec/dummy/log/*
 .sass-cache
 *.gem/bin/
 /exe/
+/bin/

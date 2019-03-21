@@ -41,6 +41,7 @@ But ideally, read everything 🙂
     * [Step-By-Step]({{site.github.url}}/tutorial)
   * ## Cookbooks
     * [Usage Without ActiveRecord]({{site.github.url}}/cookbooks/without-activerecord)
+    * [Customizing Sideloads]({{site.github.url}}/cookbooks/customizing-sideloads)
   * ## Sample Apps
     * [Rails](https://github.com/graphiti-api/employee_directory)
     * [Sinatra](https://github.com/graphiti-api/sinatra_example)

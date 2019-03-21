@@ -83,7 +83,7 @@ img.drop {
 }
 
 blockquote {
-  box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.4);
+  /*box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);*/
 }
 
 .layout-home {
@@ -115,6 +115,7 @@ body {
   background: #414B5B;
   font-size: 17px;
   line-height: 1.7;
+  color: lighten(#333, 10%);
 
   .page-content {
     background: white;
@@ -494,6 +495,11 @@ img[alt=glimmer_logo] {
     .mi {
       color: $yellow;
     }
+  }
+
+  .language-error {
+    color: lighten(red, 20%);
+    font-weight: 600;
   }
 
   .language-bash {

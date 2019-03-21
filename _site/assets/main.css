@@ -12140,7 +12140,7 @@ img.drop {
   box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.3); }
 
 blockquote {
-  box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.4); }
+  /*box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);*/ }
 
 .layout-home .brand {
   display: block;
@@ -12160,7 +12160,8 @@ blockquote {
 body {
   background: #414B5B;
   font-size: 17px;
-  line-height: 1.7; }
+  line-height: 1.7;
+  color: #4d4d4d; }
   body .page-content {
     background: white; }
   body.layout-home {
@@ -12395,6 +12396,9 @@ img[alt=glimmer_logo] {
     font-weight: 600; }
   .highlight .language-typescript .mi, .highlight .language-javascript .mi {
     color: #e6eb9d; }
+  .highlight .language-error {
+    color: #ff6666;
+    font-weight: 600; }
   .highlight .language-bash {
     color: white; }
   .highlight .language-javascript .k {
