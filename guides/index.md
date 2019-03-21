@@ -42,6 +42,7 @@ But ideally, read everything 🙂
   * ## Cookbooks
     * [Usage Without ActiveRecord]({{site.github.url}}/cookbooks/without-activerecord)
     * [Customizing Sideloads]({{site.github.url}}/cookbooks/customizing-sideloads)
+    * [Hopping Relationships]({{site.github.url}}/cookbooks/hopping-relationships)
   * ## Sample Apps
     * [Rails](https://github.com/graphiti-api/employee_directory)
     * [Sinatra](https://github.com/graphiti-api/sinatra_example)
