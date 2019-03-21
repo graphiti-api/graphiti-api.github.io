@@ -17,3 +17,4 @@ spec/dummy/log/*
 *.gem/bin/
 /exe/
 /bin/
+_site/bin
