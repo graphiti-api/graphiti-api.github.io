@@ -12147,7 +12147,7 @@ a.header:hover {
       width: 130px;
       height: 130px; }
     .navbar.normal .navbar-nav {
-      font-size: 26px;
+      font-size: 22px;
       position: relative;
       bottom: 15px; }
     .navbar.normal .nav-links {
@@ -12157,7 +12157,9 @@ a.header:hover {
       .navbar.normal .nav-links .tutorial {
         display: none; }
     .navbar.normal .nav li {
-      display: inline-block; } }
+      display: inline-block; }
+    .navbar.normal .nav .li a {
+      padding: 10px 5px; } }
 @media (min-width: 768px) {
   .navbar.normal {
     min-height: 125px;
@@ -12167,6 +12169,8 @@ a.header:hover {
       height: 200px; }
     .navbar.normal .nav.gh {
       margin-top: 50px; }
+    .navbar.normal .nav .li a {
+      padding: 10px 5px; }
     .navbar.normal .nav-links {
       font-size: 32px;
       left: 190px;

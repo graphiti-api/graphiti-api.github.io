@@ -89,7 +89,7 @@ a.header {
     }
 
     .navbar-nav {
-      font-size: 26px;
+      font-size: 22px;
       position: relative;
       bottom: 15px;
     }
@@ -109,6 +109,10 @@ a.header {
     .nav li {
       display: inline-block;
     }
+
+    .nav .li a {
+      padding: 10px 5px
+    }
   }
 }
 
@@ -124,6 +128,10 @@ a.header {
 
     .nav.gh {
       margin-top: 50px;
+    }
+
+    .nav .li a {
+      padding: 10px 5px
     }
 
     .nav-links {
