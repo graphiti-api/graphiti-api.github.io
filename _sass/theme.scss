@@ -71,7 +71,7 @@ a.header {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 1px) {
   .navbar.normal {
     min-height: 75px;
     max-height: 75px;
@@ -270,7 +270,7 @@ body {
       /*}*/
 
       .wrapper > div.container {
-        @media (min-width: 576px) {
+        @media (min-width: 1px) {
           padding-top: 110px;
         }
         @media (min-width: 768px) {
