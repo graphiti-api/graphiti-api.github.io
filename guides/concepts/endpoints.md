@@ -9,19 +9,18 @@ Endpoints
 * 1 [Overview](#overview)
   * [Endpoint logic](#endpoint-logic)
   * [Rails Integration](#rails-integration)
-  * Without Rails
-* 2 [Customizing Resources](#customizing-resource-behavior)
+* 2 [Customizing Resources](#customizing-resources)
   * [Scope Overrides](#scope-overrides)
   * [Sideload Allowlist](#sideload-allowlist)
 * 3 [Caching](#caching)
   * [ETags](#etags)
-  * Action Caching
 * 4 [Testing](#testing)
 
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 Overview
+
+{% include h.html tag="h2" text="1 Overview" a="overview" %}
 
 **Endpoints** expose and customize
 [Resources]({{site.github.url}}/guides/concepts/resources).
@@ -54,7 +53,7 @@ Finally, Endpoints are in charge of the [HTTP specification](https://tools.ietf.
 request processing, response codes, caching, MIME types, and so on. If you're thinking
 Rails, an Endpoint is the combination of a Route and Controller.
 
-### 1.1 Endpoint Logic
+{% include h.html tag="h3" text="Endpoint Logic" a="endpoint-logic" %}
 
 Often, you won't need to customize Endpoints - especially if you're
 using our [Rails Resource
@@ -73,7 +72,7 @@ welcome email from `/users#create` but not `/admin/users#create`)
 
 If your logic falls elsewhere, consider a Resource or Model.
 
-### 1.2 Rails Integration
+{% include h.html tag="h3" text="1.2 Rails Integration" a="rails-integration" %}
 
 When using Rails, an endpoint is the combination of a Route and
 Controller:
@@ -105,12 +104,12 @@ end
 This gives us [#sideload_allowlist](#sideload-allowlist) and sets the
 [context]({{site.github.url}}/guides/concepts/resources#context).
 
-## 2 Customizing Resources
+{% include h.html tag="h2" text="2 Customizing Resources" a="customizing-resources" %}
 
-### Scope Overrides
+{% include h.html tag="h3" text="Scope Overrides" a="scope-overrides" %}
 
 One common use case for endpoints is customizing the Resource
-[base scope]({{site.github.url}}/guides/concepts/resources#basescope). This causes a new
+[base scope]({{site.github.url}}/guides/concepts/resources#base-scope). This causes a new
 "starting point" for query building.
 
 Consider the endpoints `/posts` (basic CRUD) and `/top_posts`. Though
@@ -128,7 +127,7 @@ end
 We're able to reuse all the other logic in PostResource - relationships,
 filters, sorts, etc - while only returning "Top Posts".
 
-### Sideload Allowlist
+{% include h.html tag="h3" text="Sideload Allowlist" a="sideload-allowlist" %}
 
 Resources define relationships to other resources. But we may not want
 all of those relationships exposed at a given endpoint.
@@ -157,9 +156,9 @@ class EmployeesController < ApplicationController
 end
 {% endhighlight %}
 
-## Caching
+{% include h.html tag="h2" text="Caching" a="caching" %}
 
-### Etags
+{% include h.html tag="h3" text="Etags" a="etags" %}
 
 [ETags](https://robots.thoughtbot.com/introduction-to-conditional-http-caching-with-rails) are an important concept that is often overlooked. Etags tell browsers
 that the response to a GET request hasn't changed since the last request and
@@ -205,11 +204,7 @@ end
 > sideloading (and filtering) Positions as well. Use custom endpoints or
 > [Sideload Allowlist](#sideload-allowlist) to mitigate this issue.
 
-### Action Caching
-
-TODO
-
-## 4 Testing
+{% include h.html tag="h2" text="4 Testing " a="testing" %}
 
 If you have custom Endpoint logic, we suggest testing using an [API
 Test]({{site.github.url}}/guides/concepts/testing#api-tests).

@@ -5,7 +5,7 @@ layout: page
 Quickstart
 ==========
 
-##### Zero to API in 5 minutes
+{% include h.html tag="h5" text="Zero to API in 5 minutes" a="zero" %}
 
 This quickstart will use Rails with ActiveRecord to give an overview of
 Graphiti functionality on familiar ground. For a more in-depth breakdown, head to the
@@ -14,7 +14,7 @@ Graphiti functionality on familiar ground. For a more in-depth breakdown, head t
 If the below seems too "magical", don’t worry - we’re just applying some
 sensible defaults to get started quickly.
 
-## Installation
+{% include h.html tag="h2" text="Installation" a="installation" %}
 
 Let's start with a classic Rails blog. We'll use a [template](http://guides.rubyonrails.org/rails_application_templates.html) to handle some of the boilerplate. Just run this command and accept all the defaults for now:
 
@@ -29,7 +29,7 @@ particulars; this is mostly just installing gems and including modules.
 > directly, you can download the file and and run this command as `-m
 > /path/to/all.rb`
 
-## Defining a Resource
+{% include h.html tag="h2" text="Defining a Resource" a="defining-a-resource" %}
 
 A [**Resource**]({{site.github.url}}/guides/concepts/resources) defines how to query and persist your [**Model**]({{site.github.url}}/guides/concepts/backends-and-models). In other
 words: a Model is to the database as Resource is to the API. So
@@ -57,7 +57,7 @@ $ bundle exec rails s
 Verify `http://localhost:3000/api/v1/posts` renders JSON correctly.
 Now we just need data.
 
-##### Seeding Data
+{% include h.html tag="h5" text="Seeding Data" a="seeding-data" %}
 
 Edit `db/seeds.rb` to create a few `Post`s:
 
@@ -80,7 +80,7 @@ your database!
 
 <hr />
 
-# Querying
+{% include h.html tag="h2" text="Querying" a="querying" %}
 
 Now that we've defined our Resource and seeded some data, let's see
 what query functionality we have. We've listed all `Post`s at
@@ -187,7 +187,7 @@ end
   * Different errors can be customized with different response codes,
   JSON, and side-effects.
 
-## Persisting
+{% include h.html tag="h2" text="Persisting" a="persisting" %}
 
 Resources can Create, Update, and Delete (and you can persist multiple
 Resources in a single request). The best way to observe this behavior is
@@ -224,7 +224,7 @@ end
 Read more about [Persistence]({{site.github.url}}/guides/concepts/resources#persisting) and
 [Testing Persistence]({{site.github.url}}/guides/concepts/testing#writes).
 
-## Adding Relationships
+{% include h.html tag="h2" text="Adding Relationships" a="adding-relationships" %}
 
 Let’s start by defining our Model:
 
@@ -277,7 +277,7 @@ Query]({{site.github.url}}/guides/concepts/resources#deep-queries), e.g.
 You should now be able to hit `/api/v1/comments` with all the same
 functionality as before. We just need to seed data.
 
-#### Seeding Relationships
+{% include h.html tag="h4" text="Seeding Relationships" a="seeding-relationships" %}
 
 Start by clearing out your database:
 
@@ -305,7 +305,7 @@ And run it:
 $ bundle exec rails db:seed
 {% endhighlight %}
 
-## Relationship Usage
+{% include h.html tag="h2" text="Relationship Usage" a="relationship-usage" %}
 
 Now let's fetch a `Post` and filtered `Comment`s in a single request:
 
@@ -329,7 +329,7 @@ Also note: just as we can query a graph of Resources in a single
 request, we can *persist* a graph of Resources in a single request. See
 [Sideposting]({{site.github.url}}/guides/concepts/resources#sideposting).
 
-## Exploring with Vandal
+{% include h.html tag="h2" text="Exploring with Vandal" a="exploring-with-vandal" %}
 
 <p align="center">
   <img width="100%" src="https://user-images.githubusercontent.com/55264/50739987-cb5af780-11b5-11e9-9839-cdb913dafbd1.png">
@@ -353,7 +353,7 @@ with the text "two":
 
 [Click here](https://jsonapi-employee-directory.herokuapp.com/vandal) to play with Vandal hitting our [Employee Directory Tutorial]({{site.github.url}}/tutorial). Initial load might take longer as it runs on a free Heroku instance.
 
-## What's Next
+{% include h.html tag="h2" text="What's next" a="whats-next" %}
 
 We have a full CRUD API with robust querying functionality, and the
 ability to combine relationships for both reads and writes. But what
@@ -363,19 +363,19 @@ altogether?
 
 These are important topics that Graphiti was built to address. To
 learn more about advanced usage and customization, we suggest following
-the [**Tutorial**]({{site.github.url}}/tutorial) and reading through the
-[**Guides**]({{site.github.url}}/guides).
+the [Tutorial]({{site.github.url}}/tutorial) and reading through the
+[Guides]({{site.github.url}}/guides).
 
-For help with specific use cases, [**join our Slack chat**](https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg)!
+For help with specific use cases, [join our Slack chat](https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg)!
 
-## Testing
+{% include h.html tag="h2" text="Testing" a="testing" %}
 
 This Quickstart is meant to get you up-and-running quickly, so we didn't
 write tests. But in Graphiti **testing is the easiest, most pleasant way
 to develop your application**.
 
 Even if you're not normally a TDDer, we highly recommend reading through
-our [**Integration Testing Guide**]({{site.github.url}}/guides/concepts/testing).
+our [Integration Testing Guide]({{site.github.url}}/guides/concepts/testing).
 
 <br />
 <br />

@@ -15,12 +15,16 @@ Links
   * [Endpoint Validation](#endpoint-validation)
   * [Links-On-Demand](#links-on-demand)
   * [Custom Endpoint URLs](#custom-endpoint-urls)
-  * [Without Rails](#without-rails)
 
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 Overview
+
+<p align="center">
+  <img width="100%" src="https://pbs.twimg.com/media/CeKlfWPUIAATWZZ.jpg">
+</p>
+
+{% include h.html tag="h2" text="1 Overview" a="overview" %}
 
 Links are useful for:
 
@@ -63,13 +67,17 @@ match our eager loaded data**. Whether we fetch the Post and its Top
 Comments in a single request, or lazy-load that data in a separate
 request, the same data should always be returned.
 
+<p align="center">
+  <img width="100%" src="/assets/img/rest2.gif">
+</p>
+
 [Links](http://jsonapi.org/format/#document-links) solve this problem. When we fetch the Post, the `top_comments`
 relationship will contain a URL. Clients can simply follow that URL to
 lazy-load the same data. We can now change the definition of a Top
 Comment - 500 upvotes, factor in recency, apply downvotes - and no
 clients need to change. They simple continue to follow a Link.
 
-### 1.1 Linking Relationships
+{% include h.html tag="h3" text="1.1 Linking Relationships" a="linking-relationships" %}
 
 When defining a relationship, we get a Link for free:
 
@@ -117,7 +125,7 @@ To avoid a Relationship Link altogether:
 has_many :comments, link: false
 {% endhighlight %}
 
-## 2 Resource Endpoints
+{% include h.html tag="h2" text="2 Resource Endpoints" a="resource-endpoints" %}
 
 To generate links, we need to associate a Resource to a URL. By default,
 this happens automatically:
@@ -137,7 +145,7 @@ end
 
 Which would generate links to `/api/v1/posts`.
 
-### 2.1 Validation
+{% include h.html tag="h3" text="2.1 Validation" a="validation" %}
 
 Associating a Resource to an Endpoint serves two purposes. We've gone
 over link generation. But we also want to make sure we're not linking to
@@ -185,9 +193,9 @@ pointing to `/posts` (the primary endpoint), but *allow* accessing
 secondary_endpoint '/top_posts', [:index]
 {% endhighlight %}
 
-## 3 Configuration
+{% include h.html tag="h2" text="3 Configuration" a="configuration" %}
 
-### 3.1 Autolinking
+{% include h.html tag="h3" text="3.1 Autolinking" a="autolinking" %}
 
 To turn off automatically generated links:
 
@@ -197,7 +205,7 @@ class ApplicationResource < Graphiti::Resource
 end
 {% endhighlight %}
 
-### 3.2 Endpoint Validation
+{% include h.html tag="h3" text="3.2 Endpoint Validation" a="endpoint-validation" %}
 
 To turn off Endpoint Validation:
 
@@ -207,7 +215,7 @@ class ApplicationResource < Graphiti::Resource
 end
 {% endhighlight %}
 
-### 3.3 Links-on-Demand
+{% include h.html tag="h3" text="3.3 Links-on-Demand" a="links-on-demand" %}
 
 To only render links when requested in the URL with `?links=true`:
 
@@ -217,7 +225,7 @@ Graphiti.configure do |c|
 end
 {% endhighlight %}
 
-### 3.4 Custom Endpoint URLs
+{% include h.html tag="h3" text="3.4 Custom Endpoint URLs" a="custom-endpoint-urls" %}
 
 To change the URL associated with a Resource:
 
@@ -246,11 +254,5 @@ has_many :comments do
   end
 end
 {% endhighlight %}
-
-### 3.4 Without Rails
-
-TODO
-
-<!--TODO LINK GIF-->
 
 </div>

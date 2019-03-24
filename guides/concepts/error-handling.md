@@ -19,7 +19,7 @@ Error Handling
 
 <div markdown="1" class="col-md-8">
 
-## 1 Overview
+{% include h.html tag="h2" text="1 Overview" a="overview" %}
 
 Whenever we have an application error, we want to respond with a
 [JSONAPI-compliant errors payload](http://jsonapi.org/format/#errors).
@@ -38,7 +38,7 @@ the user about why the error occurred."
 
 To do this we use the [Graphiti Errors](https://github.com/graphiti-api/graphiti_errors) gem.
 
-### 1.1 Setup
+{% include h.html tag="h3" text="1.1 Setup" a="setup" %}
 
 Error handling is part of [Installation]({{site.github.url}}/guides/getting-started/installation),
 but here's the code:
@@ -60,7 +60,7 @@ handle_exception(e)
 We expose this directly so you can add additional logic, like sending
 the error to NewRelic.
 
-#### 1.1.1 Displaying Raw Errors
+{% include h.html tag="h4" text="1.1.1 Displaying Raw Errors" a="displaying-raw-errors" %}
 
 <p align="center">
   <img width="100%" src="https://user-images.githubusercontent.com/55264/45879208-9bf0be00-bd71-11e8-8427-282c5a426394.png">
@@ -91,9 +91,9 @@ end
 When `show_raw_error` is `true`, you'll get the raw error class,
 message, and backtrace in the JSON response.
 
-## 2 Usage
+{% include h.html tag="h2" text="2 Usage" a="usage" %}
 
-### 2.1 Basic
+{% include h.html tag="h3" text="2.1 Basic" a="basic" %}
 
 Let's register an error with a custom response code:
 
@@ -123,7 +123,7 @@ class FooController < ApplicationController
 end
 {% endhighlight %}
 
-### 2.2 Advanced
+{% include h.html tag="h3" text="2.2 Advanced" a="advanced" %}
 
 The final option `register_exception` accepts is `handler`. Here you can inject your own error handling class that customize `GraphitiErrors::ExceptionHandler`. For example:
 
@@ -166,12 +166,12 @@ def self.default_exception_handler
 end
 {% endhighlight %}
 
-### 2.3 Logging
+{% include h.html tag="h3" text="2.3 Logging" a="logging" %}
 
 You can assign any logger using `GraphitiErrors.logger =
 your_logger`. When using Rails this defaults to `Rails.logger`.
 
-## 3 Testing
+{% include h.html tag="h2" text="3 Testing" a="testing" %}
 
 This pattern of globally rescuing exceptions makes sense when
 running our live application...but during testing, we may want to

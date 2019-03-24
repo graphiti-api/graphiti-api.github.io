@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -88,7 +95,6 @@
         <li><a href="#endpoint-validation">Endpoint Validation</a></li>
         <li><a href="#links-on-demand">Links-On-Demand</a></li>
         <li><a href="#custom-endpoint-urls">Custom Endpoint URLs</a></li>
-        <li><a href="#without-rails">Without Rails</a></li>
       </ul>
     </li>
   </ul>
@@ -96,7 +102,17 @@
 </div>
 
 <div class="col-md-8">
-  <h2 id="overview">1 Overview</h2>
+
+  <p align="center">
+  <img width="100%" src="https://pbs.twimg.com/media/CeKlfWPUIAATWZZ.jpg" />
+</p>
+
+<a class="anchor" id="overview" />
+  <a class="header" href="#overview">
+    <h2>
+      1 Overview
+    </h2>
+  </a>
 
   <p>Links are useful for:</p>
 
@@ -141,13 +157,22 @@ match our eager loaded data</strong>. Whether we fetch the Post and its Top
 Comments in a single request, or lazy-load that data in a separate
 request, the same data should always be returned.</p>
 
+  <p align="center">
+  <img width="100%" src="/assets/img/rest2.gif" />
+</p>
+
   <p><a href="http://jsonapi.org/format/#document-links">Links</a> solve this problem. When we fetch the Post, the <code class="highlighter-rouge">top_comments</code>
 relationship will contain a URL. Clients can simply follow that URL to
 lazy-load the same data. We can now change the definition of a Top
 Comment - 500 upvotes, factor in recency, apply downvotes - and no
 clients need to change. They simple continue to follow a Link.</p>
 
-  <h3 id="linking-relationships">1.1 Linking Relationships</h3>
+<a class="anchor" id="linking-relationships" />
+  <a class="header" href="#linking-relationships">
+    <h3>
+      1.1 Linking Relationships
+    </h3>
+  </a>
 
   <p>When defining a relationship, we get a Link for free:</p>
 
@@ -191,7 +216,12 @@ links. Avoid using <code class="highlighter-rouge">scope</code> directly and ins
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:comments</span><span class="p">,</span> <span class="ss">link: </span><span class="kp">false</span></code></pre></figure>
 
-  <h2 id="resource-endpoints">2 Resource Endpoints</h2>
+<a class="anchor" id="resource-endpoints" />
+  <a class="header" href="#resource-endpoints">
+    <h2>
+      2 Resource Endpoints
+    </h2>
+  </a>
 
   <p>To generate links, we need to associate a Resource to a URL. By default,
 this happens automatically:</p>
@@ -209,7 +239,12 @@ this happens automatically:</p>
 
   <p>Which would generate links to <code class="highlighter-rouge">/api/v1/posts</code>.</p>
 
-  <h3 id="validation">2.1 Validation</h3>
+<a class="anchor" id="validation" />
+  <a class="header" href="#validation">
+    <h3>
+      2.1 Validation
+    </h3>
+  </a>
 
   <p>Associating a Resource to an Endpoint serves two purposes. We’ve gone
 over link generation. But we also want to make sure we’re not linking to
@@ -247,9 +282,19 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">secondary_endpoint</span> <span class="s1">'/top_posts'</span><span class="p">,</span> <span class="p">[</span><span class="ss">:index</span><span class="p">]</span></code></pre></figure>
 
-  <h2 id="configuration">3 Configuration</h2>
+<a class="anchor" id="configuration" />
+  <a class="header" href="#configuration">
+    <h2>
+      3 Configuration
+    </h2>
+  </a>
 
-  <h3 id="autolinking">3.1 Autolinking</h3>
+<a class="anchor" id="autolinking" />
+  <a class="header" href="#autolinking">
+    <h3>
+      3.1 Autolinking
+    </h3>
+  </a>
 
   <p>To turn off automatically generated links:</p>
 
@@ -257,7 +302,12 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
   <span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="endpoint-validation">3.2 Endpoint Validation</h3>
+<a class="anchor" id="endpoint-validation" />
+  <a class="header" href="#endpoint-validation">
+    <h3>
+      3.2 Endpoint Validation
+    </h3>
+  </a>
 
   <p>To turn off Endpoint Validation:</p>
 
@@ -265,7 +315,12 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
   <span class="nb">self</span><span class="p">.</span><span class="nf">validate_endpoints</span> <span class="o">=</span> <span class="kp">false</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="links-on-demand">3.3 Links-on-Demand</h3>
+<a class="anchor" id="links-on-demand" />
+  <a class="header" href="#links-on-demand">
+    <h3>
+      3.3 Links-on-Demand
+    </h3>
+  </a>
 
   <p>To only render links when requested in the URL with <code class="highlighter-rouge">?links=true</code>:</p>
 
@@ -273,7 +328,12 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
   <span class="n">c</span><span class="p">.</span><span class="nf">links_on_demand</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="custom-endpoint-urls">3.4 Custom Endpoint URLs</h3>
+<a class="anchor" id="custom-endpoint-urls" />
+  <a class="header" href="#custom-endpoint-urls">
+    <h3>
+      3.4 Custom Endpoint URLs
+    </h3>
+  </a>
 
   <p>To change the URL associated with a Resource:</p>
 
@@ -298,12 +358,6 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
     <span class="c1"># http://example.com/api/v1/comments?filter[post_id]=123</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
-
-  <h3 id="without-rails">3.4 Without Rails</h3>
-
-  <p>TODO</p>
-
-  <!--TODO LINK GIF-->
 
 </div>
 

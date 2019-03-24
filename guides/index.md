@@ -21,6 +21,7 @@ Or to dive into code, check out our sample apps in [**Rails**](https://github.co
 But ideally, read everything 🙂
 
   * ## Overview: What is Graphiti?
+    * [Why Graphiti]({{site.github.url}}/guides/why)
     * [Lifecycle of a Graphiti Request]({{site.github.url}}/guides/overview#lifecycle-of-a-graphiti-request)
   * ## Getting Started
     * [Installation]({{site.github.url}}/guides/getting-started/installation)
@@ -35,6 +36,7 @@ But ideally, read everything 🙂
     * [Error Handling]({{site.github.url}}/guides/concepts/error-handling)
     * [Testing]({{site.github.url}}/guides/concepts/testing)
     * [Debugging]({{site.github.url}}/guides/concepts/debugging)
+    * [Remote Resources (Microservices)]({{site.github.url}}/guides/concepts/remote-resources)
   * ## Consuming Graphiti
     * [Spraypaint JS Client]({{site.github.url}}/js)
   * ## Tutorial

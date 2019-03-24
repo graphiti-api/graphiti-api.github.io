@@ -10,13 +10,18 @@ Installation
 * 2 [Adding to an Existing App](#adding-to-an-existing-app)
   * [Responders](#responders)
   * [Testing](#testing)
-  * [will_paginate](#willpaginate)
+  * [will_paginate](#will-paginate)
 * 3 [Without Rails](#without-rails)
 
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 From Scratch
+
+<p align="center">
+  <img width="100%" src="http://www.urbanphoto.net/blog/wp-content/uploads/2010/03/sfz1.jpg">
+</p>
+
+{% include h.html tag="h2" text="1 From Scratch" a="from-scratch" %}
 
 The easiest way to start from scratch is to use the application
 template:
@@ -34,7 +39,7 @@ $ rails new blog --api -m all.rb
 
 Run `git diff` to see the changes to a blank Rails app.
 
-## 2 Adding to an Existing App
+{% include h.html tag="h2" text="2 Adding to an Existing App" a="adding-to-an-existing-app" %}
 
 This process is straightforward; you can add Graphiti to an existing
 Rails app alongside [JBuilder](https://github.com/rails/jbuilder) or [ActiveModelSerializers](https://github.com/rails-api/active_model_serializers).
@@ -101,7 +106,7 @@ That's it for the basics. You may have issues with generators
 conflicting with your existing application structure - but you can
 always write files manually or [submit an issue](https://github.com/graphiti-api/graphiti/issues).
 
-### 2.1 Responders
+{% include h.html tag="h3" text="2.1 Responders" a="responders" %}
 
 Graphiti supports JSONAPI, simple JSON, and XML. You can do this
 manually when inheriting from `ActionController::Base`
@@ -141,7 +146,7 @@ include Graphiti::Responders
 > Note: Persistence operations only support JSONAPI format, so you'll
 > still use `render jsonapi:` and `render jsonapi_errors:` for those.
 
-### 2.2 Testing
+{% include h.html tag="h3" text="2.2 Testing" a="testing" %}
 
 To add our [Integration Tests]({{site.github.url}}/guides/concepts/testing):
 
@@ -198,7 +203,7 @@ RSpec.configure do |config|
 end
 {% endhighlight %}
 
-### 2.3 will_paginate
+{% include h.html tag="h3" text="2.3 will_paginate" a="will-paginate" %}
 
 By default, we use [Kaminari](https://github.com/kaminari/kaminari) for
 ActiveRecord pagination. If you prefer [will_paginate] (or anything
@@ -211,7 +216,7 @@ paginate do |scope, current_page, per_page|
 end
 {% endhighlight %}
 
-## Without Rails
+{% include h.html tag="h2" text="3 Without Rails" a="without-rails" %}
 
 You can use Graphiti in any plain `.rb` file. To see this in action,
 check out the [Plain Ruby Sample App](https://github.com/graphiti-api/plain_ruby_example).

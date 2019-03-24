@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -68,7 +75,11 @@
 </header>
 
         <div class="container">
-          <h1 id="why-graphiti">Why Graphiti</h1>
+          <p align="center">
+  <img style="margin-top:-30px" width="100%" src="/assets/img/why.png" />
+</p>
+
+<h1 id="why-graphiti">Why Graphiti</h1>
 
 <p>I’ve written GraphQL and had a pleasant experience. I have enourmous respect for GraphQL. I also believe there is a fundamental flaw in GraphQL’s design.</p>
 
@@ -77,7 +88,7 @@
 <blockquote>
   <p><em>[We] heard from integrators that our REST API also wasn’t very flexible. It sometimes required two or three separate calls to assemble a complete view of a resource. It seemed like our responses simultaneously sent too much data and didn’t include data that consumers needed.</em></p>
 
-  <p>- <a href="https://githubengineering.com/the-github-graphql-api">“The Github Graph API”</a>, GitHub Engineering</p>
+  <p>- <a href="https://githubengineering.com/the-github-graphql-api">“The Github Graph API”</a>, <strong>GitHub Engineering</strong></p>
 </blockquote>
 
 <p>GraphQL solves real problems. It’s flaw is that it solved these
@@ -90,7 +101,7 @@ versus REST, one or the other. <a href="https://medium.freecodecamp.org/rest-api
 <blockquote>
   <p><em>Positive-sum thinking is how we embrace pluralism while retaining a coherent vision and set of values…A zero-sum view would assume that apparent oppositions are fundamental, e.g., that appealing to the JS crowd inherently hurts the C++ one. A positive-sum view starts by seeing different perspectives and priorities as legitimate and worthwhile, with a faith that</em> <strong>by respecting each other in this way, we can find strictly better solutions than had we optimized solely for one perspective.</strong></p>
 
-  <p>- <a href="http://aturon.github.io/2018/06/02/listening-part-2">“Listening and Trust”</a>, Aaron Turon</p>
+  <p>- <a href="http://aturon.github.io/2018/06/02/listening-part-2">“Listening and Trust”</a>, <strong>Aaron Turon</strong></p>
 </blockquote>
 
 <p>GraphQL optimized around REST’s shortcomings, and in doing so it dropped
@@ -98,17 +109,19 @@ REST’s advantages. There is no need for such a zero-sum tradeoff. We can take
 everything great about GraphQL and build it <strong><em>on top of</em></strong> REST (and
 HTTP!), instead of replacing it altogether. We can have our cake and eat it too.</p>
 
-<h2 id="rest">REST</h2>
-
-<p>You’ll find plenty of GraphQL <a href="https://blog.apollographql.com/graphql-vs-rest-5d425123e34b">blog posts</a> that define REST like so:</p>
-
-<p><br /></p>
+<a class="anchor" id="rest" />
+  <a class="header" href="#rest">
+    <h2>
+      REST
+    </h2>
+  </a>
 
 <p align="center">
-  <img class="drop" width="80%" src="https://user-images.githubusercontent.com/55264/52901666-6a6f0800-31d4-11e9-81be-4bc23a7c26aa.png" />
+  <img width="100%" src="https://i.ytimg.com/vi/t7Yt78QuPB4/maxresdefault.jpg" />
 </p>
+<div class="spacer"></div>
 
-<p><br /></p>
+<p>You’ll find plenty of <a href="https://www.howtographql.com/basics/1-graphql-is-the-better-rest">GraphQL posts</a> that describe REST as an inflexible paradigm of a bygone era, a lack of granularity that necessarily leads to data under- and over-fetching.</p>
 
 <p>It’s true that many REST APIs work this way, but this is not REST. While there’s
 endless debate around which APIs are considered “RESTful”, I don’t think
@@ -142,17 +155,32 @@ Maybe tell him: “Marcus, please add 2 cows to your farm”.</em></p>
 <em>me: “Ahh, great!”</em>
 <em>See? It was really not that hard and it was REST.</em></p>
 
-  <p>- <a href="http://www.beabetterdeveloper.com/2013/07/why-rest-is-so-important.html">“Why REST Is So Important”</a>, Gregor Riegler</p>
+  <p>- <a href="http://www.beabetterdeveloper.com/2013/07/why-rest-is-so-important.html">“Why REST Is So Important”</a>, <strong>Gregor Riegler</strong></p>
 </blockquote>
 
 <p>In other words, <strong>this is REST</strong>:</p>
 
+<div class="spacer"></div>
 <p align="center">
-  <img width="80%" src="https://user-images.githubusercontent.com/55264/52964195-bf935100-336f-11e9-8be4-7046d6556f57.gif" />
+  <img width="80%" src="/assets/img/rest1.gif" />
 </p>
+<div class="spacer"></div>
 
 <p>We’re moving an object from the server to the client, possibly modifying
 that object, then moving back to the server.</p>
+
+<p>The other important aspect of REST is <strong>Links</strong>. Because all objects are
+addressable at a URL, we can use HTTP links to connect Resources. This
+allows for (among other things) <strong>lazy-loading</strong> - the logic connecting Resources can be
+changed server-side without breaking clients. If we have a “Top
+Comments” relationship, we can redefine “Top” without disturbing
+clients.</p>
+
+<div class="spacer"></div>
+<p align="center">
+  <img width="80%" src="/assets/img/rest2.gif" />
+</p>
+<div class="spacer"></div>
 
 <p>Pretty simple right? Here’s how we might implement this in GraphQL:</p>
 
@@ -213,7 +241,18 @@ team, as time moves on. In fact, the above is really a best-case
 scenario with common naming convention of <code class="highlighter-rouge">create/update/destroy</code> - the
 Github API adds verbs like <code class="highlighter-rouge">add</code>, <code class="highlighter-rouge">remove</code>, <code class="highlighter-rouge">lock</code>, <code class="highlighter-rouge">move</code> and more.</p>
 
-<h4 id="conventions">Conventions</h4>
+<p>Oh, and we dropped support for lazy-loading along the way.</p>
+
+<a class="anchor" id="conventions" />
+  <a class="header" href="#conventions">
+    <h2>
+      Conventions
+    </h2>
+  </a>
+
+<p align="center">
+  <img src="/assets/img/conformity.png" />
+</p>
 
 <p>The benefit of REST over RPC is conventions. Conventions cause increased
 productivity and consistency (leading to fewer misunderstandiings and
@@ -279,9 +318,7 @@ and consumers of the API.</p>
 parameter - straight equality? Case sensitive? Contains? I guess we
 could throw a bunch of suffixes at it:</p>
 
-<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">employee</span><span class="p">(</span><span class="nx">id</span><span class="err">:</span> <span class="nx">ID</span><span class="p">,</span> <span class="nx">name_eq</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_suffix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_prefix</span><span class="err">:</span>
-<span class="nb">String</span><span class="p">,</span> <span class="nx">name_contains</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_eq</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_suffix</span><span class="err">:</span>
-<span class="nb">String</span><span class="p">,</span> <span class="nx">name_prefix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_prefix</span><span class="err">:</span> <span class="nb">String</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">employee</span><span class="p">(</span><span class="nx">id</span><span class="err">:</span> <span class="nx">ID</span><span class="p">,</span> <span class="nx">name_eq</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_suffix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_prefix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_contains</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_eq</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_suffix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_prefix</span><span class="err">:</span> <span class="nb">String</span><span class="p">,</span> <span class="nx">name_not_prefix</span><span class="err">:</span> <span class="nb">String</span><span class="p">)</span></code></pre></figure>
 
 <p>Works, but a bit unwieldy…and again, likely to diverge wildly across
 implementations.</p>
@@ -320,12 +357,34 @@ GraphQL</a>?:</p>
 <p>We have divergent APIs right off the bat, and neither one supports
 multisort.</p>
 
-<p>Let’s take a step back and think RESTfully. REST doesn’t have a query
-specification, but it does have this Resource concept. <strong>Instead of
-thinking in fields and types, what if we thought in Resources</strong>?:</p>
+<h2 id="rethinking-rest">Rethinking REST</h2>
 
-<p>Resources have attributes (fields) with corresponding types (String, Int, etc). We’d
-probably want to filter and sort by these attributes right? We might add
+<p align="center">
+  <img width="100%" src="http://4.bp.blogspot.com/-GnENNMAEekc/Tq-M-NbuN0I/AAAAAAAAA0c/P0xnTMmFRlo/s1600/rethink+001.JPG" />
+</p>
+<div class="spacer"></div>
+
+<p>Earlier, we covered RESTfully moving an object between the server and
+the client. Those objects connected together with Links, which allowed
+for lazy-loading.</p>
+
+<p>Instead of throwing away this paradigm, what if we just <strong>added
+eager-loading</strong>?</p>
+
+<div class="spacer"></div>
+<p align="center">
+  <img width="80%" src="/assets/img/rest3.gif" />
+</p>
+<div class="spacer"></div>
+
+<p>REST doesn’t have a query
+specification or built-in schema, but it does have this Resource concept. <strong>Instead of
+thinking of a bag fields and types, what if we thought in Resources</strong>?:</p>
+
+<p>Resources have <strong>Attributes</strong>. An <code class="highlighter-rouge">Employee</code> has a <code class="highlighter-rouge">first_name</code> which is
+a <code class="highlighter-rouge">string</code>, an <code class="highlighter-rouge">age</code> which is an <code class="highlighter-rouge">integer</code>, and so forth.</p>
+
+<p>We’d probably want to filter and sort by these attributes right? We might add
 some additional filters and sorts, we might want to opt-out of others,
 but querying a Resource by its attributes serves as a reasonable
 baseline.</p>
@@ -334,10 +393,24 @@ baseline.</p>
 talking about operators like <code class="highlighter-rouge">suffix</code> and <code class="highlighter-rouge">prefix</code>, but an <code class="highlighter-rouge">integer</code>
 attribute would want operators like <code class="highlighter-rouge">greater_than</code> and <code class="highlighter-rouge">less_than</code>.</p>
 
-<p>OK, so really we don’t need to define <em>inputs</em> and <em>outputs</em> - those can
-be assumed by convention. What we really need to define is the <strong>Resource</strong>.</p>
+<p>Resources also have <strong>relationships</strong> to other Resources. We should be
+able to lazy-load those relationships (with <strong>Links</strong>), or eager-load
+those relationships. Whether lazy or eager, the same logic should apply.</p>
 
-<h4 id="welcome-to-graphiti">Welcome to Graphiti</h4>
+<p>If we defined these Resources, with their attributes and relationships,
+then <strong>the input and the output don’t actually matter</strong>. Or more
+accurately: we can <em>accept and render whatever payload we want</em>. Maybe
+we’ll even dynamically serve different payloads based on <code class="highlighter-rouge">Content-Type</code>.</p>
+
+<p>OK, so really we don’t need to define <em>inputs</em> and <em>outputs</em> - those can
+be assumed by convention, swapped on-demand. What we really need to define is the <strong>Resource</strong>.</p>
+
+<a class="anchor" id="welcome-to-graphiti" />
+  <a class="header" href="#welcome-to-graphiti">
+    <h2>
+      Welcome to Graphiti
+    </h2>
+  </a>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeeResource</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
   <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">sortable: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">filterable: </span><span class="kp">true</span>
@@ -383,40 +456,14 @@ we get all this behavior out of the box:</p>
   </li>
 </ul>
 
-<h4 id="automation">Automation</h4>
+<p>Not just an API contract, but <strong>out-of-the-📦 behavior</strong>. If we know
+the configuration of a Resource, we can <strong>automate query and persistence
+operations</strong>. Obviously we’ll need lots of ways to customize and
+override, and support for any number of datastores and clients. But if
+we have the configuration, a defined contract for querying and
+persistence data, we can build patterns around it.</p>
 
-<p>So far, we’ve only talked in terms of schema. But the above Graphiti
-code not only provides conventions around our API contract, it powers
-the API as well.</p>
-
-<p>Let’s follow the example at <a href="https://graphql.org/learn/execution/">graphql.org</a>:</p>
-
-<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Query</span><span class="err">:</span> <span class="p">{</span>
-  <span class="nx">employee</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">loadEmployeesByID</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
-      <span class="nx">employeeData</span> <span class="o">=&gt;</span> <span class="nx">employeeData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
-      <span class="p">})</span>
-    <span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
-
-<p>This example is hardcoded to find the employee by ID. If we added other
-parameters, we’d have something like</p>
-
-<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Query</span><span class="err">:</span> <span class="p">{</span>
-  <span class="nx">employee</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">context</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">loadEmployees</span><span class="p">(</span><span class="nx">args</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
-      <span class="nx">employeeData</span> <span class="o">=&gt;</span> <span class="nx">employeeData</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
-      <span class="p">})</span>
-    <span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre></figure>
-
-<h4 id="ui">UI</h4>
-
-<p>There’s more to this than a bunch of out-of-the-box standards and
+<p>There’s more to this than a bunch of out-of-the-📦 standards and
 behavior. If we thought only in Fields and Types, we’d use GraphiQL to
 see something like:</p>
 
@@ -439,7 +486,7 @@ able to organize those fields around meaningful concepts:</p>
 
 <p><br /></p>
 
-<p>This screenshot is from <a href="/guides/vandal">Vandal</a>, the Graphiti UI.</p>
+<p>This screenshot is from <a href="https://www.graphiti.dev/guides/vandal">Vandal</a>, the Graphiti UI.</p>
 
 <p>Because we started with a better abstraction, we ended with a more
 intuitive
@@ -450,7 +497,12 @@ or <code class="highlighter-rouge">Edge</code>s, they just need to click around.
 through the domain together, validating concepts and solidifying a shared
 understanding.</p>
 
-<h4 id="http-endpoints">HTTP Endpoints</h4>
+<a class="anchor" id="http-endpoints" />
+  <a class="header" href="#http-endpoints">
+    <h4>
+      HTTP Endpoints
+    </h4>
+  </a>
 
 <p>While both GraphQL and Graphiti can fetch your graph of data in a single
 request, GraphQL does this with a single endpoint. Graphiti keeps
@@ -465,9 +517,14 @@ Resources form your graph, but Endpoints <em>expose</em> that graph to the
 outside world (and hold relevant logic around exposure). Read more in
 our <a href="https://www.graphiti.dev/guides/concepts/endpoints">Endpoints Guide</a>.</p>
 
-<p>The third reason is lazy-loading with <a href="https://www.graphiti.dev/guides/concepts/links">Links</a>, which we’ll cover in a bit.</p>
+<p>The third reason is lazy-loading with <a href="https://www.graphiti.dev/graphiti/guides/concepts/links">Links</a>, which we’ll cover in a bit.</p>
 
-<h4 id="schema">Schema</h4>
+<a class="anchor" id="schema" />
+  <a class="header" href="#schema">
+    <h4>
+      Schema
+    </h4>
+  </a>
 
 <p>We even get schema benefits. Schemas are great for tooling and
 backwards-compatibility checks…but when they are oriented around
@@ -475,25 +532,30 @@ Fields and Types, they can only tell you so much. When they are oriented
 around Resources, they can expose less-obvious concepts. Maybe we sort
 Employees by <code class="highlighter-rouge">created_at</code> by default:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
-  <span class="s2">"name"</span>: <span class="s2">"EmployeeResource"</span>,
-  <span class="s2">"type"</span>: <span class="s2">"employees"</span>,
-  <span class="s2">"attributes"</span>: <span class="o">{</span> ... <span class="o">}</span>,
-  <span class="s2">"default_sort"</span>: <span class="o">[{</span> <span class="s2">"created_at"</span>: <span class="s2">"desc"</span> <span class="o">}]</span>,
-  ...
-<span class="o">}</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span>
+  <span class="ss">name: </span><span class="s2">"EmployeeResource"</span><span class="p">,</span>
+  <span class="ss">type: </span><span class="s2">"employees"</span><span class="p">,</span>
+  <span class="ss">attributes: </span><span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">},</span>
+  <span class="ss">default_sort: </span><span class="p">[{</span> <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">}],</span>
+  <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Because this is specified in the schema, not only are clients more
 informed, but changing this default would raise a backwards-compatibility
 error:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">EmployeeResource: default sort changed from <span class="o">[{</span>:created_at<span class="o">=</span>&gt;<span class="s2">"desc"</span><span class="o">}]</span> to <span class="o">[{</span>:last_name<span class="o">=</span>&gt;<span class="s2">"asc"</span><span class="o">}]</span>.</code></pre></figure>
+<figure class="highlight"><pre><code class="language-error" data-lang="error">EmployeeResource: default sort changed from [{:created_at=&gt;"desc"}] to [{:last_name=&gt;"asc"}].</code></pre></figure>
 
 <p>When developing in Graphiti, we introspect your Resources and
 automatically generate the schema for you. Backwards-compatibility
 checks can be done with a command-line task, or whenever your tests run.</p>
 
-<h2 id="graphs">Graphs</h2>
+<a class="anchor" id="graphs" />
+  <a class="header" href="#graphs">
+    <h2>
+      Graphs
+    </h2>
+  </a>
 
 <p>You may be thinking, “<em>OK, but REST only works for a single object. I’ll
 have to make multiple requests, and be right back where I started. I
@@ -504,7 +566,7 @@ need GraphQL to solve this problem</em>”.</p>
 <p>Years before GraphQL came out, respected developers from different
 companies and backgrounds came together and began the discussion on how to improve REST
 APIs. This wasn’t a project pushed by a hundred-billion dollar
-company; it was an organic, community-driven effort. The result was the <a href="https://www.graphiti.devhttps://jsonapi.org">JSON:API</a> standard,
+company; it was an organic, community-driven effort. The result was the <a href="https://jsonapi.org">JSON:API</a> standard,
 which tackled granular queries long ago:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># GET /employees?include=positions</span>
@@ -551,7 +613,7 @@ only render it once.</p>
 
 <p align="center">
   <div style="width: 500px;margin:auto">
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Namely, those constraints are that all entities must be addressable top level by type and ID. (Very similar to JSON:API in this respect.)</p>&mdash; Tom Dale (@tomdale) <a href="https://twitter.com/tomdale/status/786951015945895936?ref_src=twsrc%5Etfw">October 14, 2016</a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark" data-lang="en"><p lang="en" dir="ltr">Namely, those constraints are that all entities must be addressable top level by type and ID. (Very similar to JSON:API in this respect.)</p>&mdash; Tom Dale (@tomdale) <a href="https://twitter.com/tomdale/status/786951015945895936?ref_src=twsrc%5Etfw">October 14, 2016</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 </p>
@@ -575,7 +637,7 @@ packaged into a library to make this automatic.</p>
 
 <p align="center">
   <div style="width: 500px;margin:auto">
-    <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">A GraphQL response is going to be as slow as the slowest subquery it has to execute to build the response.</p>&mdash; Tom Dale (@tomdale) <a href="https://twitter.com/tomdale/status/786952448799825921?ref_src=twsrc%5Etfw">October 14, 2016</a></blockquote>
+    <blockquote class="twitter-tweet" data-theme="dark" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">A GraphQL response is going to be as slow as the slowest subquery it has to execute to build the response.</p>&mdash; Tom Dale (@tomdale) <a href="https://twitter.com/tomdale/status/786952448799825921?ref_src=twsrc%5Etfw">October 14, 2016</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 </p>
@@ -614,7 +676,12 @@ outputting JSON, GraphQL isn’t the only Graph Query Language - in fact,
 you could call JSON:API a Graph Query Language as well!</em>)</p>
 </blockquote>
 
-<h4 id="rest--multiple-requests">REST != Multiple Requests</h4>
+<a class="anchor" id="rest-multiple-requests" />
+  <a class="header" href="#rest-multiple-requests">
+    <h4>
+      REST != Multiple Requests
+    </h4>
+  </a>
 
 <p>Anything you could do with a single Resource, you can do with multiple
 Resources. In other words, we can fetch an <code class="highlighter-rouge">Employee</code>, and their
@@ -627,7 +694,7 @@ no need for a wholesale revamp. In fact, we don’t need to change much at
 all.</p>
 
 <p align="center">
-  <img width="30%" src="https://user-images.githubusercontent.com/55264/52920466-a68c9080-32da-11e9-823c-1ff275db40f6.jpg" />
+  <img width="100%" src="/assets/img/persist.jpg" />
 </p>
 
 <p>Just as we can <strong>query</strong> multiple Resources at once, we can also
@@ -676,13 +743,12 @@ builds on top of REST to add eager-loading, and “eager-persisting”. In
 other words, we can both read and write a graph of data in a single
 request.</p>
 
-<h2 id="todo-automation-with-escape-valves--orm-agnostic">TODO Automation with Escape Valves / ORM Agnostic</h2>
-
-<p>visual: rest is a graph</p>
-
-<p>ORM/DB, etcs</p>
-
-<h2 id="micro-services">(Micro) Services</h2>
+<a class="anchor" id="microservices" />
+  <a class="header" href="#microservices">
+    <h2>
+      (Micro) Services
+    </h2>
+  </a>
 
 <blockquote>
   <p><em>You should think hard before breaking up <a href="https://m.signalvnoise.com/the-majestic-monolith">a Magestic Monolith</a>; beware the tradeoffs. Still, if you need it, Graphiti has your back.</em></p>
@@ -714,7 +780,12 @@ Deep Query. If you use Vandal, you’ll think it’s all the same API.</p>
 
 <p>Microservices 🎉!</p>
 
-<h2 id="dont-sleep-on-this-one-domain-driven-design">Don’t Sleep On This One: Domain-Driven Design</h2>
+<a class="anchor" id="domain-driven-design" />
+  <a class="header" href="#domain-driven-design">
+    <h2>
+      Don't Sleep On This One: Domain-Driven Design
+    </h2>
+  </a>
 
 <div class="spacer"></div>
 <p align="center">
@@ -745,7 +816,7 @@ check <a href="https://stackoverflow.com/questions/1222392/can-someone-explain-d
 
   <p><em>The concepts described by the UL will form the basis of your object-oriented design. DDD provides some clear guidance…recommends several patterns…</em></p>
 
-  <p>- Rob Knight</p>
+  <p>- <strong>Rob Knight</strong></p>
 </blockquote>
 
 <p>I trim the quote because the prescriptive patterns of DDD often
@@ -762,14 +833,19 @@ critically about your domain.</p>
 <p>You don’t <strong><em>need</em></strong> to know anything about DDD to develop in Graphiti.
 But don’t sleep on it.</p>
 
-<h2 id="clients">Clients</h2>
+<a class="anchor" id="clients" />
+  <a class="header" href="#clients">
+    <h2>
+      Clients
+    </h2>
+  </a>
 
 <p>You can use any HTTP client with Graphiti. If you’re using JS, a simple
 <code class="highlighter-rouge">fetch</code> will do.</p>
 
 <p>But you may be looking for a more robust client, one that takes
 advantage of Graphiti conventions. Look no further than
-<a href="https://www.graphiti.dev/js/home">Spraypaint</a>, our
+<a href="https://www.graphiti.dev/js">Spraypaint</a>, our
 official client heavily inspired by ActiveRecord. Query your API the
 same way you query your database:</p>
 
@@ -791,7 +867,12 @@ same way you query your database:</p>
 <p>By relying on conventions we can move the URL, request, and response
 under the hood, allowing you to focus on what matters - your domain.</p>
 
-<h2 id="graphql-support">GraphQL Support</h2>
+<a class="anchor" id="graphql-support" />
+  <a class="header" href="#graphql-support">
+    <h2>
+      GraphQL Support
+    </h2>
+  </a>
 
 <p>OK, let’s come full circle. Let’s say some of these conventions resonate
 with you, but nevertheless you’d like to develop a GraphQL API. I <strong><em>still</em></strong> think
@@ -850,7 +931,12 @@ to hear from you!</p>
 
 <p>Still, let’s be clear what we’re missing: HTTP caching, error codes, lazy-loading, and more.</p>
 
-<h2 id="magic">Magic</h2>
+<a class="anchor" id="magic" />
+  <a class="header" href="#magic">
+    <h2>
+      Magic
+    </h2>
+  </a>
 
 <blockquote>
   <p><em>Having that level of consistency, and working with that for
@@ -866,7 +952,7 @@ really important things.</em></p>
 you can easily go from one application to the other, and expect the
 same things to happen.</em></p>
 
-  <p>- <a href="https://www.youtube.com/watch?v=GFhoSMD6idk">“Resources on Rails”</a>, David Heinemeier Hansson</p>
+  <p>- <a href="https://www.youtube.com/watch?v=GFhoSMD6idk">“Resources on Rails”</a>, <strong>David Heinemeier Hansson</strong></p>
 </blockquote>
 
 <p>When conventions form your programming foundation, you end up with these
@@ -879,7 +965,7 @@ to something simple: a mirror, a trick deck, a quick hand.</p>
 <p>An object, moving back and forth.</p>
 
 <p align="center">
-  <img width="80%" src="https://user-images.githubusercontent.com/55264/52964195-bf935100-336f-11e9-8be4-7046d6556f57.gif" />
+  <img width="80%" src="/assets/img/rest1.gif" />
 </p>
 
 <p>Simple concepts can often be the most powerful, and I will never get
@@ -890,7 +976,12 @@ tired of seeing this trick performed.</p>
 things get tricky, ask for help in our <a href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg">Slack Chat</a>. Reach out to me
 directly at <a href="mailto:richmolj@gmail.com">richmolj@gmail.com</a> or <a href="https://twitter.com/richmolj">@richmolj</a> on Twitter.</p>
 
-<h2 id="addendum-holy-shit">Addendum: Holy Shit</h2>
+<a class="anchor" id="addendum" />
+  <a class="header" href="#addendum">
+    <h2>
+      Addendum: Holy Shit
+    </h2>
+  </a>
 
 <p>I can’t believe I just wrote all that. I swear, I never set out to do any of this.</p>
 
@@ -922,9 +1013,11 @@ to do.</p>
 
 <p>Unless you like XML. Screw XML.</p>
 
-<p><br />
-<br />
-<br /></p>
+<p><br /></p>
+
+<p align="center">
+  <img width="100%" src="https://i.pinimg.com/originals/d3/a7/82/d3a78239f9f2cc15cef7f858a632c809.jpg" />
+</p>
 
         </div>
       </div>

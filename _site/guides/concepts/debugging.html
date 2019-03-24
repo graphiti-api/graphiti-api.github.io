@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -90,7 +97,13 @@
 </div>
 
 <div class="col-md-8">
-  <h2 id="debugger">1 Debugger</h2>
+
+<a class="anchor" id="debugger" />
+  <a class="header" href="#debugger">
+    <h2>
+      Debugger
+    </h2>
+  </a>
 
   <p>Graphiti comes with a debugger that shows the queries executed for a
 given request. Remember that Resources <a href="https://www.graphiti.dev/guides/concepts/resources#query-interface">have a query interface</a> independent of a request or response. And Resources connect similar to ActiveRecord’s <code class="highlighter-rouge">includes</code>:</p>
@@ -123,7 +136,12 @@ specific Resource, then test that Resource directly.</p>
   <img width="100%" src="https://user-images.githubusercontent.com/55264/46086595-6c2d2600-c176-11e8-9b57-1b27d380e9fe.png" />
 </p>
 
-  <h3 id="json-output">1.1 JSON Output</h3>
+<a class="anchor" id="json-output" />
+  <a class="header" href="#json-output">
+    <h3>
+      JSON Output
+    </h3>
+  </a>
 
   <p>It can be helpful to have this debug output come back as part of the
 JSON response. To enable this:</p>
@@ -157,7 +175,12 @@ JSON response. To enable this:</p>
 
   <p><br /></p>
 
-  <h3 id="configuration">1.2 Configuration</h3>
+<a class="anchor" id="configuration" />
+  <a class="header" href="#configuration">
+    <h3>
+      1.2 Configuration
+    </h3>
+  </a>
 
   <p>By default, we’ll log to <code class="highlighter-rouge">Rails.logger</code>, and only enable debugging (logs
 or JSON) when <code class="highlighter-rouge">Rails.logger.level</code> is set to <code class="highlighter-rouge">debug</code>. Here are the
@@ -213,13 +236,23 @@ a <code class="highlighter-rouge">around_action</code>):</p>
   <span class="no">EmployeeResource</span><span class="p">.</span><span class="nf">all</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="rake-tasks">2 Rake Tasks</h3>
+<a class="anchor" id="rake-tasks" />
+  <a class="header" href="#rake-tasks">
+    <h3>
+      2 Rake Tasks
+    </h3>
+  </a>
 
   <p>There are some common debugging scenarios that are possible to do
 manually, but their frequency warrants common patterns. For these, we
 have rake tasks.</p>
 
-  <h4 id="graphitirequest">2.1 graphiti:request</h4>
+<a class="anchor" id="graphiti-request" />
+  <a class="header" href="#graphiti-request">
+    <h4>
+      2.1 graphiti:request
+    </h4>
+  </a>
 
   <blockquote>
     <p><code class="highlighter-rouge">bin/rake graphiti:request[PATH,DEBUG]</code></p>
@@ -245,7 +278,12 @@ run with the Debugger enabled:</p>
   <p>The <code class="highlighter-rouge">PATH</code> should not contain the domain unless you want to hit a live
 API instead of a test server.</p>
 
-  <h4 id="graphitibenchmark">2.2 graphiti:benchmark</h4>
+<a class="anchor" id="graphiti-benchmark" />
+  <a class="header" href="#graphiti-benchmark">
+    <h4>
+      2.2 graphiti:benchmark
+    </h4>
+  </a>
 
   <blockquote>
     <p><code class="highlighter-rouge">bin/rake graphiti:benchmark[PATH,NUM_REQUESTS]</code></p>
@@ -258,7 +296,12 @@ server, to eliminate the vagaries of latency. To do this:</p>
 
   <p>Which will return the average response time.</p>
 
-  <h2 id="tips">3 Tips</h2>
+<a class="anchor" id="tips" />
+  <a class="header" href="#tips">
+    <h2>
+      3 Tips
+    </h2>
+  </a>
 
   <p>When debugging an application, try to isolate the individual Resource
 call and debug the Resource directly (instead of running the entire

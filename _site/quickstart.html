@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -70,7 +77,12 @@
         <div class="container">
           <h1 id="quickstart">Quickstart</h1>
 
-<h5 id="zero-to-api-in-5-minutes">Zero to API in 5 minutes</h5>
+<a class="anchor" id="zero" />
+  <a class="header" href="#zero">
+    <h5>
+      Zero to API in 5 minutes
+    </h5>
+  </a>
 
 <p>This quickstart will use Rails with ActiveRecord to give an overview of
 Graphiti functionality on familiar ground. For a more in-depth breakdown, head to the
@@ -79,7 +91,12 @@ Graphiti functionality on familiar ground. For a more in-depth breakdown, head t
 <p>If the below seems too “magical”, don’t worry - we’re just applying some
 sensible defaults to get started quickly.</p>
 
-<h2 id="installation">Installation</h2>
+<a class="anchor" id="installation" />
+  <a class="header" href="#installation">
+    <h2>
+      Installation
+    </h2>
+  </a>
 
 <p>Let’s start with a classic Rails blog. We’ll use a <a href="http://guides.rubyonrails.org/rails_application_templates.html">template</a> to handle some of the boilerplate. Just run this command and accept all the defaults for now:</p>
 
@@ -94,7 +111,12 @@ directly, you can download the file and and run this command as <code class="hig
 /path/to/all.rb</code></p>
 </blockquote>
 
-<h2 id="defining-a-resource">Defining a Resource</h2>
+<a class="anchor" id="defining-a-resource" />
+  <a class="header" href="#defining-a-resource">
+    <h2>
+      Defining a Resource
+    </h2>
+  </a>
 
 <p>A <a href="https://www.graphiti.dev/guides/concepts/resources"><strong>Resource</strong></a> defines how to query and persist your <a href="https://www.graphiti.dev/guides/concepts/backends-and-models"><strong>Model</strong></a>. In other
 words: a Model is to the database as Resource is to the API. So
@@ -116,7 +138,12 @@ corresponding <a href="https://www.graphiti.dev/guides/concepts/endpoints"><stro
 <p>Verify <code class="highlighter-rouge">http://localhost:3000/api/v1/posts</code> renders JSON correctly.
 Now we just need data.</p>
 
-<h5 id="seeding-data">Seeding Data</h5>
+<a class="anchor" id="seeding-data" />
+  <a class="header" href="#seeding-data">
+    <h5>
+      Seeding Data
+    </h5>
+  </a>
 
 <p>Edit <code class="highlighter-rouge">db/seeds.rb</code> to create a few <code class="highlighter-rouge">Post</code>s:</p>
 
@@ -133,7 +160,12 @@ your database!</p>
 
 <hr />
 
-<h1 id="querying">Querying</h1>
+<a class="anchor" id="querying" />
+  <a class="header" href="#querying">
+    <h2>
+      Querying
+    </h2>
+  </a>
 
 <p>Now that we’ve defined our Resource and seeded some data, let’s see
 what query functionality we have. We’ve listed all <code class="highlighter-rouge">Post</code>s at
@@ -306,7 +338,12 @@ the total count of all posts”.</li>
   </li>
 </ul>
 
-<h2 id="persisting">Persisting</h2>
+<a class="anchor" id="persisting" />
+  <a class="header" href="#persisting">
+    <h2>
+      Persisting
+    </h2>
+  </a>
 
 <p>Resources can Create, Update, and Delete (and you can persist multiple
 Resources in a single request). The best way to observe this behavior is
@@ -341,7 +378,12 @@ to take a look at the tests the generator created. One example:</p>
 <p>Read more about <a href="https://www.graphiti.dev/guides/concepts/resources#persisting">Persistence</a> and
 <a href="https://www.graphiti.dev/guides/concepts/testing#writes">Testing Persistence</a>.</p>
 
-<h2 id="adding-relationships">Adding Relationships</h2>
+<a class="anchor" id="adding-relationships" />
+  <a class="header" href="#adding-relationships">
+    <h2>
+      Adding Relationships
+    </h2>
+  </a>
 
 <p>Let’s start by defining our Model:</p>
 
@@ -389,7 +431,12 @@ Query</a>, e.g.
 <p>You should now be able to hit <code class="highlighter-rouge">/api/v1/comments</code> with all the same
 functionality as before. We just need to seed data.</p>
 
-<h4 id="seeding-relationships">Seeding Relationships</h4>
+<a class="anchor" id="seeding-relationships" />
+  <a class="header" href="#seeding-relationships">
+    <h4>
+      Seeding Relationships
+    </h4>
+  </a>
 
 <p>Start by clearing out your database:</p>
 
@@ -411,7 +458,12 @@ three <code class="highlighter-rouge">Comment</code>s:</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:seed</code></pre></figure>
 
-<h2 id="relationship-usage">Relationship Usage</h2>
+<a class="anchor" id="relationship-usage" />
+  <a class="header" href="#relationship-usage">
+    <h2>
+      Relationship Usage
+    </h2>
+  </a>
 
 <p>Now let’s fetch a <code class="highlighter-rouge">Post</code> and filtered <code class="highlighter-rouge">Comment</code>s in a single request:</p>
 
@@ -437,7 +489,12 @@ reuse code across multiple Endpoints.</p>
 request, we can <em>persist</em> a graph of Resources in a single request. See
 <a href="https://www.graphiti.dev/guides/concepts/resources#sideposting">Sideposting</a>.</p>
 
-<h2 id="exploring-with-vandal">Exploring with Vandal</h2>
+<a class="anchor" id="exploring-with-vandal" />
+  <a class="header" href="#exploring-with-vandal">
+    <h2>
+      Exploring with Vandal
+    </h2>
+  </a>
 
 <p align="center">
   <img width="100%" src="https://user-images.githubusercontent.com/55264/50739987-cb5af780-11b5-11e9-9839-cdb913dafbd1.png" />
@@ -461,7 +518,12 @@ with the text “two”:</p>
 
 <p><a href="https://jsonapi-employee-directory.herokuapp.com/vandal">Click here</a> to play with Vandal hitting our <a href="https://www.graphiti.dev/tutorial">Employee Directory Tutorial</a>. Initial load might take longer as it runs on a free Heroku instance.</p>
 
-<h2 id="whats-next">What’s Next</h2>
+<a class="anchor" id="whats-next" />
+  <a class="header" href="#whats-next">
+    <h2>
+      What's next
+    </h2>
+  </a>
 
 <p>We have a full CRUD API with robust querying functionality, and the
 ability to combine relationships for both reads and writes. But what
@@ -471,19 +533,24 @@ altogether?</p>
 
 <p>These are important topics that Graphiti was built to address. To
 learn more about advanced usage and customization, we suggest following
-the <a href="https://www.graphiti.dev/tutorial"><strong>Tutorial</strong></a> and reading through the
-<a href="https://www.graphiti.dev/guides"><strong>Guides</strong></a>.</p>
+the <a href="https://www.graphiti.dev/tutorial">Tutorial</a> and reading through the
+<a href="https://www.graphiti.dev/guides">Guides</a>.</p>
 
-<p>For help with specific use cases, <a href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg"><strong>join our Slack chat</strong></a>!</p>
+<p>For help with specific use cases, <a href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg">join our Slack chat</a>!</p>
 
-<h2 id="testing">Testing</h2>
+<a class="anchor" id="testing" />
+  <a class="header" href="#testing">
+    <h2>
+      Testing
+    </h2>
+  </a>
 
 <p>This Quickstart is meant to get you up-and-running quickly, so we didn’t
 write tests. But in Graphiti <strong>testing is the easiest, most pleasant way
 to develop your application</strong>.</p>
 
 <p>Even if you’re not normally a TDDer, we highly recommend reading through
-our <a href="https://www.graphiti.dev/guides/concepts/testing"><strong>Integration Testing Guide</strong></a>.</p>
+our <a href="https://www.graphiti.dev/guides/concepts/testing">Integration Testing Guide</a>.</p>
 
 <p><br />
 <br /></p>

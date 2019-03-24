@@ -58,6 +58,72 @@
   padding: 12px 30px;
 }
 
+a.anchor {
+  display: block;
+  position: relative;
+  top: -140px;
+  visibility: hidden;
+}
+
+a.header {
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+.navbar.normal {
+  min-height: 125px;
+  position: fixed;
+  width: 100%;
+  /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/connectwork.png");*/
+  background: url("/assets/img/fancy-cushion.png");
+  /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark-honeycomb.png");*/
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 15px -2px black;
+  /*background: black;*/
+  margin-bottom: 125px;
+
+  .navbar-header {
+    margin-top: -50px;
+  }
+
+  .navbar-nav {
+    margin-top: 30px;
+    font-family: 'Boogaloo', cursive;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    left: 80px;
+
+    a {
+      color: white !important;
+    }
+  }
+
+  .navbar-brand {
+    img {
+      transition: all 200ms;
+
+      &:hover {
+        transform: rotate(-10deg);
+      }
+    }
+  }
+
+  .star {
+    position: absolute;
+    bottom: 10px;
+    right: 70px;
+    font-size: 26px;
+  }
+}
+
+strong {
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  color: white;
+}
+
 .nav-menu .main-menu {
   h4 {
     color: darken(white, 10%);
@@ -83,7 +149,7 @@ img.drop {
 }
 
 blockquote {
-  /*box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);*/
+  border: 1px solid black !important;
 }
 
 .layout-home {
@@ -117,12 +183,70 @@ body {
   line-height: 1.7;
   color: lighten(#333, 10%);
 
-  .page-content {
-    background: white;
+  &.layout-home {
+    background-image: url("/assets/img/home-bg.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+
+    .holder {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      margin-top: -250px; /* Half the height */
+      margin-left: -250px;
+      transition: 200ms all;
+
+      &:hover {
+        margin-top: -260px;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      h1 {
+        margin-top: -75px;
+      }
+    }
   }
 
-  &.layout-home {
-    background: white;
+  &:not(.layout-home) {
+    .page-content {
+      background-image: url("https://images.unsplash.com/photo-1487452066049-a710f7296400?ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80");
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      // so specific it overrides h1 h2
+      // find diff way to display tweets
+      /*:not(.twitter-tweet) {*/
+        /*text-shadow: 1px 1px black;*/
+        /*font-family: 'Noto Sans', sans-serif;*/
+      /*}*/
+
+      .wrapper > div.container {
+        padding-top: 150px;
+        background: url("https://www.toptal.com/designers/subtlepatterns/patterns/classy_fabric.png");
+        /*background: #5c666f;*/
+        border: 1px solid black;
+        color: lighten(#ddd, 5%);
+        font-size: 18px;
+        border-radius: 5px;
+        border: 1px solid black;
+        box-shadow: -2px 2px 6px 2px rgba(0,0,0,0.4);
+
+        img {
+          border-radius: 5px;
+          border: 1px solid black;
+          box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
   }
 }
 
@@ -131,8 +255,20 @@ body {
   margin: 40px 0 40px 0;
 }
 
+h1 {
+  //36
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 36px;
+  //
+}
+
 h1, h2 {
-  color: black;
+  font-family: 'Boogaloo', cursive;
+  color: white;
+  text-shadow: 4px 4px black;
 
   a, a:hover {
     color: black;
@@ -156,29 +292,32 @@ h1, h2 {
 }
 
 h3, h4, h5 {
-  color: #727272;
+  font-family: 'Boogaloo', cursive;
+  color: white;
 
   a, a:hover {
-    color: #727272;
+    color: white;
     text-decoration: none;
-
   }
 }
 
 h5 {
+  color: white;
   font-size: 17px;
   margin-top: 30px;
   border-bottom: 1px solid #f0f0f0;
 }
 
 h4 {
-  color: black;
+  color: white;
   margin-top: 40px;
   border-bottom: 1px solid darken(#f0f0f0, 10%);
 }
 
 .main-footer {
+  background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark-honeycomb.png");
   margin-top: 0;
+  bottom: 0;
 }
 
 .get-started {
@@ -200,6 +339,7 @@ h4 {
 
   a {
     color: #90CAF9;
+    font-weight: bold;
   }
 }
 
@@ -225,8 +365,20 @@ h4 {
   }
 }
 
+code span {
+  font-family: 'Roboto Mono', sans-serif !important;
+  text-shadow: none !important;
+}
+
 pre {
   background: #292E33;
+  border: 1px solid black;
+
+  code {
+    font-family: 'Roboto Mono', sans-serif;
+    text-shadow: none !important;
+    font-size: 15px !important;
+  }
 
   code.hljs {
     background: #292E33;
@@ -234,6 +386,24 @@ pre {
     line-height: 20px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+code.highlighter-rouge {
+  background: darken(#292E33, 5%);
+  color: lighten(green, 60%);
+
+  /*color: lighten(#c7254e, 10%);*/
+}
+
+a, a:not([href]):not([tabindex]) {
+  color: #90CAF9;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+
+  &:hover {
+    color: lighten(#90CAF9, 10%);
   }
 }
 
@@ -253,8 +423,9 @@ img[alt=github] {
 }
 
 .js-toc, .ruby-toc, blockquote {
-  background: #f7f8fb;
-  border: 1px solid #eaedf7;
+  background: #292E33;
+  /*background: #f7f8fb;*/
+  border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
   line-height: 1.8;
@@ -354,16 +525,22 @@ img[alt=glimmer_logo] {
   margin-bottom: 4em;
 }
 
+.code-tabs .highlight {
+  margin-top: 0;
+}
+
+
 .tabs {
-  background: #f8f8f8;
+  /*background: black;*/
   border-radius: 3px;
 
   .tab {
-    background-color: #f8f8f8;
+    background-color: #292E33;
+    border: 1px solid black;
     font-weight: 500;
-    color: #555;
+    color: lighten(#555, 20%);
     display: inline-block;
-    padding: 18px 25px;
+    padding: 0 8px 0 8px;
     margin-top: 10px;
     cursor: pointer;
     -webkit-transition: background-color .2s linear;
@@ -371,14 +548,21 @@ img[alt=glimmer_logo] {
     -ms-transition: background-color .2s linear;
     -o-transition: background-color .2s linear;
     transition: background-color .2s linear;
+    border-bottom: 1px solid black;
+    font-size: 14px;
 
     &.active {
-      background-color: #fff;
-      border: 1px solid #e8e8e8;
+      color: white;
+      text-shadow: 2px 2px black;
+      font-weight: bold;
+      /*background-color: #fff;*/
       border-radius: 5px 5px 0 0;
-      border-bottom: 0;
     }
   }
+}
+
+#next a, #next a small {
+  color: white;
 }
 
 .highlight {

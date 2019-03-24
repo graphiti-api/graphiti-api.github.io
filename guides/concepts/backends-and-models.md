@@ -12,14 +12,15 @@ Backends and Models
   * [Validations](#validations)
 * 2 [Model Implementations](#model-implementations)
   * [PORO](#poro)
-  * [ActiveModel::Model](#activemodelmodel)
-  * [Dry::Struct](#drystruct)
+  * [ActiveModel::Model](#activemodel-model)
+  * [Dry::Struct](#dry-struct)
 * 3 [Model Tips](#model-tips)
   * [ID-less Models](#id-less-models)
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 Overview
+
+{% include h.html tag="h2" text="Overview" a="overview" %}
 
 A Resource *queries* and *persists* to a **Backend**. It returns
 **Models** from the Backend response, which get *serialized*. In this way, it is
@@ -115,7 +116,7 @@ In summary: a Resource builds a query that is sent to a Backend. The
 backend executes the query, and we instantiate Models from the raw
 results.
 
-### 1.1 ActiveRecord
+{% include h.html tag="h3" text="ActiveRecord" a="activerecord" %}
 
 From the [ActiveRecord Guides](https://guides.rubyonrails.org/active_record_basics.html#the-active-record-pattern):
 
@@ -127,7 +128,8 @@ but Graphiti supports either approach: we can separate data and business layers,
 combine them. See the ActiveRecord doppelgänger of the above at our
 [Resource cheatsheet]({{site.github.url}}/cheatsheet).
 
-### 1.2 Model Requirements
+{% include h.html tag="h3" text="Model Requirements"
+a="model-requirements" %}
 
 The only hard requirement of a Model is that it responds to `id`. We use
 `model.id` to determine uniqueness when rendering a JSONAPI response.
@@ -151,7 +153,7 @@ end
 If your Model does not respond to `#name`, either pass a block to `attribute` or
 look into [aliasing](https://blog.bigbinary.com/2012/01/08/alias-vs-alias-method.html).
 
-#### 1.2.1 Validations
+{% include h.html tag="h4" text="Validations" a="validations" %}
 
 Graphiti will perform validations on your models during write requests,
 returning a [JSONAPI-compliant errors payload](http://jsonapi.org/format/#errors).
@@ -171,13 +173,13 @@ class Employee
 end
 {% endhighlight %}
 
-## 2 Model Implementations
+{% include h.html tag="h2" text="Model Implementations" a="model-implementations" %}
 
 Because our default is ActiveRecord, it may be unclear what other Models
 look like. Graphiti itself has no opinion about your Model layer, but
 below are a few examples.
 
-### 2.1 PORO
+{% include h.html tag="h3" text="2.1 PORO" a="poro" %}
 
 {% highlight ruby %}
 class Employee
@@ -201,7 +203,7 @@ e = Employee.new(id: 1, first_name: 'Jane')
 e.first_name # => 'Jane'
 {% endhighlight %}
 
-### 2.2 ActiveModel::Model
+{% include h.html tag="h3" text="2.2 ActiveModel::Model" a="activemodel-model" %}
 
 A simple abstraction of the above is [ActiveModel::Model](https://api.rubyonrails.org/classes/ActiveModel/Model.html):
 
@@ -221,7 +223,7 @@ e = Employee.new(id: 1, first_name: 'Jane')
 e.first_name # => 'Jane'
 {% endhighlight %}
 
-### 2.3 Dry::Struct
+{% include h.html tag="h3" text="2.3 Dry::Struct" a="dry-struct" %}
 
 [dry-types](https://dry-rb.org/gems/dry-types) is a dependency of Graphiti and successor to the popular [Virtus](https://github.com/solnic/virtus).
 
@@ -243,9 +245,9 @@ e = Employee.new(id: 1, first_name: 'Jane')
 e.first_name # => 'Jane'
 {% endhighlight %}
 
-## 3 Model Tips
+{% include h.html tag="h2" text="3 Model Tips" a="model-tips" %}
 
-### ID-less Models
+{% include h.html tag="h3" text="ID-less Models" a="id-less-models" %}
 
 If your Model does not have an `id` property, using a random UUID is
 perfectly acceptable:

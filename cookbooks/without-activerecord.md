@@ -5,7 +5,7 @@ layout: page
 Usage Without ActiveRecord
 ==========================
 
-Graphiti was build to be used with any ORM or datastore, from PostgreSQL
+Graphiti was built to be used with any ORM or datastore, from PostgreSQL
 to elasticsearch to `Net::HTTP`. In fact, Graphiti itself is tested with
 Plain Old Ruby Objects (POROs).
 
@@ -57,7 +57,7 @@ DATA = [
 ]
 {% endhighlight %}
 
-## Resource Overrides
+{% include h.html tag="h2" text="Resource Overrides" a="resource-overrides" %}
 
 If it's your first time with a new ORM or datastore, we recommend
 putting the logic in the Resource first. Once things are working *and*
@@ -100,7 +100,7 @@ returning the full dataset for now. The contract of `#resolve` is to
 return an array of model instances, hence `DATA.map { |d| Post.new(d)
 }`.
 
-#### Sorting
+{% include h.html tag="h4" text="Sorting" a="sorting" %}
 
 {% highlight ruby %}
 sort_all do |scope, attribute, direction|
@@ -126,7 +126,7 @@ then reference that information on the scope when resolving.
 
 Note the `sort_all` scope block, in fact all scope blocks, must return the scope.
 
-#### Paginating
+{% include h.html tag="h4" text="Paginating" a="paginating" %}
 
 {% highlight ruby %}
 paginate do |scope, current_page, per_page|
@@ -145,7 +145,7 @@ end
 Again: merge into the scope, then reference the scope data when
 resolving.
 
-#### Filtering
+{% include h.html tag="h4" text="Filtering" a="filtering" %}
 
 {% highlight ruby %}
 filter :title, only: [:eq] do
@@ -172,7 +172,7 @@ end
 Same as above examples. Again, note that we must return the scope object
 from the filter function.
 
-##### Persisting
+{% include h.html tag="h4" text="Persisting" a="persisting" %}
 
 All at once:
 
@@ -212,7 +212,7 @@ These are the overrides for persistence operations. You are encouraged
 **not** to override `create/update/destroy` directly and instead use
 [Persistence Lifecycle Hooks]({{site.github.url}}/concepts/resources#persistence-lifecycle-hooks).
 
-## Adapters
+{% include h.html tag="h2" text="Adapters" a="adapters" %}
 
 OK so we have all our read and write operations working correctly. But
 if we had multiple Resources all using an in-memory datastore, you'd see

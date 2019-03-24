@@ -48,7 +48,8 @@ Testing
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 Overview
+
+{% include h.html tag="h2" text="1 Overview" a="overview" %}
 
 Test first.
 
@@ -104,7 +105,7 @@ mentally parsing the response payload.
 * Because our integration test is separate from implementation, we don't
 need to worry about [test-induced design damage](http://david.heinemeierhansson.com/2014/test-induced-design-damage.html).
 
-### 1.1 API vs Resource
+{% include h.html tag="h3" text="1.1 API vs Resource" a="api-vs-resource" %}
 
 There are two types of Graphiti tests: **API tests** and **Resource
 tests**.
@@ -121,7 +122,7 @@ Resource: routing, middleware, cache rules, response codes, etc…
 Typically, you'll write the API test **once** and not have to touch it
 again.
 
-### 1.2 Factories
+{% include h.html tag="h3" text="1.2 Factories" a="factories" %}
 
 > Note: Factories are not **required**, but they are considered a best
 > practice used by the Graphiti test generator. Read thoughtbot's
@@ -169,19 +170,19 @@ end
 
 {% endhighlight %}
 
-### 1.3 RSpec
+{% include h.html tag="h3" text="1.3 RSpec" a="rspec" %}
 
 RSpec is not **required**, but considered a first-class citizen used by the
 Graphiti test generator.
 
-## 2 Test Helpers
+{% include h.html tag="h2" text="2 Test Helpers" a="test-helpers" %}
 
 Tests are run using [JSONAPI standards](http://jsonapi.org/format/#fetching-includes). But the
 JSONAPI payload can be a pain to deal with. So, we've supplied helpers.
 
 These helpers are defined in the [Graphiti Spec Helpers](https://github.com/graphiti-api/graphiti_errors) gem.
 
-### 2.1 `#jsonapi_data`
+{% include h.html tag="h3" text="2.1 #jsonapi_data" a="jsonapi-data" %}
 
 > Note: for brevity, this method is aliased to `d`
 
@@ -203,7 +204,7 @@ conflicting with an attribute of the same name.
 * If the `first_name` key was not present in the response, an error will
 be raised.
 
-#### 2.2 Accessing Sideloads
+{% include h.html tag="h4" text="2.2 Accessing Sideloads" a="accessing-sideloads" %}
 
 To grab a relationship:
 
@@ -217,7 +218,7 @@ expect(sideload.body).to eq('body')
 The `sideload` method accepts the *name of the relationship*. It returns
 a normal `jsonapi_data` `GraphitiSpecHelpers::Node` containing the `include`-ed data.
 
-#### 2.3 Accessing Links
+{% include h.html tag="h4" text="2.3 Accessing Links" a="accessing-links" %}
 
 To grab a Link:
 
@@ -228,11 +229,11 @@ d[0].link(:comments, :related)
 This accepts the relationship name and the link type. It will return the
 link URL.
 
-### 2.2 `#json`
+{% include h.html tag="h3" text="2.2 #json" a="json" %}
 
 To see the raw JSON response, use `json`.
 
-### 2.3 `#datetime`
+{% include h.html tag="h3" text="2.3 #date and #datetime" a="date-and-datetime" %}
 
 In Graphiti, datetimes are rendered in [ISO 8601 format](https://www.iso.org/iso-8601-date-and-time-format.html). This means that straight date comparisons will fail:
 
@@ -249,7 +250,9 @@ apples to apples:
 expect(d[0].created_at).to eq(datetime(post.created_at))
 {% endhighlight %}
 
-### 2.4 `#jsonapi_errors`
+Similarly, there's a `date` helper as well.
+
+{% include h.html tag="h3" text="2.4 #jsonapi_errors" a="jsonapi-errors" %}
 
 > This method is aliased to `errors` for brevity
 
@@ -278,7 +281,7 @@ expect(errors.to_h).to eq({
 })
 {% endhighlight %}
 
-### 2.5 Resource Test Helpers
+{% include h.html tag="h3" text="2.5 Resource Test Helpers" a="resource-test-helpers" %}
 
 Resource tests have two helpers, both different ways to execute a query.
 
@@ -302,7 +305,7 @@ it 'works' do
 end
 {% endhighlight %}
 
-### 2.6 API Test Helpers
+{% include h.html tag="h3" text="2.6 API Test Helpers" a="api-test-helpers" %}
 
 When executing an API test request, always use the `jsonapi_` doppelgänger:
 
@@ -326,14 +329,14 @@ def jsonapi_headers
 end
 {% endhighlight %}
 
-## 3 Resource Tests
+{% include h.html tag="h2" text="3 Resource Tests" a="resource-tests" %}
 
 There are two test files for each Resource:
 
 * `spec/resources/post/reads_spec.rb`
 * `spec/resources/post/writes_spec.rb`
 
-### 3.1 Reads
+{% include h.html tag="h3" text="3.1 Reads" a="reads" %}
 
 The basic setup for read operations:
 
@@ -360,7 +363,7 @@ RSpec.describe EmployeeResource, type: :resource do
 end
 {% endhighlight %}
 
-#### 3.1.1 Serialization
+{% include h.html tag="h4" text="3.1.1 Serialization" a="serialization" %}
 
 {% highlight ruby %}
 describe 'serialization' do
@@ -397,7 +400,7 @@ expect(data.first_name).to eq(employee.first_name)
 > Note: Our schema validation test will ensure no attributes get
 > removed or change types.
 
-#### 3.1.2 Filtering
+{% include h.html tag="h4" text="3.1.2 Filtering" a="filtering" %}
 
 {% highlight ruby %}
 describe 'filtering' do
@@ -424,7 +427,7 @@ In general, you only need to test filtering when there is custom logic.
 Our schema validation test will ensure no filters are removed, guarded,
 changed operators, etc.
 
-#### 3.1.3 Sorting
+{% include h.html tag="h4" text="3.1.3 Sorting" a="sorting" %}
 
 {% highlight ruby %}
 describe 'sorting' do
@@ -470,7 +473,7 @@ In general, you only need to test sorting when there is custom logic.
 Our schema validation test will ensure no sorts are removed, guarded or
 limited in direction.
 
-#### 3.1.4 Sideloading
+{% include h.html tag="h4" text="3.1.4 Sideloading" a="sideloading" %}
 
 {% highlight ruby %}
 describe 'sideloading' do
@@ -507,7 +510,7 @@ In general, you only need to test sideloads when there is custom logic.
 Our schema validation test will ensure no sideloads are removed or
 associated to a different Resource.
 
-### 3.2 Writes
+{% include h.html tag="h3" text="3.2 Writes" a="writes" %}
 
 The basic setup for write operations:
 
@@ -534,7 +537,7 @@ end
 
 Here `payload` is a [JSONAPI Resource Object](http://jsonapi.org/format/#crud).
 
-#### 3.2.1 Create
+{% include h.html tag="h4" text="3.2.1 Create" a="create" %}
 
 {% highlight ruby %}
 describe 'creating' do
@@ -588,7 +591,7 @@ it 'works' do
 end
 {% endhighlight %}
 
-##### 3.2.1.1 Required Belongs To
+{% include h.html tag="h5" text="3.2.1.1 Required Belongs To" a="required-belongs-to" %}
 
 [Rails 5 made belongs_to required by default](https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html). This means that if Employee `belongs_to :department`, the above tests will fail (we cannot create the Employee without associating it to Department).
 
@@ -627,7 +630,7 @@ end
 Will ensure the Employee is created and associated to the given
 department.
 
-#### 3.2.2 Update
+{% include h.html tag="h4" text="3.2.2 Update" a="update" %}
 
 {% highlight ruby %}
 describe 'updating' do
@@ -663,7 +666,7 @@ Here `payload` is an empty Employee [Resource Object](http://jsonapi.org/format/
 We'll assert that when updating attributes, the changes are correctly
 persisted to the database.
 
-#### 3.2.3 Destroy
+{% include h.html tag="h4" text="3.2.3 Destroy" a="destroy" %}
 
 {% highlight ruby %}
 describe 'destroying' do
@@ -684,7 +687,7 @@ end
 Here we ensure that a delete request correctly removes a record from the
 database.
 
-#### 3.2.4 Side Effects
+{% include h.html tag="h4" text="3.2.4 Side Effects" a="side-effects" %}
 
 {% highlight ruby %}
 it 'works' do
@@ -700,7 +703,7 @@ an email or updating an audit trail. It's recommended to test these
 Though "one expectation per test" works well for unit tests, integration
 tests can take longer to run and the performance penalty isn't worth it.
 
-## 4 API Tests
+{% include h.html tag="h2" text="4 API Tests" a="api-tests" %}
 
 There are five test files for each Resource:
 
@@ -710,9 +713,9 @@ There are five test files for each Resource:
 * `spec/api/v1/employees/update_spec.rb`
 * `spec/api/v1/employees/destroy_spec.rb`
 
-### 4.1 Reads
+{% include h.html tag="h3" text="4.1 Reads" a="reads" %}
 
-#### 4.1.1 `index`
+{% include h.html tag="h4" text="4.1.1 #index" a="index" %}
 
 {% highlight ruby %}
 require 'rails_helper'
@@ -745,7 +748,7 @@ Here we're ensuring `EmployeeResource` is the correct resource to be
 called from this endpoint, we get a 200 status code, and the entities
 returned are expected.
 
-#### 4.1.2 `show`
+{% include h.html tag="h4" text="4.1.2 #show" a="show" %}
 
 {% highlight ruby %}
 require 'rails_helper'
@@ -773,9 +776,9 @@ end
 
 Similar to `index`, but fetching only a single Employee.
 
-### 4.2 Writes
+{% include h.html tag="h3" text="4.2 Writes" a="writes" %}
 
-#### 4.2.1 `create`
+{% include h.html tag="h4" text="4.2.1 #create" a="create" %}
 
 {% highlight ruby %}
 require 'rails_helper'
@@ -831,7 +834,7 @@ See also:
 
   * [Dealing with required belongs_to relationships](#required-belongs-to).
 
-#### 4.2.2 `update`
+{% include h.html tag="h4" text="4.2.2 #update" a="update" %}
 
 {% highlight ruby %}
 require 'rails_helper'
@@ -886,7 +889,7 @@ let(:payload) do
 end
 {% endhighlight %}
 
-#### 4.2.3 `destroy`
+{% include h.html tag="h4" text="4.2.3 #destroy" a="destroy" %}
 
 {% highlight ruby %}
 require 'rails_helper'
@@ -914,7 +917,7 @@ end
 Here we're sending a DELETE request, ensuring the record is actually
 removed, and we respond [according to the JSONAPI specification](http://jsonapi.org/format/#crud-deleting-responses-200).
 
-# 5 Context
+{% include h.html tag="h2" text="5 Context" a="context" %}
 
 Occasionally you'll need to set context for tests. The most common
 scenario is authorization:
@@ -944,7 +947,7 @@ end
 
 <br />
 
-# 6 Schema Validation
+{% include h.html tag="h2" text="6 Schema Validation" a="schema-validation" %}
 
 Graphiti comes with built-in backwards-compatibility tests. We do this
 by comparing the current version of the schema with one previously
@@ -973,7 +976,7 @@ $ FORCE_SCHEMA=true bin/rspec
 
 <br />
 
-# 7 Testing Spectrum
+{% include h.html tag="h2" text="7 Testing Spectrum" a="testing-spectrum" %}
 
 Testing standards vary from team to team, and there is no right answer
 when judging "the right level of testing".
@@ -993,7 +996,7 @@ duplicate tests across endpoints, which is why we have Resource tests.
 Graphiti provides sensible defaults, but you're encouraged to consider
 the tradeoffs and pick the right level of testing for *you*.
 
-# 7 Double-Testing Units
+{% include h.html tag="h2" text="8 Double-Testing Units" a="double-testing-units" %}
 
 Integration testing is great: it gives a high level of confidence, and
 they're typically the easiest tests to write. In fact, these tests are
@@ -1087,7 +1090,7 @@ This way future developers know the scope is only an implementation
 detail and not considered part of this object's public API. Writing the
 unit test can be deferred until the use case actually arises.
 
-## 9 Generators
+{% include h.html tag="h2" text="9 Generators" a="generators" %}
 
 The [Resource generator]({{site.github.url}}/guides/concepts/resources#generators) will create both Resource and API tests for you.
 Use these as templates to implement your tests.
@@ -1107,3 +1110,6 @@ $ rails generate graphiti:api_test EmployeeResource -a index show
 To generate only the API tests. This can be particularly helpful because
 API tests are mostly boilerplate that does not need to be manually
 edited. Pass the `-a` option to limit RESTful actions.
+
+<br />
+<br />

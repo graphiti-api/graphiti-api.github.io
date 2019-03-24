@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -92,7 +99,12 @@
 
 <div class="col-md-8">
 
-  <h2 id="overview">1 Overview</h2>
+<a class="anchor" id="overview" />
+  <a class="header" href="#overview">
+    <h2>
+      1 Overview
+    </h2>
+  </a>
 
   <p>Whenever we have an application error, we want to respond with a
 <a href="http://jsonapi.org/format/#errors">JSONAPI-compliant errors payload</a>.
@@ -111,7 +123,12 @@ the user about why the error occurred.”</p>
 
   <p>To do this we use the <a href="https://github.com/graphiti-api/graphiti_errors">Graphiti Errors</a> gem.</p>
 
-  <h3 id="setup">1.1 Setup</h3>
+<a class="anchor" id="setup" />
+  <a class="header" href="#setup">
+    <h3>
+      1.1 Setup
+    </h3>
+  </a>
 
   <p>Error handling is part of <a href="https://www.graphiti.dev/guides/getting-started/installation">Installation</a>,
 but here’s the code:</p>
@@ -131,7 +148,12 @@ but here’s the code:</p>
   <p>We expose this directly so you can add additional logic, like sending
 the error to NewRelic.</p>
 
-  <h4 id="displaying-raw-errors">1.1.1 Displaying Raw Errors</h4>
+<a class="anchor" id="displaying-raw-errors" />
+  <a class="header" href="#displaying-raw-errors">
+    <h4>
+      1.1.1 Displaying Raw Errors
+    </h4>
+  </a>
 
   <p align="center">
   <img width="100%" src="https://user-images.githubusercontent.com/55264/45879208-9bf0be00-bd71-11e8-8427-282c5a426394.png" />
@@ -158,9 +180,19 @@ privileged to see them:</p>
   <p>When <code class="highlighter-rouge">show_raw_error</code> is <code class="highlighter-rouge">true</code>, you’ll get the raw error class,
 message, and backtrace in the JSON response.</p>
 
-  <h2 id="usage">2 Usage</h2>
+<a class="anchor" id="usage" />
+  <a class="header" href="#usage">
+    <h2>
+      2 Usage
+    </h2>
+  </a>
 
-  <h3 id="basic">2.1 Basic</h3>
+<a class="anchor" id="basic" />
+  <a class="header" href="#basic">
+    <h3>
+      2.1 Basic
+    </h3>
+  </a>
 
   <p>Let’s register an error with a custom response code:</p>
 
@@ -184,7 +216,12 @@ message, and backtrace in the JSON response.</p>
   <span class="n">register_exception</span> <span class="no">FooError</span><span class="p">,</span> <span class="ss">status: </span><span class="mi">422</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="advanced">2.2 Advanced</h3>
+<a class="anchor" id="advanced" />
+  <a class="header" href="#advanced">
+    <h3>
+      2.2 Advanced
+    </h3>
+  </a>
 
   <p>The final option <code class="highlighter-rouge">register_exception</code> accepts is <code class="highlighter-rouge">handler</code>. Here you can inject your own error handling class that customize <code class="highlighter-rouge">GraphitiErrors::ExceptionHandler</code>. For example:</p>
 
@@ -223,12 +260,22 @@ message, and backtrace in the JSON response.</p>
   <span class="no">MyCustomHandler</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="logging">2.3 Logging</h3>
+<a class="anchor" id="logging" />
+  <a class="header" href="#logging">
+    <h3>
+      2.3 Logging
+    </h3>
+  </a>
 
   <p>You can assign any logger using <code class="highlighter-rouge">GraphitiErrors.logger =
 your_logger</code>. When using Rails this defaults to <code class="highlighter-rouge">Rails.logger</code>.</p>
 
-  <h2 id="testing">3 Testing</h2>
+<a class="anchor" id="testing" />
+  <a class="header" href="#testing">
+    <h2>
+      3 Testing
+    </h2>
+  </a>
 
   <p>This pattern of globally rescuing exceptions makes sense when
 running our live application…but during testing, we may want to

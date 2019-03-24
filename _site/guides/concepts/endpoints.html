@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -76,10 +83,9 @@
       <ul>
         <li><a href="#endpoint-logic">Endpoint logic</a></li>
         <li><a href="#rails-integration">Rails Integration</a></li>
-        <li>Without Rails</li>
       </ul>
     </li>
-    <li>2 <a href="#customizing-resource-behavior">Customizing Resources</a>
+    <li>2 <a href="#customizing-resources">Customizing Resources</a>
       <ul>
         <li><a href="#scope-overrides">Scope Overrides</a></li>
         <li><a href="#sideload-allowlist">Sideload Allowlist</a></li>
@@ -88,7 +94,6 @@
     <li>3 <a href="#caching">Caching</a>
       <ul>
         <li><a href="#etags">ETags</a></li>
-        <li>Action Caching</li>
       </ul>
     </li>
     <li>4 <a href="#testing">Testing</a></li>
@@ -97,7 +102,13 @@
 </div>
 
 <div class="col-md-8">
-  <h2 id="overview">1 Overview</h2>
+
+<a class="anchor" id="overview" />
+  <a class="header" href="#overview">
+    <h2>
+      1 Overview
+    </h2>
+  </a>
 
   <p><strong>Endpoints</strong> expose and customize
 <a href="https://www.graphiti.dev/guides/concepts/resources">Resources</a>.</p>
@@ -128,7 +139,12 @@ or add an <code class="highlighter-rouge">/exemplary_employees</code> endpoint w
 request processing, response codes, caching, MIME types, and so on. If you’re thinking
 Rails, an Endpoint is the combination of a Route and Controller.</p>
 
-  <h3 id="endpoint-logic">1.1 Endpoint Logic</h3>
+<a class="anchor" id="endpoint-logic" />
+  <a class="header" href="#endpoint-logic">
+    <h3>
+      Endpoint Logic
+    </h3>
+  </a>
 
   <p>Often, you won’t need to customize Endpoints - especially if you’re
 using our <a href="https://www.graphiti.dev/guides/concepts/resources#generators">Rails Resource
@@ -149,7 +165,12 @@ welcome email from <code class="highlighter-rouge">/users#create</code> but not 
 
   <p>If your logic falls elsewhere, consider a Resource or Model.</p>
 
-  <h3 id="rails-integration">1.2 Rails Integration</h3>
+<a class="anchor" id="rails-integration" />
+  <a class="header" href="#rails-integration">
+    <h3>
+      1.2 Rails Integration
+    </h3>
+  </a>
 
   <p>When using Rails, an endpoint is the combination of a Route and
 Controller:</p>
@@ -177,12 +198,22 @@ our application generator):</p>
   <p>This gives us <a href="#sideload-allowlist">#sideload_allowlist</a> and sets the
 <a href="https://www.graphiti.dev/guides/concepts/resources#context">context</a>.</p>
 
-  <h2 id="customizing-resources">2 Customizing Resources</h2>
+<a class="anchor" id="customizing-resources" />
+  <a class="header" href="#customizing-resources">
+    <h2>
+      2 Customizing Resources
+    </h2>
+  </a>
 
-  <h3 id="scope-overrides">Scope Overrides</h3>
+<a class="anchor" id="scope-overrides" />
+  <a class="header" href="#scope-overrides">
+    <h3>
+      Scope Overrides
+    </h3>
+  </a>
 
   <p>One common use case for endpoints is customizing the Resource
-<a href="https://www.graphiti.dev/guides/concepts/resources#basescope">base scope</a>. This causes a new
+<a href="https://www.graphiti.dev/guides/concepts/resources#base-scope">base scope</a>. This causes a new
 “starting point” for query building.</p>
 
   <p>Consider the endpoints <code class="highlighter-rouge">/posts</code> (basic CRUD) and <code class="highlighter-rouge">/top_posts</code>. Though
@@ -198,7 +229,12 @@ Posts with a certain number of upvotes get returned:</p>
   <p>We’re able to reuse all the other logic in PostResource - relationships,
 filters, sorts, etc - while only returning “Top Posts”.</p>
 
-  <h3 id="sideload-allowlist">Sideload Allowlist</h3>
+<a class="anchor" id="sideload-allowlist" />
+  <a class="header" href="#sideload-allowlist">
+    <h3>
+      Sideload Allowlist
+    </h3>
+  </a>
 
   <p>Resources define relationships to other resources. But we may not want
 all of those relationships exposed at a given endpoint.</p>
@@ -225,9 +261,19 @@ furthest we can go is Department:</p>
   <span class="c1"># ... code ...</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h2 id="caching">Caching</h2>
+<a class="anchor" id="caching" />
+  <a class="header" href="#caching">
+    <h2>
+      Caching
+    </h2>
+  </a>
 
-  <h3 id="etags">Etags</h3>
+<a class="anchor" id="etags" />
+  <a class="header" href="#etags">
+    <h3>
+      Etags
+    </h3>
+  </a>
 
   <p><a href="https://robots.thoughtbot.com/introduction-to-conditional-http-caching-with-rails">ETags</a> are an important concept that is often overlooked. Etags tell browsers
 that the response to a GET request hasn’t changed since the last request and
@@ -273,11 +319,12 @@ sideloading (and filtering) Positions as well. Use custom endpoints or
 <a href="#sideload-allowlist">Sideload Allowlist</a> to mitigate this issue.</p>
   </blockquote>
 
-  <h3 id="action-caching">Action Caching</h3>
-
-  <p>TODO</p>
-
-  <h2 id="testing">4 Testing</h2>
+<a class="anchor" id="testing" />
+  <a class="header" href="#testing">
+    <h2>
+      4 Testing 
+    </h2>
+  </a>
 
   <p>If you have custom Endpoint logic, we suggest testing using an <a href="https://www.graphiti.dev/guides/concepts/testing#api-tests">API
 Test</a>.</p>

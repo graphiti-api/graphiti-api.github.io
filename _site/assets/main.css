@@ -12124,6 +12124,52 @@ html.portfolio-page {
 .index-sidebar-hero .cta a.button {
   padding: 12px 30px; }
 
+a.anchor {
+  display: block;
+  position: relative;
+  top: -140px;
+  visibility: hidden; }
+
+a.header:hover {
+  text-decoration: none !important; }
+
+.navbar.normal {
+  min-height: 125px;
+  position: fixed;
+  width: 100%;
+  /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/connectwork.png");*/
+  background: url("/assets/img/fancy-cushion.png");
+  /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark-honeycomb.png");*/
+  border-bottom: 1px solid black;
+  box-shadow: 1px 1px 15px -2px black;
+  /*background: black;*/
+  margin-bottom: 125px; }
+  .navbar.normal .navbar-header {
+    margin-top: -50px; }
+  .navbar.normal .navbar-nav {
+    margin-top: 30px;
+    font-family: 'Boogaloo', cursive;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    left: 80px; }
+    .navbar.normal .navbar-nav a {
+      color: white !important; }
+  .navbar.normal .navbar-brand img {
+    transition: all 200ms; }
+    .navbar.normal .navbar-brand img:hover {
+      transform: rotate(-10deg); }
+  .navbar.normal .star {
+    position: absolute;
+    bottom: 10px;
+    right: 70px;
+    font-size: 26px; }
+
+strong {
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+  color: white; }
+
 .nav-menu .main-menu h4 {
   color: #e6e6e6;
   margin-left: 5rem; }
@@ -12140,7 +12186,7 @@ img.drop {
   box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.3); }
 
 blockquote {
-  /*box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);*/ }
+  border: 1px solid black !important; }
 
 .layout-home .brand {
   display: block;
@@ -12162,17 +12208,67 @@ body {
   font-size: 17px;
   line-height: 1.7;
   color: #4d4d4d; }
-  body .page-content {
-    background: white; }
   body.layout-home {
-    background: white; }
+    background-image: url("/assets/img/home-bg.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-size: cover;*/ }
+    body.layout-home .holder {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      margin-top: -250px;
+      /* Half the height */
+      margin-left: -250px;
+      transition: 200ms all; }
+      body.layout-home .holder:hover {
+        margin-top: -260px; }
+      body.layout-home .holder a:hover {
+        text-decoration: none; }
+      body.layout-home .holder h1 {
+        margin-top: -75px; }
+  body:not(.layout-home) .page-content {
+    background-image: url("https://images.unsplash.com/photo-1487452066049-a710f7296400?ixlib=rb-1.2.1&auto=format&fit=crop&w=2102&q=80");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*:not(.twitter-tweet) {*/
+    /*text-shadow: 1px 1px black;*/
+    /*font-family: 'Noto Sans', sans-serif;*/
+    /*}*/ }
+    body:not(.layout-home) .page-content .wrapper > div.container {
+      padding-top: 150px;
+      background: url("https://www.toptal.com/designers/subtlepatterns/patterns/classy_fabric.png");
+      /*background: #5c666f;*/
+      border: 1px solid black;
+      color: #eaeaea;
+      font-size: 18px;
+      border-radius: 5px;
+      border: 1px solid black;
+      box-shadow: -2px 2px 6px 2px rgba(0, 0, 0, 0.4); }
+      body:not(.layout-home) .page-content .wrapper > div.container img {
+        border-radius: 5px;
+        border: 1px solid black;
+        box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.3); }
 
 #next {
   float: right;
   margin: 40px 0 40px 0; }
 
+h1 {
+  font-size: 40px; }
+
+h2 {
+  font-size: 36px; }
+
 h1, h2 {
-  color: black; }
+  font-family: 'Boogaloo', cursive;
+  color: white;
+  text-shadow: 4px 4px black; }
   h1 a, h1 a:hover, h2 a, h2 a:hover {
     color: black;
     text-decoration: none;
@@ -12187,23 +12283,27 @@ h1, h2 {
     top: 4px; }
 
 h3, h4, h5 {
-  color: #727272; }
+  font-family: 'Boogaloo', cursive;
+  color: white; }
   h3 a, h3 a:hover, h4 a, h4 a:hover, h5 a, h5 a:hover {
-    color: #727272;
+    color: white;
     text-decoration: none; }
 
 h5 {
+  color: white;
   font-size: 17px;
   margin-top: 30px;
   border-bottom: 1px solid #f0f0f0; }
 
 h4 {
-  color: black;
+  color: white;
   margin-top: 40px;
   border-bottom: 1px solid #d7d7d7; }
 
 .main-footer {
-  margin-top: 0; }
+  background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark-honeycomb.png");
+  margin-top: 0;
+  bottom: 0; }
 
 .get-started {
   margin-top: 40px;
@@ -12219,7 +12319,8 @@ h4 {
     color: white;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
   .get-started a {
-    color: #90CAF9; }
+    color: #90CAF9;
+    font-weight: bold; }
 
 #docs #api-docs #methods .method .method-section {
   padding-top: 0; }
@@ -12233,14 +12334,36 @@ h4 {
   margin-left: 30px !important;
   height: 300px; }
 
+code span {
+  font-family: 'Roboto Mono', sans-serif !important;
+  text-shadow: none !important; }
+
 pre {
-  background: #292E33; }
+  background: #292E33;
+  border: 1px solid black; }
+  pre code {
+    font-family: 'Roboto Mono', sans-serif;
+    text-shadow: none !important;
+    font-size: 15px !important; }
   pre code.hljs {
     background: #292E33;
     color: #edf2f9;
     line-height: 20px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
+
+code.highlighter-rouge {
+  background: #1e2125;
+  color: #b3ffb3;
+  /*color: lighten(#c7254e, 10%);*/ }
+
+a, a:not([href]):not([tabindex]) {
+  color: #90CAF9;
+  cursor: pointer;
+  font-weight: bold;
+  text-shadow: 1px 1px black; }
+  a:hover, a:not([href]):not([tabindex]):hover {
+    color: #c0e1fc; }
 
 img[alt=github] {
   margin-right: 5px;
@@ -12254,8 +12377,9 @@ img[alt=github] {
     padding-left: 10px; }
 
 .js-toc, .ruby-toc, blockquote {
-  background: #f7f8fb;
-  border: 1px solid #eaedf7;
+  background: #292E33;
+  /*background: #f7f8fb;*/
+  border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
   line-height: 1.8; }
@@ -12316,27 +12440,37 @@ img[alt=glimmer_logo] {
   display: block;
   margin-bottom: 4em; }
 
+.code-tabs .highlight {
+  margin-top: 0; }
+
 .tabs {
-  background: #f8f8f8;
+  /*background: black;*/
   border-radius: 3px; }
   .tabs .tab {
-    background-color: #f8f8f8;
+    background-color: #292E33;
+    border: 1px solid black;
     font-weight: 500;
-    color: #555;
+    color: #888888;
     display: inline-block;
-    padding: 18px 25px;
+    padding: 0 8px 0 8px;
     margin-top: 10px;
     cursor: pointer;
     -webkit-transition: background-color .2s linear;
     -moz-transition: background-color .2s linear;
     -ms-transition: background-color .2s linear;
     -o-transition: background-color .2s linear;
-    transition: background-color .2s linear; }
+    transition: background-color .2s linear;
+    border-bottom: 1px solid black;
+    font-size: 14px; }
     .tabs .tab.active {
-      background-color: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 5px 5px 0 0;
-      border-bottom: 0; }
+      color: white;
+      text-shadow: 2px 2px black;
+      font-weight: bold;
+      /*background-color: #fff;*/
+      border-radius: 5px 5px 0 0; }
+
+#next a, #next a small {
+  color: white; }
 
 .highlight {
   margin-top: 2rem;

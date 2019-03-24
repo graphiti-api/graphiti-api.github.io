@@ -13,7 +13,7 @@ generating URLs. To take Vandal for a spin, [view our sample app](https://jsonap
 
 <div markdown="1" class="toc col-md-3">
 
-* 1 [Installation](#from-scratch)
+* 1 [Installation](#installation)
   * [Via Gem](#installing-via-gem)
   * [Manual](#manual-installation)
 * 2 [Usage](#usage)
@@ -22,13 +22,13 @@ generating URLs. To take Vandal for a spin, [view our sample app](https://jsonap
 
 <div markdown="1" class="col-md-8">
 
-## 1 Installation
+{% include h.html tag="h2" text="1 Installation" a="installation" %}
 
 If you ran our [application template]({{site.github.url}}/guides/getting-started/installation),
 you already have Vandal installed. Otherwise, you can
 install from the `vandal_ui` gem, or manually install.
 
-### Installing Via Gem
+{% include h.html tag="h3" text="1.1 Installing via Gem" a="installing-via-gem" %}
 
 * Add the `vandal_ui` gem.
 * Run `rake vandal:install`
@@ -44,7 +44,7 @@ end
 
 That's it! Vandal will dynamically generate a schema at `<api_namespace>/vandal/schema.json`, and you can view the UI at `<api_namespace>/vandal`.
 
-### Manual Installation
+{% include h.html tag="h3" text="1.2 Manual Installation" a="manual-installation" %}
 
 [Vandal](https://github.com/graphiti-api/vandal) is a VueJS
 application. Just grab the [dist files](https://github.com/graphiti-api/vandal/tree/master/dist) and put them anywhere you'd like.
@@ -52,7 +52,7 @@ application. Just grab the [dist files](https://github.com/graphiti-api/vandal/t
 Note that `index.html` has a placeholder, `__SCHEMA_PATH__`. Replace
 this with a URL hosting your schema, and you'll be good to go.
 
-## Usage
+{% include h.html tag="h2" text="2 Usage" a="usage" %}
 
 First, make sure your schema is properly generated. The schema is
 generated whenever you run `rspec`. Remember that if you make changes,
@@ -70,3 +70,6 @@ comments should be returned".
 
 When you hit 'submit', the top URL bar will change to reflect your query
 and results will show in the center table.
+
+<br />
+<br />

@@ -17,7 +17,8 @@ Debugging
 </div>
 
 <div markdown="1" class="col-md-8">
-## 1 Debugger
+
+{% include h.html tag="h2" text="Debugger" a="debugger" %}
 
 Graphiti comes with a debugger that shows the queries executed for a
 given request. Remember that Resources [have a query interface]({{site.github.url}}/guides/concepts/resources#query-interface) independent of a request or response. And Resources connect similar to ActiveRecord's `includes`:
@@ -52,7 +53,7 @@ Finally: if an error occurs, we'll note the query that caused it:
   <img width="100%" src="https://user-images.githubusercontent.com/55264/46086595-6c2d2600-c176-11e8-9b57-1b27d380e9fe.png">
 </p>
 
-### 1.1 JSON Output
+{% include h.html tag="h3" text="JSON Output" a="json-output" %}
 
 It can be helpful to have this debug output come back as part of the
 JSON response. To enable this:
@@ -88,7 +89,7 @@ If there's an error, and you've [enabled raw errors]({{site.github.url}}/guides/
 
 <br />
 
-### 1.2 Configuration
+{% include h.html tag="h3" text="1.2 Configuration" a="configuration" %}
 
 By default, we'll log to `Rails.logger`, and only enable debugging (logs
 or JSON) when `Rails.logger.level` is set to `debug`. Here are the
@@ -154,13 +155,13 @@ Graphiti::Debugger.debug do
 end
 {% endhighlight %}
 
-### 2 Rake Tasks
+{% include h.html tag="h3" text="2 Rake Tasks" a="rake-tasks" %}
 
 There are some common debugging scenarios that are possible to do
 manually, but their frequency warrants common patterns. For these, we
 have rake tasks.
 
-#### 2.1 graphiti:request
+{% include h.html tag="h4" text="2.1 graphiti:request" a="graphiti-request" %}
 
 > `bin/rake graphiti:request[PATH,DEBUG]`
 
@@ -188,7 +189,7 @@ Which add Debugger output as well.
 The `PATH` should not contain the domain unless you want to hit a live
 API instead of a test server.
 
-#### 2.2 graphiti:benchmark
+{% include h.html tag="h4" text="2.2 graphiti:benchmark" a="graphiti-benchmark" %}
 
 > `bin/rake graphiti:benchmark[PATH,NUM_REQUESTS]`
 
@@ -201,7 +202,7 @@ $ bin/rake graphiti:benchmark[/employees,100]
 
 Which will return the average response time.
 
-## 3 Tips
+{% include h.html tag="h2" text="3 Tips" a="tips" %}
 
 When debugging an application, try to isolate the individual Resource
 call and debug the Resource directly (instead of running the entire

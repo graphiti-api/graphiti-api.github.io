@@ -15,7 +15,7 @@ Resources
 * 3 [Querying](#querying)
   * [Query Interface](#query-interface)
   * [Composing with Scopes](#composing-with-scopes)
-  * [`#base_scope`](#basescope)
+  * [`#base_scope`](#base-scope)
   * [Sort](#sort)
     * [Sort Options](#sort-options)
   * [Filter](#filter)
@@ -30,16 +30,18 @@ Resources
 * 5 [Relationships](#relationships)
   * [Deep Queries](#deep-queries)
   * [Customizing Relationships](#customizing-relationships)
-  * [has_many](#hasmany)
-  * [belongs_to](#belongsto)
-  * [has_one](#hasone)
-  * [many_to_many](#manytomany)
-  * [polymorphic_belongs_to](#polymorphicbelongsto)
-  * [polymorphic_has_many](#polymorphichasmany)
+    * [Customizing Scope](#customizing-scope)
+    * [Customizing Assignment](#customizing-assignment)
+  * [has_many](#has-many)
+  * [belongs_to](#belongs-to)
+  * [has_one](#has-one)
+    * [Faux has_one](#faux-has-one)
+  * [many_to_many](#many-to-many)
+  * [polymorphic_belongs_to](#polymorphic-belongs-to)
+  * [polymorphic_has_many](#polymorphic-has-many)
 * 6 [Generators](#generators)
 * 7 [Persisting](#persisting)
   * [Lifecycle Hooks](#persistence-lifecycle-hooks)
-  * [Side Effects](#side-effects)
   * [Sideposting](#sideposting)
     * [Create](#create)
     * [Expanded Example](#expanded-example)
@@ -50,7 +52,11 @@ Resources
 
 <div markdown="1" class="col-md-8">
 
-## 1 Overview
+{% include h.html tag="h2" text="1 Overview" a="overview" %}
+
+<p align="center">
+  <img width="100%" src="/assets/img/rest3.gif" />
+</p>
 
 The same way a `Model` is an abstraction around a database table, a
 `Resource` is an abstraction around an API endpoint. It holds logic for
@@ -59,7 +65,7 @@ The same way a `Model` is an abstraction around a database table, a
 > For a condensed view of the Resource interface, see the
 > [cheatsheet]({{site.github.url}}/cheatsheet).
 
-## 2 Attributes
+{% include h.html tag="h2" text="2 Attributes" a="attributes" %}
 
 A **Resource** is composed of **Attribute**s. Each Attribute has a
 **name** (e.g. `first_name`) that corresponds to a JSON key, and a
@@ -71,7 +77,7 @@ To define an attribute:
 attribute :first_name, :string
 {% endhighlight %}
 
-#### 2.1 Limiting Behavior
+{% include h.html tag="h4" text="2.1 Limiting Behavior" a="limiting-behavior" %}
 
 Each attribute consists of four flags: `readable`, `writable`,
 `sortable`, and `filterable`. Any of these flags can be turned off:
@@ -110,7 +116,7 @@ def allowed?(model_instance)
 end
 {% endhighlight %}
 
-#### 2.2 Default Behavior
+{% include h.html tag="h4" text="2.2 Default Behavior" a="default-behavior" %}
 
 By default, attributes are enabled for all behavior. You may want to
 disable certain behavior globally, for example a read-only API. Use
@@ -123,7 +129,7 @@ self.attributes_filterable_by_default = false # default true
 self.attributes_sortable_by_default = false # default true
 {% endhighlight %}
 
-#### 2.3 Customizing Display
+{% include h.html tag="h4" text="2.3 Customizing Display" a="customizing-display" %}
 
 Pass a block to `attribute` to customize display:
 
@@ -135,7 +141,7 @@ end
 
 `@object` will be an instance of your model.
 
-#### 2.4 Types
+{% include h.html tag="h4" text="2.4 Types" a="types" %}
 
 Each **Attribute** has a **Type**. Each **Type** defines behavior for
 
@@ -187,7 +193,7 @@ The `integer_id` type says, "render as a string, but query as an
 integer" and is the default for the `id` attribute. The `uuid` type says
 "this is a string, but query me case-sensitive by default".
 
-##### 2.5 Custom Types
+{% include h.html tag="h5" text="2.5 Custom Types" a="custom-types" %}
 
 [Dry Types supports custom types](https://dry-rb.org/gems/dry-types/custom-types). Let's register a "capital letters" type:
 
@@ -212,7 +218,7 @@ Graphiti::Types[:caps_lock] = {
 attribute :name, :caps_lock
 {% endhighlight %}
 
-## 3 Querying
+{% include h.html tag="h2" text="3 Querying" a="querying" %}
 
 Resources must be able to dynamically compose a query that can be run
 against an arbitrary backend (SQL, NoSQL, service calls, etc). They do
@@ -293,7 +299,7 @@ end
 scope.to_a # #resolve
 {% endhighlight %}
 
-#### 3.1 Query Interface
+{% include h.html tag="h3" text="3.1 Query Interface" a="query-interface" %}
 
 Resources can query and persist data without an API request or
 response. To query, pass a [JSONAPI-compliant](http://jsonapi.org) query hash:
@@ -344,11 +350,9 @@ employee = EmployeeResource.find(id: 123)
 employee.data.first_name # => "Jane"
 {% endhighlight %}
 
-#### 3.2 Composing with Scopes
+{% include h.html tag="h3" text="3.2 Composing with Scopes" a="composing-with-scopes" %}
 
-
-
-#### 3.3 `#base_scope`
+{% include h.html tag="h4" text="3.2.1 #base_scope" a="base-scope" %}
 
 Override the `#base_scope` method whenever you have logic that should
 apply to *every* query. For example, if we only ever wanted to return
@@ -371,7 +375,7 @@ class InactivePostsController < PostsController
 end
 {% endhighlight %}
 
-#### 3.4 Sort
+{% include h.html tag="h4" text="3.4 Sort" a="sort" %}
 
 Use the `sort` DSL to customize sorting behavior.
 
@@ -396,7 +400,7 @@ end
 > Note: `sort` defines a sort-only attribute. If you want other
 > behavior, like filtering, it's best to define the attribute first.
 
-##### 3.4.1 Sort Options
+{% include h.html tag="h5" text="3.4.1 Sort Options" a="sort-options" %}
 
 Pass `:only` if you support just a single direction:
 
@@ -404,7 +408,7 @@ Pass `:only` if you support just a single direction:
 sort :name, only: [:desc]
 {% endhighlight %}
 
-#### 3.5 Filter
+{% include h.html tag="h4" text="3.5 Filter" a="filter" %}
 
 Use the `filter` DSL to customize each *operator*:
 
@@ -456,7 +460,7 @@ Will now support `filter[name][fuzzy_match]=foo`
 > Note: `filter` defines a filter-only attribute. If you want other
 > behavior, like sorting, it's best to define the attribute first.
 
-##### 3.5.1 Filter Options
+{% include h.html tag="h5" text="3.5.1 Filter Options" a="filter-options" %}
 
 Pass `:only` or `:except` to limit possible operators:
 
@@ -512,12 +516,12 @@ filter :customer_id, :integer, dependent: [:customer_type]
 filter :customer_type, :string, dependent: [:customer_id]
 {% endhighlight %}
 
-##### 3.5.2 Boolean Filter
+{% include h.html tag="h5" text="3.5.2 Boolean Filter" a="boolean-filter" %}
 
 It doesn't make sense for a filter with type `boolean` to accept
 multiple values. These filters will be `single: true` by default.
 
-##### 3.5.3 Hash Filter
+{% include h.html tag="h5" text="3.5.3 Hash Filter" a="hash-filter" %}
 
 Filters with type `hash` will automatically parse JSON when passed in a
 URL query string:
@@ -532,7 +536,7 @@ filter :metadata, :hash do
 end
 {% endhighlight %}
 
-##### 3.5.4 Escaping Values
+{% include h.html tag="h5" text="3.5.4 Escaping Values" a="escaping-values" %}
 
 By default, Graphiti parses a comma-delimited string as an array. There
 are times you may not want this - for instance a "keyword search" field
@@ -567,7 +571,7 @@ end
 If a filter is marked `single: true`, we'll avoid any array parsing and
 escape the value for you, filtering on the string as given.
 
-#### 3.6 Statistics
+{% include h.html tag="h4" text="3.6 Statistics" a="statistics" %}
 
 Statistics are useful and common. Consider a datagrid listing posts - we might want a "Total Posts" count displayed above the grid without firing an additional request. Notably, that statistic **should** take into account filtering, but **should not** take into account pagination.
 
@@ -626,7 +630,7 @@ stat rating: [:average] do
 end
 {% endhighlight %}
 
-#### 3.7 `#resolve`
+{% include h.html tag="h4" text="3.7 #resolve" a="resolve" %}
 
 After we build up a query, we pass it to `#resolve`. Resolve **must** do
 two things:
@@ -645,7 +649,7 @@ def resolve(scope)
 end
 {% endhighlight %}
 
-## 4 Configuration
+{% include h.html tag="h2" text="4 Configuration" a="configuration" %}
 
 Here's a Resource with explicit defaults:
 
@@ -704,7 +708,7 @@ class ApplicationResource < Graphiti::Resource
 end
 {% endhighlight %}
 
-### 4.1 Polymorphic Resources
+{% include h.html tag="h3" text="4.1 Polymorphic Resources" a="polymorphic-resources" %}
 
 Polymorphic Resources are similar to [ActiveRecord STI](https://api.rubyonrails.org/classes/ActiveRecord/Inheritance.html): when a single query can return multiple Resource instances. We may query `/tasks`, but return `bugs`, `features`, `epics`, etc.
 
@@ -775,7 +779,7 @@ If we hit a `/tasks` endpoint, we'd get back [JSONAPI types](http://jsonapi.org/
 A query to `/tasks?include=milestones` would correctly only query
 and render Milestones for Epics.
 
-## 5 Relationships
+{% include h.html tag="h2" text="5 Relationships" a="relationships" %}
 
 Resources can connect to other Resources via **relationships**.
 Each relationship determines behavior for:
@@ -808,7 +812,7 @@ CommentResource.all(includes: 'post')
 
 > Note the explicit `post_id` filter on `CommentResource`
 
-### 5.1 Deep Queries
+{% include h.html tag="h3" text="5.1 Deep Queries" a="deep-queries" %}
 
 A query that applies to a relationship is referred to as a **deep
 query**. Use the dot-syntax to deep query:
@@ -828,7 +832,7 @@ Sorting and pagination currently only support the JSONAPI type:
 
 `/employees?include=positions.department&page[departments][size]=10`
 
-#### 5.2 Customizing Relationships
+{% include h.html tag="h4" text="5.2 Customizing Relationships" a="customizing-relationships" %}
 
 The default options you can override are:
 
@@ -843,12 +847,14 @@ has_many :positions,
   single: false # only allow this sideload when one employee
 {% endhighlight %}
 
+{% include h.html tag="h5" text="5.2.1 Customizing Scope" a="customizing-scope" %}
+
 Use `params` to change the query parameters that will be passed to the
 associated Resource:
 
 {% highlight ruby %}
 has_many :active_positions do
-  params do |hash|
+  params do |hash, employees|
     hash[:filter][:active] = true
   end
 end
@@ -863,6 +869,8 @@ end
 # })
 {% endhighlight %}
 
+{% include h.html tag="h5" text="5.2.1 Customizing Assignment" a="customizing-assignment" %}
+
 Once we've fetched primary data and its relationship (e.g. we have an
 `employees` array and `positions` array), we need to associate these
 objects:
@@ -874,7 +882,8 @@ end
 {% endhighlight %}
 
 Occasionally this logic will be non-standard or more complex. Use
-`assign_each` to customize:
+`assign_each` to customize, returning all relevant children for the
+given parent:
 
 {% highlight ruby %}
 has_many :positions do
@@ -884,7 +893,24 @@ has_many :positions do
 end
 {% endhighlight %}
 
-#### 5.3 has_many
+Or if all else fails, use `#assign` to control all the logic:
+
+{% highlight ruby %}
+has_many :positions do
+  assign do |employees, positions|
+    employees.each do |employee|
+      positions.select { |p| p.belongs_to?(employee) }
+    end
+  end
+end
+{% endhighlight %}
+
+**Note**: ActiveRecord will sometimes cause unexpected queries when
+assigning. If you're overriding `#assign`, make sure to keep an eye on
+this. If using `#assign_each`, you're fine because the adapter will take
+care of this for you.
+
+{% include h.html tag="h4" text="5.3 has_many" a="has-many" %}
 
 {% highlight ruby %}
 has_many :positions
@@ -927,7 +953,7 @@ And generate a Link:
 
 `/positions?filter[employee_id]=1,2,3`
 
-#### 5.4 belongs_to
+{% include h.html tag="h4" text="5.4 belongs_to" a="belongs-to" %}
 
 {% highlight ruby %}
 belongs_to :employee
@@ -960,7 +986,7 @@ And generate a Link:
 
 `/employees?filter[id]=1,2,3`
 
-#### 5.4 has_one
+{% include h.html tag="h4" text="5.5 has_one" a="has-one" %}
 
 `has_one` works exactly like `has_many`, but only one record will be
 returned. When sideloading this will be a single element, much like
@@ -970,7 +996,7 @@ There is one small caveat: Links always point to an `index` action, so
 we can apply filters. That means following *`has_one` Link will lead to
 an array*, and you should select the first record.
 
-##### 5.4.1 Faux has_one
+{% include h.html tag="h5" text="5.5.1 Faux has_one" a="faux-has-one" %}
 
 A "Faux Has One" occurrs when there is more than one record of
 associated data, but we only want to return the *first* record in that
@@ -1032,7 +1058,7 @@ Employee.includes('current_position').to_a
 We've ensured the *query itself* only returns a single record.
 Optimizing a Graphiti API is the same as optimizing queries.
 
-##### 5.5 many_to_many
+{% include h.html tag="h4" text="5.6 many_to_many" a="many-to-many" %}
 
 > This relationship is specific to relational databases that use a "join
 > table" between two tables.
@@ -1113,7 +1139,7 @@ that should be used to derive the query:
 many_to_many :teams, as: :groups
 {% endhighlight %}
 
-##### 5.5 polymorphic_belongs_to
+{% include h.html tag="h4" text="5.7 polymorphic_belongs_to" a="polymorphic-belongs-to" %}
 
 With polymorphic associations, a Resource can belong to more than one other Resource, on a single association. Though these relationships are not specific to `ActiveRecord`, we'll use `ActiveRecord` conventions to describe the use case.
 
@@ -1168,7 +1194,7 @@ In other words: group all Notes by `notable_type`, and for all that have
 the value of `"Employee"` use the `belongs_to :employee` relationship
 for further querying.
 
-##### 5.6 polymorphic_has_many
+{% include h.html tag="h4" text="5.8 polymorphic_has_many" a="polymorphic-has-many" %}
 
 Continuing from the prior section, the corresponding association of a
 `polymorphic_belongs_to` is a `polymorphic_has_many`:
@@ -1204,7 +1230,7 @@ class NoteResource < ApplicationResource
 end
 {% endhighlight %}
 
-## 6 Generators
+{% include h.html tag="h2" text="6 Generators" a="generators" %}
 
 To generate a Resource:
 
@@ -1226,7 +1252,7 @@ Limit the actions this resource supports with `-a`:
 $ rails generate graphiti:resource Employee -a index show
 {% endhighlight %}
 
-## 7 Persisting
+{% include h.html tag="h2" text="7 Persisting" a="persisting" %}
 
 Graphiti allows writing a graph of data in a single request. We'll do
 the work of parsing the graph and ordering operations, so you can focus
@@ -1272,7 +1298,7 @@ errors, rolling back the transaction if any Model in the graph is
 invalid.
 * These methods **must return the Model instance**.
 
-### 7.1 Persistence Lifecycle Hooks
+{% include h.html tag="h3" text="7.1 Persistence Lifecycle Hooks" a="persistence-lifecycle-hooks" %}
 
 Let's dive into a persistence request. If you look at the code snippets in
 the prior section, the flow breaks down into 3 steps:
@@ -1386,7 +1412,7 @@ before_commit do |model|
 end
 {% endhighlight %}
 
-### 7.2 Sideposting
+{% include h.html tag="h3" text="7.2 Sideposting" a="sideposting" %}
 
 The act of persisting multiple Resources in a single request is called
 **Sideposting**. The payload mirrors the **sideloading** payload for
@@ -1425,7 +1451,7 @@ one of:
 When we sidepost, all objects will be persisted within the same database
 transaction, which rolls back if an error is raised or any objects are invalid.
 
-#### 7.2.1 Create
+{% include h.html tag="h4" text="7.2.1 Create" a="create" %}
 
 Let's say we want to create a Post and its Blog in a single request.
 You'll note that we don't have the `id` key to generate a [Resource
@@ -1465,7 +1491,7 @@ This random UUID:
 * Connects relevant sections of the payload.
 * Tells clients how to associate their in-memory objects with the ids returned from the server.
 
-#### 7.2.2 Expanded Example
+{% include h.html tag="h4" text="7.2.2 Expanded Example" a="expanded-example" %}
 
 Here we're updating a Post, changing the name of its associated Blog, creating a Tag, deleting one Comment, and disassociating (`null` foreign key) a different Comment, all in a single request:
 
@@ -1521,7 +1547,7 @@ Here we're updating a Post, changing the name of its associated Blog, creating a
 }
 {% endhighlight %}
 
-### 7.3 Validation Errors
+{% include h.html tag="h3" text="7.3 Validation Errors" a="validation-errors" %}
 
 When a persistence operation is attempted but the corresponding Resource
 is invalid, the transaction will be rolled back and an [errors payload](http://jsonapi.org/format/#errors) will be returned
@@ -1584,7 +1610,7 @@ Errors on associations will have a slightly expanded payload:
 When [Sideposting](#sideposting), the errors payload will contain all
 invalid Resources in the graph.
 
-## 7.4 Read on Write
+{% include h.html tag="h2" text="7.4 Read on Write" a="read-on-write" %}
 
 By default, the response of a persistence operation will mirror your
 request. But sometimes you need control over the response. The most
@@ -1595,23 +1621,23 @@ the response.
 You can do this by POSTing the payload as normal, but adding query
 parameters to the URL:
 
-```
-POST /api/v1/orders?include=shipping_information
+{% highlight ruby %}
+# POST /api/v1/orders?include=shipping_information
 
 {
   type: 'orders',
   attributes: { ... }
 }
-```
+{% endhighlight %}
 
 This will sideload the shipping information in the response. When using
 [Spraypaint]({{site.github.url}}/js/home), do this with:
 
-{% highlight js %}
+{% highlight typescript %}
 order.save({ returnScope: Order.includes('shipping_information') })
 {% endhighlight %}
 
-## 8 Context
+{% include h.html tag="h2" text="8 Context" a="context" %}
 
 All resources have access to `#context`. If you're using Rails,
 `context` is the controller instance processing the request.
@@ -1656,7 +1682,7 @@ Graphiti.with_context(ctx) do
 end
 {% endhighlight %}
 
-## 9 Adapters
+{% include h.html tag="h2" text="9 Adapters" a="adapters" %}
 
 Common resource overrides can be packaged into an Adapter for code
 re-use. The most common example is using a different client/datastore

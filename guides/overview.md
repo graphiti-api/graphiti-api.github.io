@@ -2,21 +2,10 @@
 layout: page
 ---
 
-<div markdown="1" class="toc col-md-3">
-What is Graphiti?
-==========
-
-* 1 [Guiding Principles]
-* 2 [Lifecycle of a Graphiti Request](#lifecycle-of-a-graphiti-request)
-
-</div>
-
-<div markdown="1" class="col-md-8">
-
 ## 2 Lifecycle of a Graphiti Request
 
 <p align="center">
-  <img width="100%" src="https://user-images.githubusercontent.com/55264/44479491-c3d3f100-a60e-11e8-90fb-e7654a94a2c9.png">
+  <img width="100%" src="/assets/img/lifecycle.gif">
 </p>
 
 <br />
@@ -26,7 +15,7 @@ The key concept here is a **Resource**. [Resources]({{site.github.url}}/guides/c
 <br />
 
 <p align="center">
-  <img width="80%" src="https://user-images.githubusercontent.com/55264/44619632-13592d80-a858-11e8-807e-36db566f86c6.png">
+  <img width="100%" src="/assets/img/resource.gif">
 </p>
 
 Each Resource is comprised of **Attributes**. Each Attribute corresponds to behavior for:
@@ -39,7 +28,7 @@ Each Resource is comprised of **Attributes**. Each Attribute corresponds to beha
 Each Attribute has a **Type**, which will be coerced and checked at runtime.
 
 <p align="center">
-  <img width="60%" src="https://user-images.githubusercontent.com/55264/44620523-df840500-a863-11e8-9a00-6eca2488b8ce.png">
+  <img width="100%" src="/assets/img/backend.gif" />
 </p>
 
 A Resource does not mean "a database table", though the two have a lot in common and often match. A Resource is a generic interface wrapping a **Backend**. That Backend could be a relational database, a No-SQL database, or even a third-party service call. And you can use whichever client or ORM you'd like for a given Backend (`ActiveRecord`, `Sequel`, `Mongoid`, `Net::HTTP`, etc).
@@ -52,7 +41,7 @@ business logic. In other words you might **query** using `elasticsearch-ruby`, b
 Finally, these Models are *serialized* when we actually render a response. You'll still use `Rails`, `Sinatra`, or whatever-else to manage routing, HTTP codes, etc.
 
 <p align="center">
-  <img width="100%" src="https://user-images.githubusercontent.com/55264/44619631-13592d80-a858-11e8-9544-0809fb144cb2.png">
+  <img width="100%" src="/assets/img/rest3.gif">
 </p>
 
 Critically, **each Resource can connect to other Resources**. This can occur through ***Sideloading*** ("fetch the employee, her positions, and the departments for those positions in a single request"), ***Sideposting*** ("*save* the employee and her positions/departments in a single request), and ***Links*** ("here's a URL to lazy-load positions in a separate request"). Because `Resource`s connect to each other, this is why we often refer to a Resource as a "node in the graph".
@@ -145,8 +134,12 @@ class PositionResource < ApplicationResource
 end
 {% endhighlight %}
 
+We can now fetch Posts and Comments in a single request - ***including*** sorting the comments, filtering, fieldsets and everything else a [Resource]({{site.github.url}}/guides/concepts/resources) supports.
+
 <br />
 
-We can now fetch Posts and Comments in a single request - ***including*** sorting the comments, filtering, fieldsets and everything else a [Resource]({{site.github.url}}/guides/concepts/resources) supports.
+<p align="center">
+  <img width="100%" src="https://i.pinimg.com/originals/d1/12/8d/d1128d21ad45ac7e9be074053a9f1c76.jpg" />
+</p>
 
 <br />

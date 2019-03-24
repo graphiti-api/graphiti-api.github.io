@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -85,7 +92,7 @@
       <ul>
         <li><a href="#query-interface">Query Interface</a></li>
         <li><a href="#composing-with-scopes">Composing with Scopes</a></li>
-        <li><a href="#basescope"><code class="highlighter-rouge">#base_scope</code></a></li>
+        <li><a href="#base-scope"><code class="highlighter-rouge">#base_scope</code></a></li>
         <li><a href="#sort">Sort</a>
           <ul>
             <li><a href="#sort-options">Sort Options</a></li>
@@ -111,20 +118,28 @@
     <li>5 <a href="#relationships">Relationships</a>
       <ul>
         <li><a href="#deep-queries">Deep Queries</a></li>
-        <li><a href="#customizing-relationships">Customizing Relationships</a></li>
-        <li><a href="#hasmany">has_many</a></li>
-        <li><a href="#belongsto">belongs_to</a></li>
-        <li><a href="#hasone">has_one</a></li>
-        <li><a href="#manytomany">many_to_many</a></li>
-        <li><a href="#polymorphicbelongsto">polymorphic_belongs_to</a></li>
-        <li><a href="#polymorphichasmany">polymorphic_has_many</a></li>
+        <li><a href="#customizing-relationships">Customizing Relationships</a>
+          <ul>
+            <li><a href="#customizing-scope">Customizing Scope</a></li>
+            <li><a href="#customizing-assignment">Customizing Assignment</a></li>
+          </ul>
+        </li>
+        <li><a href="#has-many">has_many</a></li>
+        <li><a href="#belongs-to">belongs_to</a></li>
+        <li><a href="#has-one">has_one</a>
+          <ul>
+            <li><a href="#faux-has-one">Faux has_one</a></li>
+          </ul>
+        </li>
+        <li><a href="#many-to-many">many_to_many</a></li>
+        <li><a href="#polymorphic-belongs-to">polymorphic_belongs_to</a></li>
+        <li><a href="#polymorphic-has-many">polymorphic_has_many</a></li>
       </ul>
     </li>
     <li>6 <a href="#generators">Generators</a></li>
     <li>7 <a href="#persisting">Persisting</a>
       <ul>
         <li><a href="#persistence-lifecycle-hooks">Lifecycle Hooks</a></li>
-        <li><a href="#side-effects">Side Effects</a></li>
         <li><a href="#sideposting">Sideposting</a>
           <ul>
             <li><a href="#create">Create</a></li>
@@ -141,7 +156,16 @@
 
 <div class="col-md-8">
 
-  <h2 id="overview">1 Overview</h2>
+<a class="anchor" id="overview" />
+  <a class="header" href="#overview">
+    <h2>
+      1 Overview
+    </h2>
+  </a>
+
+  <p align="center">
+  <img width="100%" src="/assets/img/rest3.gif" />
+</p>
 
   <p>The same way a <code class="highlighter-rouge">Model</code> is an abstraction around a database table, a
 <code class="highlighter-rouge">Resource</code> is an abstraction around an API endpoint. It holds logic for
@@ -152,7 +176,12 @@
 <a href="https://www.graphiti.dev/cheatsheet">cheatsheet</a>.</p>
   </blockquote>
 
-  <h2 id="attributes">2 Attributes</h2>
+<a class="anchor" id="attributes" />
+  <a class="header" href="#attributes">
+    <h2>
+      2 Attributes
+    </h2>
+  </a>
 
   <p>A <strong>Resource</strong> is composed of <strong>Attribute</strong>s. Each Attribute has a
 <strong>name</strong> (e.g. <code class="highlighter-rouge">first_name</code>) that corresponds to a JSON key, and a
@@ -162,7 +191,12 @@
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">attribute</span> <span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:string</span></code></pre></figure>
 
-  <h4 id="limiting-behavior">2.1 Limiting Behavior</h4>
+<a class="anchor" id="limiting-behavior" />
+  <a class="header" href="#limiting-behavior">
+    <h4>
+      2.1 Limiting Behavior
+    </h4>
+  </a>
 
   <p>Each attribute consists of four flags: <code class="highlighter-rouge">readable</code>, <code class="highlighter-rouge">writable</code>,
 <code class="highlighter-rouge">sortable</code>, and <code class="highlighter-rouge">filterable</code>. Any of these flags can be turned off:</p>
@@ -193,7 +227,12 @@ model instance being serialized as an argument:</p>
   <span class="n">model_instance</span><span class="p">.</span><span class="nf">internal</span> <span class="o">==</span> <span class="kp">false</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="default-behavior">2.2 Default Behavior</h4>
+<a class="anchor" id="default-behavior" />
+  <a class="header" href="#default-behavior">
+    <h4>
+      2.2 Default Behavior
+    </h4>
+  </a>
 
   <p>By default, attributes are enabled for all behavior. You may want to
 disable certain behavior globally, for example a read-only API. Use
@@ -204,7 +243,12 @@ these properties to affect all subclasses:</p>
 <span class="nb">self</span><span class="p">.</span><span class="nf">attributes_filterable_by_default</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># default true</span>
 <span class="nb">self</span><span class="p">.</span><span class="nf">attributes_sortable_by_default</span> <span class="o">=</span> <span class="kp">false</span> <span class="c1"># default true</span></code></pre></figure>
 
-  <h4 id="customizing-display">2.3 Customizing Display</h4>
+<a class="anchor" id="customizing-display" />
+  <a class="header" href="#customizing-display">
+    <h4>
+      2.3 Customizing Display
+    </h4>
+  </a>
 
   <p>Pass a block to <code class="highlighter-rouge">attribute</code> to customize display:</p>
 
@@ -214,7 +258,12 @@ these properties to affect all subclasses:</p>
 
   <p><code class="highlighter-rouge">@object</code> will be an instance of your model.</p>
 
-  <h4 id="types">2.4 Types</h4>
+<a class="anchor" id="types" />
+  <a class="header" href="#types">
+    <h4>
+      2.4 Types
+    </h4>
+  </a>
 
   <p>Each <strong>Attribute</strong> has a <strong>Type</strong>. Each <strong>Type</strong> defines behavior for</p>
 
@@ -266,7 +315,12 @@ render an integer:</p>
 integer” and is the default for the <code class="highlighter-rouge">id</code> attribute. The <code class="highlighter-rouge">uuid</code> type says
 “this is a string, but query me case-sensitive by default”.</p>
 
-  <h5 id="custom-types">2.5 Custom Types</h5>
+<a class="anchor" id="custom-types" />
+  <a class="header" href="#custom-types">
+    <h5>
+      2.5 Custom Types
+    </h5>
+  </a>
 
   <p><a href="https://dry-rb.org/gems/dry-types/custom-types">Dry Types supports custom types</a>. Let’s register a “capital letters” type:</p>
 
@@ -289,7 +343,12 @@ integer” and is the default for the <code class="highlighter-rouge">id</code> 
 <span class="c1"># Use in a Resource</span>
 <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:caps_lock</span></code></pre></figure>
 
-  <h2 id="querying">3 Querying</h2>
+<a class="anchor" id="querying" />
+  <a class="header" href="#querying">
+    <h2>
+      3 Querying
+    </h2>
+  </a>
 
   <p>Resources must be able to dynamically compose a query that can be run
 against an arbitrary backend (SQL, NoSQL, service calls, etc). They do
@@ -358,7 +417,12 @@ and returning model instances.</p>
 <span class="k">end</span>
 <span class="n">scope</span><span class="p">.</span><span class="nf">to_a</span> <span class="c1"># #resolve</span></code></pre></figure>
 
-  <h4 id="query-interface">3.1 Query Interface</h4>
+<a class="anchor" id="query-interface" />
+  <a class="header" href="#query-interface">
+    <h3>
+      3.1 Query Interface
+    </h3>
+  </a>
 
   <p>Resources can query and persist data without an API request or
 response. To query, pass a <a href="http://jsonapi.org">JSONAPI-compliant</a> query hash:</p>
@@ -401,9 +465,19 @@ JSON, or XML:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">employee</span> <span class="o">=</span> <span class="no">EmployeeResource</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="ss">id: </span><span class="mi">123</span><span class="p">)</span>
 <span class="n">employee</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">first_name</span> <span class="c1"># =&gt; "Jane"</span></code></pre></figure>
 
-  <h4 id="composing-with-scopes">3.2 Composing with Scopes</h4>
+<a class="anchor" id="composing-with-scopes" />
+  <a class="header" href="#composing-with-scopes">
+    <h3>
+      3.2 Composing with Scopes
+    </h3>
+  </a>
 
-  <h4 id="basescope">3.3 <code class="highlighter-rouge">#base_scope</code></h4>
+<a class="anchor" id="base-scope" />
+  <a class="header" href="#base-scope">
+    <h4>
+      3.2.1 #base_scope
+    </h4>
+  </a>
 
   <p>Override the <code class="highlighter-rouge">#base_scope</code> method whenever you have logic that should
 apply to <em>every</em> query. For example, if we only ever wanted to return
@@ -422,7 +496,12 @@ apply to <em>every</em> query. For example, if we only ever wanted to return
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="sort">3.4 Sort</h4>
+<a class="anchor" id="sort" />
+  <a class="header" href="#sort">
+    <h4>
+      3.4 Sort
+    </h4>
+  </a>
 
   <p>Use the <code class="highlighter-rouge">sort</code> DSL to customize sorting behavior.</p>
 
@@ -445,13 +524,23 @@ the second argument):</p>
 behavior, like filtering, it’s best to define the attribute first.</p>
   </blockquote>
 
-  <h5 id="sort-options">3.4.1 Sort Options</h5>
+<a class="anchor" id="sort-options" />
+  <a class="header" href="#sort-options">
+    <h5>
+      3.4.1 Sort Options
+    </h5>
+  </a>
 
   <p>Pass <code class="highlighter-rouge">:only</code> if you support just a single direction:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">sort</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:desc</span><span class="p">]</span></code></pre></figure>
 
-  <h4 id="filter">3.5 Filter</h4>
+<a class="anchor" id="filter" />
+  <a class="header" href="#filter">
+    <h4>
+      3.5 Filter
+    </h4>
+  </a>
 
   <p>Use the <code class="highlighter-rouge">filter</code> DSL to customize each <em>operator</em>:</p>
 
@@ -503,7 +592,12 @@ the second argument):</p>
 behavior, like sorting, it’s best to define the attribute first.</p>
   </blockquote>
 
-  <h5 id="filter-options">3.5.1 Filter Options</h5>
+<a class="anchor" id="filter-options" />
+  <a class="header" href="#filter-options">
+    <h5>
+      3.5.1 Filter Options
+    </h5>
+  </a>
 
   <p>Pass <code class="highlighter-rouge">:only</code> or <code class="highlighter-rouge">:except</code> to limit possible operators:</p>
 
@@ -549,12 +643,22 @@ present:</p>
 <span class="n">filter</span> <span class="ss">:customer_id</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">dependent: </span><span class="p">[</span><span class="ss">:customer_type</span><span class="p">]</span>
 <span class="n">filter</span> <span class="ss">:customer_type</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">dependent: </span><span class="p">[</span><span class="ss">:customer_id</span><span class="p">]</span></code></pre></figure>
 
-  <h5 id="boolean-filter">3.5.2 Boolean Filter</h5>
+<a class="anchor" id="boolean-filter" />
+  <a class="header" href="#boolean-filter">
+    <h5>
+      3.5.2 Boolean Filter
+    </h5>
+  </a>
 
   <p>It doesn’t make sense for a filter with type <code class="highlighter-rouge">boolean</code> to accept
 multiple values. These filters will be <code class="highlighter-rouge">single: true</code> by default.</p>
 
-  <h5 id="hash-filter">3.5.3 Hash Filter</h5>
+<a class="anchor" id="hash-filter" />
+  <a class="header" href="#hash-filter">
+    <h5>
+      3.5.3 Hash Filter
+    </h5>
+  </a>
 
   <p>Filters with type <code class="highlighter-rouge">hash</code> will automatically parse JSON when passed in a
 URL query string:</p>
@@ -567,7 +671,12 @@ URL query string:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h5 id="escaping-values">3.5.4 Escaping Values</h5>
+<a class="anchor" id="escaping-values" />
+  <a class="header" href="#escaping-values">
+    <h5>
+      3.5.4 Escaping Values
+    </h5>
+  </a>
 
   <p>By default, Graphiti parses a comma-delimited string as an array. There
 are times you may not want this - for instance a “keyword search” field
@@ -596,7 +705,12 @@ that could contain a comma.</p>
   <p>If a filter is marked <code class="highlighter-rouge">single: true</code>, we’ll avoid any array parsing and
 escape the value for you, filtering on the string as given.</p>
 
-  <h4 id="statistics">3.6 Statistics</h4>
+<a class="anchor" id="statistics" />
+  <a class="header" href="#statistics">
+    <h4>
+      3.6 Statistics
+    </h4>
+  </a>
 
   <p>Statistics are useful and common. Consider a datagrid listing posts - we might want a “Total Posts” count displayed above the grid without firing an additional request. Notably, that statistic <strong>should</strong> take into account filtering, but <strong>should not</strong> take into account pagination.</p>
 
@@ -647,7 +761,12 @@ escape the value for you, filtering on the string as given.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="resolve">3.7 <code class="highlighter-rouge">#resolve</code></h4>
+<a class="anchor" id="resolve" />
+  <a class="header" href="#resolve">
+    <h4>
+      3.7 #resolve
+    </h4>
+  </a>
 
   <p>After we build up a query, we pass it to <code class="highlighter-rouge">#resolve</code>. Resolve <strong>must</strong> do
 two things:</p>
@@ -666,7 +785,12 @@ two things:</p>
   <span class="n">result</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h2 id="configuration">4 Configuration</h2>
+<a class="anchor" id="configuration" />
+  <a class="header" href="#configuration">
+    <h2>
+      4 Configuration
+    </h2>
+  </a>
 
   <p>Here’s a Resource with explicit defaults:</p>
 
@@ -721,7 +845,12 @@ two things:</p>
   <span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="polymorphic-resources">4.1 Polymorphic Resources</h3>
+<a class="anchor" id="polymorphic-resources" />
+  <a class="header" href="#polymorphic-resources">
+    <h3>
+      4.1 Polymorphic Resources
+    </h3>
+  </a>
 
   <p>Polymorphic Resources are similar to <a href="https://api.rubyonrails.org/classes/ActiveRecord/Inheritance.html">ActiveRecord STI</a>: when a single query can return multiple Resource instances. We may query <code class="highlighter-rouge">/tasks</code>, but return <code class="highlighter-rouge">bugs</code>, <code class="highlighter-rouge">features</code>, <code class="highlighter-rouge">epics</code>, etc.</p>
 
@@ -788,7 +917,12 @@ two things:</p>
   <p>A query to <code class="highlighter-rouge">/tasks?include=milestones</code> would correctly only query
 and render Milestones for Epics.</p>
 
-  <h2 id="relationships">5 Relationships</h2>
+<a class="anchor" id="relationships" />
+  <a class="header" href="#relationships">
+    <h2>
+      5 Relationships
+    </h2>
+  </a>
 
   <p>Resources can connect to other Resources via <strong>relationships</strong>.
 Each relationship determines behavior for:</p>
@@ -823,7 +957,12 @@ Each relationship determines behavior for:</p>
     <p>Note the explicit <code class="highlighter-rouge">post_id</code> filter on <code class="highlighter-rouge">CommentResource</code></p>
   </blockquote>
 
-  <h3 id="deep-queries">5.1 Deep Queries</h3>
+<a class="anchor" id="deep-queries" />
+  <a class="header" href="#deep-queries">
+    <h3>
+      5.1 Deep Queries
+    </h3>
+  </a>
 
   <p>A query that applies to a relationship is referred to as a <strong>deep
 query</strong>. Use the dot-syntax to deep query:</p>
@@ -843,7 +982,12 @@ also pass the JSONAPI type in brackets:</p>
 
   <p><code class="highlighter-rouge">/employees?include=positions.department&amp;page[departments][size]=10</code></p>
 
-  <h4 id="customizing-relationships">5.2 Customizing Relationships</h4>
+<a class="anchor" id="customizing-relationships" />
+  <a class="header" href="#customizing-relationships">
+    <h4>
+      5.2 Customizing Relationships
+    </h4>
+  </a>
 
   <p>The default options you can override are:</p>
 
@@ -856,11 +1000,18 @@ also pass the JSONAPI type in brackets:</p>
   <span class="ss">link: </span><span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span> <span class="c1"># default true</span>
   <span class="ss">single: </span><span class="kp">false</span> <span class="c1"># only allow this sideload when one employee</span></code></pre></figure>
 
+<a class="anchor" id="customizing-scope" />
+  <a class="header" href="#customizing-scope">
+    <h5>
+      5.2.1 Customizing Scope
+    </h5>
+  </a>
+
   <p>Use <code class="highlighter-rouge">params</code> to change the query parameters that will be passed to the
 associated Resource:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:active_positions</span> <span class="k">do</span>
-  <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
+  <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">employees</span><span class="o">|</span>
     <span class="nb">hash</span><span class="p">[</span><span class="ss">:filter</span><span class="p">][</span><span class="ss">:active</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -874,6 +1025,13 @@ associated Resource:</p>
 <span class="c1">#   }</span>
 <span class="c1"># })</span></code></pre></figure>
 
+<a class="anchor" id="customizing-assignment" />
+  <a class="header" href="#customizing-assignment">
+    <h5>
+      5.2.1 Customizing Assignment
+    </h5>
+  </a>
+
   <p>Once we’ve fetched primary data and its relationship (e.g. we have an
 <code class="highlighter-rouge">employees</code> array and <code class="highlighter-rouge">positions</code> array), we need to associate these
 objects:</p>
@@ -883,7 +1041,8 @@ objects:</p>
 <span class="k">end</span></code></pre></figure>
 
   <p>Occasionally this logic will be non-standard or more complex. Use
-<code class="highlighter-rouge">assign_each</code> to customize:</p>
+<code class="highlighter-rouge">assign_each</code> to customize, returning all relevant children for the
+given parent:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span> <span class="k">do</span>
   <span class="n">assign_each</span> <span class="k">do</span> <span class="o">|</span><span class="n">employee</span><span class="p">,</span> <span class="n">positions</span><span class="o">|</span>
@@ -891,7 +1050,27 @@ objects:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="hasmany">5.3 has_many</h4>
+  <p>Or if all else fails, use <code class="highlighter-rouge">#assign</code> to control all the logic:</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span> <span class="k">do</span>
+  <span class="n">assign</span> <span class="k">do</span> <span class="o">|</span><span class="n">employees</span><span class="p">,</span> <span class="n">positions</span><span class="o">|</span>
+    <span class="n">employees</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">employee</span><span class="o">|</span>
+      <span class="n">positions</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="nb">p</span><span class="p">.</span><span class="nf">belongs_to?</span><span class="p">(</span><span class="n">employee</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+  <p><strong>Note</strong>: ActiveRecord will sometimes cause unexpected queries when
+assigning. If you’re overriding <code class="highlighter-rouge">#assign</code>, make sure to keep an eye on
+this. If using <code class="highlighter-rouge">#assign_each</code>, you’re fine because the adapter will take
+care of this for you.</p>
+
+<a class="anchor" id="has-many" />
+  <a class="header" href="#has-many">
+    <h4>
+      5.3 has_many
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span></code></pre></figure>
 
@@ -924,7 +1103,12 @@ would be associated with logic similar to:</p>
 
   <p><code class="highlighter-rouge">/positions?filter[employee_id]=1,2,3</code></p>
 
-  <h4 id="belongsto">5.4 belongs_to</h4>
+<a class="anchor" id="belongs-to" />
+  <a class="header" href="#belongs-to">
+    <h4>
+      5.4 belongs_to
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">belongs_to</span> <span class="ss">:employee</span></code></pre></figure>
 
@@ -949,7 +1133,12 @@ would be associated with logic similar to:</p>
 
   <p><code class="highlighter-rouge">/employees?filter[id]=1,2,3</code></p>
 
-  <h4 id="hasone">5.4 has_one</h4>
+<a class="anchor" id="has-one" />
+  <a class="header" href="#has-one">
+    <h4>
+      5.5 has_one
+    </h4>
+  </a>
 
   <p><code class="highlighter-rouge">has_one</code> works exactly like <code class="highlighter-rouge">has_many</code>, but only one record will be
 returned. When sideloading this will be a single element, much like
@@ -959,7 +1148,12 @@ returned. When sideloading this will be a single element, much like
 we can apply filters. That means following <em><code class="highlighter-rouge">has_one</code> Link will lead to
 an array</em>, and you should select the first record.</p>
 
-  <h5 id="faux-hasone">5.4.1 Faux has_one</h5>
+<a class="anchor" id="faux-has-one" />
+  <a class="header" href="#faux-has-one">
+    <h5>
+      5.5.1 Faux has_one
+    </h5>
+  </a>
 
   <p>A “Faux Has One” occurrs when there is more than one record of
 associated data, but we only want to return the <em>first</em> record in that
@@ -1015,7 +1209,12 @@ where a value of <code class="highlighter-rouge">1</code> meant “most recent�
   <p>We’ve ensured the <em>query itself</em> only returns a single record.
 Optimizing a Graphiti API is the same as optimizing queries.</p>
 
-  <h5 id="manytomany">5.5 many_to_many</h5>
+<a class="anchor" id="many-to-many" />
+  <a class="header" href="#many-to-many">
+    <h4>
+      5.6 many_to_many
+    </h4>
+  </a>
 
   <blockquote>
     <p>This relationship is specific to relational databases that use a “join
@@ -1088,7 +1287,12 @@ that should be used to derive the query:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># The API relationship is "teams", ActiveRecord has "groups"</span>
 <span class="n">many_to_many</span> <span class="ss">:teams</span><span class="p">,</span> <span class="ss">as: :groups</span></code></pre></figure>
 
-  <h5 id="polymorphicbelongsto">5.5 polymorphic_belongs_to</h5>
+<a class="anchor" id="polymorphic-belongs-to" />
+  <a class="header" href="#polymorphic-belongs-to">
+    <h4>
+      5.7 polymorphic_belongs_to
+    </h4>
+  </a>
 
   <p>With polymorphic associations, a Resource can belong to more than one other Resource, on a single association. Though these relationships are not specific to <code class="highlighter-rouge">ActiveRecord</code>, we’ll use <code class="highlighter-rouge">ActiveRecord</code> conventions to describe the use case.</p>
 
@@ -1137,7 +1341,12 @@ all the usual options and customizations:</p>
 the value of <code class="highlighter-rouge">"Employee"</code> use the <code class="highlighter-rouge">belongs_to :employee</code> relationship
 for further querying.</p>
 
-  <h5 id="polymorphichasmany">5.6 polymorphic_has_many</h5>
+<a class="anchor" id="polymorphic-has-many" />
+  <a class="header" href="#polymorphic-has-many">
+    <h4>
+      5.8 polymorphic_has_many
+    </h4>
+  </a>
 
   <p>Continuing from the prior section, the corresponding association of a
 <code class="highlighter-rouge">polymorphic_belongs_to</code> is a <code class="highlighter-rouge">polymorphic_has_many</code>:</p>
@@ -1167,7 +1376,12 @@ for further querying.</p>
   <span class="c1"># ... code ...</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h2 id="generators">6 Generators</h2>
+<a class="anchor" id="generators" />
+  <a class="header" href="#generators">
+    <h2>
+      6 Generators
+    </h2>
+  </a>
 
   <p>To generate a Resource:</p>
 
@@ -1183,7 +1397,12 @@ for further querying.</p>
 
   <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails generate graphiti:resource Employee -a index show</code></pre></figure>
 
-  <h2 id="persisting">7 Persisting</h2>
+<a class="anchor" id="persisting" />
+  <a class="header" href="#persisting">
+    <h2>
+      7 Persisting
+    </h2>
+  </a>
 
   <p>Graphiti allows writing a graph of data in a single request. We’ll do
 the work of parsing the graph and ordering operations, so you can focus
@@ -1229,7 +1448,12 @@ invalid.</li>
     <li>These methods <strong>must return the Model instance</strong>.</li>
   </ul>
 
-  <h3 id="persistence-lifecycle-hooks">7.1 Persistence Lifecycle Hooks</h3>
+<a class="anchor" id="persistence-lifecycle-hooks" />
+  <a class="header" href="#persistence-lifecycle-hooks">
+    <h3>
+      7.1 Persistence Lifecycle Hooks
+    </h3>
+  </a>
 
   <p>Let’s dive into a persistence request. If you look at the code snippets in
 the prior section, the flow breaks down into 3 steps:</p>
@@ -1343,7 +1567,12 @@ is raised the transaction gets rolled back.</p>
   <span class="no">PostMailer</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="ss">post: </span><span class="n">model</span><span class="p">).</span><span class="nf">some_email</span><span class="p">.</span><span class="nf">deliver</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="sideposting">7.2 Sideposting</h3>
+<a class="anchor" id="sideposting" />
+  <a class="header" href="#sideposting">
+    <h3>
+      7.2 Sideposting
+    </h3>
+  </a>
 
   <p>The act of persisting multiple Resources in a single request is called
 <strong>Sideposting</strong>. The payload mirrors the <strong>sideloading</strong> payload for
@@ -1382,7 +1611,12 @@ one of:</p>
   <p>When we sidepost, all objects will be persisted within the same database
 transaction, which rolls back if an error is raised or any objects are invalid.</p>
 
-  <h4 id="create">7.2.1 Create</h4>
+<a class="anchor" id="create" />
+  <a class="header" href="#create">
+    <h4>
+      7.2.1 Create
+    </h4>
+  </a>
 
   <p>Let’s say we want to create a Post and its Blog in a single request.
 You’ll note that we don’t have the <code class="highlighter-rouge">id</code> key to generate a <a href="http://jsonapi.org/format/#document-resource-identifier-objects">Resource
@@ -1422,7 +1656,12 @@ that uniquely identifies a Resource).</p>
     <li>Tells clients how to associate their in-memory objects with the ids returned from the server.</li>
   </ul>
 
-  <h4 id="expanded-example">7.2.2 Expanded Example</h4>
+<a class="anchor" id="expanded-example" />
+  <a class="header" href="#expanded-example">
+    <h4>
+      7.2.2 Expanded Example
+    </h4>
+  </a>
 
   <p>Here we’re updating a Post, changing the name of its associated Blog, creating a Tag, deleting one Comment, and disassociating (<code class="highlighter-rouge">null</code> foreign key) a different Comment, all in a single request:</p>
 
@@ -1476,7 +1715,12 @@ that uniquely identifies a Resource).</p>
   <span class="p">]</span>
 <span class="p">}</span></code></pre></figure>
 
-  <h3 id="validation-errors">7.3 Validation Errors</h3>
+<a class="anchor" id="validation-errors" />
+  <a class="header" href="#validation-errors">
+    <h3>
+      7.3 Validation Errors
+    </h3>
+  </a>
 
   <p>When a persistence operation is attempted but the corresponding Resource
 is invalid, the transaction will be rolled back and an <a href="http://jsonapi.org/format/#errors">errors payload</a> will be returned
@@ -1533,7 +1777,12 @@ PORO:</p>
   <p>When <a href="#sideposting">Sideposting</a>, the errors payload will contain all
 invalid Resources in the graph.</p>
 
-  <h2 id="read-on-write">7.4 Read on Write</h2>
+<a class="anchor" id="read-on-write" />
+  <a class="header" href="#read-on-write">
+    <h2>
+      7.4 Read on Write
+    </h2>
+  </a>
 
   <p>By default, the response of a persistence operation will mirror your
 request. But sometimes you need control over the response. The most
@@ -1544,21 +1793,24 @@ the response.</p>
   <p>You can do this by POSTing the payload as normal, but adding query
 parameters to the URL:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>POST /api/v1/orders?include=shipping_information
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># POST /api/v1/orders?include=shipping_information</span>
 
-{
-  type: 'orders',
-  attributes: { ... }
-}
-</code></pre>
-  </div>
+<span class="p">{</span>
+  <span class="ss">type: </span><span class="s1">'orders'</span><span class="p">,</span>
+  <span class="ss">attributes: </span><span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
   <p>This will sideload the shipping information in the response. When using
 <a href="https://www.graphiti.dev/js/home">Spraypaint</a>, do this with:</p>
 
-  <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">order</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">returnScope</span><span class="p">:</span> <span class="nx">Order</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'shipping_information'</span><span class="p">)</span> <span class="p">})</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">order</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">returnScope</span><span class="p">:</span> <span class="nx">Order</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'shipping_information'</span><span class="p">)</span> <span class="p">})</span></code></pre></figure>
 
-  <h2 id="context">8 Context</h2>
+<a class="anchor" id="context" />
+  <a class="header" href="#context">
+    <h2>
+      8 Context
+    </h2>
+  </a>
 
   <p>All resources have access to <code class="highlighter-rouge">#context</code>. If you’re using Rails,
 <code class="highlighter-rouge">context</code> is the controller instance processing the request.</p>
@@ -1597,7 +1849,12 @@ parameters to the URL:</p>
   <span class="no">PostResource</span><span class="p">.</span><span class="nf">all</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h2 id="adapters">9 Adapters</h2>
+<a class="anchor" id="adapters" />
+  <a class="header" href="#adapters">
+    <h2>
+      9 Adapters
+    </h2>
+  </a>
 
   <p>Common resource overrides can be packaged into an Adapter for code
 re-use. The most common example is using a different client/datastore

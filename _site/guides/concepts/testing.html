@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
   <title>Graphiti</title>
   <meta name="description" content="Stylish Graph APIs">
@@ -41,7 +43,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="https://www.graphiti.dev" class="navbar-brand">Graphiti</a>
+      <a href="https://www.graphiti.dev" class="navbar-brand">
+        <img src="/assets/img/logo.png">
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -58,9 +62,12 @@
           <a class="nav-link" href="https://www.graphiti.dev/js">Spraypaint</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right visible-md visible-lg">
+      <ul class="nav navbar-nav navbar-right visible-lg visible-md">
         <li>
-          <a href="https://github.com/graphiti-api/graphiti" class="button">Fork on Github</a>
+          <span class="star">⭐</span>
+          <a href="https://github.com/graphiti-api/graphiti">
+            <img style="margin-right: 65px;margin-top: -20px" src="/assets/img/gh.png">
+          </a>
         </li>
       </ul>
     </nav>
@@ -145,7 +152,13 @@
 </div>
 
 <div class="col-md-8">
-  <h2 id="overview">1 Overview</h2>
+
+<a class="anchor" id="overview" />
+  <a class="header" href="#overview">
+    <h2>
+      1 Overview
+    </h2>
+  </a>
 
   <p>Test first.</p>
 
@@ -201,7 +214,12 @@ mentally parsing the response payload.</li>
 need to worry about <a href="http://david.heinemeierhansson.com/2014/test-induced-design-damage.html">test-induced design damage</a>.</li>
   </ul>
 
-  <h3 id="api-vs-resource">1.1 API vs Resource</h3>
+<a class="anchor" id="api-vs-resource" />
+  <a class="header" href="#api-vs-resource">
+    <h3>
+      1.1 API vs Resource
+    </h3>
+  </a>
 
   <p>There are two types of Graphiti tests: <strong>API tests</strong> and <strong>Resource
 tests</strong>.</p>
@@ -218,7 +236,12 @@ Resource: routing, middleware, cache rules, response codes, etc…</p>
   <p>Typically, you’ll write the API test <strong>once</strong> and not have to touch it
 again.</p>
 
-  <h3 id="factories">1.2 Factories</h3>
+<a class="anchor" id="factories" />
+  <a class="header" href="#factories">
+    <h3>
+      1.2 Factories
+    </h3>
+  </a>
 
   <blockquote>
     <p>Note: Factories are not <strong>required</strong>, but they are considered a best
@@ -263,19 +286,34 @@ attribute is optional, it should not be defaulted in a factory.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="rspec">1.3 RSpec</h3>
+<a class="anchor" id="rspec" />
+  <a class="header" href="#rspec">
+    <h3>
+      1.3 RSpec
+    </h3>
+  </a>
 
   <p>RSpec is not <strong>required</strong>, but considered a first-class citizen used by the
 Graphiti test generator.</p>
 
-  <h2 id="test-helpers">2 Test Helpers</h2>
+<a class="anchor" id="test-helpers" />
+  <a class="header" href="#test-helpers">
+    <h2>
+      2 Test Helpers
+    </h2>
+  </a>
 
   <p>Tests are run using <a href="http://jsonapi.org/format/#fetching-includes">JSONAPI standards</a>. But the
 JSONAPI payload can be a pain to deal with. So, we’ve supplied helpers.</p>
 
   <p>These helpers are defined in the <a href="https://github.com/graphiti-api/graphiti_errors">Graphiti Spec Helpers</a> gem.</p>
 
-  <h3 id="jsonapidata">2.1 <code class="highlighter-rouge">#jsonapi_data</code></h3>
+<a class="anchor" id="jsonapi-data" />
+  <a class="header" href="#jsonapi-data">
+    <h3>
+      2.1 #jsonapi_data
+    </h3>
+  </a>
 
   <blockquote>
     <p>Note: for brevity, this method is aliased to <code class="highlighter-rouge">d</code></p>
@@ -299,7 +337,12 @@ conflicting with an attribute of the same name.</li>
 be raised.</li>
   </ul>
 
-  <h4 id="accessing-sideloads">2.2 Accessing Sideloads</h4>
+<a class="anchor" id="accessing-sideloads" />
+  <a class="header" href="#accessing-sideloads">
+    <h4>
+      2.2 Accessing Sideloads
+    </h4>
+  </a>
 
   <p>To grab a relationship:</p>
 
@@ -311,7 +354,12 @@ be raised.</li>
   <p>The <code class="highlighter-rouge">sideload</code> method accepts the <em>name of the relationship</em>. It returns
 a normal <code class="highlighter-rouge">jsonapi_data</code> <code class="highlighter-rouge">GraphitiSpecHelpers::Node</code> containing the <code class="highlighter-rouge">include</code>-ed data.</p>
 
-  <h4 id="accessing-links">2.3 Accessing Links</h4>
+<a class="anchor" id="accessing-links" />
+  <a class="header" href="#accessing-links">
+    <h4>
+      2.3 Accessing Links
+    </h4>
+  </a>
 
   <p>To grab a Link:</p>
 
@@ -320,11 +368,21 @@ a normal <code class="highlighter-rouge">jsonapi_data</code> <code class="highli
   <p>This accepts the relationship name and the link type. It will return the
 link URL.</p>
 
-  <h3 id="json">2.2 <code class="highlighter-rouge">#json</code></h3>
+<a class="anchor" id="json" />
+  <a class="header" href="#json">
+    <h3>
+      2.2 #json
+    </h3>
+  </a>
 
   <p>To see the raw JSON response, use <code class="highlighter-rouge">json</code>.</p>
 
-  <h3 id="datetime">2.3 <code class="highlighter-rouge">#datetime</code></h3>
+<a class="anchor" id="date-and-datetime" />
+  <a class="header" href="#date-and-datetime">
+    <h3>
+      2.3 #date and #datetime
+    </h3>
+  </a>
 
   <p>In Graphiti, datetimes are rendered in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>. This means that straight date comparisons will fail:</p>
 
@@ -337,7 +395,14 @@ apples to apples:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># RIGHT</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">created_at</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="nf">created_at</span><span class="p">))</span></code></pre></figure>
 
-  <h3 id="jsonapierrors">2.4 <code class="highlighter-rouge">#jsonapi_errors</code></h3>
+  <p>Similarly, there’s a <code class="highlighter-rouge">date</code> helper as well.</p>
+
+<a class="anchor" id="jsonapi-errors" />
+  <a class="header" href="#jsonapi-errors">
+    <h3>
+      2.4 #jsonapi_errors
+    </h3>
+  </a>
 
   <blockquote>
     <p>This method is aliased to <code class="highlighter-rouge">errors</code> for brevity</p>
@@ -366,7 +431,12 @@ apples to apples:</p>
   <span class="ss">name: </span><span class="s2">"can't be blank"</span>
 <span class="p">})</span></code></pre></figure>
 
-  <h3 id="resource-test-helpers">2.5 Resource Test Helpers</h3>
+<a class="anchor" id="resource-test-helpers" />
+  <a class="header" href="#resource-test-helpers">
+    <h3>
+      2.5 Resource Test Helpers
+    </h3>
+  </a>
 
   <p>Resource tests have two helpers, both different ways to execute a query.</p>
 
@@ -386,7 +456,12 @@ accessed as normal:</p>
   <span class="n">expect</span><span class="p">(</span><span class="n">records</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h3 id="api-test-helpers">2.6 API Test Helpers</h3>
+<a class="anchor" id="api-test-helpers" />
+  <a class="header" href="#api-test-helpers">
+    <h3>
+      2.6 API Test Helpers
+    </h3>
+  </a>
 
   <p>When executing an API test request, always use the <code class="highlighter-rouge">jsonapi_</code> doppelgänger:</p>
 
@@ -410,7 +485,12 @@ headers for a given request:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h2 id="resource-tests">3 Resource Tests</h2>
+<a class="anchor" id="resource-tests" />
+  <a class="header" href="#resource-tests">
+    <h2>
+      3 Resource Tests
+    </h2>
+  </a>
 
   <p>There are two test files for each Resource:</p>
 
@@ -419,7 +499,12 @@ headers for a given request:</p>
     <li><code class="highlighter-rouge">spec/resources/post/writes_spec.rb</code></li>
   </ul>
 
-  <h3 id="reads">3.1 Reads</h3>
+<a class="anchor" id="reads" />
+  <a class="header" href="#reads">
+    <h3>
+      3.1 Reads
+    </h3>
+  </a>
 
   <p>The basic setup for read operations:</p>
 
@@ -444,7 +529,12 @@ headers for a given request:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="serialization">3.1.1 Serialization</h4>
+<a class="anchor" id="serialization" />
+  <a class="header" href="#serialization">
+    <h4>
+      3.1.1 Serialization
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'serialization'</span> <span class="k">do</span>
   <span class="n">let!</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">,</span> <span class="ss">first_name: </span><span class="s1">'Jane'</span><span class="p">)</span> <span class="p">}</span>
@@ -481,7 +571,12 @@ can instead save some keystrokes and assert on randomized data:</p>
 removed or change types.</p>
   </blockquote>
 
-  <h4 id="filtering">3.1.2 Filtering</h4>
+<a class="anchor" id="filtering" />
+  <a class="header" href="#filtering">
+    <h4>
+      3.1.2 Filtering
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'filtering'</span> <span class="k">do</span>
   <span class="n">let!</span><span class="p">(</span><span class="ss">:employee1</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">}</span>
@@ -506,7 +601,12 @@ matching the given criteria are present in the response.</p>
 Our schema validation test will ensure no filters are removed, guarded,
 changed operators, etc.</p>
 
-  <h4 id="sorting">3.1.3 Sorting</h4>
+<a class="anchor" id="sorting" />
+  <a class="header" href="#sorting">
+    <h4>
+      3.1.3 Sorting
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'sorting'</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'by id'</span> <span class="k">do</span>
@@ -550,7 +650,12 @@ of the rendered response.</p>
 Our schema validation test will ensure no sorts are removed, guarded or
 limited in direction.</p>
 
-  <h4 id="sideloading">3.1.4 Sideloading</h4>
+<a class="anchor" id="sideloading" />
+  <a class="header" href="#sideloading">
+    <h4>
+      3.1.4 Sideloading
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'sideloading'</span> <span class="k">do</span>
   <span class="n">let!</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">}</span>
@@ -585,7 +690,12 @@ Test</a> of the sideloaded Resource.</p>
 Our schema validation test will ensure no sideloads are removed or
 associated to a different Resource.</p>
 
-  <h3 id="writes">3.2 Writes</h3>
+<a class="anchor" id="writes" />
+  <a class="header" href="#writes">
+    <h3>
+      3.2 Writes
+    </h3>
+  </a>
 
   <p>The basic setup for write operations:</p>
 
@@ -610,7 +720,12 @@ associated to a different Resource.</p>
 
   <p>Here <code class="highlighter-rouge">payload</code> is a <a href="http://jsonapi.org/format/#crud">JSONAPI Resource Object</a>.</p>
 
-  <h4 id="create">3.2.1 Create</h4>
+<a class="anchor" id="create" />
+  <a class="header" href="#create">
+    <h4>
+      3.2.1 Create
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'creating'</span> <span class="k">do</span>
   <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="k">do</span>
@@ -660,7 +775,12 @@ correctly:</p>
   <span class="n">expect</span><span class="p">(</span><span class="n">employee</span><span class="p">.</span><span class="nf">age</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h5 id="required-belongs-to">3.2.1.1 Required Belongs To</h5>
+<a class="anchor" id="required-belongs-to" />
+  <a class="header" href="#required-belongs-to">
+    <h5>
+      3.2.1.1 Required Belongs To
+    </h5>
+  </a>
 
   <p><a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 made belongs_to required by default</a>. This means that if Employee <code class="highlighter-rouge">belongs_to :department</code>, the above tests will fail (we cannot create the Employee without associating it to Department).</p>
 
@@ -699,7 +819,12 @@ behavior:</p>
   <p>Will ensure the Employee is created and associated to the given
 department.</p>
 
-  <h4 id="update">3.2.2 Update</h4>
+<a class="anchor" id="update" />
+  <a class="header" href="#update">
+    <h4>
+      3.2.2 Update
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'updating'</span> <span class="k">do</span>
   <span class="n">let!</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">}</span>
@@ -735,7 +860,12 @@ generator, as we require the attributes to be explicitly defined.</p>
 We’ll assert that when updating attributes, the changes are correctly
 persisted to the database.</p>
 
-  <h4 id="destroy">3.2.3 Destroy</h4>
+<a class="anchor" id="destroy" />
+  <a class="header" href="#destroy">
+    <h4>
+      3.2.3 Destroy
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'destroying'</span> <span class="k">do</span>
   <span class="n">let!</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">}</span>
@@ -754,7 +884,12 @@ persisted to the database.</p>
   <p>Here we ensure that a delete request correctly removes a record from the
 database.</p>
 
-  <h4 id="side-effects">3.2.4 Side Effects</h4>
+<a class="anchor" id="side-effects" />
+  <a class="header" href="#side-effects">
+    <h4>
+      3.2.4 Side Effects
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">it</span> <span class="s1">'works'</span> <span class="k">do</span>
   <span class="c1"># some assertion</span>
@@ -768,7 +903,12 @@ an email or updating an audit trail. It’s recommended to test these
 Though “one expectation per test” works well for unit tests, integration
 tests can take longer to run and the performance penalty isn’t worth it.</p>
 
-  <h2 id="api-tests">4 API Tests</h2>
+<a class="anchor" id="api-tests" />
+  <a class="header" href="#api-tests">
+    <h2>
+      4 API Tests
+    </h2>
+  </a>
 
   <p>There are five test files for each Resource:</p>
 
@@ -780,9 +920,19 @@ tests can take longer to run and the performance penalty isn’t worth it.</p>
     <li><code class="highlighter-rouge">spec/api/v1/employees/destroy_spec.rb</code></li>
   </ul>
 
-  <h3 id="reads-1">4.1 Reads</h3>
+<a class="anchor" id="reads" />
+  <a class="header" href="#reads">
+    <h3>
+      4.1 Reads
+    </h3>
+  </a>
 
-  <h4 id="index">4.1.1 <code class="highlighter-rouge">index</code></h4>
+<a class="anchor" id="index" />
+  <a class="header" href="#index">
+    <h4>
+      4.1.1 #index
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rails_helper'</span>
 
@@ -813,7 +963,12 @@ tests can take longer to run and the performance penalty isn’t worth it.</p>
 called from this endpoint, we get a 200 status code, and the entities
 returned are expected.</p>
 
-  <h4 id="show">4.1.2 <code class="highlighter-rouge">show</code></h4>
+<a class="anchor" id="show" />
+  <a class="header" href="#show">
+    <h4>
+      4.1.2 #show
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rails_helper'</span>
 
@@ -839,9 +994,19 @@ returned are expected.</p>
 
   <p>Similar to <code class="highlighter-rouge">index</code>, but fetching only a single Employee.</p>
 
-  <h3 id="writes-1">4.2 Writes</h3>
+<a class="anchor" id="writes" />
+  <a class="header" href="#writes">
+    <h3>
+      4.2 Writes
+    </h3>
+  </a>
 
-  <h4 id="create-1">4.2.1 <code class="highlighter-rouge">create</code></h4>
+<a class="anchor" id="create" />
+  <a class="header" href="#create">
+    <h4>
+      4.2.1 #create
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rails_helper'</span>
 
@@ -895,7 +1060,12 @@ randomized data from your factory:</p>
     <li><a href="#required-belongs-to">Dealing with required belongs_to relationships</a>.</li>
   </ul>
 
-  <h4 id="update-1">4.2.2 <code class="highlighter-rouge">update</code></h4>
+<a class="anchor" id="update" />
+  <a class="header" href="#update">
+    <h4>
+      4.2.2 #update
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rails_helper'</span>
 
@@ -946,7 +1116,12 @@ generate randomized attributes:</p>
   <span class="p">}</span>
 <span class="k">end</span></code></pre></figure>
 
-  <h4 id="destroy-1">4.2.3 <code class="highlighter-rouge">destroy</code></h4>
+<a class="anchor" id="destroy" />
+  <a class="header" href="#destroy">
+    <h4>
+      4.2.3 #destroy
+    </h4>
+  </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'rails_helper'</span>
 
@@ -972,7 +1147,12 @@ generate randomized attributes:</p>
   <p>Here we’re sending a DELETE request, ensuring the record is actually
 removed, and we respond <a href="http://jsonapi.org/format/#crud-deleting-responses-200">according to the JSONAPI specification</a>.</p>
 
-  <h1 id="context">5 Context</h1>
+<a class="anchor" id="context" />
+  <a class="header" href="#context">
+    <h2>
+      5 Context
+    </h2>
+  </a>
 
   <p>Occasionally you’ll need to set context for tests. The most common
 scenario is authorization:</p>
@@ -998,7 +1178,12 @@ We can manually set context in tests:</p>
 
   <p><br /></p>
 
-  <h1 id="schema-validation">6 Schema Validation</h1>
+<a class="anchor" id="schema-validation" />
+  <a class="header" href="#schema-validation">
+    <h2>
+      6 Schema Validation
+    </h2>
+  </a>
 
   <p>Graphiti comes with built-in backwards-compatibility tests. We do this
 by comparing the current version of the schema with one previously
@@ -1023,7 +1208,12 @@ anyway. In this case, use <code class="highlighter-rouge">FORCE_SCHEMA</code>:</
 
   <p><br /></p>
 
-  <h1 id="testing-spectrum">7 Testing Spectrum</h1>
+<a class="anchor" id="testing-spectrum" />
+  <a class="header" href="#testing-spectrum">
+    <h2>
+      7 Testing Spectrum
+    </h2>
+  </a>
 
   <p>Testing standards vary from team to team, and there is no right answer
 when judging “the right level of testing”.</p>
@@ -1043,7 +1233,12 @@ duplicate tests across endpoints, which is why we have Resource tests.</p>
   <p>Graphiti provides sensible defaults, but you’re encouraged to consider
 the tradeoffs and pick the right level of testing for <em>you</em>.</p>
 
-  <h1 id="double-testing-units">7 Double-Testing Units</h1>
+<a class="anchor" id="double-testing-units" />
+  <a class="header" href="#double-testing-units">
+    <h2>
+      8 Double-Testing Units
+    </h2>
+  </a>
 
   <p>Integration testing is great: it gives a high level of confidence, and
 they’re typically the easiest tests to write. In fact, these tests are
@@ -1131,7 +1326,12 @@ method as not re-usable:</p>
 detail and not considered part of this object’s public API. Writing the
 unit test can be deferred until the use case actually arises.</p>
 
-  <h2 id="generators">9 Generators</h2>
+<a class="anchor" id="generators" />
+  <a class="header" href="#generators">
+    <h2>
+      9 Generators
+    </h2>
+  </a>
 
   <p>The <a href="https://www.graphiti.dev/guides/concepts/resources#generators">Resource generator</a> will create both Resource and API tests for you.
 Use these as templates to implement your tests.</p>
@@ -1147,6 +1347,9 @@ Use these as templates to implement your tests.</p>
   <p>To generate only the API tests. This can be particularly helpful because
 API tests are mostly boilerplate that does not need to be manually
 edited. Pass the <code class="highlighter-rouge">-a</code> option to limit RESTful actions.</p>
+
+  <p><br />
+<br /></p>
 </div>
 
         </div>
