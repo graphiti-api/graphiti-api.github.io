@@ -12133,8 +12133,34 @@ a.anchor {
 a.header:hover {
   text-decoration: none !important; }
 
+@media (min-width: 576px) {
+  .navbar.normal {
+    min-height: 75px;
+    max-height: 75px;
+    margin-bottom: 75px; }
+    .navbar.normal .navbar-brand img {
+      width: 130px;
+      height: 130px; }
+    .navbar.normal .navbar-nav {
+      font-size: 26px;
+      position: relative;
+      bottom: 15px; }
+    .navbar.normal .nav-links {
+      left: 170px; }
+    .navbar.normal .nav li {
+      display: inline-block; } }
+@media (min-width: 768px) {
+  .navbar.normal {
+    min-height: 125px;
+    margin-bottom: 125px; }
+    .navbar.normal .navbar-brand img {
+      width: 200px;
+      height: 200px; }
+    .navbar.normal .nav-links {
+      font-size: 32px;
+      left: 190px;
+      top: 10px; } }
 .navbar.normal {
-  min-height: 125px;
   position: fixed;
   width: 100%;
   /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/connectwork.png");*/
@@ -12142,17 +12168,13 @@ a.header:hover {
   /*background: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark-honeycomb.png");*/
   border-bottom: 1px solid black;
   box-shadow: 1px 1px 15px -2px black;
-  /*background: black;*/
-  margin-bottom: 125px; }
+  /*background: black;*/ }
   .navbar.normal .navbar-header {
     margin-top: -50px; }
   .navbar.normal .navbar-nav {
     margin-top: 30px;
     font-family: 'Boogaloo', cursive;
-    font-size: 32px;
-    font-weight: bold;
-    position: relative;
-    left: 80px; }
+    font-weight: bold; }
     .navbar.normal .navbar-nav a {
       color: white !important; }
   .navbar.normal .navbar-brand img {
@@ -12161,8 +12183,8 @@ a.header:hover {
       transform: rotate(-10deg); }
   .navbar.normal .star {
     position: absolute;
-    bottom: 10px;
-    right: 70px;
+    bottom: 0px;
+    right: 65px;
     font-size: 26px; }
 
 strong {
@@ -12241,7 +12263,6 @@ body {
     /*font-family: 'Noto Sans', sans-serif;*/
     /*}*/ }
     body:not(.layout-home) .page-content .wrapper > div.container {
-      padding-top: 150px;
       background: url("https://www.toptal.com/designers/subtlepatterns/patterns/classy_fabric.png");
       /*background: #5c666f;*/
       border: 1px solid black;
@@ -12250,6 +12271,12 @@ body {
       border-radius: 5px;
       border: 1px solid black;
       box-shadow: -2px 2px 6px 2px rgba(0, 0, 0, 0.4); }
+      @media (min-width: 576px) {
+        body:not(.layout-home) .page-content .wrapper > div.container {
+          padding-top: 110px; } }
+      @media (min-width: 768px) {
+        body:not(.layout-home) .page-content .wrapper > div.container {
+          padding-top: 150px; } }
       body:not(.layout-home) .page-content .wrapper > div.container img {
         border-radius: 5px;
         border: 1px solid black;
