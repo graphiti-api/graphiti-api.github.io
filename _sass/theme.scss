@@ -61,8 +61,14 @@
 a.anchor {
   display: block;
   position: relative;
-  top: -140px;
   visibility: hidden;
+
+  @media (min-width: 1px) {
+    top: -80px;
+  }
+  @media (min-width: 768px) {
+    top: -140px;
+  }
 }
 
 a.header {
@@ -89,7 +95,15 @@ a.header {
     }
 
     .nav-links {
-      left: 170px;
+      left: 140px;
+
+      .quickstart {
+        display: none;
+      }
+
+      .tutorial {
+        display: none;
+      }
     }
 
     .nav li {
@@ -108,10 +122,22 @@ a.header {
       height: 200px;
     }
 
+    .nav.gh {
+      margin-top: 50px;
+    }
+
     .nav-links {
       font-size: 32px;
       left: 190px;
       top: 10px;
+
+      .quickstart {
+        display: inline-block;
+      }
+
+      .tutorial {
+        display: inline-block;
+      }
     }
   }
 }
@@ -271,7 +297,7 @@ body {
 
       .wrapper > div.container {
         @media (min-width: 1px) {
-          padding-top: 110px;
+          padding-top: 80px;
         }
         @media (min-width: 768px) {
           padding-top: 150px;
