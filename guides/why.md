@@ -36,7 +36,7 @@ HTTP!), instead of replacing it altogether. We can have our cake and eat it too.
 {% include h.html tag="h2" text="REST" a="rest" %}
 
 <p align="center">
-  <img width="100%" src="https://i.ytimg.com/vi/t7Yt78QuPB4/maxresdefault.jpg" />
+  <img width="100%" src="/assets/img/rest-graffiti.jpg" />
 </p>
 <div class="spacer"></div>
 
@@ -288,7 +288,7 @@ multisort.
 ## Rethinking REST
 
 <p align="center">
-  <img width="100%" src="http://4.bp.blogspot.com/-GnENNMAEekc/Tq-M-NbuN0I/AAAAAAAAA0c/P0xnTMmFRlo/s1600/rethink+001.JPG" />
+  <img width="100%" src="/assets/img/rethink-rest-graffiti.jpg" />
 </p>
 <div class="spacer"></div>
 
@@ -887,5 +887,5 @@ Unless you like XML. Screw XML.
 <br />
 
 <p align="center">
-  <img width="100%" src="https://i.pinimg.com/originals/d3/a7/82/d3a78239f9f2cc15cef7f858a632c809.jpg">
+  <img width="100%" src="/assets/img/love-graffiti.jpg">
 </p>
