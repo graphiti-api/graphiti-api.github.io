@@ -94,6 +94,7 @@
         <li><a href="#jsonapierrors"><code class="highlighter-rouge">jsonapi_errors</code></a></li>
         <li><a href="#resource-test-helpers">Resource Test Helpers</a></li>
         <li><a href="#api-test-helpers">API Test Helpers</a></li>
+        <li><a href="#guard-helpers">Guard Helpers</a></li>
       </ul>
     </li>
     <li>3 <a href="#resource-tests">Resource Tests</a>
@@ -479,6 +480,20 @@ headers for a given request:</p>
     <span class="n">headers</span><span class="p">[</span><span class="s1">'CUSTOM'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
+
+<a class="anchor" id="guard-helpers" />
+  <a class="header" href="#guard-helpers">
+    <h3>
+      2.7 Guard Helpers
+    </h3>
+  </a>
+
+  <p>Many teams use <a href="https://github.com/guard/guard">guard</a> in development to watch
+their project files and run a smaller set of focused tests as code changes.  For
+those teams leveraging guard and the <a href="https://github.com/guard/guard-rspec">guard-rspec plugin</a>,
+we offer an additional set of DSL helpers via the
+<a href="https://github.com/graphiti-api/guard-rspec-graphiti">guard-rspec-graphiti plugin</a>.
+For more details, check out the <a href="https://github.com/graphiti-api/guard-rspec-graphiti/blob/master/README.md">project README</a>.</p>
 
 <a class="anchor" id="resource-tests" />
   <a class="header" href="#resource-tests">

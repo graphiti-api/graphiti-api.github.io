@@ -19,6 +19,7 @@ Testing
   * [`jsonapi_errors`](#jsonapierrors)
   * [Resource Test Helpers](#resource-test-helpers)
   * [API Test Helpers](#api-test-helpers)
+  * [Guard Helpers](#guard-helpers)
 * 3 [Resource Tests](#resource-tests)
   * [Reads](#reads)
     * [Serialization](#serialization)
@@ -328,6 +329,15 @@ def jsonapi_headers
   end
 end
 {% endhighlight %}
+
+{% include h.html tag="h3" text="2.7 Guard Helpers" a="guard-helpers" %}
+
+Many teams use [guard](https://github.com/guard/guard) in development to watch
+their project files and run a smaller set of focused tests as code changes.  For
+those teams leveraging guard and the [guard-rspec plugin](https://github.com/guard/guard-rspec),
+we offer an additional set of DSL helpers via the
+[guard-rspec-graphiti plugin](https://github.com/graphiti-api/guard-rspec-graphiti).
+For more details, check out the [project README](https://github.com/graphiti-api/guard-rspec-graphiti/blob/master/README.md).
 
 {% include h.html tag="h2" text="3 Resource Tests" a="resource-tests" %}
 
