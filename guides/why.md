@@ -326,8 +326,8 @@ able to lazy-load those relationships (with **Links**), or eager-load
 those relationships. Whether lazy or eager, the same logic should apply.
 
 If we defined these Resources, with their attributes and relationships,
-then **the input and the output don't actually matter**. Or more
-accurately: we can *accept and render whatever payload we want*. Maybe
+then **the input and the output wouldn't actually matter**. Or more
+accurately: we can ***accept** and **render** whatever payload we want*. Maybe
 we'll even dynamically serve different payloads based on `Content-Type`.
 
 OK, so really we don't need to define *inputs* and *outputs* - those can
