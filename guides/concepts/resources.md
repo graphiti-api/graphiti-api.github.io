@@ -12,6 +12,8 @@ Resources
   * [Default Behavior](#default-behavior)
   * [Customizing Display](#customizing-display)
   * [Types](#types)
+  * [Enum Types](#enum-types)
+  * [Custom Types](#custom-types)
 * 3 [Querying](#querying)
   * [Query Interface](#query-interface)
   * [Composing with Scopes](#composing-with-scopes)
