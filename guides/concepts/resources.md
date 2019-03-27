@@ -182,6 +182,8 @@ The built-in Types are:
 * `date`
 * `datetime`
 * `uuid`
+* `string_enum`
+* `integer_enum`
 * `boolean`
 * `hash`
 * `array`
@@ -193,7 +195,42 @@ The `integer_id` type says, "render as a string, but query as an
 integer" and is the default for the `id` attribute. The `uuid` type says
 "this is a string, but query me case-sensitive by default".
 
-{% include h.html tag="h5" text="2.5 Custom Types" a="custom-types" %}
+{% include h.html tag="h5" text="2.5 Enum Types" a="enum-types" %}
+
+Graphiti provides two built enum types, `string_enum` and `integer_enum`.  These behave
+in exactly the same way as the `string` and `integer` types, respectively, except that
+when declaring them as either an attribute or a filter you are required to
+pass the `allow` option, which is the list of acceptable values for the field:
+
+{% highlight ruby %}
+attribute :status, :string_enum, allowed: ['draft', 'published']
+{% endhighlight %}
+
+Or if your attribute is backed by an ActiveRecord, you could reference
+the values directly
+
+{% highlight ruby %}
+# app/models/post.rb
+class Post < ApplicationRecord
+  enum status: {
+    draft: 0,
+    published: 1
+  }
+end
+
+# app/resources/post_resource.rb
+class PostResource < ApplicationResource
+  attribute :status, :string_enum, allowed: Post.status.keys
+end
+{% endhighlight %}
+
+See the section on [filter options](#filter-options) for more details on `allow` behavior
+
+**Note**: Graphiti does not currently do any value checking on enum fields when
+writing an attribute, and it still expects that your model layer will validate any
+data coming in.
+
+{% include h.html tag="h5" text="2.6 Custom Types" a="custom-types" %}
 
 [Dry Types supports custom types](https://dry-rb.org/gems/dry-types/custom-types). Let's register a "capital letters" type:
 
