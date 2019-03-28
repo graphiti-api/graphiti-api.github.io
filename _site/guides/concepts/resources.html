@@ -81,6 +81,8 @@
         <li><a href="#default-behavior">Default Behavior</a></li>
         <li><a href="#customizing-display">Customizing Display</a></li>
         <li><a href="#types">Types</a></li>
+        <li><a href="#enum-types">Enum Types</a></li>
+        <li><a href="#custom-types">Custom Types</a></li>
       </ul>
     </li>
     <li>3 <a href="#querying">Querying</a>
@@ -298,6 +300,8 @@ render an integer:</p>
     <li><code class="highlighter-rouge">date</code></li>
     <li><code class="highlighter-rouge">datetime</code></li>
     <li><code class="highlighter-rouge">uuid</code></li>
+    <li><code class="highlighter-rouge">string_enum</code></li>
+    <li><code class="highlighter-rouge">integer_enum</code></li>
     <li><code class="highlighter-rouge">boolean</code></li>
     <li><code class="highlighter-rouge">hash</code></li>
     <li><code class="highlighter-rouge">array</code></li>
@@ -310,10 +314,46 @@ render an integer:</p>
 integer” and is the default for the <code class="highlighter-rouge">id</code> attribute. The <code class="highlighter-rouge">uuid</code> type says
 “this is a string, but query me case-sensitive by default”.</p>
 
+<a class="anchor" id="enum-types" />
+  <a class="header" href="#enum-types">
+    <h5>
+      2.5 Enum Types
+    </h5>
+  </a>
+
+  <p>Graphiti provides two built enum types, <code class="highlighter-rouge">string_enum</code> and <code class="highlighter-rouge">integer_enum</code>.  These behave
+in exactly the same way as the <code class="highlighter-rouge">string</code> and <code class="highlighter-rouge">integer</code> types, respectively, except that
+when declaring them as either an attribute or a filter you are required to
+pass the <code class="highlighter-rouge">allow</code> option, which is the list of acceptable values for the field:</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">attribute</span> <span class="ss">:status</span><span class="p">,</span> <span class="ss">:string_enum</span><span class="p">,</span> <span class="ss">allow: </span><span class="p">[</span><span class="s1">'draft'</span><span class="p">,</span> <span class="s1">'published'</span><span class="p">]</span></code></pre></figure>
+
+  <p>Or if your attribute is backed by an ActiveRecord, you could reference
+the values directly</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/post.rb</span>
+<span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+  <span class="n">enum</span> <span class="ss">status: </span><span class="p">{</span>
+    <span class="ss">draft: </span><span class="mi">0</span><span class="p">,</span>
+    <span class="ss">published: </span><span class="mi">1</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># app/resources/post_resource.rb</span>
+<span class="k">class</span> <span class="nc">PostResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
+  <span class="n">attribute</span> <span class="ss">:status</span><span class="p">,</span> <span class="ss">:string_enum</span><span class="p">,</span> <span class="ss">allow: </span><span class="no">Post</span><span class="p">.</span><span class="nf">statuses</span><span class="p">.</span><span class="nf">keys</span>
+<span class="k">end</span></code></pre></figure>
+
+  <p>See the section on <a href="#filter-options">filter options</a> for more details on <code class="highlighter-rouge">allow</code> behavior</p>
+
+  <p><strong>Note</strong>: Graphiti does not currently do any value checking on enum fields when
+writing an attribute, and it still expects that your model layer will validate any
+data coming in.</p>
+
 <a class="anchor" id="custom-types" />
   <a class="header" href="#custom-types">
     <h5>
-      2.5 Custom Types
+      2.6 Custom Types
     </h5>
   </a>
 

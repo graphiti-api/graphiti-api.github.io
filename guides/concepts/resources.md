@@ -205,7 +205,7 @@ when declaring them as either an attribute or a filter you are required to
 pass the `allow` option, which is the list of acceptable values for the field:
 
 {% highlight ruby %}
-attribute :status, :string_enum, allowed: ['draft', 'published']
+attribute :status, :string_enum, allow: ['draft', 'published']
 {% endhighlight %}
 
 Or if your attribute is backed by an ActiveRecord, you could reference
@@ -222,7 +222,7 @@ end
 
 # app/resources/post_resource.rb
 class PostResource < ApplicationResource
-  attribute :status, :string_enum, allowed: Post.status.keys
+  attribute :status, :string_enum, allow: Post.statuses.keys
 end
 {% endhighlight %}
 
