@@ -53,7 +53,12 @@ backwards-compatibility checks, and organize code into RESTful
 Resources. Not only can we ***facilitate*** cross-service communication,
 we can ***automate*** it.
 
-> Note: Remote Resources are for **read** operations only.
+> Note: Remote Resources are for **read** operations only. The exception
+> is associating to an existing `belongs_to` remote entity.
+
+> Note: We use [Faraday](https://github.com/lostisland/faraday) to hit
+> the remote API. You must add `faraday` to your Gemfile to enable
+> remote resources.
 
 {% include h.html tag="h3" text="How it Works" a="how-it-works" %}
 
@@ -261,9 +266,11 @@ describe 'comments' do
 
   let(:api_response) do
     {
-      id: '1',
-      type: 'comments',
-      attributes: { body: 'hello' }
+      data: [{
+        id: '1',
+        type: 'comments',
+        attributes: { body: 'hello' }
+      }]
     }
   end
 
@@ -278,6 +285,10 @@ This shows all the pieces needed to test remote APIs. We want to test
 
 * The correct URL is hit
 * When given a valid response, the rest of the flow works as expected.
+
+> NOTE: if the remote relationship is a has_many, the API will need to
+> return the foreign key as part of the response. Otherwise, we won't
+> know how to associate these children to their parents.
 
 Here's a slightly longer version, showing that `Post` can sideload
 `Comment`s:
