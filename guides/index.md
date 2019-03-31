@@ -23,6 +23,7 @@ But ideally, read everything 🙂
   * ## Overview: What is Graphiti?
     * [Why Graphiti]({{site.github.url}}/guides/why)
     * [Lifecycle of a Graphiti Request]({{site.github.url}}/guides/overview#lifecycle-of-a-graphiti-request)
+    * [🎬🍿 Video: Intro to Graphiti](https://www.youtube.com/watch?v=_QqXjZDzTf4&feature=youtu.be)
   * ## Getting Started
     * [Installation]({{site.github.url}}/guides/getting-started/installation)
     * [Quickstart]({{site.github.url}}/quickstart)
