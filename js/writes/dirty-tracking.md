@@ -119,7 +119,7 @@ object.
   {% endhighlight %}
 </div>
 
-If you need to reset back to original state, call `reset()`:
+If you need to reset dirty tracking, call `#reset()`
 
 {% include js-code-tabs.html %}
 <div markdown="1" class="code-tabs">
@@ -127,18 +127,20 @@ If you need to reset back to original state, call `reset()`:
   let post = await Post.first()
   post.title // "original"
   post.title = "changed"
-  post.title // "changed"
+  post.isDirty() // true
   post.reset()
-  post.title // "original"
+  post.title // "changed"
+  post.isDirty() // false
 {% endhighlight %}
 
 {% highlight javascript %}
   Post.first().then(function(post) {
     post.title; // "original"
     post.title = "changed";
-    post.title; // "changed"
+    post.isDirty() // true
     post.reset();
     post.title; // "original"
+    post.isDirty() // false
   });
 {% endhighlight %}
 </div>

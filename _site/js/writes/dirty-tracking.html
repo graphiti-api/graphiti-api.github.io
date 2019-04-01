@@ -247,7 +247,7 @@ object.</li>
 
   </div>
 
-  <p>If you need to reset back to original state, call <code class="highlighter-rouge">reset()</code>:</p>
+  <p>If you need to reset dirty tracking, call <code class="highlighter-rouge">#reset()</code></p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -263,16 +263,18 @@ object.</li>
     <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// "original"</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"changed"</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// "changed"</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">()</span> <span class="c1">// true</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">reset</span><span class="p">()</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// "original"</span></code></pre></figure>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// "changed"</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">()</span> <span class="c1">// false</span></code></pre></figure>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span> <span class="c1">// "original"</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"changed"</span><span class="p">;</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span> <span class="c1">// "changed"</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">()</span> <span class="c1">// true</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span> <span class="c1">// "original"</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">()</span> <span class="c1">// false</span>
   <span class="p">});</span></code></pre></figure>
 
   </div>
