@@ -1670,7 +1670,7 @@ parameters to the URL:
 {% endhighlight %}
 
 This will sideload the shipping information in the response. When using
-[Spraypaint]({{site.github.url}}/js/home), do this with:
+[Spraypaint]({{site.github.url}}/js/index), do this with:
 
 {% highlight typescript %}
 order.save({ returnScope: Order.includes('shipping_information') })
