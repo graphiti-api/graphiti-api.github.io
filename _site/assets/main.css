@@ -12546,6 +12546,8 @@ img[alt=glimmer_logo] {
   .highlight .language-ruby .vi, .highlight .language-ruby .mi, .highlight .language-ruby .nb {
     color: #ff99e6;
     font-weight: 600; }
+  .highlight .language-http {
+    color: #edf2f9; }
   .highlight .language-typescript .kd, .highlight .language-javascript .kd {
     color: #edf2f9;
     font-weight: 600; }
