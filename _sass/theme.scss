@@ -702,6 +702,10 @@ img[alt=glimmer_logo] {
     }
   }
 
+  .language-http {
+    color: $generic;
+  }
+
   .language-typescript, .language-javascript {
     .kd {
       color: $generic;
