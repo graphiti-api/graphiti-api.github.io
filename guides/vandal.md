@@ -14,7 +14,8 @@ generating URLs. To take Vandal for a spin, [view our sample app](https://jsonap
 <div markdown="1" class="toc col-md-3">
 
 * 1 [Installation](#installation)
-  * [Via Gem](#installing-via-gem)
+  * [Via the Template](#installing-via-template)
+  * [Via the Gem](#installing-via-gem)
   * [Manual](#manual-installation)
 * 2 [Usage](#usage)
 
@@ -24,11 +25,12 @@ generating URLs. To take Vandal for a spin, [view our sample app](https://jsonap
 
 {% include h.html tag="h2" text="1 Installation" a="installation" %}
 
-If you ran our [application template]({{site.github.url}}/guides/getting-started/installation),
-you already have Vandal installed. Otherwise, you can
-install from the `vandal_ui` gem, or manually install.
+{% include h.html tag="h3" text="1.1 Installing via Template" a="installing-via-template" %}
 
-{% include h.html tag="h3" text="1.1 Installing via Gem" a="installing-via-gem" %}
+If you ran our [application template]({{site.github.url}}/guides/getting-started/installation),
+you already have Vandal installed. Check your routes to see it mounted.
+
+{% include h.html tag="h3" text="1.2 Installing via Gem" a="installing-via-gem" %}
 
 * Add the `vandal_ui` gem.
 * Run `rake vandal:install`
@@ -44,7 +46,7 @@ end
 
 That's it! Vandal will dynamically generate a schema at `<api_namespace>/vandal/schema.json`, and you can view the UI at `<api_namespace>/vandal`.
 
-{% include h.html tag="h3" text="1.2 Manual Installation" a="manual-installation" %}
+{% include h.html tag="h3" text="1.3 Manual Installation" a="manual-installation" %}
 
 [Vandal](https://github.com/graphiti-api/vandal) is a VueJS
 application. Just grab the [dist files](https://github.com/graphiti-api/vandal/tree/master/dist) and put them anywhere you'd like.
