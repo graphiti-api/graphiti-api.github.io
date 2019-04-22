@@ -463,6 +463,18 @@ filter :name, :string do
 end
 {% endhighlight %}
 
+The built-in operators for ActiveRecord are:
+
+* eq (case-insensitive)
+* eql (case-sensitive)
+* prefix
+* suffix
+* match
+* gt (greater-than)
+* gte (greater-than-or-equal-to)
+* lt (less-than)
+* lte (less-than-or-equal-to)
+
 > Note that Graphiti expects filters to support multiple values by
 > default, so `value` will be an array. Pass `single: true` if you do
 > not support multiple values.
