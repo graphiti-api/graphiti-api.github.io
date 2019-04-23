@@ -154,13 +154,15 @@ that accepts a hash of options to perform a query:</p>
   <span class="c1"># Merge filters into the hash based on request params</span>
   <span class="n">filter</span> <span class="ss">:name</span> <span class="k">do</span>
     <span class="n">eq</span> <span class="k">do</span> <span class="o">|</span><span class="n">scope</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
-      <span class="n">scope</span><span class="p">[</span><span class="ss">:conditions</span><span class="p">].</span><span class="nf">merge!</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+      <span class="n">scope</span><span class="p">[</span><span class="ss">:conditions</span><span class="p">].</span><span class="nf">merge!</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">scope</span>
     <span class="k">end</span>
   <span class="k">end</span>
 
   <span class="c1"># Set sort based on request params</span>
   <span class="n">sort</span> <span class="ss">:name</span> <span class="k">do</span> <span class="o">|</span><span class="n">scope</span><span class="p">,</span> <span class="n">direction</span><span class="o">|</span>
     <span class="n">scope</span><span class="p">[</span><span class="ss">:sort</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">name: </span><span class="n">direction</span> <span class="p">}</span>
+    <span class="n">scope</span>
   <span class="k">end</span>
 
   <span class="c1"># 'scope' here is our hash</span>
@@ -174,7 +176,8 @@ that accepts a hash of options to perform a query:</p>
   <p>As you see above, a <strong>scope</strong> can be anything from an
 <code class="highlighter-rouge">ActiveRecord::Relation</code> to a plain Ruby Hash. We want to adjust
 <em>something</em> based on the request parameters and pass it to our backend.
-From the raw backend results, we can instantiate Models.</p>
+From the raw backend results, we can instantiate Models. <strong>Note that we
+always return the full scope at the end of each block.</strong></p>
 
   <p>Of course, most Backends have predictable and consistent interfaces. It
 would be a pain to manually write this code for every Resource. So

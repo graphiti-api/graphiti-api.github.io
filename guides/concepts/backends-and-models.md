@@ -78,13 +78,15 @@ class EmployeeResource < ApplicationResource
   # Merge filters into the hash based on request params
   filter :name do
     eq do |scope, value|
-      scope[:conditions].merge!(c)
+      scope[:conditions].merge!(value)
+      scope
     end
   end
 
   # Set sort based on request params
   sort :name do |scope, direction|
     scope[:sort] = { name: direction }
+    scope
   end
 
   # 'scope' here is our hash
@@ -99,7 +101,8 @@ end
 As you see above, a **scope** can be anything from an
 `ActiveRecord::Relation` to a plain Ruby Hash. We want to adjust
 *something* based on the request parameters and pass it to our backend.
-From the raw backend results, we can instantiate Models.
+From the raw backend results, we can instantiate Models. **Note that we
+always return the full scope at the end of each block.**
 
 Of course, most Backends have predictable and consistent interfaces. It
 would be a pain to manually write this code for every Resource. So
