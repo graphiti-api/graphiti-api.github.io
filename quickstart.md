@@ -19,7 +19,7 @@ sensible defaults to get started quickly.
 Let's start with a classic Rails blog. We'll use a [template](http://guides.rubyonrails.org/rails_application_templates.html) to handle some of the boilerplate. Just run this command and accept all the defaults for now:
 
 {% highlight bash %}
-$ rails new blog --api -m https://raw.githubusercontent.com/graphiti-api/graphiti_rails_template/master/all.rb
+$ rails new blog --api -m https://www.graphiti.dev/template
 {% endhighlight %}
 
 Feel free to run `git diff` if you're interested in the
