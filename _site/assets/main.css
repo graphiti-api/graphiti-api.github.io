@@ -12257,7 +12257,7 @@ body {
     /*background-size: cover;*/ }
     body.layout-home .holder {
       position: absolute;
-      top: 35%;
+      top: 20%;
       left: 50%;
       width: 500px;
       height: 500px;
@@ -12266,7 +12266,7 @@ body {
       margin-left: -250px;
       transition: 200ms all; }
       body.layout-home .holder:hover {
-        margin-top: -260px; }
+        /*margin-top: -260px;*/ }
       body.layout-home .holder a:hover {
         text-decoration: none; }
       body.layout-home .holder h1 {
