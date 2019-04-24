@@ -5,8 +5,8 @@ layout: page
 Guides
 ==========
 
-<div style="width: 560px; margin: 0 auto">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_QqXjZDzTf4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="guides-video">
+<iframe height="400" src="https://www.youtube.com/embed/_QqXjZDzTf4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 Graphiti makes **RESTful Resources** a first-class concept. This enables

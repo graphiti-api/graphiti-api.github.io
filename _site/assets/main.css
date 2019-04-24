@@ -12179,6 +12179,10 @@ a.header:hover {
         display: inline-block; }
       .navbar.normal .nav-links .tutorial {
         display: inline-block; } }
+.guides-video iframe {
+  width: 100%;
+  margin: 0 auto; }
+
 .navbar.normal {
   position: fixed;
   width: 100%;
