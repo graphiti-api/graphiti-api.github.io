@@ -67,7 +67,7 @@ take a look at the query parameters that would be used to connect these
 two Resources:
 
 {% highlight ruby %}
-has_many :watchers, resource: EmployeeResource
+has_many :watchers, resource: EmployeeResource do
   params do |hash, departments|
     binding.pry
   end
