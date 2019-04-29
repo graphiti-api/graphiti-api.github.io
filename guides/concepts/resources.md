@@ -904,7 +904,7 @@ Use `params` to change the query parameters that will be passed to the
 associated Resource:
 
 {% highlight ruby %}
-has_many :active_positions do
+has_many :active_positions, resource: PositionResource do
   params do |hash, employees|
     hash[:filter][:active] = true
   end
@@ -918,6 +918,13 @@ end
 #     active: true
 #   }
 # })
+{% endhighlight %}
+
+If there is no existing AR association for this we would also need to make it a getter/setter on the model.
+
+{% highlight ruby %}
+# app/models/position.rb
+attr_accessor :active_positions
 {% endhighlight %}
 
 {% include h.html tag="h5" text="5.2.1 Customizing Assignment" a="customizing-assignment" %}
