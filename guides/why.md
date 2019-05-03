@@ -336,7 +336,7 @@ be assumed by convention, swapped on-demand. What we really need to define is th
 {% include h.html tag="h2" text="Welcome to Graphiti" a="welcome-to-graphiti" %}
 
 {% highlight ruby %}
-class EmployeeResource < ApplicationRecord
+class EmployeeResource < ApplicationResource
   attribute :name, :string, sortable: true, filterable: true
   attribute :age, :integer, writable: false
 end
