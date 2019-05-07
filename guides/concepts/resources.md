@@ -26,6 +26,7 @@ Resources
     * [Hash Filter](#hash-filter)
     * [Escaping Values](#escaping-values)
   * [Statistics](#statistics)
+  * [Extra Fields](#extra-fields)
   * [`#resolve`](#resolve)
 * 4 [Configuration](#configuration)
   * [Polymorphic Resources](#polymorphic-resources)
@@ -681,7 +682,30 @@ stat rating: [:average] do
 end
 {% endhighlight %}
 
-{% include h.html tag="h4" text="3.7 #resolve" a="resolve" %}
+{% include h.html tag="h4" text="3.7 Extra Fields" a="extra-fields" %}
+
+Sometimes you have a field that is not always needed, and perhaps
+computationally expensive. In this case, you only want the field
+returned when explicitly requested by the client. To do this:
+
+{% highlight ruby %}
+extra_attribute :net_worth
+{% endhighlight %}
+
+This works just like `attribute`, except the field is read-only and will
+only be returned when requested. The query parameter signature matches
+`fields`: `?extra_fields[employees]=net_worth`.
+
+You may want to adjust your scope to eager load data when a given extra
+field is requested. To do this:
+
+{% highlight ruby %}
+resource.on_extra_attribute :net_worth do |scope|
+  scope.includes(:assets)
+end
+{% endhighlight %}
+
+{% include h.html tag="h4" text="3.8 #resolve" a="resolve" %}
 
 After we build up a query, we pass it to `#resolve`. Resolve **must** do
 two things:

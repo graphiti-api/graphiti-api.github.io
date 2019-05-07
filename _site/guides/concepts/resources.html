@@ -104,6 +104,7 @@
           </ul>
         </li>
         <li><a href="#statistics">Statistics</a></li>
+        <li><a href="#extra-fields">Extra Fields</a></li>
         <li><a href="#resolve"><code class="highlighter-rouge">#resolve</code></a></li>
       </ul>
     </li>
@@ -810,10 +811,34 @@ escape the value for you, filtering on the string as given.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
+<a class="anchor" id="extra-fields" />
+  <a class="header" href="#extra-fields">
+    <h4>
+      3.7 Extra Fields
+    </h4>
+  </a>
+
+  <p>Sometimes you have a field that is not always needed, and perhaps
+computationally expensive. In this case, you only want the field
+returned when explicitly requested by the client. To do this:</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">extra_attribute</span> <span class="ss">:net_worth</span></code></pre></figure>
+
+  <p>This works just like <code class="highlighter-rouge">attribute</code>, except the field is read-only and will
+only be returned when requested. The query parameter signature matches
+<code class="highlighter-rouge">fields</code>: <code class="highlighter-rouge">?extra_fields[employees]=net_worth</code>.</p>
+
+  <p>You may want to adjust your scope to eager load data when a given extra
+field is requested. To do this:</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">resource</span><span class="p">.</span><span class="nf">on_extra_attribute</span> <span class="ss">:net_worth</span> <span class="k">do</span> <span class="o">|</span><span class="n">scope</span><span class="o">|</span>
+  <span class="n">scope</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="ss">:assets</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
 <a class="anchor" id="resolve" />
   <a class="header" href="#resolve">
     <h4>
-      3.7 #resolve
+      3.8 #resolve
     </h4>
   </a>
 
