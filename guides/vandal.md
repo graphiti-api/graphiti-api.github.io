@@ -56,9 +56,10 @@ this with a URL hosting your schema, and you'll be good to go.
 
 {% include h.html tag="h2" text="2 Usage" a="usage" %}
 
-First, make sure your schema is properly generated. The schema is
-generated whenever you run `rspec`. Remember that if you make changes,
-you'll need to regenerate the schema before Vandal will see them.
+First, make sure your schema is being correctly generated. You should
+see Vandal make a request something like `/vandal/schema.json` - make
+sure that looks correct. If it doesn't, you may need to bounce your
+server.
 
 After selecting an endpoint, use the left rail to configure your
 request. Click a relationship once to include it in the response.
