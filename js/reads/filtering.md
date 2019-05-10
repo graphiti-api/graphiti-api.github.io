@@ -49,7 +49,7 @@ Post.where({ id_lt: 5 }).all()
 Post.where({ id_lte: 5 }).all()
 
 // title starts with "foo"
-Post.where({ title_prefix: "foo" }).all()
+Post.where({ title: { prefix: "foo" } }).all()
 
 // OR these two values
 Post.where({ status_or: ['draft', 'review'] })

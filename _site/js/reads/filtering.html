@@ -155,7 +155,7 @@ conventions we promote:</p>
 <span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">id_lte</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
 
 <span class="c1">// title starts with "foo"</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">title_prefix</span><span class="p">:</span> <span class="s2">"foo"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="p">{</span> <span class="na">prefix</span><span class="p">:</span> <span class="s2">"foo"</span> <span class="p">}</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
 
 <span class="c1">// OR these two values</span>
 <span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">status_or</span><span class="p">:</span> <span class="p">[</span><span class="s1">'draft'</span><span class="p">,</span> <span class="s1">'review'</span><span class="p">]</span> <span class="p">})</span>

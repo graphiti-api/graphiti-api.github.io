@@ -407,7 +407,7 @@ be assumed by convention, swapped on-demand. What we really need to define is th
     </h2>
   </a>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeeResource</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeeResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
   <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">sortable: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">filterable: </span><span class="kp">true</span>
   <span class="n">attribute</span> <span class="ss">:age</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">writable: </span><span class="kp">false</span>
 <span class="k">end</span></code></pre></figure>

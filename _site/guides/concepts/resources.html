@@ -1084,7 +1084,7 @@ also pass the JSONAPI type in brackets:</p>
   <p>Use <code class="highlighter-rouge">params</code> to change the query parameters that will be passed to the
 associated Resource:</p>
 
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:active_positions</span> <span class="k">do</span>
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:active_positions</span><span class="p">,</span> <span class="ss">resource: </span><span class="no">PositionResource</span> <span class="k">do</span>
   <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">employees</span><span class="o">|</span>
     <span class="nb">hash</span><span class="p">[</span><span class="ss">:filter</span><span class="p">][</span><span class="ss">:active</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="k">end</span>
@@ -1098,6 +1098,11 @@ associated Resource:</p>
 <span class="c1">#     active: true</span>
 <span class="c1">#   }</span>
 <span class="c1"># })</span></code></pre></figure>
+
+  <p>If there is no existing AR association for this we would also need to make it a getter/setter on the model.</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/position.rb</span>
+<span class="kp">attr_accessor</span> <span class="ss">:active_positions</span></code></pre></figure>
 
 <a class="anchor" id="customizing-assignment" />
   <a class="header" href="#customizing-assignment">

@@ -129,7 +129,7 @@ together with <a href="https://www.graphiti.dev/guides/concepts/links">Links</a>
 take a look at the query parameters that would be used to connect these
 two Resources:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:watchers</span><span class="p">,</span> <span class="ss">resource: </span><span class="no">EmployeeResource</span>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:watchers</span><span class="p">,</span> <span class="ss">resource: </span><span class="no">EmployeeResource</span> <span class="k">do</span>
   <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">departments</span><span class="o">|</span>
     <span class="nb">binding</span><span class="p">.</span><span class="nf">pry</span>
   <span class="k">end</span>
