@@ -239,7 +239,7 @@ data coming in.
 
 {% highlight ruby %}
 # Define the Type
-definition = Dry::Types::Definition.new(String)
+definition = Dry::Types::Nominal.new(String)
 type = definition.constructor do |input|
   input.upcase
 end
