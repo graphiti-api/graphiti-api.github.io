@@ -252,6 +252,12 @@ create a Remote Resource under-the-hood:</p>
 <span class="c1">#   self.remote = 'http://my-api.com/api/v1/comments'</span>
 <span class="c1"># end</span></code></pre></figure>
 
+  <blockquote>
+    <p>NOTE: When sending a request to a remote API, we request page size
+<code class="highlighter-rouge">999</code> so results don’t get accidentally cut off. If you need
+successive requests, please <a href="https://github.com/graphiti-api/graphiti/issues">submit an issue</a>.</p>
+  </blockquote>
+
 <a class="anchor" id="customizing" />
   <a class="header" href="#customizing">
     <h3>
@@ -363,7 +369,8 @@ response. Graphiti gives you a spec helper to do just that -
   <span class="k">end</span>
 
   <span class="n">it</span> <span class="s1">'does something'</span> <span class="k">do</span>
-    <span class="n">mock_api</span><span class="p">(</span><span class="s1">'http://my-api.com/api/v1/comments'</span><span class="p">,</span> <span class="n">api_response</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'http://my-api.com/api/v1/comments?page[size]=999'</span>
+    <span class="n">mock_api</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">api_response</span><span class="p">)</span>
     <span class="c1"># ... test ...</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
@@ -415,6 +422,9 @@ know how to associate these children to their parents.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
+  <blockquote>
+    <p>Make sure to include <code class="highlighter-rouge">page[size]=999</code> in the test URL!</p>
+  </blockquote>
 </div>
 
         </div>
