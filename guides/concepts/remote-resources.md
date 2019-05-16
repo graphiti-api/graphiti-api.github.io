@@ -184,6 +184,10 @@ end
 # end
 {% endhighlight %}
 
+> NOTE: When sending a request to a remote API, we request page size
+> `999` so results don't get accidentally cut off. If you need
+> successive requests, please [submit an issue](https://github.com/graphiti-api/graphiti/issues).
+
 {% include h.html tag="h3" text="Customizing"
 a="customizing" %}
 
@@ -275,7 +279,8 @@ describe 'comments' do
   end
 
   it 'does something' do
-    mock_api('http://my-api.com/api/v1/comments', api_response)
+    url = 'http://my-api.com/api/v1/comments?page[size]=999'
+    mock_api(url, api_response)
     # ... test ...
   end
 end
@@ -326,3 +331,4 @@ describe 'sideloading' do
 end
 {% endhighlight %}
 
+> Make sure to include `page[size]=999` in the test URL!
