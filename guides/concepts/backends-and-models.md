@@ -125,7 +125,7 @@ From the [ActiveRecord Guides](https://guides.rubyonrails.org/active_record_basi
 
 > *[Active Record was described by Martin Fowler](https://www.martinfowler.com/eaaCatalog/activeRecord.html) in his book Patterns of Enterprise Application Architecture. In Active Record, objects carry both persistent data and behavior which operates on that data. Active Record takes the opinion that ensuring data access logic as part of the object will educate users of that object on how to write to and read from the database.*
 
-In other words, ActiveRecord is **combines** a Backend and Model.
+In other words, ActiveRecord **combines** a Backend and Model.
 Opinions on this [vary](https://blog.lelonek.me/why-is-your-rails-application-still-coupled-to-activerecord-efe34d657c91),
 but Graphiti supports either approach: we can separate data and business layers, or
 combine them. See the ActiveRecord doppelgänger of the above at our
