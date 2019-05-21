@@ -914,3 +914,15 @@ img[alt=glimmer_logo] {
     }
   }
 }
+
+.blog {
+  h2 a {
+    color: white;
+
+    &:hover {
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
