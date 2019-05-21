@@ -18,3 +18,4 @@ spec/dummy/log/*
 /exe/
 /bin/
 _site/bin
+_site/*

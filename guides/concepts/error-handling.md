@@ -12,7 +12,6 @@ Error Handling
 * 2 [Usage](#usage)
   * [Basic](#basic)
   * [Advanced](#advanced)
-  * [Logging](#logging)
 * 3 [Testing](#testing)
 
 </div>
@@ -30,35 +29,30 @@ the error.
   <img width="100%" src="https://user-images.githubusercontent.com/55264/45879320-06096300-bd72-11e8-8920-6e83f4a2fce3.png">
 </p>
 
-To do these we'll need to globally rescue errors so that we can render
-the correct response. As part of that logic, we'll need a way to say "if
-a `NotAuthorized` error is raised, the response should have a `403`
-status code", or "when this error is raised, send a helpful message to
-the user about why the error occurred."
+We'll also need a way to customize this payload. For instance, if a
+`NotAuthorized` error is raised, the response should have a `403` status
+code. For other errors, we may want to render a helpful error message:
 
-To do this we use the [Graphiti Errors](https://github.com/graphiti-api/graphiti_errors) gem.
+{% highlight ruby %}
+class ApplicationController < ActionController::API
+  register_exception NotAuthorized, status: 403
+  register_exception ShipmentDelayed,
+    message: ->(e) { "Contact us at 123-456-7899" }
+  # ... code ...
+end
+{% endhighlight %}
+
+Correctly handling exceptions happens in [graphiti-rails](https://github.com/graphiti-api/graphiti-rails). Customizing the behavior based on error class happens in the [RescueRegistry](https://github.com/wagenet/rescue_registry) dependency.
 
 {% include h.html tag="h3" text="1.1 Setup" a="setup" %}
 
-Error handling is part of [Installation]({{site.github.url}}/guides/getting-started/installation),
-but here's the code:
+Just make sure you have [graphiti-rails](https://github.com/graphiti-api/graphiti-rails) installed:
 
 {% highlight ruby %}
-# With Rails
-# app/controllers/application_controller.rb
-include Graphiti::Rails
-rescue_from Exception do |e|
-  handle_exception(e)
-end
-
-# Without Rails:
-include GraphitiErrors
-# ... your code to globally rescue errors ...
-handle_exception(e)
+gem 'graphiti-rails'
 {% endhighlight %}
 
-We expose this directly so you can add additional logic, like sending
-the error to NewRelic.
+And you're all set!
 
 {% include h.html tag="h4" text="1.1.1 Displaying Raw Errors" a="displaying-raw-errors" %}
 
@@ -72,9 +66,12 @@ but you probably don't want to expose your stack trace to customers.
 Let's only show raw errors for the `staging` environment:
 
 {% highlight ruby %}
-# app/controllers/application_controller.rb
-rescue_from Exception do |e|
-  handle_exception(e,  show_raw_error: Rails.env.staging?)
+class ApplicationController < ActionController::API
+  # ... code ...
+
+  def show_detailed_exceptions?
+    Rails.env.staging?
+  end
 end
 {% endhighlight %}
 
@@ -82,13 +79,17 @@ Another common pattern is to only show raw errors when the user is
 privileged to see them:
 
 {% highlight ruby %}
-# app/controllers/application_controller.rb
-rescue_from Exception do |e|
-  handle_exception(e,  show_raw_error: current_user.developer?)
+class ApplicationController < ActionController::API
+  # ... code ...
+
+  def show_detailed_exceptions?
+    Rails.env.staging?
+  end
 end
+
 {% endhighlight %}
 
-When `show_raw_error` is `true`, you'll get the raw error class,
+When `#show_detailed_exceptions?` returns `true`, you'll get the raw error class,
 message, and backtrace in the JSON response.
 
 {% include h.html tag="h2" text="2 Usage" a="usage" %}
@@ -111,9 +112,10 @@ register_exception Errors::NotAuthorized,
   status: 403,
   title: "You cannot perform this action",
   message: true, # render the raw error message
-  message: ->(error) { "Invalid Action" }, # message via proc
-  log: false # don't log the error
+  message: ->(error) { "Invalid Action" } # message via proc
 {% endhighlight %}
+
+[See full documentation in the RescueRegistry README](https://github.com/wagenet/rescue_registry).
 
 All controllers will inherit any registered exceptions from their parent. They can also add their own. In this example, `FooError` will only throw a custom status code when thrown from `FooController`:
 
@@ -125,15 +127,17 @@ end
 
 {% include h.html tag="h3" text="2.2 Advanced" a="advanced" %}
 
-The final option `register_exception` accepts is `handler`. Here you can inject your own error handling class that customize `GraphitiErrors::ExceptionHandler`. For example:
+The final option `register_exception` accepts is `handler`. Here you can inject your own error handling class that customize `RescueRegistry::ExceptionHandler`. For example:
 
 {% highlight ruby %}
 class MyCustomHandler < GraphitiErrors::ExceptionHandler
-  def status_code(error)
+  # self.exception accessible within all instance methods
+
+  def status_code
     # ...customize...
   end
 
-  def error_code(error)
+  def error_code
     # ...customize...
   end
 
@@ -141,15 +145,11 @@ class MyCustomHandler < GraphitiErrors::ExceptionHandler
     # ...customize...
   end
 
-  def detail(error)
+  def detail
     # ...customize...
   end
 
-  def meta(error)
-    # ...customize...
-  end
-
-  def log(error)
+  def meta
     # ...customize...
   end
 end
@@ -166,26 +166,22 @@ def self.default_exception_handler
 end
 {% endhighlight %}
 
-{% include h.html tag="h3" text="2.3 Logging" a="logging" %}
-
-You can assign any logger using `GraphitiErrors.logger =
-your_logger`. When using Rails this defaults to `Rails.logger`.
-
 {% include h.html tag="h2" text="3 Testing" a="testing" %}
 
 This pattern of globally rescuing exceptions makes sense when
 running our live application...but during testing, we may want to
 raise real errors and bypass this rescue logic.
 
-This is why we [turn off Graphiti Errors during tests by default](https://github.com/graphiti-api/employee_directory/blob/master/spec/rails_helper.rb#L35-L37):
+This is why we turn off error-handling during tests by default:
 
 {% highlight ruby %}
 # spec/rails_helper.rb
 RSpec.configure do |config|
+  config.include Graphiti::Rails::TestHelpers
   # ... code ...
 
   config.before :each do
-    GraphitiErrors.disable!
+    handle_request_exceptions(false)
   end
 end
 {% endhighlight %}
@@ -195,7 +191,7 @@ error codes, etc):
 
 {% highlight ruby %}
 before do
-  GraphitiErrors.enable!
+  handle_request_exceptions(true)
 end
 {% endhighlight %}
 

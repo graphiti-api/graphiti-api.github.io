@@ -54,6 +54,7 @@ say(set_color(welcome.rstrip, :cyan, :bold))
 api_namespace
 
 gem 'graphiti'
+gem 'graphiti-rails'
 gem 'vandal_ui'
 gem 'kaminari', '~> 1.0'
 gem 'responders', '~> 2.4'
@@ -108,9 +109,13 @@ insert_into_file "spec/rails_helper.rb", :after => "RSpec.configure do |config|\
   <<-STR
 
   config.before :each do
-    GraphitiErrors.disable!
+    handle_request_exceptions(false)
   end
   STR
+end
+
+insert_into_file "spec/rails_helper.rb", :after => "RSpec.configure do |config|\n" do
+  "  config.include Graphiti::Rails::TestHelpers\n"
 end
 
 insert_into_file "spec/rails_helper.rb", :after => "RSpec.configure do |config|\n" do
