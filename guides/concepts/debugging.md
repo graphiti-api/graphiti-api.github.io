@@ -10,8 +10,8 @@ Debugging
   * [JSON Output](#json-output)
   * [Configuration](#configuration)
 * 2 [Rake Tasks](#rake-tasks)
-  * [graphiti:request](#graphitirequest)
-  * [graphiti:benchmark](#graphitibenchmark)
+  * [graphiti:request](#graphiti-request)
+  * [graphiti:benchmark](#graphiti-benchmark)
 * 3 [Tips](#tips)
 
 </div>
