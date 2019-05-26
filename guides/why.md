@@ -17,7 +17,7 @@ Let's remember [why people like GraphQL](https://dev.to/smizell/why-people-like-
 >
 > \- ["The Github Graph API"](https://githubengineering.com/the-github-graphql-api), **GitHub Engineering**
 
-GraphQL solves real problems. It's flaw is that it solved these
+GraphQL solves real problems. Its flaw is that it solved these
 problems using zero-sum thinking: we must
 abandon the existing paradigm and forge a new one. It's GraphQL
 versus REST, one or the other. [REST is dead, long live GraphQL](https://medium.freecodecamp.org/rest-apis-are-rest-in-peace-apis-long-live-graphql-d412e559d8e4).
@@ -646,7 +646,7 @@ request.
 
 {% include h.html tag="h2" text="(Micro) Services" a="microservices" %}
 
-> *You should think hard before breaking up [a Magestic Monolith](https://m.signalvnoise.com/the-majestic-monolith); beware the tradeoffs. Still, if you need it, Graphiti has your back.*
+> *You should think hard before breaking up [a Majestic Monolith](https://m.signalvnoise.com/the-majestic-monolith); beware the tradeoffs. Still, if you need it, Graphiti has your back.*
 
 We now have a consistent interface for queries and relationships. We
 also covered how Resources connect together with Links. Put two and
