@@ -15,9 +15,9 @@ start seeing deprecation notices.
 
 Then add `graphiti-rails` to your `Gemfile`:
 
-```ruby
+{% highlight ruby %}
 gem 'graphiti-rails', '~> 0.1'
-```
+{% endhighlight %}
 
 You'll see slightly different deprecation notices at this point. To fix:
 
@@ -31,11 +31,11 @@ anything else, but this is now built-in by default.
 Finally, if you were passing the `show_raw_error` option to
 `#handle_exception`, replace this with `#show_detailed_exceptions?`:
 
-```ruby
+{% highlight ruby %}
 def show_detailed_exceptions?
   current_user.admin?
 end
-```
+{% endhighlight %}
 
 > Keep in mind, we'll always show detailed exceptions in development
 > mode, per Rails conventions. If this is confusing or not desirable,
