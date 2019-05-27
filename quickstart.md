@@ -180,12 +180,13 @@ def index
 end
 {% endhighlight %}
 
-  * View the default payload:
+  * The default payload you'd see in production:
 
     ![error_payload]({{site.github.url}}/assets/img/error_payload.png)
 
   * Different errors can be customized with different response codes,
-  JSON, and side-effects.
+  JSON, and side-effects. See more in the [Error Handling
+  Guide]({{site.github.url}}/guides/error-handling).
 
 {% include h.html tag="h2" text="Persisting" a="persisting" %}
 
