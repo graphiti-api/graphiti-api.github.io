@@ -36,6 +36,8 @@ But ideally, read everything 🙂
     * [Quickstart]({{site.github.url}}/quickstart)
     * [Vandal: The Graphiti UI]({{site.github.url}}/guides/vandal)
     * [Upgrading from JSONAPI Suite]({{site.github.url}}/guides/upgrading)
+    * [Upgrading to Graphiti 1.2 🔥]({{site.github.url}}/guides/graphiti-rails-migration)
+    * [Blog]({{site.github.url}}/blog)
   * ## Concepts
     * [Resources]({{site.github.url}}/guides/concepts/resources)
     * [Endpoints]({{site.github.url}}/guides/concepts/endpoints)
