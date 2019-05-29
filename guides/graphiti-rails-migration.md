@@ -48,7 +48,7 @@ end
 
 ## Testing
 
-Add `config.include GraphitiSpecHelpers::Sugar` to
+Add `config.include Graphiti::Rails::TestHelpers` to
 `spec/rails_helper.rb`.
 
 Replace
