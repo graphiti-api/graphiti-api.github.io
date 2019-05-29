@@ -876,11 +876,11 @@ class CommentResource < ApplicationResource
   belongs_to :post
 end
 
-PostResource.all(includes: 'comments')
+PostResource.all(include: 'comments')
 # Under the hood:
 # CommentResource.all(filter: { post_id: array_of_post_ids })
 
-CommentResource.all(includes: 'post')
+CommentResource.all(include: 'post')
 # Under the hood:
 # PostResource.all(filter: { id: array_of_comment_ids })
 {% endhighlight %}
