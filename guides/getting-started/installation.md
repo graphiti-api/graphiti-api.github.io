@@ -9,6 +9,7 @@ Installation
 * 1 [From Scratch](#from-scratch)
 * 2 [Adding to an Existing App](#adding-to-an-existing-app)
   * [Responders](#responders)
+  * [.graphiticfg.yml](#graphiticfg)
   * [Testing](#testing)
   * [will_paginate](#will-paginate)
 * 3 [Without Rails](#without-rails)
