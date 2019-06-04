@@ -146,7 +146,23 @@ include Graphiti::Responders
 > Note: Persistence operations only support JSONAPI format, so you'll
 > still use `render jsonapi:` and `render jsonapi_errors:` for those.
 
-{% include h.html tag="h3" text="2.2 Testing" a="testing" %}
+{% include h.html tag="h3" text="2.3 .graphiticfg.yml" a="graphiticfg" %}
+
+The `.graphiticfg.yml` file lives in the root directory of your
+application. It holds configuration we need to reuse across a variety of
+contexts (primarily generates and rake tasks). If you use our template to create your application, it's created for you.
+
+Primarily this is used to hold your "API namespace":
+
+{% highlight bash %}
+---
+namespace: /my_api/v1
+{% endhighlight %}
+
+If this file doesn't exist you may get unexpected errors - make sure to
+create it!
+
+{% include h.html tag="h3" text="2.4 Testing" a="testing" %}
 
 To add our [Integration Tests]({{site.github.url}}/guides/concepts/testing):
 
@@ -203,7 +219,7 @@ RSpec.configure do |config|
 end
 {% endhighlight %}
 
-{% include h.html tag="h3" text="2.3 will_paginate" a="will-paginate" %}
+{% include h.html tag="h3" text="2.5 will_paginate" a="will-paginate" %}
 
 By default, we use [Kaminari](https://github.com/kaminari/kaminari) for
 ActiveRecord pagination. If you prefer [will_paginate] (or anything
