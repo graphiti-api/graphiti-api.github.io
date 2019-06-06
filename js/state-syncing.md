@@ -107,5 +107,5 @@ instance.unlisten()
 
 In practice, when developing in a SPA, you'll want to `#unlisten()`
 whenever a view is destroyed and model instances no longer need to be referenced. If
-you are using VueJS, this is done automatically by adding [spraypaint-vue](https://github.com/jsonapi-suite/spraypaint-vue)
+you are using VueJS, this is done automatically by adding [spraypaint-vue](https://github.com/graphiti-api/spraypaint-vue)
 to your application.
