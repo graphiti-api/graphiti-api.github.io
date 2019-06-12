@@ -82,8 +82,8 @@ attribute :first_name, :string
 
 {% include h.html tag="h4" text="2.1 Limiting Behavior" a="limiting-behavior" %}
 
-Each attribute consists of four flags: `readable`, `writable`,
-`sortable`, and `filterable`. Any of these flags can be turned off:
+Each attribute consists of five flags: `readable`, `writable`,
+`sortable`, `filterable`, and `schema`. Any of these flags can be turned off:
 
 {% highlight ruby %}
 attribute :name, :string, sortable: false
@@ -95,6 +95,9 @@ Or use `only/except` shorthand:
 attribute :name, :string, only: [:sortable]
 attribute :name, :string, except: [:writable]
 {% endhighlight %}
+
+The `schema` flag is not effected by `only/except` options. 
+This option determines if the attribute is exported to the schema.json.
 
 You might want to allow behavior only if a certain condition is met.
 Pass a symbol to guard this behavior via corresponding method, only allowing the
@@ -130,6 +133,7 @@ self.attributes_readable_by_default = false # default true
 self.attributes_writable_by_default = false # default true
 self.attributes_filterable_by_default = false # default true
 self.attributes_sortable_by_default = false # default true
+self.attributes_schema_by_default = false # default true
 {% endhighlight %}
 
 {% include h.html tag="h4" text="2.3 Customizing Display" a="customizing-display" %}
