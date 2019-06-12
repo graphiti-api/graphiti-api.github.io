@@ -32,7 +32,7 @@ exclude:
 
 github:
   url: 'https://www.graphiti.dev'
-  #url: 'http://localhost:4000'
+#  url: 'http://localhost:4000'
 defaults:
   - scope:
       path: "assets/img"
