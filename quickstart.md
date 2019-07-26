@@ -29,6 +29,8 @@ particulars; this is mostly just installing gems and including modules.
 > directly, you can download the file and and run this command as `-m
 > /path/to/all.rb`
 
+Alternatively, you can [**add to an existing project**]({{site.github.url}}/guides/getting-started/installation#adding-to-an-existing-app).
+
 {% include h.html tag="h2" text="Defining a Resource" a="defining-a-resource" %}
 
 A [**Resource**]({{site.github.url}}/guides/concepts/resources) defines how to query and persist your [**Model**]({{site.github.url}}/guides/concepts/backends-and-models). In other
