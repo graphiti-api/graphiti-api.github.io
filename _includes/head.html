@@ -5,6 +5,16 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
 
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.github.url }}/assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.github.url }}/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ site.github.url }}/assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="{{ site.github.url }}/assets/favicons/site.webmanifest">
+  <link rel="mask-icon" href="{{ site.github.url }}/assets/favicons/safari-pinned-tab.svg" color="#F86DA7">
+  <link rel="shortcut icon" href="{{ site.github.url }}/assets/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#F86DA7">
+  <meta name="msapplication-config" content="{{ site.github.url }}/assets/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#F86DA7">
+
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 
