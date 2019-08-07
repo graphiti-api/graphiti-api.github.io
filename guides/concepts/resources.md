@@ -96,7 +96,7 @@ attribute :name, :string, only: [:sortable]
 attribute :name, :string, except: [:writable]
 {% endhighlight %}
 
-The `schema` flag is not effected by `only/except` options. 
+The `schema` flag is not affected by `only/except` options. 
 This option determines if the attribute is exported to the schema.json.
 
 You might want to allow behavior only if a certain condition is met.
