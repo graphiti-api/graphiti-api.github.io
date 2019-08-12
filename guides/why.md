@@ -22,7 +22,7 @@ problems using zero-sum thinking: we must
 abandon the existing paradigm and forge a new one. It's GraphQL
 versus REST, one or the other. [REST is dead, long live GraphQL](https://medium.freecodecamp.org/rest-apis-are-rest-in-peace-apis-long-live-graphql-d412e559d8e4).
 
-Graphiti instead approaches the problem using [positive-sum thinking](http://aturon.github.io/2018/06/02/listening-part-2):
+Graphiti instead approaches the problem using [positive-sum thinking](http://aturon.github.io/tech/2018/06/02/listening-part-2/):
 
 > *Positive-sum thinking is how we embrace pluralism while retaining a coherent vision and set of values...A zero-sum view would assume that apparent oppositions are fundamental, e.g., that appealing to the JS crowd inherently hurts the C++ one. A positive-sum view starts by seeing different perspectives and priorities as legitimate and worthwhile, with a faith that* **by respecting each other in this way, we can find strictly better solutions than had we optimized solely for one perspective.**
 >
