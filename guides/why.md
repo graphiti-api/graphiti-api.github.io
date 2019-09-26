@@ -9,7 +9,7 @@ layout: page
 Why Graphiti
 ============
 
-I've written GraphQL and had a pleasant experience. I have enourmous respect for GraphQL. I also believe there is a fundamental flaw in GraphQL's design.
+I've written GraphQL and had a pleasant experience. I have enormous respect for GraphQL. I also believe there is a fundamental flaw in GraphQL's design.
 
 Let's remember [why people like GraphQL](https://dev.to/smizell/why-people-like-graphql-221c) in the first place: because it addressed common frustrations with REST APIs:
 
