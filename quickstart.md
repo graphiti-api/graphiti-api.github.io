@@ -27,7 +27,7 @@ particulars; this is mostly just installing gems and including modules.
 
 > Note: if a network issue prevents you from pointing to this URL
 > directly, you can download the file and and run this command as `-m
-> /path/to/all.rb`
+> /path/to/template`
 
 {% include h.html tag="h2" text="Defining a Resource" a="defining-a-resource" %}
 

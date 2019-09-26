@@ -2,14 +2,17 @@
 layout: page
 ---
 
-Tutorial
-==========
+{% include tutorial-toc.html %}
 
-### Step 2: Has Many
+<div markdown="1" class="col-md-8">
+
+## Step 2: Has Many
+
+> [View the Code](https://github.com/graphiti-api/employee_directory/compare/step_1_employees...step_2_positions)
 
 We'll be adding the database table `positions`:
 
-<table class="table text-center">
+<table class="table table-small text-center">
   <thead>
     <tr>
       <th class="text-center">id</th>
@@ -28,8 +31,8 @@ We'll be adding the database table `positions`:
       <td>Engineer</td>
       <td>true</td>
       <td>1</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
     <tr>
       <td>2</td>
@@ -37,8 +40,8 @@ We'll be adding the database table `positions`:
       <td>Intern</td>
       <td>true</td>
       <td>2</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
     <tr>
       <td>3</td>
@@ -46,8 +49,8 @@ We'll be adding the database table `positions`:
       <td>Manager</td>
       <td>true</td>
       <td>1</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
   </tbody>
 </table>
@@ -56,12 +59,13 @@ Because this table tracks all historical positions, we have the
 `historical_index` column. This tells the order the employee moved
 through each position, where `1` is most recent.
 
-#### Rails
+### The Rails Stuff 🚂
 
 Generate the `Position` model:
 
 {% highlight bash %}
 $ bin/rails g model Position title:string active:boolean historical_index:integer employee:belongs_to
+$ bin/rails db:migrate
 {% endhighlight %}
 
 Update the `Employee` model with the association, too:
@@ -94,33 +98,7 @@ end
 $ bin/rails db:seed
 {% endhighlight %}
 
-When running our tests, let's make sure the `historical_index` column
-reflects the order we created the positions. This code recalculates
-everything after a record is saved:
-
-{% highlight ruby %}
-# spec/factories/position.rb
-FactoryBot.define do
-  factory :position do
-    employee
-
-    title { Faker::Job.title }
-
-    after(:create) do |position|
-      unless position.historical_index
-        scope = Position
-          .where(employee_id: position.employee.id)
-          .order(created_at: :desc)
-        scope.each_with_index do |p, index|
-          p.update_attribute(:historical_index, index + 1)
-        end
-      end
-    end
-  end
-end
-{% endhighlight %}
-
-#### Graphiti
+### The Graphiti Stuff 🎨
 
 Let's start by running the same command as before to create
 `PositionResource`:
@@ -129,51 +107,28 @@ Let's start by running the same command as before to create
 $ bin/rails g graphiti:resource Position title:string active:boolean
 {% endhighlight %}
 
-And we'll need to add the associations:
+We'll need to add the association, just like ActiveRecord:
 
 {% highlight ruby %}
 # app/resources/employee_resource.rb
 has_many :positions
 {% endhighlight %}
 
-This allows loading employees and their positions in a single request:
-
-`/api/v1/employees?include=positions`
-
-Now let's add the reverse: starting with positions, and loading
-employees:
+...and a corresponding filter:
 
 {% highlight ruby %}
 # app/resources/position_resource.rb
-belongs_to :employee
+filter :employee_id, :integer
 {% endhighlight %}
 
-`/api/v1/positions?include=employee`
+If you visit `/api/v1/employees`, you'll see a number of HTTP
+[Links](https://www.graphiti.dev/guides/concepts/links)
+that allow lazy-loading positions. Or, if you visit
+`/api/v1/employees?include=positions`, you'll load the employees and
+positions in a single request. We'll dig a bit deeper into this logic
+in the section below.
 
-{% comment %}TODO link the Link{% endcomment %}
-
-But what if we wanted to first load only the `Employee`, and lazy-load
-`Position`s in a separate request? In other words, a Link from an
-`Employee` to their `Position`s would look like:
-
-`/api/v1/positions?filter[employee_id]=123`
-
-And so we should add the corresponding filter if we want to enable this
-functionality:
-
-{% highlight ruby %}
-attribute :employee_id, :integer, only: [:filterable]
-{% endhighlight %}
-
-> Note: this is the same as `filter :employee_id, :integer`, but it's a
-> best practice to call out these "foreign keys" alongside other
-> attributes.
-
-We can now traverse `Employee`s and `Positions` via Links:
-
-{% comment %}TODO GIF{% endcomment %}
-
-Let's revisit the `historical_index` column. For now, let's
+Before we get there, let's revisit the `historical_index` column. For now, let's
 treat this as an implementation detail that the API should not expose -
 let's say we want to support sorting on this attribute but nothing else:
 
@@ -192,7 +147,7 @@ We can solve this in three ways:
 optional: true`.
 * Associate an `Employee` as part of the API request.
 
-We'll opt for the last option. Look at
+We'll take for the last option. Look at
 `spec/resources/position/writes_spec.rb`:
 
 {% highlight ruby %}
@@ -215,6 +170,32 @@ RSpec.describe PositionResource, type: :resource do
       expect {
         expect(instance.save).to eq(true)
       }.to change { Position.count }.by(1)
+    end
+  end
+end
+{% endhighlight %}
+
+When running our tests, let's make sure the `historical_index` column
+reflects the order we created the positions. This code recalculates
+everything after a record is saved:
+
+{% highlight ruby %}
+# spec/factories/position.rb
+FactoryBot.define do
+  factory :position do
+    employee
+
+    title { Faker::Job.title }
+
+    after(:create) do |position|
+      unless position.historical_index
+        scope = Position
+          .where(employee_id: position.employee.id)
+          .order(created_at: :desc)
+        scope.each_with_index do |p, index|
+          p.update_attribute(:historical_index, index + 1)
+        end
+      end
     end
   end
 end
@@ -249,3 +230,83 @@ This will associate the `Position` to the `Employee` as part of the
 creation process. The test should now pass - make the same change to
 `spec/api/v1/positions/create_spec.rb` to get a fully-passing test
 suite.
+
+#### Digging Deeper 🧐
+
+Why did we need the `employee_id` filter above? To explain that, let's dive deeper into the logic connecting Resources.
+
+If you hit `/api/v1/employees`, you'll see a number of
+[Links](https://www.graphiti.dev/guides/concepts/links) in the
+response. These are useful for lazy-loading, but the same logic
+applies to eager loading. Let's take a look at a Link to see how these
+Resources connect together:
+
+{% highlight ruby %}
+{
+  ...
+  relationships: {
+    positions: {
+      links: {
+        related: "http://localhost:3000/api/v1/positions?filter[employee_id]=1"
+      }
+    }
+  }
+  ...
+}
+{% endhighlight %}
+
+The salient bit: `/positions?filter[employee_id]=1`. In other words,
+fetch all Positions for the given Employee id.That means, whether we're lazy-loading data in separate requests or
+eager-loading in a single request, **the same logic fires
+under-the-hood**:
+
+{% highlight ruby %}
+PositionResource.all({
+  filter: { employee_id: 1 }
+})
+{% endhighlight %}
+
+This means we need `filter :employee_id, :integer` to satisfy the query.
+
+We can customize the logic connecting Resources in a few different
+ways. First some simple options:
+
+{% highlight ruby %}
+has_many :positions, foreign_key: :emp_id, primary_key: :eid
+{% endhighlight %}
+
+So far so good. The logic, and corresponding Link, both update as you'd
+expect (though we'd of course need a corresponding `filter
+:emp_id, :integer` on `PositionResource`).
+
+Those options are just simple versions of parameter customization.
+You can customize parameters connecting Resources with the `params` block:
+
+{% highlight ruby %}
+has_many :positions do
+  params do |hash, employees|
+    hash[:filter] # => { employee_id: employees.map(&:id) }
+    hash[:filter][:active] = true
+    hash[:sort] = '-created_at'
+  end
+end
+{% endhighlight %}
+
+Customizing these params affects the Link as well as the eager-load
+logic. Remember the parameters here should reflect the JSON:API
+specification, or anything `PositionResource.all` accepts.
+
+These are the most common options, but there's a bunch more. Check
+out the [Resource Relationships Guide]({{site.github.url}}/guides/concepts/resources#relationships) to dig even deeper.
+
+</div>
+
+<div class="clearfix">
+  <h2 id="next">
+    <a href="/tutorial/step_3">
+      NEXT - 
+      <small>Step 3: Belongs To</small>
+      &raquo;
+    </a>
+  </h2>
+</div>

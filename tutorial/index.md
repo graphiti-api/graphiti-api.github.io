@@ -2,20 +2,21 @@
 layout: page
 ---
 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55264/45711831-c87dbd80-bb58-11e8-9c67-84ba9427d60a.gif">
+</p>
+
 Tutorial
 ==========
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/55264/45711831-c87dbd80-bb58-11e8-9c67-84ba9427d60a.gif">
-</p>
+This tutorial serves as a deeper-dive into Graphiti development,
+building an Employee Directory application. We purposefully built this
+to illustrate common - but non-trivial - scenarios present in many
+applications.
 
-<br />
-
-This tutorial **reads a graph of data** and **writes a graph of data**,
-performing common operations like sorting, filtering, and nested forms.
-
-The sample applications are broken into step-by-step branches. See the diff
-of each step to see what's going on.
+A core concept of Graphiti is **Test-First** - the most pleasant way to
+develop Graphiti is by starting with an [integration test]({{site.github.url}}/guides/concepts/testing). But that can add a lot of noise to a tutorial like this. Though we'll occasionally touch on testing - and the git diffs at the top of each section contain the necessary tests - we won't test first for the purposes of this tutorial.
 
 <div class="clearfix">
 <div markdown="1" class="tutorial col-md-6">
@@ -24,21 +25,23 @@ of each step to see what's going on.
 
 [Rails Sample Application](https://github.com/graphiti-api/employee_directory)
 
-* [Step 1: Initial Resource](https://github.com/graphiti-api/employee_directory/commit/45c1c92e14fb1c3a47b8ed246ceb2cba50e97c72)
-* [Step 2: Has Many](https://github.com/graphiti-api/employee_directory/compare/step_1_employees...step_2_positions)
-* [Step 3: Belongs To](https://github.com/graphiti-api/employee_directory/compare/step_2_positions...step_3_departments)
-* [Step 4: Customizing Queries](https://github.com/graphiti-api/employee_directory/compare/step_3_departments...step_4_customizations)
-* [Step 5: Has One](https://github.com/graphiti-api/employee_directory/compare/step_4_customizations...step_5_has_one)
-* [Step 6: Customizing Writes](https://github.com/graphiti-api/employee_directory/compare/step_5_has_one...step_6_write_customization)
-* [Step 7: Many-to-Many](https://github.com/graphiti-api/employee_directory/compare/step_6_write_customization...step_7_many_to_many)
-* [Step 8: Polymorphic Relationships](https://github.com/graphiti-api/employee_directory/compare/step_7_many_to_many...step_8_polymorphic_belongs_to)
-* [Step 9: Polymorphic Resources](https://github.com/graphiti-api/employee_directory/compare/step_8_polymorphic_belongs_to...step_9_polymorphic_resource)
+* [Step 0: Bootstrapping]({{site.github.url}}/tutorial/step_0)
+* [Step 1: Initial Resource]({{site.github.url}}/tutorial/step_1)
+* [Step 2: Has Many]({{site.github.url}}/tutorial/step_2)
+* [Step 3: Belongs To]({{site.github.url}}/tutorial/step_3)
+* [Step 4: Customizing Queries]({{site.github.url}}/tutorial/step_4)
+* [Step 5: Has One]({{site.github.url}}/tutorial/step_5)
+* [Step 6: Customizing Writes]({{site.github.url}}/tutorial/step_6)
+* [Step 7: Many-to-Many]({{site.github.url}}/tutorial/step_7)
+* [Step 8: Polymorphic
+Relationships]({{site.github.url}}/tutorial/step_8)
+* [Step 9: Polymorphic Resources]({{site.github.url}}/tutorial/step_9)
 
 </div>
 
 <div markdown="1" class="tutorial col-md-6">
 
-### Client Side: VueJS
+### Client Side: VueJS (diff-only)
 
 [VueJS Sample Application](https://github.com/graphiti-api/employee-directory-vue)
 
@@ -62,7 +65,6 @@ of each step to see what's going on.
 </div>
 </div>
 
-<br />
 <br />
 <br />
 <br />

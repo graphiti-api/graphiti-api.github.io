@@ -2,14 +2,17 @@
 layout: page
 ---
 
-Tutorial
-==========
+{% include tutorial-toc.html %}
+
+<div markdown="1" class="col-md-8">
 
 ### Step 3: Belongs To
 
+> [View the Diff](https://github.com/graphiti-api/employee_directory/compare/step_2_positions...step_3_departments)
+
 We'll be adding the database table `departments`:
 
-<table class="table text-center">
+<table class="table table-small text-center">
   <thead>
     <tr>
       <th class="text-center">id</th>
@@ -35,7 +38,7 @@ We'll be adding the database table `departments`:
 We'll also be adding a `department_id:integer` foreign key column to
 the `positions` table.
 
-#### Rails
+### The Rails Stuff 🚂
 
 Generate the `Department` model:
 
@@ -87,7 +90,7 @@ departments = [engineering, safety, qa]
 end
 {% endhighlight %}
 
-Make sure to update `spec/factories/departments` with randomized
+Make sure to update `spec/factories/departments.rb` with randomized
 data. Then, since this is also a required relationship, update
 `spec/factories/positions.rb` to always seed a department when we ask to
 create a position:
@@ -101,7 +104,7 @@ factory :position do
 end
 {% endhighlight %}
 
-#### Graphiti
+### The Graphiti Stuff 🎨
 
 You should be used to this by now:
 
@@ -109,24 +112,39 @@ You should be used to this by now:
 bin/rails g graphiti:resource Department name:string
 {% endhighlight %}
 
-Add the associations
+Add the association:
 
 {% highlight ruby %}
 # app/resources/position_resource.rb
 belongs_to :department
 {% endhighlight %}
 
-{% highlight ruby %}
-# app/resources/department_resource.rb
-has_many :positions
-{% endhighlight %}
-
-Remember the relevant filter, if desired:
-
-{% highlight ruby %}
-# app/resources/position_resource.rb
-attribute :department_id, :integer, only: [:filterable]
-{% endhighlight %}
-
-And review the end of [Step 2](/tutorial/step_2) to get all your specs
+And review the end of [Step 2]({{site.github.url}}/tutorial/step_2) to get all your specs
 passing (add the department to the request payload). Practice makes perfect!
+
+#### Digging Deeper 🧐
+
+Note that we didn't need a filter like we did in step two. That's
+because the primary key connecting the Resources is `id` by
+default. In other words, the Link would be something like:
+
+{% highlight bash %}
+/departments?filter[id]=1
+{% endhighlight %}
+
+Which we get out-of-the-📦
+
+But remember, you can customize these relationships just like the
+previous `has_many` section.
+
+</div>
+
+<div class="clearfix">
+  <h2 id="next">
+    <a href="/tutorial/step_4">
+      NEXT - 
+      <small>Step 4: Customizing Queries</small>
+      &raquo;
+    </a>
+  </h2>
+</div>

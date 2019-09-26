@@ -34,9 +34,10 @@ But ideally, read everything 🙂
   * ## Getting Started
     * [Installation]({{site.github.url}}/guides/getting-started/installation)
     * [Quickstart]({{site.github.url}}/quickstart)
+    * [Tutorial]({{site.github.url}}/tutorial) (now with step-by-step write-ups 🔥!)
     * [Vandal: The Graphiti UI]({{site.github.url}}/guides/vandal)
     * [Upgrading from JSONAPI Suite]({{site.github.url}}/guides/upgrading)
-    * [Upgrading to Graphiti 1.2 🔥]({{site.github.url}}/guides/graphiti-rails-migration)
+    * [Upgrading to Graphiti 1.2]({{site.github.url}}/guides/graphiti-rails-migration)
     * [Blog]({{site.github.url}}/blog)
   * ## Concepts
     * [Resources]({{site.github.url}}/guides/concepts/resources)

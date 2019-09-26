@@ -2,14 +2,17 @@
 layout: page
 ---
 
-Tutorial
-==========
+{% include tutorial-toc.html %}
 
-### Step 1: Basic Resource
+<div markdown="1" class="col-md-8">
+
+## Step 1: Basic Resource
+
+> [View the Diff](https://github.com/graphiti-api/employee_directory/commit/45c1c92e14fb1c3a47b8ed246ceb2cba50e97c72)
 
 We'll be working with a single database table, `employees`:
 
-<table class="table">
+<table class="table table-small">
   <thead>
     <tr>
       <th>id</th>
@@ -26,29 +29,29 @@ We'll be working with a single database table, `employees`:
       <td>Homer</td>
       <td>Simpson</td>
       <td>39</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
     <tr>
       <td>2</td>
       <td>Waylon</td>
       <td>Smithers</td>
       <td>65</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
     <tr>
       <td>3</td>
       <td>Monty</td>
       <td>Burns</td>
       <td>123</td>
-      <td>2018-09-04 18:06:56</td>
-      <td>2018-09-04 18:06:56</td>
+      <td>2018-09-04</td>
+      <td>2018-09-04</td>
     </tr>
   </tbody>
 </table>
 
-#### Rails
+### The Rails Stuff 🚂
 
 Use the built-in generator to create the database table
 and corresponding `ActiveRecord` model:
@@ -77,7 +80,7 @@ Run this seed file with
 $ bin/rails db:seed
 {% endhighlight %}
 
-#### Graphiti
+### The Graphiti Stuff 🎨
 
 Just like Rails, Graphiti has built-in generators. Let's generate
 the corresponding Resource for our `Employee` model:
@@ -200,11 +203,6 @@ tutorial. For now, let's just verify our out-of-the-box defaults:
   * 5 per page, third page:
     `http://localhost:3000/api/v1/employees?page[number]=3`
 
-<!--TODO: Resource Concept Doc-->
-<!--TODO: Attribute Concept Doc-->
-<!--TODO: Endpoint Concept Doc-->
-<!--TODO: Spec Concept Doc-->
-
 Write operations are easiest to verify with integration tests, which
 were created when we generated our Resource. Let's take a look at the
 test for creating `Employee`s:
@@ -239,8 +237,6 @@ RSpec.describe "employees#create", type: :request do
   end
 end
 {% endhighlight %}
-
-<!--TODO API SPEC VS RESOURCE SPEC-->
 
 This is an **API Spec**, which tests high-level end-to-end functionality. We
 know that if our API receives a POST with the given payload, an
@@ -285,10 +281,9 @@ RSpec.describe EmployeeResource, type: :resource do
 end
 {% endhighlight %}
 
-<!--TODO: ENDPOINT VERSUS RESOURCE-->
-
 In other words: API specs test Endpoints (request, response, middleware,
 etc), Resource specs test only the Resource (actual application logic).
+Read more in our [Testing Guide]({{site.github.url}}/guides/testing).
 
 Before we run these specs, we need to edit our [factories](https://github.com/thoughtbot/factory_bot) to ensure
 dynamic, randomized data. Let's change this:
@@ -298,9 +293,9 @@ dynamic, randomized data. Let's change this:
 
 FactoryBot.define do
   factory :employee do
-    first_name "MyString"
-    last_name "MyString"
-    age 1
+    first_name { "MyString" }
+    last_name { "MyString" }
+    age { 1 }
   end
 end
 {% endhighlight %}
@@ -319,7 +314,7 @@ FactoryBot.define do
 end
 {% endhighlight %}
 
-Now undo the changes to `first_name`, and run the generated specs:
+Now undo the capitalization change to `attribute :first_name`, and run the generated specs:
 
 {% highlight bash %}
 $ bin/rspec
@@ -333,12 +328,12 @@ That leaves us with two "update" specs. These are marked pending so you
 can manage the data yourself. Follow the comments in these specs to add
 attributes and get them passing.
 
-<!--TODO TESTING GUIDE-->
+</div>
 
 <div class="clearfix">
   <h2 id="next">
     <a href="/tutorial/step_2">
-      NEXT:
+      NEXT - 
       <small>Step 2: Has Many</small>
       &raquo;
     </a>
