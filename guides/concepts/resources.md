@@ -928,6 +928,30 @@ has_many :positions,
   single: false # only allow this sideload when one employee
 {% endhighlight %}
 
+For the `readable` and `writable` flags you can pass a symbol, block, string, or boolean value. Below are some examples:
+
+{% highlight ruby %}
+# This expects the methods `user_can_read?` and `user_can_write?` to be defined on your resource. 
+# Blocks are evaluated in the context of a resource instance.
+has_many :positions,
+  readable: lambda{ user_can_read? },
+  writable: lambda{ user_can_write? }
+{% endhighlight %}
+
+{% highlight ruby %}
+# This expects the symbols to be methods defined on your resource. 
+has_many :positions,
+  readable: :user_can_read?,
+  writable: :user_can_write?
+{% endhighlight %}
+
+{% highlight ruby %}
+# This expects the strings to be methods defined on your resource. 
+has_many :positions,
+  readable: "user_can_read?",
+  writable: "user_can_write?"
+{% endhighlight %}
+
 {% include h.html tag="h5" text="5.2.1 Customizing Scope" a="customizing-scope" %}
 
 Use `params` to change the query parameters that will be passed to the
