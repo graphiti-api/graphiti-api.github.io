@@ -394,6 +394,8 @@ employee = EmployeeResource.find(id: 123)
 employee.data.first_name # => "Jane"
 {% endhighlight %}
 
+*Note*: `SomeResource.find` returns a `ResourceProxy`. To access the model/record proper you will want to make sure you call `.data` on the result of find as shown above.
+
 {% include h.html tag="h3" text="3.2 Composing with Scopes" a="composing-with-scopes" %}
 
 {% include h.html tag="h4" text="3.2.1 #base_scope" a="base-scope" %}
