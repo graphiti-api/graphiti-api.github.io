@@ -26,7 +26,7 @@ Graphiti instead approaches the problem using [positive-sum thinking](http://atu
 
 > *Positive-sum thinking is how we embrace pluralism while retaining a coherent vision and set of values...A zero-sum view would assume that apparent oppositions are fundamental, e.g., that appealing to the JS crowd inherently hurts the C++ one. A positive-sum view starts by seeing different perspectives and priorities as legitimate and worthwhile, with a faith that* **by respecting each other in this way, we can find strictly better solutions than had we optimized solely for one perspective.**
 >
-> \- ["Listening and Trust"](http://aturon.github.io/2018/06/02/listening-part-2), **Aaron Turon**
+> \- ["Listening and Trust"](http://aturon.github.io/tech/2018/06/02/listening-part-2), **Aaron Turon**
 
 GraphQL optimized around REST's shortcomings, and in doing so it dropped
 REST's advantages. There is no need for such a zero-sum tradeoff. We can take
