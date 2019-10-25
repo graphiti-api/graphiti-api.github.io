@@ -1476,13 +1476,16 @@ class PostResource < ApplicationResource
   # By default, we'd call adapter.save(model_instance)
   def save(model_instance)
     model_instance.save
+    model_instance
   end
+
 
   # This is an *override*
   # During #destroy, actually save the model instance
   # By default, we'd call adapter.destroy(model_instance)
   def delete(model_instance)
-    model.destroy
+    model_instance.destroy
+    model_instance
   end
 
   # Finally, you may want to hook around *all* the above steps:
