@@ -849,7 +849,7 @@ tired of seeing this trick performed.
 
 There's plenty more we haven't even touched on. Check out the
 [Guides]({{site.github.url}}/guides), or dive right in with the [Quickstart]({{site.github.url}}/quickstart) or [Tutorial]({{site.github.url}}/tutorial). If
-things get tricky, ask for help in our [Slack Chat](https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLWVkMDM3NTlmNTIwODY2YWFkMGNiNzUzZGMzOTY3YmNmZjBhYzIyZWZlZTk4YmI1YTI0Y2M0OTZmZGYwN2QxZjg). Reach out to me
+things get tricky, ask for help in our [Slack Chat](https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM). Reach out to me
 directly at <a href="mailto:richmolj@gmail.com">richmolj@gmail.com</a> or [@richmolj](https://twitter.com/richmolj) on Twitter.
 
 {% include h.html tag="h2" text="Addendum: Holy Shit" a="addendum" %}
