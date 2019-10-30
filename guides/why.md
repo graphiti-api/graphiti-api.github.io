@@ -11,7 +11,7 @@ Why Graphiti
 
 I've written GraphQL and had a pleasant experience. I have enormous respect for GraphQL. I also believe there is a fundamental flaw in GraphQL's design.
 
-Let's remember [why people like GraphQL](https://dev.to/smizell/why-people-like-graphql-221c) in the first place: because it addressed common frustrations with REST APIs:
+Let's remember [why people like GraphQL](https://dev.to/smizell/why-people-like-graphql-221c) in the first place - because it addressed common frustrations with REST APIs:
 
 > *[We] heard from integrators that our REST API also wasn't very flexible. It sometimes required two or three separate calls to assemble a complete view of a resource. It seemed like our responses simultaneously sent too much data and didn’t include data that consumers needed.*
 >
@@ -307,7 +307,7 @@ eager-loading**?
 
 REST doesn't have a query
 specification or built-in schema, but it does have this Resource concept. **Instead of
-thinking of a bag fields and types, what if we thought in Resources**?:
+thinking of a bag of fields and types, what if we thought in Resources**?:
 
 Resources have **Attributes**. An `Employee` has a `first_name` which is
 a `string`, an `age` which is an `integer`, and so forth.
