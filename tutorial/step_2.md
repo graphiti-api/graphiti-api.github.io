@@ -311,6 +311,7 @@ out the [Resource Relationships Guide]({{site.github.url}}/guides/concepts/resou
 
 </div>
 
+
 <div class="clearfix">
   <h2 id="next">
     <a href="/tutorial/step_3">
