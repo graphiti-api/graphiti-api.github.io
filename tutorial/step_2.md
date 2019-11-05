@@ -217,13 +217,23 @@ let(:payload) do
       attributes: { },
       relationships: {
         employee: {
-          data: employee.id.to_s,
-          type: 'employees'
+          data: {
+            id: employee.id.to_s,
+            type: 'employees'
+          }
         }
       }
     }
   }
 end
+{% endhighlight %}
+
+To ensure the `PositionResource` will process this relationship, the
+last step is to add it:
+
+{% highlight ruby %}
+# app/resources/position_resource.rb
+belongs_to :employee
 {% endhighlight %}
 
 This will associate the `Position` to the `Employee` as part of the
