@@ -372,7 +372,7 @@ the configuration of a Resource, we can **automate query and persistence
 operations**. Obviously we'll need lots of ways to customize and
 override, and support for any number of datastores and clients. But if
 we have the configuration, a defined contract for querying and
-persistence data, we can build patterns around it.
+persisting data, we can build patterns around it.
 
 There's more to this than a bunch of out-of-the-📦 standards and
 behavior. If we thought only in Fields and Types, we'd use GraphiQL to
