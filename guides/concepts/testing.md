@@ -181,7 +181,7 @@ Graphiti test generator.
 Tests are run using [JSONAPI standards](http://jsonapi.org/format/#fetching-includes). But the
 JSONAPI payload can be a pain to deal with. So, we've supplied helpers.
 
-These helpers are defined in the [Graphiti Spec Helpers](https://github.com/graphiti-api/graphiti_errors) gem.
+These helpers are defined in the [Graphiti Spec Helpers](https://github.com/graphiti-api/graphiti_spec_helpers) gem.
 
 {% include h.html tag="h3" text="2.1 #jsonapi_data" a="jsonapi-data" %}
 
