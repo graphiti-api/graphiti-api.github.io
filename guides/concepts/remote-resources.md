@@ -307,9 +307,11 @@ describe 'sideloading' do
 
     let(:api_response) do
       {
-        id: '789',
-        type: 'comments',
-        attributes: { body: 'hello' }
+        data: [{
+          id: '789',
+          type: 'comments',
+          attributes: { body: 'hello' }
+        }]
       }
     end
 
