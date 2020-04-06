@@ -283,7 +283,7 @@ end
 
 In other words: API specs test Endpoints (request, response, middleware,
 etc), Resource specs test only the Resource (actual application logic).
-Read more in our [Testing Guide]({{site.github.url}}/guides/testing).
+Read more in our [Testing Guide]({{site.github.url}}/guides/concepts/testing).
 
 Before we run these specs, we need to edit our [factories](https://github.com/thoughtbot/factory_bot) to ensure
 dynamic, randomized data. Let's change this:
