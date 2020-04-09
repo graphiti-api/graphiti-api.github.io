@@ -14,7 +14,7 @@ In the last step, we covered polymorphic relationships: a single
 relationship can point to many different Resources. Polymorphic
 Resources are the same concept, without an association: a single
 Resource can resolve to many different sub-Resources. It's a very similar
-to [Single-Table Inheritance in ActiveRecord](#TODO).
+to [Single-Table Inheritance in ActiveRecord](https://api.rubyonrails.org/classes/ActiveRecord/Inheritance.html).
 
 To illustrate this, we'll add a `tasks` table and corresponding `Task`
 superclass. Each record in this table will resolve to one of `Bug`,
