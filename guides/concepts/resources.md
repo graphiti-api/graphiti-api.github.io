@@ -629,6 +629,16 @@ end
 If a filter is marked `single: true`, we'll avoid any array parsing and
 escape the value for you, filtering on the string as given.
 
+By default a value that comes in as `null` is treated as a string `"null"`. 
+To coerce `null` to a Ruby `nil` mark the filter with `allow_nil: true`.
+This can be changed for all attributes by setting `filters_accept_nil_by_default`
+
+{% highlight ruby %}
+class PostResource < ApplicationResource
+  self.filters_accept_nil_by_default = true
+end
+{% endhighlight %}
+
 {% include h.html tag="h4" text="3.6 Statistics" a="statistics" %}
 
 Statistics are useful and common. Consider a datagrid listing posts - we might want a "Total Posts" count displayed above the grid without firing an additional request. Notably, that statistic **should** take into account filtering, but **should not** take into account pagination.
