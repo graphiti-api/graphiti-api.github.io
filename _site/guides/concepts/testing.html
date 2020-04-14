@@ -312,7 +312,7 @@ Graphiti test generator.</p>
   <p>Tests are run using <a href="http://jsonapi.org/format/#fetching-includes">JSONAPI standards</a>. But the
 JSONAPI payload can be a pain to deal with. So, we’ve supplied helpers.</p>
 
-  <p>These helpers are defined in the <a href="https://github.com/graphiti-api/graphiti_errors">Graphiti Spec Helpers</a> gem.</p>
+  <p>These helpers are defined in the <a href="https://github.com/graphiti-api/graphiti_spec_helpers">Graphiti Spec Helpers</a> gem.</p>
 
 <a class="anchor" id="jsonapi-data" />
   <a class="header" href="#jsonapi-data">
@@ -486,7 +486,7 @@ and call <code class="highlighter-rouge">to_json</code> on the payload (when app
 headers for a given request:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">jsonapi_headers</span>
-  <span class="p">{}.</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">headers</span><span class="o">|</span>
+  <span class="k">super</span><span class="p">.</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">headers</span><span class="o">|</span>
     <span class="n">headers</span><span class="p">[</span><span class="s1">'CUSTOM'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'foo'</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
