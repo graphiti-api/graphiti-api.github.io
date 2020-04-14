@@ -324,7 +324,7 @@ headers for a given request:
 
 {% highlight ruby %}
 def jsonapi_headers
-  {}.tap do |headers|
+  super.tap do |headers|
     headers['CUSTOM'] = 'foo'
   end
 end
