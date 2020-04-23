@@ -83,7 +83,7 @@ class ApplicationController < ActionController::API
   # ... code ...
 
   def show_detailed_exceptions?
-    Rails.env.staging?
+    current_user.admin?
   end
 end
 
