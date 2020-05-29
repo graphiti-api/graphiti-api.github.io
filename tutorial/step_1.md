@@ -154,7 +154,7 @@ letters:
 
 {% highlight ruby %}
 # app/resources/employee_resource.rb
-attribute :first_name do
+attribute :first_name, :string do
   # @object is your model instance
   @object.first_name.upcase
 end

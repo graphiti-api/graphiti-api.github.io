@@ -236,7 +236,7 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
 letters:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
-<span class="n">attribute</span> <span class="ss">:first_name</span> <span class="k">do</span>
+<span class="n">attribute</span> <span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:string</span> <span class="k">do</span>
   <span class="c1"># @object is your model instance</span>
   <span class="vi">@object</span><span class="p">.</span><span class="nf">first_name</span><span class="p">.</span><span class="nf">upcase</span>
 <span class="k">end</span></code></pre></figure>
