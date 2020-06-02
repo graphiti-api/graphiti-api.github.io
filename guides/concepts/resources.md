@@ -1127,7 +1127,7 @@ array. Consider this `ActiveRecord` relationship:
 {% highlight ruby %}
 # app/models/employee.rb
 has_many :positions
-has_one :current_position, -> { where(created_at: :desc) }
+has_one :current_position, -> { where(created_at: :desc) }, class_name: 'Position'
 
 Employee.includes('current_position').to_a
 
@@ -1144,7 +1144,7 @@ The same thing happens in Graphiti:
 {% highlight ruby %}
 # app/resources/employee_resource.rb
 has_many :positions
-has_one :current_position do
+has_one :current_position, resource: PositionResource do
   params do |hash|
     hash[:sort] = '-created_at'
   end
@@ -1169,7 +1169,7 @@ where a value of `1` meant "most recent":
 {% highlight ruby %}
 # app/models/employee.rb
 has_many :positions
-has_one :current_position, -> { where(historical_index: 1) }
+has_one :current_position, -> { where(historical_index: 1) }, class_name: 'Position'
 
 Employee.includes('current_position').to_a
 
