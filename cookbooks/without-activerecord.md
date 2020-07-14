@@ -95,7 +95,7 @@ ActiveRecord, we might want an `ActiveRecord::Relation` like
 mind the premise of building a hash of options and passing it off to a
 client can apply to any datastore).
 
-Finally, we're [resolving that scope](/graphiti/guides/concepts/resources#resolve),
+Finally, we're [resolving that scope]({{site.github.url}}/guides/concepts/resources#resolve),
 returning the full dataset for now. The contract of `#resolve` is to
 return an array of model instances, hence `DATA.map { |d| Post.new(d)
 }`.
@@ -210,7 +210,7 @@ end
 
 These are the overrides for persistence operations. You are encouraged
 **not** to override `create/update/destroy` directly and instead use
-[Persistence Lifecycle Hooks]({{site.github.url}}/concepts/resources#persistence-lifecycle-hooks).
+[Persistence Lifecycle Hooks]({{site.github.url}}/guides/concepts/resources#persistence-lifecycle-hooks).
 
 {% include h.html tag="h2" text="Adapters" a="adapters" %}
 
