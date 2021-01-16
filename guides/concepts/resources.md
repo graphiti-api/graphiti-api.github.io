@@ -96,7 +96,7 @@ attribute :name, :string, only: [:sortable]
 attribute :name, :string, except: [:writable]
 {% endhighlight %}
 
-The `schema` flag is not affected by `only/except` options. 
+The `schema` flag is not affected by `only/except` options.
 This option determines if the attribute is exported to the schema.json.
 
 You might want to allow behavior only if a certain condition is met.
@@ -629,7 +629,7 @@ end
 If a filter is marked `single: true`, we'll avoid any array parsing and
 escape the value for you, filtering on the string as given.
 
-By default a value that comes in as `null` is treated as a string `"null"`. 
+By default a value that comes in as `null` is treated as a string `"null"`.
 To coerce `null` to a Ruby `nil` mark the filter with `allow_nil: true`.
 This can be changed for all attributes by setting `filters_accept_nil_by_default`
 
@@ -936,30 +936,6 @@ has_many :positions,
   writable: true,
   link: self.autolink # default true
   single: false # only allow this sideload when one employee
-{% endhighlight %}
-
-For the `readable` and `writable` flags you can pass a symbol, block, string, or boolean value. Below are some examples:
-
-{% highlight ruby %}
-# This expects the methods `user_can_read?` and `user_can_write?` to be defined on your resource. 
-# Blocks are evaluated in the context of a resource instance.
-has_many :positions,
-  readable: lambda{ user_can_read? },
-  writable: lambda{ user_can_write? }
-{% endhighlight %}
-
-{% highlight ruby %}
-# This expects the symbols to be methods defined on your resource. 
-has_many :positions,
-  readable: :user_can_read?,
-  writable: :user_can_write?
-{% endhighlight %}
-
-{% highlight ruby %}
-# This expects the strings to be methods defined on your resource. 
-has_many :positions,
-  readable: "user_can_read?",
-  writable: "user_can_write?"
 {% endhighlight %}
 
 {% include h.html tag="h5" text="5.2.1 Customizing Scope" a="customizing-scope" %}

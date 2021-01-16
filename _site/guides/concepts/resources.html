@@ -1098,24 +1098,6 @@ also pass the JSONAPI type in brackets:</p>
   <span class="ss">link: </span><span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span> <span class="c1"># default true</span>
   <span class="ss">single: </span><span class="kp">false</span> <span class="c1"># only allow this sideload when one employee</span></code></pre></figure>
 
-  <p>For the <code class="highlighter-rouge">readable</code> and <code class="highlighter-rouge">writable</code> flags you can pass a symbol, block, string, or boolean value. Below are some examples:</p>
-
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># This expects the methods `user_can_read?` and `user_can_write?` to be defined on your resource. </span>
-<span class="c1"># Blocks are evaluated in the context of a resource instance.</span>
-<span class="n">has_many</span> <span class="ss">:positions</span><span class="p">,</span>
-  <span class="ss">readable: </span><span class="nb">lambda</span><span class="p">{</span> <span class="n">user_can_read?</span> <span class="p">},</span>
-  <span class="ss">writable: </span><span class="nb">lambda</span><span class="p">{</span> <span class="n">user_can_write?</span> <span class="p">}</span></code></pre></figure>
-
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># This expects the symbols to be methods defined on your resource. </span>
-<span class="n">has_many</span> <span class="ss">:positions</span><span class="p">,</span>
-  <span class="ss">readable: :user_can_read?</span><span class="p">,</span>
-  <span class="ss">writable: :user_can_write?</span></code></pre></figure>
-
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># This expects the strings to be methods defined on your resource. </span>
-<span class="n">has_many</span> <span class="ss">:positions</span><span class="p">,</span>
-  <span class="ss">readable: </span><span class="s2">"user_can_read?"</span><span class="p">,</span>
-  <span class="ss">writable: </span><span class="s2">"user_can_write?"</span></code></pre></figure>
-
 <a class="anchor" id="customizing-scope" />
   <a class="header" href="#customizing-scope">
     <h5>
