@@ -14,6 +14,7 @@ Links
   * [Autolinking](#autolinking)
   * [Endpoint Validation](#endpoint-validation)
   * [Links-On-Demand](#links-on-demand)
+  * [Pagination Links](#pagination-links)
   * [Custom Endpoint URLs](#custom-endpoint-urls)
 
 </div>
@@ -225,7 +226,28 @@ Graphiti.configure do |c|
 end
 {% endhighlight %}
 
-{% include h.html tag="h3" text="3.4 Custom Endpoint URLs" a="custom-endpoint-urls" %}
+{% include h.html tag="h3" text="3.4 Pagination Links" a="pagination-links" %}
+
+To only render pagination links when requested in the URL with `?pagination_links=true`:
+
+{% highlight ruby %}
+Graphiti.configure do |c|
+  c.pagination_links_on_demand = true
+end
+{% endhighlight %}
+
+To set pagination links by default:
+
+{% highlight ruby %}
+Graphiti.configure do |c|
+  c.pagination_links_on_demand = false
+  c.pagination_links = true
+end
+{% endhighlight %}
+
+Pagination links doesn't show up for *#show* action, unless you request with `?pagination_links=true`.
+
+{% include h.html tag="h3" text="3.5 Custom Endpoint URLs" a="custom-endpoint-urls" %}
 
 To change the URL associated with a Resource:
 

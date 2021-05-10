@@ -216,7 +216,7 @@
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:sortable</span><span class="p">]</span>
 <span class="n">attribute</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:string</span><span class="p">,</span> <span class="ss">except: </span><span class="p">[</span><span class="ss">:writable</span><span class="p">]</span></code></pre></figure>
 
-  <p>The <code class="highlighter-rouge">schema</code> flag is not affected by <code class="highlighter-rouge">only/except</code> options. 
+  <p>The <code class="highlighter-rouge">schema</code> flag is not affected by <code class="highlighter-rouge">only/except</code> options.
 This option determines if the attribute is exported to the schema.json.</p>
 
   <p>You might want to allow behavior only if a certain condition is met.
@@ -771,7 +771,7 @@ that could contain a comma.</p>
   <p>If a filter is marked <code class="highlighter-rouge">single: true</code>, we’ll avoid any array parsing and
 escape the value for you, filtering on the string as given.</p>
 
-  <p>By default a value that comes in as <code class="highlighter-rouge">null</code> is treated as a string <code class="highlighter-rouge">"null"</code>. 
+  <p>By default a value that comes in as <code class="highlighter-rouge">null</code> is treated as a string <code class="highlighter-rouge">"null"</code>.
 To coerce <code class="highlighter-rouge">null</code> to a Ruby <code class="highlighter-rouge">nil</code> mark the filter with <code class="highlighter-rouge">allow_nil: true</code>.
 This can be changed for all attributes by setting <code class="highlighter-rouge">filters_accept_nil_by_default</code></p>
 
@@ -1264,7 +1264,7 @@ array. Consider this <code class="highlighter-rouge">ActiveRecord</code> relatio
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
 <span class="n">has_many</span> <span class="ss">:positions</span>
-<span class="n">has_one</span> <span class="ss">:current_position</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">created_at: :desc</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">has_one</span> <span class="ss">:current_position</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">created_at: :desc</span><span class="p">)</span> <span class="p">},</span> <span class="ss">class_name: </span><span class="s1">'Position'</span>
 
 <span class="no">Employee</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="s1">'current_position'</span><span class="p">).</span><span class="nf">to_a</span>
 
@@ -1279,7 +1279,7 @@ occurs in ruby, not the database query.</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
 <span class="n">has_many</span> <span class="ss">:positions</span>
-<span class="n">has_one</span> <span class="ss">:current_position</span> <span class="k">do</span>
+<span class="n">has_one</span> <span class="ss">:current_position</span><span class="p">,</span> <span class="ss">resource: </span><span class="no">PositionResource</span> <span class="k">do</span>
   <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span>
     <span class="nb">hash</span><span class="p">[</span><span class="ss">:sort</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'-created_at'</span>
   <span class="k">end</span>
@@ -1302,7 +1302,7 @@ where a value of <code class="highlighter-rouge">1</code> meant “most recent�
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
 <span class="n">has_many</span> <span class="ss">:positions</span>
-<span class="n">has_one</span> <span class="ss">:current_position</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">historical_index: </span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">has_one</span> <span class="ss">:current_position</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">historical_index: </span><span class="mi">1</span><span class="p">)</span> <span class="p">},</span> <span class="ss">class_name: </span><span class="s1">'Position'</span>
 
 <span class="no">Employee</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="s1">'current_position'</span><span class="p">).</span><span class="nf">to_a</span>
 
