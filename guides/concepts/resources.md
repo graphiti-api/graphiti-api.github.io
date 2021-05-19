@@ -50,7 +50,8 @@ Resources
     * [Expanded Example](#expanded-example)
   * [Validation Errors](#validation-errors)
 * 8 [Context](#context)
-* 9 [Adapters](#adapters)
+* 9 [Concurrency](#concurrency)
+* 10 [Adapters](#adapters)
 </div>
 
 <div markdown="1" class="col-md-8">
@@ -1783,7 +1784,32 @@ Graphiti.with_context(ctx) do
 end
 {% endhighlight %}
 
-{% include h.html tag="h2" text="9 Adapters" a="adapters" %}
+{% include h.html tag="h2" text="9 Concurrency" a="concurrency" %}
+
+By default when using Rails, Graphiti will turn on concurrency when `::Rails.application.config.cache_classes` is `true` (the default for staging and production environments). This will cause sibling sideloads to load concurrently. If a `Post` is sideloading `Comments` and `Author`, we'll load both of those at the same time.
+
+You can turn on/off this behavior explicitly:
+
+{% highlight ruby %}
+ # config/intializers/graphiti.rb
+Graphiti.configure do |c|
+  c.concurrency = false
+end
+{% endhighlight %}
+
+**NOTE**: Since this kicks off a new Thread, thread locals will be dropped. So if your code refers to `Thread.current[:foo]` you should set and get that on `Graphiti.context`:
+
+{% highlight ruby %}
+ # BAD:
+Thread.current[:foo] = "bar"
+Thread.current[:foo] # => will be nil when sideloading!
+
+ # GOOD:
+Graphiti.context[:foo] = "bar"
+Graphiti.context[:foo] # => "bar", even when sideloading
+{% endhighlight %}
+
+{% include h.html tag="h2" text="10 Adapters" a="adapters" %}
 
 Common resource overrides can be packaged into an Adapter for code
 re-use. The most common example is using a different client/datastore
