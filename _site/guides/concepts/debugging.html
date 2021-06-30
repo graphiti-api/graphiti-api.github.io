@@ -94,6 +94,7 @@
       <ul>
         <li><a href="#graphiti-request">graphiti:request</a></li>
         <li><a href="#graphiti-benchmark">graphiti:benchmark</a></li>
+        <li><a href="#Authorization-headers">Authorization headers</a></li>
       </ul>
     </li>
     <li>3 <a href="#tips">Tips</a></li>
@@ -300,6 +301,20 @@ server, to eliminate the vagaries of latency. To do this:</p>
   <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rake graphiti:benchmark[/employees,100]</code></pre></figure>
 
   <p>Which will return the average response time.</p>
+
+<a class="anchor" id="Authorization-headers" />
+  <a class="header" href="#Authorization-headers">
+    <h4>
+      2.3 Authorization headers
+    </h4>
+  </a>
+
+  <p>If you have an Authorization scheme implemented (for example <a href="https://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Token.html">authenticate_or_request_with_http_token</a> in rails) you can supply the <code class="highlighter-rouge">Authorization</code> http header value with the <code class="highlighter-rouge">AUTHORIZATION_HEADER</code> environment variable:</p>
+
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">export </span><span class="nv">AUTHORIZATION_HEADER</span><span class="o">=</span><span class="s2">"Token --PRIVATE_API_KEY--"</span>
+<span class="gp">$ </span>bin/rake graphiti:request[/employees,true]</code></pre></figure>
+
+  <p>This also will work for <code class="highlighter-rouge">Basic</code> (<a href="https://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html$$">request_http_basic_authentication</a>) and <code class="highlighter-rouge">Bearer</code> values</p>
 
 <a class="anchor" id="tips" />
   <a class="header" href="#tips">

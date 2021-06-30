@@ -12,6 +12,7 @@ Debugging
 * 2 [Rake Tasks](#rake-tasks)
   * [graphiti:request](#graphiti-request)
   * [graphiti:benchmark](#graphiti-benchmark)
+  * [Authorization headers](#Authorization-headers)
 * 3 [Tips](#tips)
 
 </div>
@@ -201,6 +202,17 @@ $ bin/rake graphiti:benchmark[/employees,100]
 {% endhighlight %}
 
 Which will return the average response time.
+
+{% include h.html tag="h4" text="2.3 Authorization headers" a="Authorization-headers" %}
+
+If you have an Authorization scheme implemented (for example [authenticate_or_request_with_http_token](https://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Token.html) in rails) you can supply the `Authorization` http header value with the `AUTHORIZATION_HEADER` environment variable:
+
+{% highlight bash %}
+$ export AUTHORIZATION_HEADER="Token --PRIVATE_API_KEY--"
+$ bin/rake graphiti:request[/employees,true]
+{% endhighlight %}
+
+This also will work for `Basic` ([request_http_basic_authentication](https://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Basic.html$$)) and `Bearer` values
 
 {% include h.html tag="h2" text="3 Tips" a="tips" %}
 
