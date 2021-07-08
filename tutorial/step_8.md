@@ -71,7 +71,7 @@ Finally, make sure to edit your seed file - check out the [diff](https://github.
 ### The Graphiti Stuff 🎨
 
 {% highlight bash %}
-$ bin/rails g graphiti:resource Note body:text
+$ bin/rails g graphiti:resource Note body:string
 {% endhighlight %}
 
 Let's create our `NoteResource`:
@@ -96,11 +96,11 @@ end
 And corresponding associations:
 
 {% highlight ruby %}
-# app/models/employee.rb
+# app/resources/employee_resource.rb
 polymorphic_has_many :notes, as: :notable
-# app/models/team.rb
+# app/resources/team_resource.rb
 polymorphic_has_many :notes, as: :notable
-# app/models/department.rb
+# app/resources/department_resource.rb
 polymorphic_has_many :notes, as: :notable
 {% endhighlight %}
 
