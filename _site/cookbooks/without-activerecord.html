@@ -171,7 +171,7 @@ ActiveRecord, we might want an <code class="highlighter-rouge">ActiveRecord::Rel
 mind the premise of building a hash of options and passing it off to a
 client can apply to any datastore).</p>
 
-<p>Finally, we’re <a href="/graphiti/guides/concepts/resources#resolve">resolving that scope</a>,
+<p>Finally, we’re <a href="https://www.graphiti.dev/guides/concepts/resources#resolve">resolving that scope</a>,
 returning the full dataset for now. The contract of <code class="highlighter-rouge">#resolve</code> is to
 return an array of model instances, hence <code class="highlighter-rouge">DATA.map { |d| Post.new(d)
 }</code>.</p>
@@ -298,7 +298,7 @@ from the filter function.</p>
 
 <p>These are the overrides for persistence operations. You are encouraged
 <strong>not</strong> to override <code class="highlighter-rouge">create/update/destroy</code> directly and instead use
-<a href="https://www.graphiti.dev/concepts/resources#persistence-lifecycle-hooks">Persistence Lifecycle Hooks</a>.</p>
+<a href="https://www.graphiti.dev/guides/concepts/resources#persistence-lifecycle-hooks">Persistence Lifecycle Hooks</a>.</p>
 
 <a class="anchor" id="adapters" />
   <a class="header" href="#adapters">
