@@ -935,9 +935,12 @@ has_many :positions,
   resource: EmployeeResource,
   readable: true,
   writable: true,
-  link: self.autolink # default true
-  single: false # only allow this sideload when one employee
+  link: self.autolink, # default true
+  single: false, # only allow this sideload when one employee
+  always_include_resource_ids: false
 {% endhighlight %}
+
+*note*: Setting `always_include_resource_ids: true` could result in 1+N queries (see [#167](https://github.com/graphiti-api/graphiti/issues/167#issuecomment-686866646))
 
 {% include h.html tag="h5" text="5.2.1 Customizing Scope" a="customizing-scope" %}
 
@@ -1021,6 +1024,7 @@ Defaults to these common options:
 has_many :positions,
   foreign_key: :employee_id,
   primary_key: :id,
+  always_include_resource_ids: false,
   resource: PositionResource
 {% endhighlight %}
 
@@ -1064,6 +1068,7 @@ Defaults to these common options:
 belongs_to :employee,
   foreign_key: :employee_id,
   primary_key: :id,
+  always_include_resource_ids: false,
   resource: EmployeeResource
 {% endhighlight %}
 

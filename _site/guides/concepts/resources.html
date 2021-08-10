@@ -1096,8 +1096,11 @@ also pass the JSONAPI type in brackets:</p>
   <span class="ss">resource: </span><span class="no">EmployeeResource</span><span class="p">,</span>
   <span class="ss">readable: </span><span class="kp">true</span><span class="p">,</span>
   <span class="ss">writable: </span><span class="kp">true</span><span class="p">,</span>
-  <span class="ss">link: </span><span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span> <span class="c1"># default true</span>
-  <span class="ss">single: </span><span class="kp">false</span> <span class="c1"># only allow this sideload when one employee</span></code></pre></figure>
+  <span class="ss">link: </span><span class="nb">self</span><span class="p">.</span><span class="nf">autolink</span><span class="p">,</span> <span class="c1"># default true</span>
+  <span class="ss">single: </span><span class="kp">false</span><span class="p">,</span> <span class="c1"># only allow this sideload when one employee</span>
+  <span class="ss">always_include_resource_ids: </span><span class="kp">false</span></code></pre></figure>
+
+  <p><em>note</em>: Setting <code class="highlighter-rouge">always_include_resource_ids: true</code> could result in 1+N queries (see <a href="https://github.com/graphiti-api/graphiti/issues/167#issuecomment-686866646">#167</a>)</p>
 
 <a class="anchor" id="customizing-scope" />
   <a class="header" href="#customizing-scope">
@@ -1183,6 +1186,7 @@ care of this for you.</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span><span class="p">,</span>
   <span class="ss">foreign_key: :employee_id</span><span class="p">,</span>
   <span class="ss">primary_key: :id</span><span class="p">,</span>
+  <span class="ss">always_include_resource_ids: </span><span class="kp">false</span><span class="p">,</span>
   <span class="ss">resource: </span><span class="no">PositionResource</span></code></pre></figure>
 
   <p>Which would cause the following query when sideloading:</p>
@@ -1221,6 +1225,7 @@ would be associated with logic similar to:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">belongs_to</span> <span class="ss">:employee</span><span class="p">,</span>
   <span class="ss">foreign_key: :employee_id</span><span class="p">,</span>
   <span class="ss">primary_key: :id</span><span class="p">,</span>
+  <span class="ss">always_include_resource_ids: </span><span class="kp">false</span><span class="p">,</span>
   <span class="ss">resource: </span><span class="no">EmployeeResource</span></code></pre></figure>
 
   <p>Which would cause the following query when sideloading:</p>
