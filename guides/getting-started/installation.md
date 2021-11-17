@@ -18,10 +18,6 @@ Installation
 
 <div markdown="1" class="col-md-8">
 
-<p align="center">
-  <img width="100%" src="http://www.urbanphoto.net/blog/wp-content/uploads/2010/03/sfz1.jpg">
-</p>
-
 {% include h.html tag="h2" text="1 From Scratch" a="from-scratch" %}
 
 The easiest way to start from scratch is to use the application
