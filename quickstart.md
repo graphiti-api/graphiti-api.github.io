@@ -188,7 +188,7 @@ end
 
   * Different errors can be customized with different response codes,
   JSON, and side-effects. See more in the [Error Handling
-  Guide]({{site.github.url}}/guides/error-handling).
+  Guide]({{site.github.url}}/guides/concepts/error-handling).
 
 {% include h.html tag="h2" text="Persisting" a="persisting" %}
 
