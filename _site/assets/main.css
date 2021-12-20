@@ -12289,7 +12289,7 @@ body {
     /*font-family: 'Noto Sans', sans-serif;*/
     /*}*/ }
     body:not(.layout-home) .page-content .wrapper > div.container {
-      background: url("https://www.toptal.com/designers/subtlepatterns/patterns/classy_fabric.png");
+      background: url("https://storage.googleapis.com/subtlepatterns-production/designers/subtlepatterns/uploads/dark-honeycomb.png")
       /*background: #5c666f;*/
       border: 1px solid black;
       color: #eaeaea;
