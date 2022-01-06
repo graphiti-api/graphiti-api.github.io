@@ -1175,7 +1175,7 @@ First, **you must use [has_many :through](https://guides.rubyonrails.org/associa
 {% highlight ruby %}
 class Employee < ApplicationRecord
   has_many :team_memberships
-  has_many :teams, through :team_memberships
+  has_many :teams, through: :team_memberships
 end
 
 class TeamMembership < ApplicationRecord
