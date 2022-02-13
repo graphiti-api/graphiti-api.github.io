@@ -83,7 +83,9 @@ gem_group :test do
 end
 
 after_bundle do
+unless Rails::VERSION::MAJOR > 6
 run 'bin/spring stop'
+end
 
 git :init
 git add: '.'
