@@ -1495,7 +1495,7 @@ end
 * All hooks have `only/except` options, e.g. `before_attributes only:
 [:update]`
 * Most hooks can be called with an in-line block, or by passing a method
-name (e.g. `before_attriubtes :do_something`). The exception is
+name (e.g. `before_attributes :do_something`). The exception is
 `around_*` hooks, which *must* be called with a method name.
 
 When persisting multiple objects at once, we'll open a database
