@@ -1102,7 +1102,7 @@ an array*, and you should select the first record.
 
 {% include h.html tag="h5" text="5.5.1 Faux has_one" a="faux-has-one" %}
 
-A "Faux Has One" occurrs when there is more than one record of
+A "Faux Has One" occurs when there is more than one record of
 associated data, but we only want to return the *first* record in that
 array. Consider this `ActiveRecord` relationship:
 
