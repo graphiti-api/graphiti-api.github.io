@@ -1329,7 +1329,7 @@ Which means the following filters are required:
 {% highlight ruby %}
 class NoteResource < ApplicationResource
   attribute :notable_id, :integer, only: [:filterable]
-  attribute :notable_type, :string, only: [:filterable]
+  attribute :notable_type, :string_enum, only: [:filterable], allow: ['Employee']
   # ... code ...
 end
 {% endhighlight %}
