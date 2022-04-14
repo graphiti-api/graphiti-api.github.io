@@ -99,6 +99,7 @@
         <li><a href="#autolinking">Autolinking</a></li>
         <li><a href="#endpoint-validation">Endpoint Validation</a></li>
         <li><a href="#links-on-demand">Links-On-Demand</a></li>
+        <li><a href="#pagination-links">Pagination Links</a></li>
         <li><a href="#custom-endpoint-urls">Custom Endpoint URLs</a></li>
       </ul>
     </li>
@@ -333,10 +334,47 @@ pointing to <code class="highlighter-rouge">/posts</code> (the primary endpoint)
   <span class="n">c</span><span class="p">.</span><span class="nf">links_on_demand</span> <span class="o">=</span> <span class="kp">true</span>
 <span class="k">end</span></code></pre></figure>
 
+<a class="anchor" id="pagination-links" />
+  <a class="header" href="#pagination-links">
+    <h3>
+      3.4 Pagination Links
+    </h3>
+  </a>
+
+  <p>Requesting big collections can result into slow responses sometimes. In order to avoid this, you could use <a href="https://jsonapi.org/format/#fetching-pagination">pagination</a>. It’ll break your response into smaller pieces that will make your server responds faster. Paginations links can be present in your response in the following ways:</p>
+
+<a class="anchor" id="pagination-links-showing-by-default" />
+  <a class="header" href="#pagination-links-showing-by-default">
+    <h4>
+      3.4.1 Showing by default
+    </h4>
+  </a>
+
+  <p>With this configuration, all the responses will return the pagination links</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Graphiti</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">pagination_links</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span></code></pre></figure>
+
+<a class="anchor" id="pagination-links-when-requested" />
+  <a class="header" href="#pagination-links-when-requested">
+    <h4>
+      3.4.2 When requested
+    </h4>
+  </a>
+
+  <p>You can showing the pagination links when it was requested in the URL with <code class="highlighter-rouge">?pagination_links=true</code></p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Graphiti</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+  <span class="n">c</span><span class="p">.</span><span class="nf">pagination_links_on_demand</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span></code></pre></figure>
+
+  <p>Pagination links won’t show up for <em>#show</em> actions.</p>
+
 <a class="anchor" id="custom-endpoint-urls" />
   <a class="header" href="#custom-endpoint-urls">
     <h3>
-      3.4 Custom Endpoint URLs
+      3.5 Custom Endpoint URLs
     </h3>
   </a>
 

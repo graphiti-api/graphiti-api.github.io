@@ -14,6 +14,7 @@ Links
   * [Autolinking](#autolinking)
   * [Endpoint Validation](#endpoint-validation)
   * [Links-On-Demand](#links-on-demand)
+  * [Pagination Links](#pagination-links)
   * [Custom Endpoint URLs](#custom-endpoint-urls)
 
 </div>
@@ -225,7 +226,33 @@ Graphiti.configure do |c|
 end
 {% endhighlight %}
 
-{% include h.html tag="h3" text="3.4 Custom Endpoint URLs" a="custom-endpoint-urls" %}
+{% include h.html tag="h3" text="3.4 Pagination Links" a="pagination-links" %}
+
+Requesting big collections can result into slow responses sometimes. In order to avoid this, you could use [pagination](https://jsonapi.org/format/#fetching-pagination). It'll break your response into smaller pieces that will make your server responds faster. Paginations links can be present in your response in the following ways:
+
+{% include h.html tag="h4" text="3.4.1 Showing by default" a="pagination-links-showing-by-default" %}
+
+With this configuration, all the responses will return the pagination links
+
+{% highlight ruby %}
+Graphiti.configure do |c|
+  c.pagination_links = true
+end
+{% endhighlight %}
+
+{% include h.html tag="h4" text="3.4.2 When requested" a="pagination-links-when-requested" %}
+
+You can showing the pagination links when it was requested in the URL with `?pagination_links=true`
+
+{% highlight ruby %}
+Graphiti.configure do |c|
+  c.pagination_links_on_demand = true
+end
+{% endhighlight %}
+
+Pagination links won't show up for *#show* actions.
+
+{% include h.html tag="h3" text="3.5 Custom Endpoint URLs" a="custom-endpoint-urls" %}
 
 To change the URL associated with a Resource:
 
