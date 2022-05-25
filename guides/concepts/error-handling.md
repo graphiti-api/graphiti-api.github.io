@@ -37,7 +37,7 @@ code. For other errors, we may want to render a helpful error message:
 class ApplicationController < ActionController::API
   register_exception NotAuthorized, status: 403
   register_exception ShipmentDelayed,
-    message: ->(e) { "Contact us at 123-456-7899" }
+    detail: ->(e) { "Contact us at 123-456-7899" }
   # ... code ...
 end
 {% endhighlight %}
@@ -111,8 +111,8 @@ Additional options:
 register_exception Errors::NotAuthorized,
   status: 403,
   title: "You cannot perform this action",
-  message: true, # render the raw error message
-  message: ->(error) { "Invalid Action" } # message via proc
+  detail: :exception, # render the raw error message
+  detail: ->(error) { "Invalid Action" } # message via proc
 {% endhighlight %}
 
 [See full documentation in the RescueRegistry README](https://github.com/wagenet/rescue_registry).
@@ -130,7 +130,7 @@ end
 The final option `register_exception` accepts is `handler`. Here you can inject your own error handling class that customize `RescueRegistry::ExceptionHandler`. For example:
 
 {% highlight ruby %}
-class MyCustomHandler < GraphitiErrors::ExceptionHandler
+class MyCustomHandler < RescueRegistry::ExceptionHandler # prefer < Graphiti::Rails::ExceptionHandler if using graphiti-rails
   # self.exception accessible within all instance methods
 
   def status_code
