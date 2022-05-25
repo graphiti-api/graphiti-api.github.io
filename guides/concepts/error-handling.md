@@ -130,7 +130,7 @@ end
 The final option `register_exception` accepts is `handler`. Here you can inject your own error handling class that customize `RescueRegistry::ExceptionHandler`. For example:
 
 {% highlight ruby %}
-class MyCustomHandler < RescueRegistry::ExceptionHandler
+class MyCustomHandler < RescueRegistry::ExceptionHandler # prefer < Graphiti::Rails::ExceptionHandler if using graphiti-rails
   # self.exception accessible within all instance methods
 
   def status_code
