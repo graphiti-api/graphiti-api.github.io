@@ -113,13 +113,18 @@ end
 {% endhighlight %}
 
 When guarding the `:readable` flag, the method can optionally accept the
-model instance being serialized as an argument:
+model instance and the of the attribute being serialized as arguments:
 
 {% highlight ruby %}
 attribute :name, :string, readable: :allowed?
+attribute :age, :integer, readable: :attribute_allowed?
 
 def allowed?(model_instance)
   model_instance.internal == false
+end
+
+def attribute_allowed?(model_instance, attribute_name)
+  PolicyChecker.new(model_instance).attribute_readable?(attribute_name)
 end
 {% endhighlight %}
 
