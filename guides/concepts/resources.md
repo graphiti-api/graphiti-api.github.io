@@ -113,7 +113,7 @@ end
 {% endhighlight %}
 
 When guarding the `:readable` flag, the method can optionally accept the
-model instance and the of the attribute being serialized as arguments:
+model instance and the name of the attribute being serialized as arguments:
 
 {% highlight ruby %}
 attribute :name, :string, readable: :allowed?
@@ -140,6 +140,18 @@ self.attributes_writable_by_default = false # default true
 self.attributes_filterable_by_default = false # default true
 self.attributes_sortable_by_default = false # default true
 self.attributes_schema_by_default = false # default true
+{% endhighlight %}
+
+As for resource defined guards, you can pass a symbol to guard the
+behavior globally. This can be used to globally delegate access control to a
+dedicated system.
+
+{% highlight ruby %}
+self.attributes_readable_by_default = :attribute_readable? # default true
+
+def attribute_readable?(model_instance, attribute_name)
+  PolicyChecker.new(model_instance).attribute_readable?(attribute_name)
+end
 {% endhighlight %}
 
 {% include h.html tag="h4" text="2.3 Customizing Display" a="customizing-display" %}
