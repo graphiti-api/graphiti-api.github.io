@@ -112,10 +112,10 @@ what query functionality we have. We've listed all `Post`s at
 * **Filter**:
   * Simple:
     * URL: `/api/v1/posts?filter[title]=my title`
-    * SQL: `SELECT * FROM posts WHERE title = "My title!"`
+    * SQL: `SELECT * FROM posts WHERE lower(title) = "my title!"`
   * Case Sensitive:
     * URL: `/api/v1/posts?filter[title][eql]=My title`
-    * SQL: `SELECT * FROM posts WHERE lower(title) = "my title!"`
+    * SQL: `SELECT * FROM posts WHERE title = "My title!"`
   * Prefix:
     * URL: `/api/v1/posts?filter[title][prefix]=my`
     * SQL: `SELECT * FROM posts WHERE lower(title) LIKE 'my%'`
