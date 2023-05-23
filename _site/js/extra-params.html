@@ -126,46 +126,51 @@
 </div>
 
 <div class="col-md-8 col-md-offset-1">
-  <h3 id="sorting">Sorting</h3>
+  <h3 id="extra-params">Extra Params</h3>
 
-  <p>Use <code class="highlighter-rouge">#order()</code> to sort.</p>
+  <p>Sometimes you need to submit params that are not standard jsonapi params. One great example would be
+<code class="highlighter-rouge">https://yourdomain.com/users?debug=true</code> which is not a param for the <code class="highlighter-rouge">UserResource</code> you may have, but
+might enable functionality in your controller as needed.</p>
 
-  <p>If passed a string, it will default to <strong>ascending</strong>:</p>
+  <p>Invoking it is pretty straightforward, just invoke <code class="highlighter-rouge">extraParams</code> and pass in params and values you wish
+to add to your API call when executed.</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">(</span><span class="s2">"title"</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">YourRecord</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span></code></pre></figure>
 
-  <blockquote class="url">
-  <p>/posts?sort=title</p>
-</blockquote>
+  <p>One common way to use this globally is to put this into a base class so it can be chained as part of 
+every resource.</p>
 
-  <p>Otherwise, pass an object:</p>
-
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
-
-  <blockquote class="url">
-  <p>/posts?sort=-title</p>
-</blockquote>
-
-  <p>For multisort, simply chain multiple <code class="highlighter-rouge">#order()</code> clauses:</p>
-
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">(</span><span class="s2">"ranking"</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
-
-  <blockquote class="url">
-  <p>/posts?sort=-title,ranking</p>
-</blockquote>
-
-  <div class="clearfix">
-  <h2 id="next">
-    <a href="https://www.graphiti.dev/js/reads/pagination">
-      NEXT:
-      <small>Pagination</small>
-      &raquo;
-    </a>
-  </h2>
+  <div class="tabs">
+  <div class="tab typescript active">
+    <span>Typescript</span>
+  </div>
+  <div class="tab javascript">
+    <span>Javascript</span>
+  </div>
 </div>
+
+  <div class="code-tabs">
+
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="err">@</span><span class="nx">Model</span>
+  <span class="k">export</span> <span class="kr">class</span> <span class="nx">ApplicationRecord</span> <span class="k">extends</span> <span class="nx">SpraypaintBase</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">T</span> <span class="k">extends</span> <span class="nx">ApplicationRecord</span><span class="o">&gt;</span><span class="p">()</span><span class="err">:</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="k">as</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// unfortunately you will need to pass in the </span>
+  <span class="c1">// implementing class' type as a generic</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">UserRecord</span><span class="o">&gt;</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+  </code></pre></figure>
+
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">withDebug</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+  </code></pre></figure>
+
+  </div>
 </div>
 
         </div>
