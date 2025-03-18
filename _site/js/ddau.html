@@ -129,7 +129,7 @@
 
   <p>It’s a <a href="http://www.samselikoff.com/blog/data-down-actions-up">popular pattern</a> to pass data <strong>down</strong> to components, avoid modifying state within the component, and instead pass <strong>actions up</strong> to modify state. This can make complex applications easier to track and reason about, and you’ll see it in client-side frameworks from React to Ember.</p>
 
-  <p>To follow this pattern, use <code class="highlighter-rouge">#dup()</code> when passing down to your component:</p>
+  <p>To follow this pattern, use <code class="language-plaintext highlighter-rouge">#dup()</code> when passing down to your component:</p>
 
   <figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;my-component <span class="nv">something</span><span class="o">=</span><span class="s2">"model.dup()"</span> /&gt;</code></pre></figure>
 

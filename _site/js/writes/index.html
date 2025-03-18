@@ -127,12 +127,12 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="writes">Writes</h3>
 
-  <p>Similar to <code class="highlighter-rouge">ActiveRecord</code>, you can simply call <code class="highlighter-rouge">#save()</code> on a model
-instance. Spraypaint will <a href="http://jsonapi.org/format/#crud-creating">create</a> (<code class="highlighter-rouge">POST</code>) or <a href="http://jsonapi.org/format/#crud-updating">update</a> (<code class="highlighter-rouge">PATCH</code>) as needed.</p>
+  <p>Similar to <code class="language-plaintext highlighter-rouge">ActiveRecord</code>, you can simply call <code class="language-plaintext highlighter-rouge">#save()</code> on a model
+instance. Spraypaint will <a href="http://jsonapi.org/format/#crud-creating">create</a> (<code class="language-plaintext highlighter-rouge">POST</code>) or <a href="http://jsonapi.org/format/#crud-updating">update</a> (<code class="language-plaintext highlighter-rouge">PATCH</code>) as needed.</p>
 
-  <p><code class="highlighter-rouge">#save()</code> returns a <code class="highlighter-rouge">Promise</code> that will resolve a <code class="highlighter-rouge">boolean</code> - <code class="highlighter-rouge">true</code>
-when the server returns a 200-ish response code, <code class="highlighter-rouge">false</code> when the server
-returns a <code class="highlighter-rouge">422</code> response code (see
+  <p><code class="language-plaintext highlighter-rouge">#save()</code> returns a <code class="language-plaintext highlighter-rouge">Promise</code> that will resolve a <code class="language-plaintext highlighter-rouge">boolean</code> - <code class="language-plaintext highlighter-rouge">true</code>
+when the server returns a 200-ish response code, <code class="language-plaintext highlighter-rouge">false</code> when the server
+returns a <code class="language-plaintext highlighter-rouge">422</code> response code (see
 <a href="https://www.graphiti.dev/js/writes/validations">validations</a>). As always, anything else will
 reject the promise.</p>
 
@@ -147,24 +147,24 @@ reject the promise.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"My Blog"</span> <span class="p">})</span>
-  <span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span> <span class="c1">// POST /blogs</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">My Blog</span><span class="dl">"</span> <span class="p">})</span>
+  <span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span> <span class="c1">// POST /blogs</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
 
-  <span class="nx">blog</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"Updated Title"</span>
-  <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/:id</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
+  <span class="nx">blog</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Updated Title</span><span class="dl">"</span>
+  <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/:id</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"My Blog"</span> <span class="p">});</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">My Blog</span><span class="dl">"</span> <span class="p">});</span>
   <span class="c1">// POST /blogs</span>
-  <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// true/false</span>
+  <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// true/false</span>
 
-    <span class="nx">blog</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"Updated Title"</span><span class="err">:</span>
+    <span class="nx">blog</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Updated Title</span><span class="dl">"</span><span class="p">:</span>
     <span class="c1">// PUT /blogs/:id</span>
-    <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
+    <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true/false</span>
     <span class="p">});</span>
   <span class="p">});</span>
   </code></pre></figure>
@@ -185,14 +185,14 @@ server-assigned attributes:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">()</span>
-  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">()</span>
+  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">id</span> <span class="c1">// server-assigned value</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">createdAt</span> <span class="c1">// server-assigned value</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">();</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">();</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">id</span> <span class="c1">// server-assigned value</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">createdAt</span> <span class="c1">// server-assigned value</span>
   <span class="p">});</span>
@@ -200,8 +200,8 @@ server-assigned attributes:</p>
 
   </div>
 
-  <p>If a <code class="highlighter-rouge">Model</code> was instantiated with data from the server, <code class="highlighter-rouge">isPersisted</code>
-will return <code class="highlighter-rouge">true</code>. This means that we can assign IDs on the client
+  <p>If a <code class="language-plaintext highlighter-rouge">Model</code> was instantiated with data from the server, <code class="language-plaintext highlighter-rouge">isPersisted</code>
+will return <code class="language-plaintext highlighter-rouge">true</code>. This means that we can assign IDs on the client
 without any adverse behavior; we can also manually mark objects as
 persisted for testing purposes:</p>
 
@@ -216,35 +216,35 @@ persisted for testing purposes:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="c1">// false</span>
-  <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span> <span class="c1">// POST /blogs</span>
+  <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span> <span class="c1">// POST /blogs</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="c1">// true</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">id</span> <span class="c1">// 123</span>
 
   <span class="c1">// Manually mark an instance as persisted</span>
-  <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
+  <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">})</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="o">=</span> <span class="kc">true</span>
-  <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/123</span>
+  <span class="k">await</span> <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/123</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">});</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">});</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="c1">// false</span>
   <span class="c1">// POST /blogs</span>
-  <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="c1">// true</span>
     <span class="nx">blog</span><span class="p">.</span><span class="nx">id</span> <span class="c1">// 123</span>
   <span class="p">});</span>
 
   <span class="c1">// Manually mark an instance as persisted</span>
-  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">});</span>
+  <span class="kd">var</span> <span class="nx">blog</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Blog</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="mi">123</span> <span class="p">});</span>
   <span class="nx">blog</span><span class="p">.</span><span class="nx">isPersisted</span> <span class="o">=</span> <span class="kc">true</span>
-  <span class="nx">blog</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/123</span>
+  <span class="nx">blog</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span> <span class="c1">// PUT /blogs/123</span>
   </code></pre></figure>
 
   </div>
 
-  <p>Notably, <strong>only dirty (changed) attributes will be sent to the server</strong>. This prevents race conditions and unexpected side-effects. In the following example, <code class="highlighter-rouge">Post</code> has attributes <code class="highlighter-rouge">title</code>, <code class="highlighter-rouge">description</code>, and <code class="highlighter-rouge">createdAt</code>:</p>
+  <p>Notably, <strong>only dirty (changed) attributes will be sent to the server</strong>. This prevents race conditions and unexpected side-effects. In the following example, <code class="language-plaintext highlighter-rouge">Post</code> has attributes <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">description</code>, and <code class="language-plaintext highlighter-rouge">createdAt</code>:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -257,25 +257,25 @@ persisted for testing purposes:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">())</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"updated"</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">first</span><span class="p">())</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">updated</span><span class="dl">"</span>
   <span class="c1">// ONLY title sent to the server</span>
-  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
   <span class="c1">// Title is now synced with the server</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="s2">"updated"</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">updated</span><span class="dl">"</span>
   <span class="c1">// ONLY description sent to the server</span>
-  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Post</span><span class="p">.</span><span class="nf">first</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"updated"</span><span class="p">;</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">updated</span><span class="dl">"</span><span class="p">;</span>
     <span class="c1">// ONLY title sent to the server</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Title is now synced with the server</span>
-      <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="s2">"updated"</span><span class="p">;</span>
+      <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">updated</span><span class="dl">"</span><span class="p">;</span>
       <span class="c1">// ONLY description sent to the server</span>
-      <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+      <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">();</span>
     <span class="p">});</span>
   <span class="p">});</span>
   </code></pre></figure>

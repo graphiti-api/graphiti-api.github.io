@@ -147,35 +147,35 @@
 <span class="c1">// * ...and much more!</span>
 
 <span class="c1">// define models</span>
-<span class="err">@</span><span class="nx">Model</span><span class="p">()</span>
-<span class="kr">class</span> <span class="nx">ApplicationRecord</span> <span class="k">extends</span> <span class="nx">SpraypaintBase</span> <span class="p">{</span>
-  <span class="k">static</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s2">"http://my-api.com"</span>
-  <span class="k">static</span> <span class="nx">apiNamespace</span> <span class="o">=</span> <span class="s2">"/api/v1"</span>
+<span class="p">@</span><span class="nd">Model</span><span class="p">()</span>
+<span class="kd">class</span> <span class="nc">ApplicationRecord</span> <span class="kd">extends</span> <span class="nc">SpraypaintBase</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">http://my-api.com</span><span class="dl">"</span>
+  <span class="k">static</span> <span class="nx">apiNamespace</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/api/v1</span><span class="dl">"</span>
 <span class="p">}</span>
 
-<span class="err">@</span><span class="nx">Model</span><span class="p">()</span>
-<span class="kr">class</span> <span class="nx">Person</span> <span class="k">extends</span> <span class="nx">ApplicationRecord</span> <span class="p">{</span>
-  <span class="k">static</span> <span class="nx">jsonapiType</span> <span class="o">=</span> <span class="s2">"people"</span>
+<span class="p">@</span><span class="nd">Model</span><span class="p">()</span>
+<span class="kd">class</span> <span class="nc">Person</span> <span class="kd">extends</span> <span class="nc">ApplicationRecord</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="nx">jsonapiType</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">people</span><span class="dl">"</span>
 
-  <span class="err">@</span><span class="nx">Attr</span><span class="p">()</span> <span class="nx">firstName</span><span class="err">:</span> <span class="kr">string</span>
-  <span class="err">@</span><span class="nx">Attr</span><span class="p">()</span> <span class="nx">lastName</span><span class="err">:</span> <span class="kr">string</span>
+  <span class="p">@</span><span class="nd">Attr</span><span class="p">()</span> <span class="nx">firstName</span><span class="p">:</span> <span class="kr">string</span>
+  <span class="p">@</span><span class="nd">Attr</span><span class="p">()</span> <span class="nx">lastName</span><span class="p">:</span> <span class="kr">string</span>
 
-  <span class="nx">get</span> <span class="nx">fullName</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="p">}</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">}</span><span class="err">`</span>
+  <span class="kd">get</span> <span class="nf">fullName</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">}</span><span class="s2">`</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// execute queries</span>
 <span class="nx">Person</span>
-  <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'John'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">created_at</span><span class="p">:</span> <span class="s1">'desc'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">page</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">includes</span><span class="p">({</span> <span class="na">jobs</span><span class="p">:</span> <span class="s1">'company'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">select</span><span class="p">({</span> <span class="na">people</span><span class="p">:</span> <span class="p">[</span><span class="s1">'first_name'</span><span class="p">,</span> <span class="s1">'last_name'</span><span class="p">]</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">first_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">created_at</span><span class="p">:</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">page</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">includes</span><span class="p">({</span> <span class="na">jobs</span><span class="p">:</span> <span class="dl">'</span><span class="s1">company</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">select</span><span class="p">({</span> <span class="na">people</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">first_name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">last_name</span><span class="dl">'</span><span class="p">]</span> <span class="p">})</span>
 
 <span class="c1">// persist data</span>
-<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Jane'</span> <span class="p">})</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span> <span class="p">})</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
     </code></pre></figure>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Spraypaint is like "ActiveRecord in Javascript". It can:</span>
@@ -185,39 +185,39 @@
 <span class="c1">// * Replace *ux patterns</span>
 <span class="c1">// * ...and much more!</span>
 
-<span class="kd">var</span> <span class="nx">spnt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'spraypaint/dist/spraypaint'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">spnt</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">spraypaint/dist/spraypaint</span><span class="dl">'</span><span class="p">)</span>
 
 <span class="c1">// define models</span>
-<span class="kr">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">spnt</span><span class="p">.</span><span class="nx">JSORMBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+<span class="kd">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">spnt</span><span class="p">.</span><span class="nx">JSORMBase</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
   <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'http://my-api.com'</span><span class="p">,</span>
-    <span class="na">apiNamespace</span><span class="p">:</span> <span class="s1">'/api/v1'</span>
+    <span class="na">baseUrl</span><span class="p">:</span> <span class="dl">'</span><span class="s1">http://my-api.com</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">apiNamespace</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/api/v1</span><span class="dl">'</span>
   <span class="p">}</span>
 <span class="p">})</span>
 
-<span class="kr">const</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+<span class="kd">const</span> <span class="nx">Person</span> <span class="o">=</span> <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
   <span class="na">attrs</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">firstName</span><span class="p">:</span> <span class="nx">spnt</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-    <span class="na">lastName</span><span class="p">:</span> <span class="nx">spnt</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="nx">spnt</span><span class="p">.</span><span class="nf">attr</span><span class="p">(),</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="nx">spnt</span><span class="p">.</span><span class="nf">attr</span><span class="p">()</span>
   <span class="p">},</span>
   <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">})</span>
 
 <span class="c1">// execute queries</span>
 <span class="nx">Person</span>
-  <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">first_name</span><span class="p">:</span> <span class="s1">'John'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">created_at</span><span class="p">:</span> <span class="s1">'desc'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">page</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">includes</span><span class="p">({</span> <span class="na">jobs</span><span class="p">:</span> <span class="s1">'company'</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">select</span><span class="p">({</span> <span class="na">people</span><span class="p">:</span> <span class="p">[</span><span class="s1">'first_name'</span><span class="p">,</span> <span class="s1">'last_name'</span><span class="p">]</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">first_name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">created_at</span><span class="p">:</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">page</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">includes</span><span class="p">({</span> <span class="na">jobs</span><span class="p">:</span> <span class="dl">'</span><span class="s1">company</span><span class="dl">'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">select</span><span class="p">({</span> <span class="na">people</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">first_name</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">last_name</span><span class="dl">'</span><span class="p">]</span> <span class="p">})</span>
 
 <span class="c1">// persist data</span>
-<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Jane'</span> <span class="p">})</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span> <span class="p">})</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
     </code></pre></figure>
 
   </div>

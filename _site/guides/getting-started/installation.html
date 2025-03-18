@@ -110,14 +110,14 @@
   <p>The easiest way to start from scratch is to use the application
 template:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails new blog --api -m https://raw.githubusercontent.com/graphiti-api/graphiti_rails_template/master/all.rb</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails new blog <span class="nt">--api</span> <span class="nt">-m</span> https://raw.githubusercontent.com/graphiti-api/graphiti_rails_template/master/all.rb</code></pre></figure>
 
   <p>Alternatively, download and point to the template locally:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>curl -O https://raw.githubusercontent.com/graphiti-api/graphiti_rails_template/master/all.rb
-<span class="gp">$ </span>rails new blog --api -m all.rb</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>curl <span class="nt">-O</span> https://raw.githubusercontent.com/graphiti-api/graphiti_rails_template/master/all.rb
+<span class="nv">$ </span>rails new blog <span class="nt">--api</span> <span class="nt">-m</span> all.rb</code></pre></figure>
 
-  <p>Run <code class="highlighter-rouge">git diff</code> to see the changes to a blank Rails app.</p>
+  <p>Run <code class="language-plaintext highlighter-rouge">git diff</code> to see the changes to a blank Rails app.</p>
 
 <a class="anchor" id="adding-to-an-existing-app" />
   <a class="header" href="#adding-to-an-existing-app">
@@ -191,7 +191,7 @@ always write files manually or <a href="https://github.com/graphiti-api/graphiti
   </a>
 
   <p>Graphiti supports JSONAPI, simple JSON, and XML. You can do this
-manually when inheriting from <code class="highlighter-rouge">ActionController::Base</code></p>
+manually when inheriting from <code class="language-plaintext highlighter-rouge">ActionController::Base</code></p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">index</span>
   <span class="n">posts</span> <span class="o">=</span> <span class="no">PostResource</span><span class="p">.</span><span class="nf">all</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
@@ -203,7 +203,7 @@ manually when inheriting from <code class="highlighter-rouge">ActionController::
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>But we can inherit from <code class="highlighter-rouge">ActionController::API</code> while avoiding this
+  <p>But we can inherit from <code class="language-plaintext highlighter-rouge">ActionController::API</code> while avoiding this
 boilerplate with with the <a href="https://github.com/plataformatec/responders">Responders</a> gem:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">index</span>
@@ -221,7 +221,7 @@ boilerplate with with the <a href="https://github.com/plataformatec/responders">
 
   <blockquote>
     <p>Note: Persistence operations only support JSONAPI format, so you’ll
-still use <code class="highlighter-rouge">render jsonapi:</code> and <code class="highlighter-rouge">render jsonapi_errors:</code> for those.</p>
+still use <code class="language-plaintext highlighter-rouge">render jsonapi:</code> and <code class="language-plaintext highlighter-rouge">render jsonapi_errors:</code> for those.</p>
   </blockquote>
 
 <a class="anchor" id="graphiticfg" />
@@ -231,13 +231,13 @@ still use <code class="highlighter-rouge">render jsonapi:</code> and <code class
     </h3>
   </a>
 
-  <p>The <code class="highlighter-rouge">.graphiticfg.yml</code> file lives in the root directory of your
+  <p>The <code class="language-plaintext highlighter-rouge">.graphiticfg.yml</code> file lives in the root directory of your
 application. It holds configuration we need to reuse across a variety of
 contexts (primarily generates and rake tasks). If you use our template to create your application, it’s created for you.</p>
 
   <p>Primarily this is used to hold your “API namespace”:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash">---
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nt">---</span>
 namespace: /my_api/v1</code></pre></figure>
 
   <p>If this file doesn’t exist you may get unexpected errors - make sure to
@@ -266,7 +266,7 @@ create it!</p>
 
   <p>Bootstrap RSpec if you haven’t already:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g rspec:install</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g rspec:install</code></pre></figure>
 
   <p>Add some RSpec configuration:</p>
 
@@ -322,7 +322,7 @@ else):</p>
     </h2>
   </a>
 
-  <p>You can use Graphiti in any plain <code class="highlighter-rouge">.rb</code> file. To see this in action,
+  <p>You can use Graphiti in any plain <code class="language-plaintext highlighter-rouge">.rb</code> file. To see this in action,
 check out the <a href="https://github.com/graphiti-api/plain_ruby_example">Plain Ruby Sample App</a>.</p>
 
   <p><br />

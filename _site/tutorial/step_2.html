@@ -105,7 +105,7 @@
     <p><a href="https://github.com/graphiti-api/employee_directory/compare/step_1_employees...step_2_positions">View the Code</a></p>
   </blockquote>
 
-  <p>We’ll be adding the database table <code class="highlighter-rouge">positions</code>:</p>
+  <p>We’ll be adding the database table <code class="language-plaintext highlighter-rouge">positions</code>:</p>
 
   <table class="table table-small text-center">
   <thead>
@@ -151,17 +151,17 @@
 </table>
 
   <p>Because this table tracks all historical positions, we have the
-<code class="highlighter-rouge">historical_index</code> column. This tells the order the employee moved
-through each position, where <code class="highlighter-rouge">1</code> is most recent.</p>
+<code class="language-plaintext highlighter-rouge">historical_index</code> column. This tells the order the employee moved
+through each position, where <code class="language-plaintext highlighter-rouge">1</code> is most recent.</p>
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <p>Generate the <code class="highlighter-rouge">Position</code> model:</p>
+  <p>Generate the <code class="language-plaintext highlighter-rouge">Position</code> model:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g model Position title:string active:boolean historical_index:integer employee:belongs_to
-<span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g model Position title:string active:boolean historical_index:integer employee:belongs_to
+<span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
-  <p>Update the <code class="highlighter-rouge">Employee</code> model with the association, too:</p>
+  <p>Update the <code class="language-plaintext highlighter-rouge">Employee</code> model with the association, too:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
 <span class="n">has_many</span> <span class="ss">:positions</span></code></pre></figure>
@@ -174,23 +174,23 @@ through each position, where <code class="highlighter-rouge">1</code> is most re
 <span class="mi">100</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
   <span class="n">employee</span> <span class="o">=</span> <span class="no">Employee</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">first_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span><span class="p">,</span>
     <span class="ss">last_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span><span class="p">,</span>
-    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="nf">.</span><span class="mi">80</span><span class="p">)</span>
+    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="o">..</span><span class="mi">80</span><span class="p">)</span>
 
-  <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
     <span class="n">employee</span><span class="p">.</span><span class="nf">positions</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">title: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span>
       <span class="ss">historical_index: </span><span class="n">i</span><span class="p">,</span>
       <span class="ss">active: </span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails db:seed</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails db:seed</code></pre></figure>
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
   <p>Let’s start by running the same command as before to create
-<code class="highlighter-rouge">PositionResource</code>:</p>
+<code class="language-plaintext highlighter-rouge">PositionResource</code>:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Position title:string active:boolean</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Position title:string active:boolean</code></pre></figure>
 
   <p>We’ll need to add the association, just like ActiveRecord:</p>
 
@@ -202,14 +202,14 @@ through each position, where <code class="highlighter-rouge">1</code> is most re
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/position_resource.rb</span>
 <span class="n">filter</span> <span class="ss">:employee_id</span><span class="p">,</span> <span class="ss">:integer</span></code></pre></figure>
 
-  <p>If you visit <code class="highlighter-rouge">/api/v1/employees</code>, you’ll see a number of HTTP
+  <p>If you visit <code class="language-plaintext highlighter-rouge">/api/v1/employees</code>, you’ll see a number of HTTP
 <a href="https://www.graphiti.dev/guides/concepts/links">Links</a>
 that allow lazy-loading positions. Or, if you visit
-<code class="highlighter-rouge">/api/v1/employees?include=positions</code>, you’ll load the employees and
+<code class="language-plaintext highlighter-rouge">/api/v1/employees?include=positions</code>, you’ll load the employees and
 positions in a single request. We’ll dig a bit deeper into this logic
 in the section below.</p>
 
-  <p>Before we get there, let’s revisit the <code class="highlighter-rouge">historical_index</code> column. For now, let’s
+  <p>Before we get there, let’s revisit the <code class="language-plaintext highlighter-rouge">historical_index</code> column. For now, let’s
 treat this as an implementation detail that the API should not expose -
 let’s say we want to support sorting on this attribute but nothing else:</p>
 
@@ -217,19 +217,19 @@ let’s say we want to support sorting on this attribute but nothing else:</p>
 
   <p>We’re almost done, but if you run your tests you’ll see two outstanding
 errors. This is because <a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 belongs_to associations are required by
-default</a>. We can’t save a <code class="highlighter-rouge">Position</code> without its corresponding <code class="highlighter-rouge">Employee</code>.</p>
+default</a>. We can’t save a <code class="language-plaintext highlighter-rouge">Position</code> without its corresponding <code class="language-plaintext highlighter-rouge">Employee</code>.</p>
 
   <p>We can solve this in three ways:</p>
 
   <ul>
     <li>Turn this off globally, with <a href="https://edgeguides.rubyonrails.org/configuring.html#configuring-active-record">config.active_record.belongs_to_required_by_default</a>. You may want to do this in test-mode only.</li>
-    <li>Turn this off for the specific association: <code class="highlighter-rouge">belongs_to :employee,
+    <li>Turn this off for the specific association: <code class="language-plaintext highlighter-rouge">belongs_to :employee,
 optional: true</code>.</li>
-    <li>Associate an <code class="highlighter-rouge">Employee</code> as part of the API request.</li>
+    <li>Associate an <code class="language-plaintext highlighter-rouge">Employee</code> as part of the API request.</li>
   </ul>
 
   <p>We’ll take for the last option. Look at
-<code class="highlighter-rouge">spec/resources/position/writes_spec.rb</code>:</p>
+<code class="language-plaintext highlighter-rouge">spec/resources/position/writes_spec.rb</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">PositionResource</span><span class="p">,</span> <span class="ss">type: :resource</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'creating'</span> <span class="k">do</span>
@@ -254,7 +254,7 @@ optional: true</code>.</li>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>When running our tests, let’s make sure the <code class="highlighter-rouge">historical_index</code> column
+  <p>When running our tests, let’s make sure the <code class="language-plaintext highlighter-rouge">historical_index</code> column
 reflects the order we created the positions. This code recalculates
 everything after a record is saved:</p>
 
@@ -278,11 +278,11 @@ everything after a record is saved:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Let’s associate an <code class="highlighter-rouge">Employee</code>. Start by seeding the data:</p>
+  <p>Let’s associate an <code class="language-plaintext highlighter-rouge">Employee</code>. Start by seeding the data:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">let!</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">{</span> <span class="n">create</span><span class="p">(</span><span class="ss">:employee</span><span class="p">)</span> <span class="p">}</span></code></pre></figure>
 
-  <p>And associate via <code class="highlighter-rouge">relationships</code>:</p>
+  <p>And associate via <code class="language-plaintext highlighter-rouge">relationships</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="k">do</span>
   <span class="p">{</span>
@@ -301,40 +301,40 @@ everything after a record is saved:</p>
   <span class="p">}</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>To ensure the <code class="highlighter-rouge">PositionResource</code> will process this relationship, the
+  <p>To ensure the <code class="language-plaintext highlighter-rouge">PositionResource</code> will process this relationship, the
 last step is to add it:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/position_resource.rb</span>
 <span class="n">belongs_to</span> <span class="ss">:employee</span></code></pre></figure>
 
-  <p>This will associate the <code class="highlighter-rouge">Position</code> to the <code class="highlighter-rouge">Employee</code> as part of the
+  <p>This will associate the <code class="language-plaintext highlighter-rouge">Position</code> to the <code class="language-plaintext highlighter-rouge">Employee</code> as part of the
 creation process. The test should now pass - make the same change to
-<code class="highlighter-rouge">spec/api/v1/positions/create_spec.rb</code> to get a fully-passing test
+<code class="language-plaintext highlighter-rouge">spec/api/v1/positions/create_spec.rb</code> to get a fully-passing test
 suite.</p>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
-  <p>Why did we need the <code class="highlighter-rouge">employee_id</code> filter above? To explain that, let’s dive deeper into the logic connecting Resources.</p>
+  <p>Why did we need the <code class="language-plaintext highlighter-rouge">employee_id</code> filter above? To explain that, let’s dive deeper into the logic connecting Resources.</p>
 
-  <p>If you hit <code class="highlighter-rouge">/api/v1/employees</code>, you’ll see a number of
+  <p>If you hit <code class="language-plaintext highlighter-rouge">/api/v1/employees</code>, you’ll see a number of
 <a href="https://www.graphiti.dev/guides/concepts/links">Links</a> in the
 response. These are useful for lazy-loading, but the same logic
 applies to eager loading. Let’s take a look at a Link to see how these
 Resources connect together:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span>
-  <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
-  <span class="nf">relationships</span><span class="p">:</span> <span class="p">{</span>
+  <span class="o">...</span>
+  <span class="ss">relationships: </span><span class="p">{</span>
     <span class="ss">positions: </span><span class="p">{</span>
       <span class="ss">links: </span><span class="p">{</span>
         <span class="ss">related: </span><span class="s2">"http://localhost:3000/api/v1/positions?filter[employee_id]=1"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">}</span>
-  <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
+  <span class="o">...</span>
 <span class="p">}</span></code></pre></figure>
 
-  <p>The salient bit: <code class="highlighter-rouge">/positions?filter[employee_id]=1</code>. In other words,
+  <p>The salient bit: <code class="language-plaintext highlighter-rouge">/positions?filter[employee_id]=1</code>. In other words,
 fetch all Positions for the given Employee id.That means, whether we’re lazy-loading data in separate requests or
 eager-loading in a single request, <strong>the same logic fires
 under-the-hood</strong>:</p>
@@ -343,7 +343,7 @@ under-the-hood</strong>:</p>
   <span class="ss">filter: </span><span class="p">{</span> <span class="ss">employee_id: </span><span class="mi">1</span> <span class="p">}</span>
 <span class="p">})</span></code></pre></figure>
 
-  <p>This means we need <code class="highlighter-rouge">filter :employee_id, :integer</code> to satisfy the query.</p>
+  <p>This means we need <code class="language-plaintext highlighter-rouge">filter :employee_id, :integer</code> to satisfy the query.</p>
 
   <p>We can customize the logic connecting Resources in a few different
 ways. First some simple options:</p>
@@ -351,11 +351,11 @@ ways. First some simple options:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span><span class="p">,</span> <span class="ss">foreign_key: :emp_id</span><span class="p">,</span> <span class="ss">primary_key: :eid</span></code></pre></figure>
 
   <p>So far so good. The logic, and corresponding Link, both update as you’d
-expect (though we’d of course need a corresponding <code class="highlighter-rouge">filter
-:emp_id, :integer</code> on <code class="highlighter-rouge">PositionResource</code>).</p>
+expect (though we’d of course need a corresponding <code class="language-plaintext highlighter-rouge">filter
+:emp_id, :integer</code> on <code class="language-plaintext highlighter-rouge">PositionResource</code>).</p>
 
   <p>Those options are just simple versions of parameter customization.
-You can customize parameters connecting Resources with the <code class="highlighter-rouge">params</code> block:</p>
+You can customize parameters connecting Resources with the <code class="language-plaintext highlighter-rouge">params</code> block:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:positions</span> <span class="k">do</span>
   <span class="n">params</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span> <span class="n">employees</span><span class="o">|</span>
@@ -367,7 +367,7 @@ You can customize parameters connecting Resources with the <code class="highligh
 
   <p>Customizing these params affects the Link as well as the eager-load
 logic. Remember the parameters here should reflect the JSON:API
-specification, or anything <code class="highlighter-rouge">PositionResource.all</code> accepts.</p>
+specification, or anything <code class="language-plaintext highlighter-rouge">PositionResource.all</code> accepts.</p>
 
   <p>These are the most common options, but there’s a bunch more. Check
 out the <a href="https://www.graphiti.dev/guides/concepts/resources#relationships">Resource Relationships Guide</a> to dig even deeper.</p>

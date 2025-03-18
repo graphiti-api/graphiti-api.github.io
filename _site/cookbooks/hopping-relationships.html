@@ -87,12 +87,12 @@
 </blockquote>
 
 <p>Our <a href="https://github.com/graphiti-api/employee_directory">sample application</a>
-has the setup <code class="highlighter-rouge">Employee &gt; Position &gt; Department</code>, where one of the
-positions is the <code class="highlighter-rouge">current_position</code>. What if we wanted to change this to
-<code class="highlighter-rouge">Employee &gt; Department</code>, hiding everything about positions
+has the setup <code class="language-plaintext highlighter-rouge">Employee &gt; Position &gt; Department</code>, where one of the
+positions is the <code class="language-plaintext highlighter-rouge">current_position</code>. What if we wanted to change this to
+<code class="language-plaintext highlighter-rouge">Employee &gt; Department</code>, hiding everything about positions
 under-the-hood?</p>
 
-<p>Let’s start by saying an <code class="highlighter-rouge">Employee</code> has many <code class="highlighter-rouge">Department</code>s. Here’s the
+<p>Let’s start by saying an <code class="language-plaintext highlighter-rouge">Employee</code> has many <code class="language-plaintext highlighter-rouge">Department</code>s. Here’s the
 spec:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'sideloading'</span> <span class="k">do</span>
@@ -135,10 +135,10 @@ spec:</p>
 <figure class="highlight"><pre><code class="language-error" data-lang="error">Graphiti::Errors::AttributeError:
   DepartmentResource: Tried to filter on attribute :employee_id, but could not find an attribute with that name.</code></pre></figure>
 
-<p>Which makes sense - if this is a <code class="highlighter-rouge">has_many</code> association, we’d expect
-DepartmentResource to filter by <code class="highlighter-rouge">employee_id</code>. Though in our case we
+<p>Which makes sense - if this is a <code class="language-plaintext highlighter-rouge">has_many</code> association, we’d expect
+DepartmentResource to filter by <code class="language-plaintext highlighter-rouge">employee_id</code>. Though in our case we
 don’t have that as a foreign key, we can still implement the
-<code class="highlighter-rouge">employee_id</code> filter:</p>
+<code class="language-plaintext highlighter-rouge">employee_id</code> filter:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">filter</span> <span class="ss">:employee_id</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:eq</span><span class="p">]</span> <span class="k">do</span>
   <span class="n">eq</span> <span class="k">do</span> <span class="o">|</span><span class="n">scope</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
@@ -146,20 +146,20 @@ don’t have that as a foreign key, we can still implement the
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>In order to find <code class="highlighter-rouge">Department</code>s by an <code class="highlighter-rouge">employee_id</code>, we need to join the
-<code class="highlighter-rouge">positions</code> table which has the <code class="highlighter-rouge">employee_id</code> column.</p>
+<p>In order to find <code class="language-plaintext highlighter-rouge">Department</code>s by an <code class="language-plaintext highlighter-rouge">employee_id</code>, we need to join the
+<code class="language-plaintext highlighter-rouge">positions</code> table which has the <code class="language-plaintext highlighter-rouge">employee_id</code> column.</p>
 
 <p>We now get this error:</p>
 
 <figure class="highlight"><pre><code class="language-error" data-lang="error">NoMethodError:
   undefined method `employee_id' for #&lt;Department:0x00007fa6f330f768&gt;</code></pre></figure>
 
-<p>Let’s say our URL is <code class="highlighter-rouge">/employees?include=departments</code>. We’ve fetched all
-the <code class="highlighter-rouge">Employee</code>s and all the <code class="highlighter-rouge">Department</code>s, now we need to associate each
-<code class="highlighter-rouge">Department</code> with its relevant <code class="highlighter-rouge">Employee</code>. Normally we’d do that by
-looking at the <code class="highlighter-rouge">employee_id</code> foreign key on <code class="highlighter-rouge">Department</code>, but this
+<p>Let’s say our URL is <code class="language-plaintext highlighter-rouge">/employees?include=departments</code>. We’ve fetched all
+the <code class="language-plaintext highlighter-rouge">Employee</code>s and all the <code class="language-plaintext highlighter-rouge">Department</code>s, now we need to associate each
+<code class="language-plaintext highlighter-rouge">Department</code> with its relevant <code class="language-plaintext highlighter-rouge">Employee</code>. Normally we’d do that by
+looking at the <code class="language-plaintext highlighter-rouge">employee_id</code> foreign key on <code class="language-plaintext highlighter-rouge">Department</code>, but this
 scenario has non-standard logic. Let’s tell Graphiti how to select
-relevant <code class="highlighter-rouge">Department</code>s for a given <code class="highlighter-rouge">Employee</code>:</p>
+relevant <code class="language-plaintext highlighter-rouge">Department</code>s for a given <code class="language-plaintext highlighter-rouge">Employee</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:departments</span> <span class="k">do</span>
   <span class="n">assign_each</span> <span class="k">do</span> <span class="o">|</span><span class="n">employee</span><span class="p">,</span> <span class="n">departments</span><span class="o">|</span>
@@ -174,30 +174,30 @@ relevant <code class="highlighter-rouge">Department</code>s for a given <code cl
 employee, we have to make sure that accessor exists:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
-<span class="kp">attr_accessor</span> <span class="ss">:department</span></code></pre></figure>
+<span class="nb">attr_accessor</span> <span class="ss">:department</span></code></pre></figure>
 
 <p>And that’s it! Our test now passes.</p>
 
 <p>There’s a little bit of sleight-of-hand above though. Our filter joins
-to the <code class="highlighter-rouge">positions</code> table, and our assignment iterates over departments
-and calls <code class="highlighter-rouge">department.positions</code>. <strong>If we don’t eager load, we’ll cause
+to the <code class="language-plaintext highlighter-rouge">positions</code> table, and our assignment iterates over departments
+and calls <code class="language-plaintext highlighter-rouge">department.positions</code>. <strong>If we don’t eager load, we’ll cause
 an N+!</strong>!</p>
 
-<p>There are two solutions to this. The first is to simple change <code class="highlighter-rouge">.joins</code>
-to <code class="highlighter-rouge">.eager_load</code>:</p>
+<p>There are two solutions to this. The first is to simple change <code class="language-plaintext highlighter-rouge">.joins</code>
+to <code class="language-plaintext highlighter-rouge">.eager_load</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">scope</span><span class="p">.</span><span class="nf">eager_load</span><span class="p">(</span><span class="ss">:positions</span><span class="p">).</span><span class="nf">merge</span><span class="p">(</span><span class="no">Position</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="ss">employee_id: </span><span class="n">value</span><span class="p">))</span></code></pre></figure>
 
-<p>This ensures that not only are we joining on the <code class="highlighter-rouge">positions</code> table,
-we’ll eagler load the <code class="highlighter-rouge">positions</code> <em>relationship</em> and avoid the N+1.</p>
+<p>This ensures that not only are we joining on the <code class="language-plaintext highlighter-rouge">positions</code> table,
+we’ll eagler load the <code class="language-plaintext highlighter-rouge">positions</code> <em>relationship</em> and avoid the N+1.</p>
 
 <p>If you’re a stickler, though, you may have a nitpick. For one, if
-we’re hitting <code class="highlighter-rouge">/departments?filter[employee_id]</code> directly there is no
-need to eager load <code class="highlighter-rouge">positions</code> because we’re never associating to an
-<code class="highlighter-rouge">Employee</code>. We’re paying a performance penalty when we don’t have to.</p>
+we’re hitting <code class="language-plaintext highlighter-rouge">/departments?filter[employee_id]</code> directly there is no
+need to eager load <code class="language-plaintext highlighter-rouge">positions</code> because we’re never associating to an
+<code class="language-plaintext highlighter-rouge">Employee</code>. We’re paying a performance penalty when we don’t have to.</p>
 
-<p>OK, let’s keep our filter <code class="highlighter-rouge">.joins</code>. We just have to tell Graphiti to
-switch it to <code class="highlighter-rouge">.eager_load</code> when sideloading through <code class="highlighter-rouge">EmployeeResource</code>:</p>
+<p>OK, let’s keep our filter <code class="language-plaintext highlighter-rouge">.joins</code>. We just have to tell Graphiti to
+switch it to <code class="language-plaintext highlighter-rouge">.eager_load</code> when sideloading through <code class="language-plaintext highlighter-rouge">EmployeeResource</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">has_many</span> <span class="ss">:departments</span> <span class="k">do</span>
   <span class="c1"># ... code ...</span>
@@ -207,18 +207,18 @@ switch it to <code class="highlighter-rouge">.eager_load</code> when sideloading
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>The <code class="highlighter-rouge">pre_load</code> hook fires after we’ve built up the scope, but before we
-resolve it (before actually firing the query). It yields a <code class="highlighter-rouge">proxy</code>
+<p>The <code class="language-plaintext highlighter-rouge">pre_load</code> hook fires after we’ve built up the scope, but before we
+resolve it (before actually firing the query). It yields a <code class="language-plaintext highlighter-rouge">proxy</code>
 object that we can modify - here we’re modifying the scope to eager load
 positions.</p>
 
 <p>It’s up to you if you care about this scenario - you may want to start
-with <code class="highlighter-rouge">.eager_load</code> and only embrace to the extra work of <code class="highlighter-rouge">pre_load</code> when
+with <code class="language-plaintext highlighter-rouge">.eager_load</code> and only embrace to the extra work of <code class="language-plaintext highlighter-rouge">pre_load</code> when
 you really need it.</p>
 
 <p>The trick to these customizations is to think in Links. Resources
 connect to each other with URLs - what would the query parameters of the
-URL be? In this case, <code class="highlighter-rouge">filter?[employee_id]=123</code>. After that, we just
+URL be? In this case, <code class="language-plaintext highlighter-rouge">filter?[employee_id]=123</code>. After that, we just
 have to define how to associate relevant objects. Even with complex
 associations hopping several levels, the same logic applies.</p>
 

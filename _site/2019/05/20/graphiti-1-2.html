@@ -89,19 +89,19 @@ foundation for the codebase moving forward.</p>
 
 <p>You’ll be especially happy about this release if you’ve ever tried to
 add error-handling middleware. Because prior versions of Graphiti used
-<code class="highlighter-rouge">rescue_from</code> in <code class="highlighter-rouge">ApplicationController</code>, we intercepted errors before
+<code class="language-plaintext highlighter-rouge">rescue_from</code> in <code class="language-plaintext highlighter-rouge">ApplicationController</code>, we intercepted errors before
 other middleware had access to them. Now everything just works.</p>
 
-<p>As part of this upgrade, we’re switching from <code class="highlighter-rouge">GraphitiErrors</code> to
+<p>As part of this upgrade, we’re switching from <code class="language-plaintext highlighter-rouge">GraphitiErrors</code> to
 <a href="https://github.com/wagenet/rescue_registry">RescueRegistry</a>. Think of
-<code class="highlighter-rouge">RescueRegistry</code> as a well-refactored version of <code class="highlighter-rouge">GraphitiErrors</code>, available to
+<code class="language-plaintext highlighter-rouge">RescueRegistry</code> as a well-refactored version of <code class="language-plaintext highlighter-rouge">GraphitiErrors</code>, available to
 even non-Graphiti developers.</p>
 
-<p>Though you don’t have to do anything to upgrade to Graphiti 1.2, this release will start throwing deprecation notices around <code class="highlighter-rouge">ApplicationController</code>. Don’t worry, the required changes are quite minor and spelled out in the <a href="https://www.graphiti.dev/guides/graphiti-rails-migration">graphiti-rails migration guide</a>.</p>
+<p>Though you don’t have to do anything to upgrade to Graphiti 1.2, this release will start throwing deprecation notices around <code class="language-plaintext highlighter-rouge">ApplicationController</code>. Don’t worry, the required changes are quite minor and spelled out in the <a href="https://www.graphiti.dev/guides/graphiti-rails-migration">graphiti-rails migration guide</a>.</p>
 
 <p>I’m quite happy with how this effort turned out. This release dramatically improves our integration with Rails internals, and I think everyone involved learned a lot. I’m honored to work with such talented developers in our open-source community ❤️</p>
 
-<p>If you have any further questions, check out the <code class="highlighter-rouge">#dev</code> or <code class="highlighter-rouge">#rails</code>
+<p>If you have any further questions, check out the <code class="language-plaintext highlighter-rouge">#dev</code> or <code class="language-plaintext highlighter-rouge">#rails</code>
 channels in our <a href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM">Slack Chat</a></p>
 
 <p><br />

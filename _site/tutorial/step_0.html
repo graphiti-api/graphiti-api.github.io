@@ -109,30 +109,30 @@
 project, check out <a href="https://www.graphiti.dev/guides/getting-started/installation">Installation: From
 Scratch</a>.</p>
 
-  <p>We’ll use the <code class="highlighter-rouge">-m</code> option to install from a template, which will add a few gems and apply some setup boilerplate. Accept all the default options.</p>
+  <p>We’ll use the <code class="language-plaintext highlighter-rouge">-m</code> option to install from a template, which will add a few gems and apply some setup boilerplate. Accept all the default options.</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails new employee_directory --api -m https://www.graphiti.dev/template
-<span class="gp">$ </span><span class="nb">cd </span>employee_directory</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails new employee_directory <span class="nt">--api</span> <span class="nt">-m</span> https://www.graphiti.dev/template
+<span class="nv">$ </span><span class="nb">cd </span>employee_directory</code></pre></figure>
 
   <blockquote>
-    <p>Note: if a network issue prevents you from pointing to this URL directly, you can download the file and and run this command as <code class="highlighter-rouge">-m /path/to/template</code></p>
+    <p>Note: if a network issue prevents you from pointing to this URL directly, you can download the file and and run this command as <code class="language-plaintext highlighter-rouge">-m /path/to/template</code></p>
   </blockquote>
 
-  <p>Feel free to run <code class="highlighter-rouge">git diff</code> to see what the generator did, otherwise commit the result. You can now head to <a href="https://www.graphiti.dev/tutorial/step_1">Step 1: Basic Resource</a>, or continue reading to better understand the code.</p>
+  <p>Feel free to run <code class="language-plaintext highlighter-rouge">git diff</code> to see what the generator did, otherwise commit the result. You can now head to <a href="https://www.graphiti.dev/tutorial/step_1">Step 1: Basic Resource</a>, or continue reading to better understand the code.</p>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
-  <p>You’ll see some boilerplate in <code class="highlighter-rouge">config/routes.rb</code>:</p>
+  <p>You’ll see some boilerplate in <code class="language-plaintext highlighter-rouge">config/routes.rb</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">scope</span> <span class="ss">path: </span><span class="no">ApplicationResource</span><span class="p">.</span><span class="nf">endpoint_namespace</span><span class="p">,</span> <span class="ss">defaults: </span><span class="p">{</span> <span class="ss">format: :jsonapi</span> <span class="p">}</span> <span class="k">do</span>
   <span class="c1"># your routes go here</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>This tells Rails that our API routes will be be prefixed - <code class="highlighter-rouge">/api/v1</code> by default. It also
-says that if no extension is in the URL (<code class="highlighter-rouge">.json</code>, <code class="highlighter-rouge">.xml</code>, etc), default
+  <p>This tells Rails that our API routes will be be prefixed - <code class="language-plaintext highlighter-rouge">/api/v1</code> by default. It also
+says that if no extension is in the URL (<code class="language-plaintext highlighter-rouge">.json</code>, <code class="language-plaintext highlighter-rouge">.xml</code>, etc), default
 to the <a href="http://jsonapi.org">JSONAPI Specification</a>.</p>
 
-  <p>Let’s look at the above <code class="highlighter-rouge">ApplicationResource</code>:</p>
+  <p>Let’s look at the above <code class="language-plaintext highlighter-rouge">ApplicationResource</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationResource</span> <span class="o">&lt;</span> <span class="no">Graphiti</span><span class="o">::</span><span class="no">Resource</span>
   <span class="nb">self</span><span class="p">.</span><span class="nf">abstract_class</span> <span class="o">=</span> <span class="kp">true</span>
@@ -151,7 +151,7 @@ to the <a href="http://jsonapi.org">JSONAPI Specification</a>.</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">self</span><span class="p">.</span><span class="nf">base_url</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">routes</span>
   <span class="p">.</span><span class="nf">default_url_options</span><span class="p">[</span><span class="ss">:host</span><span class="p">]</span></code></pre></figure>
 
-  <p>This is configured in <code class="highlighter-rouge">config/application.rb</code>:</p>
+  <p>This is configured in <code class="language-plaintext highlighter-rouge">config/application.rb</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">module</span> <span class="nn">EmployeeDirectory</span>
   <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
@@ -160,9 +160,9 @@ to the <a href="http://jsonapi.org">JSONAPI Specification</a>.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>When deriving and validating <a href="https://www.graphiti.dev/guides/links">Links</a>, we’ll use the <code class="highlighter-rouge">HOST</code> variable if
+  <p>When deriving and validating <a href="https://www.graphiti.dev/guides/links">Links</a>, we’ll use the <code class="language-plaintext highlighter-rouge">HOST</code> variable if
 present, falling back to the Rails development default of
-<code class="highlighter-rouge">http://localhost:3000</code>. This means our Links will look like:</p>
+<code class="language-plaintext highlighter-rouge">http://localhost:3000</code>. This means our Links will look like:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="s2">"</span><span class="si">#{</span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HOST'</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">ApplicationRecord</span><span class="p">.</span><span class="nf">endpoint_namespace</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="no">Resource</span><span class="p">.</span><span class="nf">type</span><span class="si">}</span><span class="s2">"</span></code></pre></figure>
 
@@ -172,14 +172,14 @@ present, falling back to the Rails development default of
 
   <p>Read more in the <a href="https://www.graphiti.dev/guides/links">Links Guide</a>.</p>
 
-  <p>Finally, there’s some boilerplate in <code class="highlighter-rouge">ApplicationController</code>:</p>
+  <p>Finally, there’s some boilerplate in <code class="language-plaintext highlighter-rouge">ApplicationController</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">API</span>
   <span class="c1"># Support JSON, XML, JSON:API</span>
   <span class="kp">include</span> <span class="no">Graphiti</span><span class="o">::</span><span class="no">Rails</span><span class="o">::</span><span class="no">Responders</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>This gets <code class="highlighter-rouge">respond_with</code> working, via the <a href="https://github.com/plataformatec/responders">Responders gem</a>. To render simple nested JSON like default Rails, we’ll only need to add <code class="highlighter-rouge">.json</code> to the URL.</p>
+  <p>This gets <code class="language-plaintext highlighter-rouge">respond_with</code> working, via the <a href="https://github.com/plataformatec/responders">Responders gem</a>. To render simple nested JSON like default Rails, we’ll only need to add <code class="language-plaintext highlighter-rouge">.json</code> to the URL.</p>
 
   <p>That’s it for basic setup!</p>
 

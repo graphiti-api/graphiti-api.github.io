@@ -127,7 +127,7 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="statistics">Statistics</h3>
 
-  <p>Use <code class="highlighter-rouge">#stats()</code> to request statistics. Access stats within <code class="highlighter-rouge">meta</code>:</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#stats()</code> to request statistics. Access stats within <code class="language-plaintext highlighter-rouge">meta</code>:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -140,10 +140,10 @@
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="s2">"count"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 <span class="nx">data</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="p">.</span><span class="nx">count</span> <span class="c1">// the total count</span></code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nx">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="s2">"count"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nf">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span> <span class="p">}).</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="p">.</span><span class="nx">count</span> <span class="c1">// the total count</span>
 <span class="p">})</span></code></pre></figure>
 
@@ -152,7 +152,7 @@
   <p>/posts?stats[total]=count</p>
 </blockquote>
 
-  <p>Stats are always independent of pagination. If you request the total count, you’ll get the total count even if you’re limiting to 10 per page. This means to get <strong>only</strong> statistics - avoid returning <code class="highlighter-rouge">Post</code> instances altogether - simply request <code class="highlighter-rouge">0</code> results per page:</p>
+  <p>Stats are always independent of pagination. If you request the total count, you’ll get the total count even if you’re limiting to 10 per page. This means to get <strong>only</strong> statistics - avoid returning <code class="language-plaintext highlighter-rouge">Post</code> instances altogether - simply request <code class="language-plaintext highlighter-rouge">0</code> results per page:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -165,13 +165,13 @@
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">per</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="nx">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="s2">"count"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">per</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="nf">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 <span class="nx">data</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="p">.</span><span class="nx">count</span> <span class="c1">// the total count</span></code></pre></figure>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span>
-  <span class="p">.</span><span class="nx">per</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="s2">"count"</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nf">per</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">stats</span><span class="p">({</span> <span class="na">total</span><span class="p">:</span> <span class="dl">"</span><span class="s2">count</span><span class="dl">"</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">stats</span><span class="p">.</span><span class="nx">total</span><span class="p">.</span><span class="nx">count</span> <span class="c1">// the total count</span>
   <span class="p">})</span></code></pre></figure>
 

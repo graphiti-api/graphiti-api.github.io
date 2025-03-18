@@ -127,58 +127,58 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="filtering">Filtering</h3>
 
-  <p>Use <code class="highlighter-rouge">#where()</code> to apply filters:</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#where()</code> to apply filters:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?filter[important]=true</p>
 </blockquote>
 
-  <p><code class="highlighter-rouge">#where()</code> clauses can be chained together. If the same key is seen
+  <p><code class="language-plaintext highlighter-rouge">#where()</code> clauses can be chained together. If the same key is seen
 twice, it will be overridden:</p>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span>
-  <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="mi">10</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="mi">10</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?filter[important]=false&amp;filter[ranking]=10</p>
 </blockquote>
 
-  <p><code class="highlighter-rouge">#where()</code> clauses are based on <strong>server implementation</strong>. The key
+  <p><code class="language-plaintext highlighter-rouge">#where()</code> clauses are based on <strong>server implementation</strong>. The key
 should be exactly as the server understands it. Here are some common
 conventions we promote:</p>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// id greater than 5</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">id_gt</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">id_gt</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 
 <span class="c1">// id greater than or equal to 5</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">id_gte</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">id_gte</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 
 <span class="c1">// id less than 5</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">id_lt</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">id_lt</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 
 <span class="c1">// id less or equal to 5</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">id_lte</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">id_lte</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 
 <span class="c1">// title starts with "foo"</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="p">{</span> <span class="na">prefix</span><span class="p">:</span> <span class="s2">"foo"</span> <span class="p">}</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="p">{</span> <span class="na">prefix</span><span class="p">:</span> <span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span> <span class="p">}</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span>
 
 <span class="c1">// OR these two values</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">status_or</span><span class="p">:</span> <span class="p">[</span><span class="s1">'draft'</span><span class="p">,</span> <span class="s1">'review'</span><span class="p">]</span> <span class="p">})</span>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">status_or</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">draft</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">review</span><span class="dl">'</span><span class="p">]</span> <span class="p">})</span>
 
 <span class="c1">// AND these two values (default)</span>
-<span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="p">[</span><span class="s1">'draft'</span><span class="p">,</span> <span class="s1">'review'</span><span class="p">]</span> <span class="p">})</span></code></pre></figure>
+<span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">draft</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">review</span><span class="dl">'</span><span class="p">]</span> <span class="p">})</span></code></pre></figure>
 
   <h4 id="escaping-values">Escaping Values</h4>
 
   <p><a href="https://www.graphiti.dev/guides/concepts/resources#escaping-values">Graphiti treats a comma as a delimiter of multiple values</a>. To escape the
-comma and tell Graphiti this is a single value, wrap it in <code class="highlighter-rouge"><span class="p">{</span><span class="err">{curlies</span><span class="p">}</span><span class="err">}</span></code>:</p>
+comma and tell Graphiti this is a single value, wrap it in <code class="language-plaintext highlighter-rouge">{{curlies}}</code>:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"{{Hello World, here I am}}"</span> <span class="p">})</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">{{Hello World, here I am}}</span><span class="dl">"</span> <span class="p">})</span></code></pre></figure>
 
   <div class="clearfix">
   <h2 id="next">

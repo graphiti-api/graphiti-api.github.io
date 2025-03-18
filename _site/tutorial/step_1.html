@@ -105,7 +105,7 @@
     <p><a href="https://github.com/graphiti-api/employee_directory/commit/45c1c92e14fb1c3a47b8ed246ceb2cba50e97c72">View the Diff</a></p>
   </blockquote>
 
-  <p>We’ll be working with a single database table, <code class="highlighter-rouge">employees</code>:</p>
+  <p>We’ll be working with a single database table, <code class="language-plaintext highlighter-rouge">employees</code>:</p>
 
   <table class="table table-small">
   <thead>
@@ -149,10 +149,10 @@
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
   <p>Use the built-in generator to create the database table
-and corresponding <code class="highlighter-rouge">ActiveRecord</code> model:</p>
+and corresponding <code class="language-plaintext highlighter-rouge">ActiveRecord</code> model:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g model Employee first_name:string last_name:string age:integer
-<span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g model Employee first_name:string last_name:string age:integer
+<span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
   <p>Now let’s seed some random development data, using <a href="https://github.com/stympy/faker">Faker</a> (which was installed in <a href="/tutorial/step_0">Step 0</a>):</p>
 
@@ -162,22 +162,22 @@ and corresponding <code class="highlighter-rouge">ActiveRecord</code> model:</p>
 <span class="mi">100</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
   <span class="no">Employee</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">first_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span><span class="p">,</span>
     <span class="ss">last_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span><span class="p">,</span>
-    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="nf">.</span><span class="mi">80</span><span class="p">)</span>
+    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="o">..</span><span class="mi">80</span><span class="p">)</span>
 <span class="k">end</span></code></pre></figure>
 
   <p>Run this seed file with</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails db:seed</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails db:seed</code></pre></figure>
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
   <p>Just like Rails, Graphiti has built-in generators. Let’s generate
-the corresponding Resource for our <code class="highlighter-rouge">Employee</code> model:</p>
+the corresponding Resource for our <code class="language-plaintext highlighter-rouge">Employee</code> model:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Employee first_name:string last_name:string age:integer created_at:datetime updated_at:datetime</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Employee first_name:string last_name:string age:integer created_at:datetime updated_at:datetime</code></pre></figure>
 
   <p>This generated a few things, but for now let’s focus on
-<code class="highlighter-rouge">EmployeeResource</code>:</p>
+<code class="language-plaintext highlighter-rouge">EmployeeResource</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeeResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
   <span class="n">attribute</span> <span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:string</span>
@@ -189,9 +189,9 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
 
   <p>This code defined the <a href="https://restful-api-design.readthedocs.io/en/latest/resources.html">RESTful Resource</a> we want our API to expose. Let’s run our server and see what it does:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails s</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails s</code></pre></figure>
 
-  <p>Visit <code class="highlighter-rouge">localhost:3000/api/v1/employees</code>. You should see a <a href="http://jsonapi.org">JSONAPI Response</a>:</p>
+  <p>Visit <code class="language-plaintext highlighter-rouge">localhost:3000/api/v1/employees</code>. You should see a <a href="http://jsonapi.org">JSONAPI Response</a>:</p>
 
   <p><br /></p>
 
@@ -199,7 +199,7 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
 
   <p><br /></p>
 
-  <p>If you find the payload a little intimidating, add <code class="highlighter-rouge">.json</code> to the URL for a more traditional response:</p>
+  <p>If you find the payload a little intimidating, add <code class="language-plaintext highlighter-rouge">.json</code> to the URL for a more traditional response:</p>
 
   <p><br /></p>
 
@@ -207,7 +207,7 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
 
   <p><br /></p>
 
-  <p>There’s <code class="highlighter-rouge">.xml</code>, too:</p>
+  <p>There’s <code class="language-plaintext highlighter-rouge">.xml</code>, too:</p>
 
   <p><br /></p>
 
@@ -215,9 +215,9 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
 
   <p><br /></p>
 
-  <p>These are all different <strong>renderings</strong> of the same <code class="highlighter-rouge">EmployeeResource</code>.</p>
+  <p>These are all different <strong>renderings</strong> of the same <code class="language-plaintext highlighter-rouge">EmployeeResource</code>.</p>
 
-  <p><code class="highlighter-rouge">Resources</code> are comprised of <code class="highlighter-rouge">Attribute</code>s:</p>
+  <p><code class="language-plaintext highlighter-rouge">Resources</code> are comprised of <code class="language-plaintext highlighter-rouge">Attribute</code>s:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
 <span class="n">attribute</span> <span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:string</span></code></pre></figure>
@@ -232,7 +232,7 @@ the corresponding Resource for our <code class="highlighter-rouge">Employee</cod
     <li>Fieldsets</li>
   </ul>
 
-  <p>Let’s start with simple display, turning <code class="highlighter-rouge">first_name</code> into all capital
+  <p>Let’s start with simple display, turning <code class="language-plaintext highlighter-rouge">first_name</code> into all capital
 letters:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
@@ -263,39 +263,39 @@ words:</p>
 tutorial. For now, let’s just verify our out-of-the-box defaults:</p>
 
   <ul>
-    <li>Sort by <code class="highlighter-rouge">first_name</code> ascending: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?sort=first_name</code></li>
-    <li>Sort by <code class="highlighter-rouge">first_name</code> descending: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?sort=-first_name</code></li>
-    <li>Return only <code class="highlighter-rouge">age</code> and <code class="highlighter-rouge">created_at</code> in the response: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?fields[employees]=age,created_at</code></li>
-    <li>Filter on <code class="highlighter-rouge">first_name</code>:
+    <li>Sort by <code class="language-plaintext highlighter-rouge">first_name</code> ascending: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?sort=first_name</code></li>
+    <li>Sort by <code class="language-plaintext highlighter-rouge">first_name</code> descending: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?sort=-first_name</code></li>
+    <li>Return only <code class="language-plaintext highlighter-rouge">age</code> and <code class="language-plaintext highlighter-rouge">created_at</code> in the response: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?fields[employees]=age,created_at</code></li>
+    <li>Filter on <code class="language-plaintext highlighter-rouge">first_name</code>:
       <ul>
-        <li>Case-insensitive: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name]=bob</code></li>
-        <li>Case-sensitive: <code class="highlighter-rouge">http://locahost:3000/api/v1/employees?filter[first_name][eql]=Bob</code></li>
-        <li>Prefix: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][prefix]=b</code></li>
-        <li>Suffix: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][suffix]=ob</code></li>
-        <li>Contains: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][match]=o</code></li>
+        <li>Case-insensitive: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name]=bob</code></li>
+        <li>Case-sensitive: <code class="language-plaintext highlighter-rouge">http://locahost:3000/api/v1/employees?filter[first_name][eql]=Bob</code></li>
+        <li>Prefix: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][prefix]=b</code></li>
+        <li>Suffix: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][suffix]=ob</code></li>
+        <li>Contains: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[first_name][match]=o</code></li>
       </ul>
     </li>
-    <li>Filter on <code class="highlighter-rouge">age</code>:
+    <li>Filter on <code class="language-plaintext highlighter-rouge">age</code>:
       <ul>
-        <li>Equal: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age]=39</code></li>
-        <li>Greater Than: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][gt]=39</code></li>
-        <li>Greater Than or Equal To: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][gte]=39</code></li>
-        <li>Less Than: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][lt]=65</code></li>
-        <li>Less Than or Equal To: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][lte]=65</code></li>
+        <li>Equal: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age]=39</code></li>
+        <li>Greater Than: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][gt]=39</code></li>
+        <li>Greater Than or Equal To: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][gte]=39</code></li>
+        <li>Less Than: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][lt]=65</code></li>
+        <li>Less Than or Equal To: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?filter[age][lte]=65</code></li>
       </ul>
     </li>
     <li>Paginate
       <ul>
-        <li>10 per page: <code class="highlighter-rouge">http://localhost:3000/api/v1/employees?page[size]=10</code></li>
+        <li>10 per page: <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?page[size]=10</code></li>
         <li>5 per page, third page:
-<code class="highlighter-rouge">http://localhost:3000/api/v1/employees?page[number]=3</code></li>
+<code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/employees?page[number]=3</code></li>
       </ul>
     </li>
   </ul>
 
   <p>Write operations are easiest to verify with integration tests, which
 were created when we generated our Resource. Let’s take a look at the
-test for creating <code class="highlighter-rouge">Employee</code>s:</p>
+test for creating <code class="language-plaintext highlighter-rouge">Employee</code>s:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># spec/api/v1/employees/create_spec.rb</span>
 
@@ -328,7 +328,7 @@ test for creating <code class="highlighter-rouge">Employee</code>s:</p>
 
   <p>This is an <strong>API Spec</strong>, which tests high-level end-to-end functionality. We
 know that if our API receives a POST with the given payload, an
-<code class="highlighter-rouge">Employee</code> will be created and a <code class="highlighter-rouge">201</code> response code will be returned.</p>
+<code class="language-plaintext highlighter-rouge">Employee</code> will be created and a <code class="language-plaintext highlighter-rouge">201</code> response code will be returned.</p>
 
   <p>API specs are high-level - often they won’t be changed past this initial
 boilerplate. For testing <em>logic</em>, use a <strong>Resource Spec</strong>. These
@@ -392,16 +392,16 @@ dynamic, randomized data. Let’s change this:</p>
   <span class="n">factory</span> <span class="ss">:employee</span> <span class="k">do</span>
     <span class="n">first_name</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span> <span class="p">}</span>
     <span class="n">last_name</span> <span class="p">{</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span> <span class="p">}</span>
-    <span class="n">age</span> <span class="p">{</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="o">.</span><span class="mi">80</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">age</span> <span class="p">{</span> <span class="nb">rand</span><span class="p">(</span><span class="mf">20.80</span><span class="p">)</span> <span class="p">}</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Now undo the capitalization change to <code class="highlighter-rouge">attribute :first_name</code>, and run the generated specs:</p>
+  <p>Now undo the capitalization change to <code class="language-plaintext highlighter-rouge">attribute :first_name</code>, and run the generated specs:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rspec</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rspec</code></pre></figure>
 
   <p>You’ll see 11 tests pass, with 3 pending. One of the pending specs was
-autogenerated by rails - you can delete <code class="highlighter-rouge">spec/models/employee_spec.rb</code>
+autogenerated by rails - you can delete <code class="language-plaintext highlighter-rouge">spec/models/employee_spec.rb</code>
 for now.</p>
 
   <p>That leaves us with two “update” specs. These are marked pending so you

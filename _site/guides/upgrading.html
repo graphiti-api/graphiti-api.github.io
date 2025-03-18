@@ -101,28 +101,28 @@ Schema. Instead, check out <a href="https://www.graphiti.dev/guides/vandal">Vand
 
 <h3 id="setup">Setup</h3>
 
-<p>Start by removing the gems <code class="highlighter-rouge">jsonapi_suite</code>, <code class="highlighter-rouge">jsonapi-rails</code>,
-<code class="highlighter-rouge">jsonapi_swagger_helpers</code>, and <code class="highlighter-rouge">swagger-diff</code>. You’ll eventually remove
-<code class="highlighter-rouge">jsonapi_spec_helpers</code>, but keep it for now.</p>
+<p>Start by removing the gems <code class="language-plaintext highlighter-rouge">jsonapi_suite</code>, <code class="language-plaintext highlighter-rouge">jsonapi-rails</code>,
+<code class="language-plaintext highlighter-rouge">jsonapi_swagger_helpers</code>, and <code class="language-plaintext highlighter-rouge">swagger-diff</code>. You’ll eventually remove
+<code class="language-plaintext highlighter-rouge">jsonapi_spec_helpers</code>, but keep it for now.</p>
 
-<p>Add gems <code class="highlighter-rouge">graphiti</code>, <code class="highlighter-rouge">graphiti_spec_helpers</code> and <code class="highlighter-rouge">responders</code>. See the
+<p>Add gems <code class="language-plaintext highlighter-rouge">graphiti</code>, <code class="language-plaintext highlighter-rouge">graphiti_spec_helpers</code> and <code class="language-plaintext highlighter-rouge">responders</code>. See the
 <a href="https://github.com/graphiti-api/employee_directory/blob/master/Gemfile">Sample App Gemfile</a>.</p>
 
-<p>Move <code class="highlighter-rouge">spec/api</code> to <code class="highlighter-rouge">spec/legacy</code>.</p>
+<p>Move <code class="language-plaintext highlighter-rouge">spec/api</code> to <code class="language-plaintext highlighter-rouge">spec/legacy</code>.</p>
 
-<p>Remove <code class="highlighter-rouge">config/initializers/strong_resources.rb</code>,
-<code class="highlighter-rouge">config/initializers/jsonapi.rb</code>, <code class="highlighter-rouge">app/controllers/docs_controller.rb</code>,
-and the Swagger UI that lives under <code class="highlighter-rouge">public</code>.</p>
+<p>Remove <code class="language-plaintext highlighter-rouge">config/initializers/strong_resources.rb</code>,
+<code class="language-plaintext highlighter-rouge">config/initializers/jsonapi.rb</code>, <code class="language-plaintext highlighter-rouge">app/controllers/docs_controller.rb</code>,
+and the Swagger UI that lives under <code class="language-plaintext highlighter-rouge">public</code>.</p>
 
-<p>Remove swagger helpers from <code class="highlighter-rouge">Rakefile</code>.</p>
+<p>Remove swagger helpers from <code class="language-plaintext highlighter-rouge">Rakefile</code>.</p>
 
-<p>Grep for <code class="highlighter-rouge">JsonapiErrorable</code> and change to <code class="highlighter-rouge">GraphitiErrors</code>.</p>
+<p>Grep for <code class="language-plaintext highlighter-rouge">JsonapiErrorable</code> and change to <code class="language-plaintext highlighter-rouge">GraphitiErrors</code>.</p>
 
-<p>Make <code class="highlighter-rouge">spec/rails_helper.rb</code> correct (though keep <code class="highlighter-rouge">jsonapi_spec_helpers</code>
+<p>Make <code class="language-plaintext highlighter-rouge">spec/rails_helper.rb</code> correct (though keep <code class="language-plaintext highlighter-rouge">jsonapi_spec_helpers</code>
 for now). <a href="https://github.com/graphiti-api/employee_directory/blob/master/spec/rails_helper.rb">See sample</a>.</p>
 
 <p>At this point, running your specs should give you a lot of errors like
-<code class="highlighter-rouge">"index" not found</code>.</p>
+<code class="language-plaintext highlighter-rouge">"index" not found</code>.</p>
 
 <h3 id="upgrading">Upgrading</h3>
 
@@ -131,18 +131,18 @@ for now). <a href="https://github.com/graphiti-api/employee_directory/blob/maste
 <p>Upgrade your <a href="https://github.com/graphiti-api/employee_directory/blob/master/app/resources/application_resource.rb">ApplicationResource</a>.</p>
 
 <ul>
-  <li>Note that this references <code class="highlighter-rouge">Rails.application.routes.default_url_options[:host]</code>. That’s set in <a href="https://github.com/graphiti-api/employee_directory/blob/master/config/application.rb#L22">config/application.rb</a>.</li>
-  <li>Note the <code class="highlighter-rouge">endpoint_namespace</code>. Make this match your current routes.</li>
-  <li>Reference <code class="highlighter-rouge">ApplicationResource.endpoint_namespace</code> <a href="https://github.com/graphiti-api/employee_directory/blob/master/config/routes.rb#L2">in your routes file</a>.</li>
+  <li>Note that this references <code class="language-plaintext highlighter-rouge">Rails.application.routes.default_url_options[:host]</code>. That’s set in <a href="https://github.com/graphiti-api/employee_directory/blob/master/config/application.rb#L22">config/application.rb</a>.</li>
+  <li>Note the <code class="language-plaintext highlighter-rouge">endpoint_namespace</code>. Make this match your current routes.</li>
+  <li>Reference <code class="language-plaintext highlighter-rouge">ApplicationResource.endpoint_namespace</code> <a href="https://github.com/graphiti-api/employee_directory/blob/master/config/routes.rb#L2">in your routes file</a>.</li>
 </ul>
 
-<p>Begin rewriting your Resources. Go through <code class="highlighter-rouge">spec/payloads</code> and add these
-attributes/types to the Resource. Remember to mark these as <code class="highlighter-rouge">only:
-[:readable]</code>, or <code class="highlighter-rouge">writable: false</code>, etc. Look at
-<code class="highlighter-rouge">config/initializers/strong_resources.rb</code> to see if an attribute should
+<p>Begin rewriting your Resources. Go through <code class="language-plaintext highlighter-rouge">spec/payloads</code> and add these
+attributes/types to the Resource. Remember to mark these as <code class="language-plaintext highlighter-rouge">only:
+[:readable]</code>, or <code class="language-plaintext highlighter-rouge">writable: false</code>, etc. Look at
+<code class="language-plaintext highlighter-rouge">config/initializers/strong_resources.rb</code> to see if an attribute should
 be writable.</p>
 
-<p>Rewrite custom <code class="highlighter-rouge">allow_filters</code>. If it’s a one-liner, just make sure
+<p>Rewrite custom <code class="language-plaintext highlighter-rouge">allow_filters</code>. If it’s a one-liner, just make sure
 there is a corresponding attribute. If there is custom logic:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">allow_filter</span> <span class="ss">:foo</span> <span class="k">do</span> <span class="o">|</span><span class="n">scope</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span>
@@ -157,20 +157,20 @@ there is a corresponding attribute. If there is custom logic:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Two things about filters: by default, <code class="highlighter-rouge">value</code> is now always array. Pass
-<code class="highlighter-rouge">single: true</code> if your logic only supports a single value. Also: a
-filter with a given type now comes with operators - <code class="highlighter-rouge">string</code> gets
-<code class="highlighter-rouge">prefix</code>, <code class="highlighter-rouge">suffix</code>, etc. If you don’t support these, limit operations
-with <code class="highlighter-rouge">only:</code>.</p>
+<p>Two things about filters: by default, <code class="language-plaintext highlighter-rouge">value</code> is now always array. Pass
+<code class="language-plaintext highlighter-rouge">single: true</code> if your logic only supports a single value. Also: a
+filter with a given type now comes with operators - <code class="language-plaintext highlighter-rouge">string</code> gets
+<code class="language-plaintext highlighter-rouge">prefix</code>, <code class="language-plaintext highlighter-rouge">suffix</code>, etc. If you don’t support these, limit operations
+with <code class="language-plaintext highlighter-rouge">only:</code>.</p>
 
 <p>Note that we now support multiple content types for read requests:
-<code class="highlighter-rouge">.json</code> and <code class="highlighter-rouge">.xml</code>. If you have any clients explicitly putting <code class="highlighter-rouge">.json</code>
+<code class="language-plaintext highlighter-rouge">.json</code> and <code class="language-plaintext highlighter-rouge">.xml</code>. If you have any clients explicitly putting <code class="language-plaintext highlighter-rouge">.json</code>
 at the end of the URL, they are now going to get a simple JSON response
 instead of JSONAPI. Avoid the responders gem if you don’t want this.</p>
 
 <p>You may want to move some persistence logic to <a href="https://www.graphiti.dev/guides/concepts/resources#side-effects">before_commit</a>.</p>
 
-<p>Resources now have <a href="https://www.graphiti.dev/guides/concepts/resources#basescope">#base_scope</a>. If you previously were using <code class="highlighter-rouge">default_filter</code> or passing in a custom scope in your controller, consider moving to <code class="highlighter-rouge">base_scope</code>:</p>
+<p>Resources now have <a href="https://www.graphiti.dev/guides/concepts/resources#basescope">#base_scope</a>. If you previously were using <code class="language-plaintext highlighter-rouge">default_filter</code> or passing in a custom scope in your controller, consider moving to <code class="language-plaintext highlighter-rouge">base_scope</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/post_resource.rb</span>
 <span class="k">def</span> <span class="nf">base_scope</span>
@@ -178,24 +178,24 @@ instead of JSONAPI. Avoid the responders gem if you don’t want this.</p>
 <span class="k">end</span></code></pre></figure>
 
 <p>If you have manual sideloading logic with scope, it is <strong>highly
-recommended</strong> you rewriting using <code class="highlighter-rouge">params</code> - see <a href="https://www.graphiti.dev/guides/concepts/resources#relationships">relationship docs</a>. If you <strong>do</strong> still need <code class="highlighter-rouge">scope</code>, it now yields the parent ids as the first argument and the actual parent models as the second.</p>
+recommended</strong> you rewriting using <code class="language-plaintext highlighter-rouge">params</code> - see <a href="https://www.graphiti.dev/guides/concepts/resources#relationships">relationship docs</a>. If you <strong>do</strong> still need <code class="language-plaintext highlighter-rouge">scope</code>, it now yields the parent ids as the first argument and the actual parent models as the second.</p>
 
-<p>Finally, you are encouraged to avoid overriding <code class="highlighter-rouge">create/update/destroy</code>
-directly. Instead, override <code class="highlighter-rouge">build</code>, <code class="highlighter-rouge">save</code>, and <code class="highlighter-rouge">delete</code>, and use
+<p>Finally, you are encouraged to avoid overriding <code class="language-plaintext highlighter-rouge">create/update/destroy</code>
+directly. Instead, override <code class="language-plaintext highlighter-rouge">build</code>, <code class="language-plaintext highlighter-rouge">save</code>, and <code class="language-plaintext highlighter-rouge">delete</code>, and use
 <a href="https://www.graphiti.dev/guides/concepts/resources#persistence-lifecycle-hooks">Persistence Lifecycle
 Hooks</a>.</p>
 
-<p>At this point, get all your <code class="highlighter-rouge">spec/legacy</code> specs passing.</p>
+<p>At this point, get all your <code class="language-plaintext highlighter-rouge">spec/legacy</code> specs passing.</p>
 
-<p>When you’re done, generate the new <a href="https://www.graphiti.dev/guides/concepts/testing">Resource and API Specs</a>. Note that much of this is syntax changes, you can copy/paste large amounts of logic from <code class="highlighter-rouge">spec/legacy</code>. To ease this process, try <code class="highlighter-rouge">rails g graphiti:api_test PostResource</code> and <code class="highlighter-rouge">rails g graphiti:resource_test PostResource</code>.</p>
+<p>When you’re done, generate the new <a href="https://www.graphiti.dev/guides/concepts/testing">Resource and API Specs</a>. Note that much of this is syntax changes, you can copy/paste large amounts of logic from <code class="language-plaintext highlighter-rouge">spec/legacy</code>. To ease this process, try <code class="language-plaintext highlighter-rouge">rails g graphiti:api_test PostResource</code> and <code class="language-plaintext highlighter-rouge">rails g graphiti:resource_test PostResource</code>.</p>
 
 <p>You should now have the upgraded <strong>and</strong> legacy test suite working. We
 can now remove the legacy specs:</p>
 
 <ul>
-  <li>Remove <code class="highlighter-rouge">jsonapi_spec_helpers</code> gem</li>
-  <li><code class="highlighter-rouge">rm -rf spec/payloads</code></li>
-  <li><code class="highlighter-rouge">rm -rf spec/legacy</code></li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">jsonapi_spec_helpers</code> gem</li>
+  <li><code class="language-plaintext highlighter-rouge">rm -rf spec/payloads</code></li>
+  <li><code class="language-plaintext highlighter-rouge">rm -rf spec/legacy</code></li>
 </ul>
 
 <p>And you’re done! Deploy to a staging environment and verify your API
@@ -203,16 +203,16 @@ supports all your real-world scenarios.</p>
 
 <h3 id="persistence">Persistence</h3>
 
-<p>Though you can get specs passing with your existing <code class="highlighter-rouge">create</code>, <code class="highlighter-rouge">update</code>,
+<p>Though you can get specs passing with your existing <code class="language-plaintext highlighter-rouge">create</code>, <code class="language-plaintext highlighter-rouge">update</code>,
 etc, try to rewrite them using hooks. It’s no longer considered a best
 practice to override these methods because you’ll be bypassing hooks.
-Instead, add hooks and override <code class="highlighter-rouge">def save(model)</code> if you need to.</p>
+Instead, add hooks and override <code class="language-plaintext highlighter-rouge">def save(model)</code> if you need to.</p>
 
 <h3 id="gotchas">Gotchas</h3>
 
-<p>We use <code class="highlighter-rouge">respond_with</code> in read operations and <code class="highlighter-rouge">render jsonapi:</code> in write
-operations. This is because the <code class="highlighter-rouge">responders</code> gem bypasses renderers for
-<code class="highlighter-rouge">PUT</code>, and a few other minor issues.</p>
+<p>We use <code class="language-plaintext highlighter-rouge">respond_with</code> in read operations and <code class="language-plaintext highlighter-rouge">render jsonapi:</code> in write
+operations. This is because the <code class="language-plaintext highlighter-rouge">responders</code> gem bypasses renderers for
+<code class="language-plaintext highlighter-rouge">PUT</code>, and a few other minor issues.</p>
 
 <p><br />
 <br /></p>

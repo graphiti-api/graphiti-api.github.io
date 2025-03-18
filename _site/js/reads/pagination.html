@@ -127,17 +127,17 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="pagination">Pagination</h3>
 
-  <p>Use <code class="highlighter-rouge">#per()</code> to set the limit per page:</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#per()</code> to set the limit per page:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?page[size]=10</p>
 </blockquote>
 
-  <p>Use <code class="highlighter-rouge">#page()</code> to set the current page:</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#page()</code> to set the current page:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">page</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?page[number]=5</p>
@@ -145,7 +145,7 @@
 
   <p>When chained together (10 per page, the 5th page):</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">page</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">page</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?page[size]=10&amp;page[number]=5</p>

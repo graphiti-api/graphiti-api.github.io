@@ -127,7 +127,7 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="nested-writes">Nested Writes</h3>
 
-  <p>You can write a <code class="highlighter-rouge">Model</code> and all of its relationships in a single
+  <p>You can write a <code class="language-plaintext highlighter-rouge">Model</code> and all of its relationships in a single
 request. Keep in mind normal dirty tracking rules still apply - nothing
 is sent to the server unless it is dirty.</p>
 
@@ -142,28 +142,28 @@ is sent to the server unless it is dirty.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Author</span><span class="p">()</span>
-  <span class="kd">let</span> <span class="nx">comment</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Comment</span><span class="p">({</span> <span class="nx">author</span> <span class="p">})</span>
-  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">({</span> <span class="na">comments</span><span class="p">:</span> <span class="p">[</span><span class="nx">comment</span><span class="p">]</span> <span class="p">})</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">()</span>
+  <span class="kd">let</span> <span class="nx">comment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Comment</span><span class="p">({</span> <span class="nx">author</span> <span class="p">})</span>
+  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">({</span> <span class="na">comments</span><span class="p">:</span> <span class="p">[</span><span class="nx">comment</span><span class="p">]</span> <span class="p">})</span>
 
   <span class="c1">// post.save({ with: "comments" })</span>
   <span class="c1">// post.save({ with: ["comments", "blog"] })</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="s1">'author'</span> <span class="p">}})</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="dl">'</span><span class="s1">author</span><span class="dl">'</span> <span class="p">}})</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Author</span><span class="p">();</span>
-  <span class="kd">var</span> <span class="nx">comment</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Comment</span><span class="p">({</span> <span class="na">author</span><span class="p">:</span> <span class="nx">author</span> <span class="p">});</span>
-  <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">({</span> <span class="na">comments</span><span class="p">:</span> <span class="p">[</span><span class="nx">comment</span><span class="p">]</span> <span class="p">});</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">author</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Author</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">comment</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Comment</span><span class="p">({</span> <span class="na">author</span><span class="p">:</span> <span class="nx">author</span> <span class="p">});</span>
+  <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">({</span> <span class="na">comments</span><span class="p">:</span> <span class="p">[</span><span class="nx">comment</span><span class="p">]</span> <span class="p">});</span>
 
   <span class="c1">// post.save({ with: "comments" })</span>
   <span class="c1">// post.save({ with: ["comments", "blog"] })</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="s2">"author"</span> <span class="p">}});</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span> <span class="p">}});</span>
   </code></pre></figure>
 
   </div>
 
-  <p>Use <code class="highlighter-rouge">model.isMarkedForDestruction = true</code> to delete the associated
-object. Use <code class="highlighter-rouge">model.isMarkedForDisassociation = true</code> to remove the association
+  <p>Use <code class="language-plaintext highlighter-rouge">model.isMarkedForDestruction = true</code> to delete the associated
+object. Use <code class="language-plaintext highlighter-rouge">model.isMarkedForDisassociation = true</code> to remove the association
 without deleting the underlying object:</p>
 
   <div class="tabs">
@@ -177,30 +177,30 @@ without deleting the underlying object:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"comments"</span><span class="p">).</span><span class="nx">first</span><span class="p">()).</span><span class="nx">data</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">post</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">).</span><span class="nf">first</span><span class="p">()).</span><span class="nx">data</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">comments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">isMarkedForDestruction</span> <span class="o">=</span> <span class="kc">true</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">comments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">isMarkedForDisassociation</span> <span class="o">=</span> <span class="kc">true</span>
 
   <span class="c1">// destroys the first comment</span>
   <span class="c1">// disassociates the second comment</span>
-  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="s2">"comments"</span> <span class="p">})</span>
+  <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span> <span class="p">})</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Post</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"comments"</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Post</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">).</span><span class="nf">first</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">post</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">comments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">isMarkedForDestruction</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">comments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">isMarkedForDisassociation</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 
     <span class="c1">// destroys the first comment</span>
     <span class="c1">// disassociates the second comment</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="s2">"comments"</span> <span class="p">})</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span> <span class="p">})</span>
   <span class="p">});</span>
   </code></pre></figure>
 
   </div>
 
-  <p>You may want to send <em>only</em> the <code class="highlighter-rouge">id</code> of the related object to the server - ensuring the models are associated without updating attributes by
-accident. Just add <code class="highlighter-rouge">.id</code> to the relationship name:</p>
+  <p>You may want to send <em>only</em> the <code class="language-plaintext highlighter-rouge">id</code> of the related object to the server - ensuring the models are associated without updating attributes by
+accident. Just add <code class="language-plaintext highlighter-rouge">.id</code> to the relationship name:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -213,10 +213,10 @@ accident. Just add <code class="highlighter-rouge">.id</code> to the relationshi
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="s2">"comments.id"</span> <span class="p">})</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments.id</span><span class="dl">"</span> <span class="p">})</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="s2">"comments.id"</span> <span class="p">})</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">({</span> <span class="na">with</span><span class="p">:</span> <span class="dl">"</span><span class="s2">comments.id</span><span class="dl">"</span> <span class="p">})</span>
   </code></pre></figure>
 
   </div>

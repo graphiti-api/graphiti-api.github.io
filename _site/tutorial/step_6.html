@@ -105,22 +105,22 @@
     <p><a href="https://github.com/graphiti-api/employee_directory/compare/step_5_has_one...step_6_write_customization">View the Diff</a></p>
   </blockquote>
 
-  <p>When we ran the generators (and created a blank Resource class), we got the ability to create, update, and destroy resources for free. You can turn off this behavior with <code class="highlighter-rouge">self.read_only = true</code>. Or for relationships: <code class="highlighter-rouge">has_many :positions, writable: false</code>.</p>
+  <p>When we ran the generators (and created a blank Resource class), we got the ability to create, update, and destroy resources for free. You can turn off this behavior with <code class="language-plaintext highlighter-rouge">self.read_only = true</code>. Or for relationships: <code class="language-plaintext highlighter-rouge">has_many :positions, writable: false</code>.</p>
 
   <p>But in RESTful APIs, it’s super common for persistence operations to
 have side effects - that’s how we avoid extraneous verbs and
 inconsistent patterns.</p>
 
-  <p>In a prior step, we updated <code class="highlighter-rouge">position</code> Factory to automatically reorder
-the <code class="highlighter-rouge">historical_index</code>: when a new record comes in, all the prior
+  <p>In a prior step, we updated <code class="language-plaintext highlighter-rouge">position</code> Factory to automatically reorder
+the <code class="language-plaintext highlighter-rouge">historical_index</code>: when a new record comes in, all the prior
 values need to change. This step will show how to add that behavior to
 our API, using hooks that work for a variety of scenarios: sending
 emails, checking authorization roles, queuing delayed jobs, and more.</p>
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <p>Previously, we put the logic that re-ordered the <code class="highlighter-rouge">historical_index</code>
-column in the <code class="highlighter-rouge">position</code> factory. Let’s move that to the model so our
+  <p>Previously, we put the logic that re-ordered the <code class="language-plaintext highlighter-rouge">historical_index</code>
+column in the <code class="language-plaintext highlighter-rouge">position</code> factory. Let’s move that to the model so our
 tests and API can share the same logic:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/position.rb</span>
@@ -144,13 +144,13 @@ tests and API can share the same logic:</p>
   <p>All Graphiti updates happen within a transaction. We want to insert our
 code right before that transaction closes - after the graph of objects
 has been persisted and validations have passed. To do that, we’ll use
-the <code class="highlighter-rouge">before_commit</code> hook:</p>
+the <code class="language-plaintext highlighter-rouge">before_commit</code> hook:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">before_commit</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:create</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">]</span> <span class="k">do</span> <span class="o">|</span><span class="n">position</span><span class="o">|</span>
   <span class="no">Position</span><span class="p">.</span><span class="nf">reorder!</span><span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="nf">employee_id</span><span class="p">)</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Again, note that the <code class="highlighter-rouge">Position.reorder!</code> code existed independent of our
+  <p>Again, note that the <code class="language-plaintext highlighter-rouge">Position.reorder!</code> code existed independent of our
 API, and was re-used in our factory.</p>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>

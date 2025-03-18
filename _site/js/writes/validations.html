@@ -128,7 +128,7 @@
   <h3 id="validations">Validations</h3>
 
   <p>JSONAPI Suite is already set up to return validation errors with a
-<code class="highlighter-rouge">422</code> response code and JSONAPI-compliant <a href="http://jsonapi.org/format/#errors">errors payload</a>. Those errors will be automatically assigned, and removed on subsequent requests:</p>
+<code class="language-plaintext highlighter-rouge">422</code> response code and JSONAPI-compliant <a href="http://jsonapi.org/format/#errors">errors payload</a>. Those errors will be automatically assigned, and removed on subsequent requests:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -141,21 +141,21 @@
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// false</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// false</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// { message: "Can't be blank", ... }</span>
-  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"no longer blank"</span>
-  <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true</span>
+  <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">no longer blank</span><span class="dl">"</span>
+  <span class="nx">success</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// true</span>
   <span class="nx">post</span><span class="p">.</span><span class="nx">errors</span> <span class="c1">// {}</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// false</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="c1">// false</span>
     <span class="nx">post</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">title</span> <span class="c1">// { message: "Can't be blank", ... }</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s2">"no longer blank"</span>
-    <span class="nx">post</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// true</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">no longer blank</span><span class="dl">"</span>
+    <span class="nx">post</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">success</span><span class="p">);</span> <span class="c1">// true</span>
       <span class="nx">post</span><span class="p">.</span><span class="nx">errors</span> <span class="c1">// {}</span>
     <span class="p">});</span>
   <span class="p">})</span>

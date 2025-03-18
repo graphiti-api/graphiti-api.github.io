@@ -93,15 +93,15 @@
     </li>
     <li>2 <a href="#test-helpers">Test Helpers</a>
       <ul>
-        <li><a href="#jsonapidata"><code class="highlighter-rouge">#jsonapi_data</code></a>
+        <li><a href="#jsonapidata"><code class="language-plaintext highlighter-rouge">#jsonapi_data</code></a>
           <ul>
             <li><a href="#accessing-sideloads">Accessing Sideloads</a></li>
             <li><a href="#accessing-links">Accessing Links</a></li>
           </ul>
         </li>
-        <li><a href="#json"><code class="highlighter-rouge">json</code></a></li>
-        <li><a href="#date-and-datetime"><code class="highlighter-rouge">date/time</code></a></li>
-        <li><a href="#jsonapi-errors"><code class="highlighter-rouge">jsonapi_errors</code></a></li>
+        <li><a href="#json"><code class="language-plaintext highlighter-rouge">json</code></a></li>
+        <li><a href="#date-and-datetime"><code class="language-plaintext highlighter-rouge">date/time</code></a></li>
+        <li><a href="#jsonapi-errors"><code class="language-plaintext highlighter-rouge">jsonapi_errors</code></a></li>
         <li><a href="#resource-test-helpers">Resource Test Helpers</a></li>
         <li><a href="#api-test-helpers">API Test Helpers</a></li>
         <li><a href="#guard-helpers">Guard Helpers</a></li>
@@ -174,8 +174,8 @@
 In fact, most Graphiti development can happen without even opening a browser.
 And as a side effect, you get a reliable test suite.</p>
 
-  <p>Let’s say we want to filter Employees by <code class="highlighter-rouge">title</code>, which comes from
-the <code class="highlighter-rouge">positions</code> table. Start with a spec:</p>
+  <p>Let’s say we want to filter Employees by <code class="language-plaintext highlighter-rouge">title</code>, which comes from
+the <code class="language-plaintext highlighter-rouge">positions</code> table. Start with a spec:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">EmployeeResource</span><span class="p">,</span> <span class="ss">type: :resource</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'filtering'</span> <span class="k">do</span>
@@ -231,8 +231,8 @@ need to worry about <a href="http://david.heinemeierhansson.com/2014/test-induce
 tests</strong>.</p>
 
   <p>This is because the same Resource logic can be re-used at multiple
-endpoints. PostResource can be referenced at <code class="highlighter-rouge">/posts</code>, <code class="highlighter-rouge">/top_posts</code>,
-and <code class="highlighter-rouge">/admin/posts</code>, but we shouldn’t have to test the same filtering and
+endpoints. PostResource can be referenced at <code class="language-plaintext highlighter-rouge">/posts</code>, <code class="language-plaintext highlighter-rouge">/top_posts</code>,
+and <code class="language-plaintext highlighter-rouge">/admin/posts</code>, but we shouldn’t have to test the same filtering and
 sorting logic over and over. Querying, persistence, and serialization are
 all Resource responsibilities, tested in Resource tests.</p>
 
@@ -277,13 +277,13 @@ recommended you edit that factory with randomized data:</p>
 <span class="k">end</span></code></pre></figure>
 
   <p>This will help catch edge cases and provide more clarity than seeing the
-same <code class="highlighter-rouge">"MyString"</code> everywhere.</p>
+same <code class="language-plaintext highlighter-rouge">"MyString"</code> everywhere.</p>
 
   <p>It’s a best practice that if a factory defines an attribute, there
 should be a corresponding validation around that attribute. If an
 attribute is optional, it should not be defaulted in a factory.</p>
 
-  <p>Finally, <a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 made belongs_to required by default</a>. This means that if Employee <code class="highlighter-rouge">belongs_to :department</code>, then <code class="highlighter-rouge">create(:employee)</code> will fail. To ensure a relationship is always seeded:</p>
+  <p>Finally, <a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 made belongs_to required by default</a>. This means that if Employee <code class="language-plaintext highlighter-rouge">belongs_to :department</code>, then <code class="language-plaintext highlighter-rouge">create(:employee)</code> will fail. To ensure a relationship is always seeded:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">FactoryBot</span><span class="p">.</span><span class="nf">define</span> <span class="k">do</span>
   <span class="n">factory</span> <span class="ss">:employee</span> <span class="k">do</span>
@@ -322,11 +322,11 @@ JSONAPI payload can be a pain to deal with. So, we’ve supplied helpers.</p>
   </a>
 
   <blockquote>
-    <p>Note: for brevity, this method is aliased to <code class="highlighter-rouge">d</code></p>
+    <p>Note: for brevity, this method is aliased to <code class="language-plaintext highlighter-rouge">d</code></p>
   </blockquote>
 
-  <p>The <code class="highlighter-rouge">jsonapi_data</code> method will parse response data and return a
-normalized object (<code class="highlighter-rouge">GraphitiSpecHelpers::Node</code>). Assert against this the same way you assert against
+  <p>The <code class="language-plaintext highlighter-rouge">jsonapi_data</code> method will parse response data and return a
+normalized object (<code class="language-plaintext highlighter-rouge">GraphitiSpecHelpers::Node</code>). Assert against this the same way you assert against
 JSON:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">data</span> <span class="o">=</span> <span class="n">jsonapi_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -335,11 +335,11 @@ JSON:</p>
 <span class="n">expect</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="nf">first_name</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'Jane'</span><span class="p">)</span></code></pre></figure>
 
   <ul>
-    <li><code class="highlighter-rouge">id</code> will automatically case to an integer. If you would like to avoid
-this, use <code class="highlighter-rouge">rawid</code> instead.</li>
-    <li><code class="highlighter-rouge">jsonapi_type</code> is a convenience method for <code class="highlighter-rouge">data/type</code>, to avoid
+    <li><code class="language-plaintext highlighter-rouge">id</code> will automatically case to an integer. If you would like to avoid
+this, use <code class="language-plaintext highlighter-rouge">rawid</code> instead.</li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_type</code> is a convenience method for <code class="language-plaintext highlighter-rouge">data/type</code>, to avoid
 conflicting with an attribute of the same name.</li>
-    <li>If the <code class="highlighter-rouge">first_name</code> key was not present in the response, an error will
+    <li>If the <code class="language-plaintext highlighter-rouge">first_name</code> key was not present in the response, an error will
 be raised.</li>
   </ul>
 
@@ -357,8 +357,8 @@ be raised.</li>
 <span class="n">expect</span><span class="p">(</span><span class="n">sideload</span><span class="p">.</span><span class="nf">jsonapi_type</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'comments'</span><span class="p">)</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">sideload</span><span class="p">.</span><span class="nf">body</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'body'</span><span class="p">)</span></code></pre></figure>
 
-  <p>The <code class="highlighter-rouge">sideload</code> method accepts the <em>name of the relationship</em>. It returns
-a normal <code class="highlighter-rouge">jsonapi_data</code> <code class="highlighter-rouge">GraphitiSpecHelpers::Node</code> containing the <code class="highlighter-rouge">include</code>-ed data.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">sideload</code> method accepts the <em>name of the relationship</em>. It returns
+a normal <code class="language-plaintext highlighter-rouge">jsonapi_data</code> <code class="language-plaintext highlighter-rouge">GraphitiSpecHelpers::Node</code> containing the <code class="language-plaintext highlighter-rouge">include</code>-ed data.</p>
 
 <a class="anchor" id="accessing-links" />
   <a class="header" href="#accessing-links">
@@ -381,7 +381,7 @@ link URL.</p>
     </h3>
   </a>
 
-  <p>To see the raw JSON response, use <code class="highlighter-rouge">json</code>.</p>
+  <p>To see the raw JSON response, use <code class="language-plaintext highlighter-rouge">json</code>.</p>
 
 <a class="anchor" id="date-and-datetime" />
   <a class="header" href="#date-and-datetime">
@@ -395,13 +395,13 @@ link URL.</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># WRONG</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">created_at</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="nf">created_at</span><span class="p">)</span></code></pre></figure>
 
-  <p>Instead, use the <code class="highlighter-rouge">datetime</code> helper to convert to ISO 8601 and compare
+  <p>Instead, use the <code class="language-plaintext highlighter-rouge">datetime</code> helper to convert to ISO 8601 and compare
 apples to apples:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># RIGHT</span>
 <span class="n">expect</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">created_at</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="n">post</span><span class="p">.</span><span class="nf">created_at</span><span class="p">))</span></code></pre></figure>
 
-  <p>Similarly, there’s a <code class="highlighter-rouge">date</code> helper as well.</p>
+  <p>Similarly, there’s a <code class="language-plaintext highlighter-rouge">date</code> helper as well.</p>
 
 <a class="anchor" id="jsonapi-errors" />
   <a class="header" href="#jsonapi-errors">
@@ -411,7 +411,7 @@ apples to apples:</p>
   </a>
 
   <blockquote>
-    <p>This method is aliased to <code class="highlighter-rouge">errors</code> for brevity</p>
+    <p>This method is aliased to <code class="language-plaintext highlighter-rouge">errors</code> for brevity</p>
   </blockquote>
 
   <p>To parse an <a href="http://jsonapi.org/format/#errors">Errors Payload</a>:</p>
@@ -446,7 +446,7 @@ apples to apples:</p>
 
   <p>Resource tests have two helpers, both different ways to execute a query.</p>
 
-  <p><code class="highlighter-rouge">render</code> will fire the query and return a JSON response that can be
+  <p><code class="language-plaintext highlighter-rouge">render</code> will fire the query and return a JSON response that can be
 accessed as normal:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">it</span> <span class="s1">'works'</span> <span class="k">do</span>
@@ -455,7 +455,7 @@ accessed as normal:</p>
   <span class="n">json</span> <span class="c1"># =&gt; { data: { type: 'employees', ... } }</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p><code class="highlighter-rouge">records</code> will return model instances:</p>
+  <p><code class="language-plaintext highlighter-rouge">records</code> will return model instances:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">it</span> <span class="s1">'works'</span> <span class="k">do</span>
   <span class="n">render</span>
@@ -469,20 +469,20 @@ accessed as normal:</p>
     </h3>
   </a>
 
-  <p>When executing an API test request, always use the <code class="highlighter-rouge">jsonapi_</code> doppelgänger:</p>
+  <p>When executing an API test request, always use the <code class="language-plaintext highlighter-rouge">jsonapi_</code> doppelgänger:</p>
 
   <ul>
-    <li><code class="highlighter-rouge">jsonapi_get(url, params:)</code> instead of <code class="highlighter-rouge">get</code></li>
-    <li><code class="highlighter-rouge">jsonapi_post(url, payload)</code> instead of <code class="highlighter-rouge">post</code></li>
-    <li><code class="highlighter-rouge">jsonapi_put(url, payload)</code> instead of <code class="highlighter-rouge">put</code></li>
-    <li><code class="highlighter-rouge">jsonapi_patch(url, payload)</code> instead of <code class="highlighter-rouge">patch</code></li>
-    <li><code class="highlighter-rouge">jsonapi_delete(url)</code> instead of <code class="highlighter-rouge">delete</code></li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_get(url, params:)</code> instead of <code class="language-plaintext highlighter-rouge">get</code></li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_post(url, payload)</code> instead of <code class="language-plaintext highlighter-rouge">post</code></li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_put(url, payload)</code> instead of <code class="language-plaintext highlighter-rouge">put</code></li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_patch(url, payload)</code> instead of <code class="language-plaintext highlighter-rouge">patch</code></li>
+    <li><code class="language-plaintext highlighter-rouge">jsonapi_delete(url)</code> instead of <code class="language-plaintext highlighter-rouge">delete</code></li>
   </ul>
 
-  <p>This will set the <code class="highlighter-rouge">CONTENT_TYPE</code> header to <code class="highlighter-rouge">application/vnd.api+json</code>
-and call <code class="highlighter-rouge">to_json</code> on the payload (when applicable).</p>
+  <p>This will set the <code class="language-plaintext highlighter-rouge">CONTENT_TYPE</code> header to <code class="language-plaintext highlighter-rouge">application/vnd.api+json</code>
+and call <code class="language-plaintext highlighter-rouge">to_json</code> on the payload (when applicable).</p>
 
-  <p>It also allows overriding <code class="highlighter-rouge">jsonapi_headers</code>. Use this to manipulate
+  <p>It also allows overriding <code class="language-plaintext highlighter-rouge">jsonapi_headers</code>. Use this to manipulate
 headers for a given request:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">jsonapi_headers</span>
@@ -515,8 +515,8 @@ For more details, check out the <a href="https://github.com/graphiti-api/guard-r
   <p>There are two test files for each Resource:</p>
 
   <ul>
-    <li><code class="highlighter-rouge">spec/resources/post/reads_spec.rb</code></li>
-    <li><code class="highlighter-rouge">spec/resources/post/writes_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/resources/post/reads_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/resources/post/writes_spec.rb</code></li>
   </ul>
 
 <a class="anchor" id="reads" />
@@ -578,7 +578,7 @@ the seeded data.</p>
     <li>Assert on all attributes, even if there is no logic. This way adding
 logic will cause a test failure.</li>
     <li>When seeding data, manually assign values. This way you can be assured
-you aren’t accidentally testing <code class="highlighter-rouge">nil == nil</code></li>
+you aren’t accidentally testing <code class="language-plaintext highlighter-rouge">nil == nil</code></li>
   </ul>
 
   <p>If you decide you have a high level of confidence in your factories, you
@@ -724,12 +724,12 @@ associated to a different Resource.</p>
 
 <span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="no">EmployeeResource</span><span class="p">,</span> <span class="ss">type: :resource</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'creating'</span> <span class="k">do</span>
-    <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
     <span class="c1"># ... code ...</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s1">'creating'</span> <span class="k">do</span>
-    <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
     <span class="c1"># ... code ...</span>
   <span class="k">end</span>
 
@@ -738,7 +738,7 @@ associated to a different Resource.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Here <code class="highlighter-rouge">payload</code> is a <a href="http://jsonapi.org/format/#crud">JSONAPI Resource Object</a>.</p>
+  <p>Here <code class="language-plaintext highlighter-rouge">payload</code> is a <a href="http://jsonapi.org/format/#crud">JSONAPI Resource Object</a>.</p>
 
 <a class="anchor" id="create" />
   <a class="header" href="#create">
@@ -768,7 +768,7 @@ associated to a different Resource.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Here <code class="highlighter-rouge">payload</code> is an empty Employee <a href="http://jsonapi.org/format/#crud">Resource Object</a>.
+  <p>Here <code class="language-plaintext highlighter-rouge">payload</code> is an empty Employee <a href="http://jsonapi.org/format/#crud">Resource Object</a>.
 We’ll assert that when saving this empty payload, an Employee is
 created.</p>
 
@@ -802,13 +802,13 @@ correctly:</p>
     </h5>
   </a>
 
-  <p><a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 made belongs_to required by default</a>. This means that if Employee <code class="highlighter-rouge">belongs_to :department</code>, the above tests will fail (we cannot create the Employee without associating it to Department).</p>
+  <p><a href="https://blog.bigbinary.com/2016/02/15/rails-5-makes-belong-to-association-required-by-default.html">Rails 5 made belongs_to required by default</a>. This means that if Employee <code class="language-plaintext highlighter-rouge">belongs_to :department</code>, the above tests will fail (we cannot create the Employee without associating it to Department).</p>
 
   <p>You have 3 options here:</p>
 
   <ul>
-    <li>Turn off this validation in test mode. Add <code class="highlighter-rouge">config.active_record.belongs_to_required_by_default = false</code> to <code class="highlighter-rouge">config/environments/test.rb</code>.</li>
-    <li>Turn off the validation for this specific relationship: <code class="highlighter-rouge">belongs_to :department, optional: true</code>.</li>
+    <li>Turn off this validation in test mode. Add <code class="language-plaintext highlighter-rouge">config.active_record.belongs_to_required_by_default = false</code> to <code class="language-plaintext highlighter-rouge">config/environments/test.rb</code>.</li>
+    <li>Turn off the validation for this specific relationship: <code class="language-plaintext highlighter-rouge">belongs_to :department, optional: true</code>.</li>
     <li>Associate as part of the request.</li>
   </ul>
 
@@ -821,7 +821,7 @@ behavior:</p>
   <span class="n">let</span><span class="p">(</span><span class="ss">:payload</span><span class="p">)</span> <span class="k">do</span>
     <span class="p">{</span>
       <span class="ss">type: </span><span class="s1">'employees'</span><span class="p">,</span>
-      <span class="ss">attributes: </span><span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">},</span>
+      <span class="ss">attributes: </span><span class="p">{</span> <span class="o">...</span> <span class="p">},</span>
       <span class="ss">relationships: </span><span class="p">{</span>
         <span class="ss">department: </span><span class="p">{</span>
           <span class="ss">data: </span><span class="p">{</span>
@@ -876,7 +876,7 @@ department.</p>
 generator, as we require the attributes to be explicitly defined.</p>
   </blockquote>
 
-  <p>Here <code class="highlighter-rouge">payload</code> is an empty Employee <a href="http://jsonapi.org/format/#crud">Resource Object</a>.
+  <p>Here <code class="language-plaintext highlighter-rouge">payload</code> is an empty Employee <a href="http://jsonapi.org/format/#crud">Resource Object</a>.
 We’ll assert that when updating attributes, the changes are correctly
 persisted to the database.</p>
 
@@ -933,11 +933,11 @@ tests can take longer to run and the performance penalty isn’t worth it.</p>
   <p>There are five test files for each Resource:</p>
 
   <ul>
-    <li><code class="highlighter-rouge">spec/api/v1/employees/index_spec.rb</code></li>
-    <li><code class="highlighter-rouge">spec/api/v1/employees/show_spec.rb</code></li>
-    <li><code class="highlighter-rouge">spec/api/v1/employees/create_spec.rb</code></li>
-    <li><code class="highlighter-rouge">spec/api/v1/employees/update_spec.rb</code></li>
-    <li><code class="highlighter-rouge">spec/api/v1/employees/destroy_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/api/v1/employees/index_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/api/v1/employees/show_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/api/v1/employees/create_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/api/v1/employees/update_spec.rb</code></li>
+    <li><code class="language-plaintext highlighter-rouge">spec/api/v1/employees/destroy_spec.rb</code></li>
   </ul>
 
 <a class="anchor" id="reads" />
@@ -979,7 +979,7 @@ tests can take longer to run and the performance penalty isn’t worth it.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Here we’re ensuring <code class="highlighter-rouge">EmployeeResource</code> is the correct resource to be
+  <p>Here we’re ensuring <code class="language-plaintext highlighter-rouge">EmployeeResource</code> is the correct resource to be
 called from this endpoint, we get a 200 status code, and the entities
 returned are expected.</p>
 
@@ -1012,7 +1012,7 @@ returned are expected.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Similar to <code class="highlighter-rouge">index</code>, but fetching only a single Employee.</p>
+  <p>Similar to <code class="language-plaintext highlighter-rouge">index</code>, but fetching only a single Employee.</p>
 
 <a class="anchor" id="writes" />
   <a class="header" href="#writes">
@@ -1058,7 +1058,7 @@ returned are expected.</p>
 <span class="k">end</span></code></pre></figure>
 
   <p>Here we’re ensuring EmployeeResource is called, a record is correctly
-inserted, and the response code is <code class="highlighter-rouge">201</code>.</p>
+inserted, and the response code is <code class="language-plaintext highlighter-rouge">201</code>.</p>
 
   <p>You probably only want to add attributes required to pass validation,
 here - note that we don’t assert on attributes of the created record
@@ -1183,10 +1183,10 @@ scenario is authorization:</p>
   <span class="n">context</span><span class="p">.</span><span class="nf">current_user</span><span class="p">.</span><span class="nf">admin?</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>When using Rails, <code class="highlighter-rouge">context</code> is the controller associated to the request.
+  <p>When using Rails, <code class="language-plaintext highlighter-rouge">context</code> is the controller associated to the request.
 We can manually set context in tests:</p>
 
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="n">admin?</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="ss">admin?: </span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">let</span><span class="p">(</span><span class="ss">:ctx</span><span class="p">)</span> <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="ss">current_user: </span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
 
 <span class="n">it</span> <span class="s1">'works'</span> <span class="k">do</span>
@@ -1209,7 +1209,7 @@ We can manually set context in tests:</p>
 by comparing the current version of the schema with one previously
 checked-in.</p>
 
-  <p>These tests are added at the bottom of <code class="highlighter-rouge">spec/rails_helper.rb</code>:</p>
+  <p>These tests are added at the bottom of <code class="language-plaintext highlighter-rouge">spec/rails_helper.rb</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">GraphitiSpecHelpers</span><span class="o">::</span><span class="no">RSpec</span><span class="p">.</span><span class="nf">schema!</span></code></pre></figure>
 
@@ -1222,9 +1222,9 @@ detailing all incompatibilities.</p>
 file with the new schema. It will not do this on failure.</p>
 
   <p>There are times when you want to accept an incompatibility and move on
-anyway. In this case, use <code class="highlighter-rouge">FORCE_SCHEMA</code>:</p>
+anyway. In this case, use <code class="language-plaintext highlighter-rouge">FORCE_SCHEMA</code>:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nv">FORCE_SCHEMA</span><span class="o">=</span><span class="nb">true </span>bin/rspec</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ FORCE_SCHEMA</span><span class="o">=</span><span class="nb">true </span>bin/rspec</code></pre></figure>
 
   <p><br /></p>
 
@@ -1240,7 +1240,7 @@ when judging “the right level of testing”.</p>
 
   <p>You <em>could</em> add tests for every attribute, validating every sort and
 filter. Or, you could consider logicless configuration tested as part of
-Graphiti itself (the same way we don’t tend to test a <code class="highlighter-rouge">has_many</code>
+Graphiti itself (the same way we don’t tend to test a <code class="language-plaintext highlighter-rouge">has_many</code>
 ActiveRecord relationship). Though our guides favor the latter, the
 extra tests could prove useful when performing a major upgrade or
 swapping datastores.</p>
@@ -1279,7 +1279,7 @@ so powerful the value of unit testing sometimes comes up for debate.</p>
     <span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="s2">"lower(title) = ?"</span><span class="p">,</span> <span class="n">title</span><span class="p">.</span><span class="nf">downcase</span><span class="p">)</span>
 <span class="p">}</span></code></pre></figure>
 
-  <p>If we’re by-the-book, we should absolutely test <code class="highlighter-rouge">.by_title</code> on the
+  <p>If we’re by-the-book, we should absolutely test <code class="language-plaintext highlighter-rouge">.by_title</code> on the
 Employee model. After all, we’re exposing a public interface that other
 developers might rely on in the future.</p>
 
@@ -1331,7 +1331,7 @@ the assertion will be almost identical. But because Resource Tests are
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>This <strong>allows our <code class="highlighter-rouge">by_title</code> scope to be re-used by future developers
+  <p>This <strong>allows our <code class="language-plaintext highlighter-rouge">by_title</code> scope to be re-used by future developers
 outside of the Resource context</strong>. It also keeps code clean and
 isolated.</p>
 
@@ -1340,7 +1340,7 @@ you’re of this mind, we recommend testing the Resource and marking the
 method as not re-usable:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># @api private</span>
-<span class="n">scope</span> <span class="ss">:by_title</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span></code></pre></figure>
+<span class="n">scope</span> <span class="ss">:by_title</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span></code></pre></figure>
 
   <p>This way future developers know the scope is only an implementation
 detail and not considered part of this object’s public API. Writing the
@@ -1358,15 +1358,15 @@ Use these as templates to implement your tests.</p>
 
   <p>You can also run</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails generate graphiti:api_test RESOURCE <span class="o">[</span>options]</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails generate graphiti:api_test RESOURCE <span class="o">[</span>options]</code></pre></figure>
 
   <p>For example</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails generate graphiti:api_test EmployeeResource -a index show</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails generate graphiti:api_test EmployeeResource <span class="nt">-a</span> index show</code></pre></figure>
 
   <p>To generate only the API tests. This can be particularly helpful because
 API tests are mostly boilerplate that does not need to be manually
-edited. Pass the <code class="highlighter-rouge">-a</code> option to limit RESTful actions.</p>
+edited. Pass the <code class="language-plaintext highlighter-rouge">-a</code> option to limit RESTful actions.</p>
 
   <p><br />
 <br /></p>

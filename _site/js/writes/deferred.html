@@ -127,7 +127,7 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="deferred-action">Deferred Action</h3>
 
-  <p>If your update or destroy action takes a long time then the server can respond with status code <code class="highlighter-rouge">202 Accepted</code> and include background job object in the payload.</p>
+  <p>If your update or destroy action takes a long time then the server can respond with status code <code class="language-plaintext highlighter-rouge">202 Accepted</code> and include background job object in the payload.</p>
 
   <p>Example response:</p>
   <div class="code-tabs">
@@ -136,11 +136,11 @@
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/vnd.api+json</span>
 
 <span class="p">{</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"background_jobs"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"background_jobs"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"550e8400-e29b-41d4-a716-446655440000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pending"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -148,7 +148,7 @@
 
   </div>
 
-  <p>You will need to give the model object a callback called <code class="highlighter-rouge">onDeferredDestroy</code> or <code class="highlighter-rouge">onDeferredUpdate</code>. Spraypaint will then call your callback with the deserialized object included in the payload.</p>
+  <p>You will need to give the model object a callback called <code class="language-plaintext highlighter-rouge">onDeferredDestroy</code> or <code class="language-plaintext highlighter-rouge">onDeferredUpdate</code>. Spraypaint will then call your callback with the deserialized object included in the payload.</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -161,28 +161,28 @@
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Jane'</span> <span class="p">})</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredUpdate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">job</span><span class="err">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span> <span class="p">})</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredUpdate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">job</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
 
-<span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredDestroy</span> <span class="o">=</span> <span class="p">(</span><span class="na">job</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredDestroy</span> <span class="o">=</span> <span class="p">(</span><span class="nx">job</span><span class="p">:</span> <span class="kr">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nf">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">destroy</span><span class="p">()</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">destroy</span><span class="p">()</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Jane'</span> <span class="p">});</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="p">({</span> <span class="na">firstName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Jane</span><span class="dl">'</span> <span class="p">});</span>
 <span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredUpdate</span> <span class="o">=</span> <span class="p">(</span><span class="nx">job</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
+  <span class="nf">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
 <span class="p">};</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">save</span><span class="p">();</span>
 
 <span class="nx">person</span><span class="p">.</span><span class="nx">onDeferredDestroy</span> <span class="o">=</span> <span class="p">(</span><span class="nx">job</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
+  <span class="nf">handleBackgroundJob</span><span class="p">(</span><span class="nx">job</span><span class="p">);</span>
 <span class="p">};</span>
-<span class="nx">person</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+<span class="nx">person</span><span class="p">.</span><span class="nf">destroy</span><span class="p">();</span>
   </code></pre></figure>
 
   </div>

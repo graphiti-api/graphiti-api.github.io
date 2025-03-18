@@ -128,12 +128,12 @@
   <h3 id="middleware">Middleware</h3>
 
   <p>Middleware is helpful whenever you want to globally intercept request.
-This is accomplished by assigning a <code class="highlighter-rouge">MiddlewareStack</code> to your
-<code class="highlighter-rouge">ApplicationRecord</code>. Each stack has <code class="highlighter-rouge">beforeFilters</code> and <code class="highlighter-rouge">afterFilters</code>
-where you can globally modify requests. If you <code class="highlighter-rouge">throw("abort")</code>, the
+This is accomplished by assigning a <code class="language-plaintext highlighter-rouge">MiddlewareStack</code> to your
+<code class="language-plaintext highlighter-rouge">ApplicationRecord</code>. Each stack has <code class="language-plaintext highlighter-rouge">beforeFilters</code> and <code class="language-plaintext highlighter-rouge">afterFilters</code>
+where you can globally modify requests. If you <code class="language-plaintext highlighter-rouge">throw("abort")</code>, the
 promise will be rejected.</p>
 
-  <p>Example: redirecting to the login page every time the server returns <code class="highlighter-rouge">401</code>:</p>
+  <p>Example: redirecting to the login page every time the server returns <code class="language-plaintext highlighter-rouge">401</code>:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -146,13 +146,13 @@ promise will be rejected.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="k">import</span> <span class="p">{</span> <span class="nx">MiddlewareStack</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'spraypaint'</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="k">import</span> <span class="p">{</span> <span class="nx">MiddlewareStack</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">spraypaint</span><span class="dl">'</span>
 
-  <span class="kd">let</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MiddlewareStack</span><span class="p">()</span>
-  <span class="nx">middleware</span><span class="p">.</span><span class="nx">afterFilters</span><span class="p">.</span><span class="nx">push</span><span class="p">((</span><span class="nx">response</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/login"</span>
-      <span class="k">throw</span><span class="p">(</span><span class="s2">"abort"</span><span class="p">)</span>
+  <span class="kd">let</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MiddlewareStack</span><span class="p">()</span>
+  <span class="nx">middleware</span><span class="p">.</span><span class="nx">afterFilters</span><span class="p">.</span><span class="nf">push</span><span class="p">((</span><span class="nx">response</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span>
+      <span class="k">throw</span><span class="p">(</span><span class="dl">"</span><span class="s2">abort</span><span class="dl">"</span><span class="p">)</span>
     <span class="p">}</span>
   <span class="p">})</span>
 
@@ -161,11 +161,11 @@ promise will be rejected.</p>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">MiddlewareStack</span> <span class="o">=</span> <span class="nx">spraypaint</span><span class="p">.</span><span class="nx">MiddlewareStack</span><span class="p">;</span>
 
-  <span class="kd">var</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MiddlewareStack</span><span class="p">();</span>
-  <span class="nx">middleware</span><span class="p">.</span><span class="nx">afterFilters</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"/login"</span><span class="p">;</span>
-      <span class="k">throw</span><span class="p">(</span><span class="s2">"abort"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MiddlewareStack</span><span class="p">();</span>
+  <span class="nx">middleware</span><span class="p">.</span><span class="nx">afterFilters</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if </span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">401</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">/login</span><span class="dl">"</span><span class="p">;</span>
+      <span class="k">throw</span><span class="p">(</span><span class="dl">"</span><span class="s2">abort</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
 
@@ -187,11 +187,11 @@ promise will be rejected.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="k">import</span> <span class="p">{</span> <span class="nx">MiddlewareStack</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'spraypaint'</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="k">import</span> <span class="p">{</span> <span class="nx">MiddlewareStack</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">spraypaint</span><span class="dl">'</span>
 
-  <span class="kd">let</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MiddlewareStack</span><span class="p">()</span>
-  <span class="nx">middleware</span><span class="p">.</span><span class="nx">beforeFilters</span><span class="p">.</span><span class="nx">push</span><span class="p">((</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s2">"CUSTOM-HEADER"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"whatever"</span>
+  <span class="kd">let</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MiddlewareStack</span><span class="p">()</span>
+  <span class="nx">middleware</span><span class="p">.</span><span class="nx">beforeFilters</span><span class="p">.</span><span class="nf">push</span><span class="p">((</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">"</span><span class="s2">CUSTOM-HEADER</span><span class="dl">"</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">whatever</span><span class="dl">"</span>
   <span class="p">})</span>
 
   <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">middlewareStack</span> <span class="o">=</span> <span class="nx">middleware</span>
@@ -199,9 +199,9 @@ promise will be rejected.</p>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">MiddlewareStack</span> <span class="o">=</span> <span class="nx">spraypaint</span><span class="p">.</span><span class="nx">MiddlewareStack</span><span class="p">;</span>
 
-  <span class="kd">var</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MiddlewareStack</span><span class="p">();</span>
-  <span class="nx">middleware</span><span class="p">.</span><span class="nx">beforeFilters</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="s2">"CUSTOM-HEADER"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"whatever"</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">middleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MiddlewareStack</span><span class="p">();</span>
+  <span class="nx">middleware</span><span class="p">.</span><span class="nx">beforeFilters</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">headers</span><span class="p">[</span><span class="dl">"</span><span class="s2">CUSTOM-HEADER</span><span class="dl">"</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">whatever</span><span class="dl">"</span><span class="p">;</span>
   <span class="p">});</span>
 
   <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">middlewareStack</span> <span class="o">=</span> <span class="nx">middleware</span><span class="p">;</span>

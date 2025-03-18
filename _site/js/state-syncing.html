@@ -148,31 +148,31 @@ Consider the scenario where an instance is initially loaded, then separately pol
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
 
   <span class="kd">let</span> <span class="nx">poll</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">poll</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">poll</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
   <span class="p">}</span>
-  <span class="nx">poll</span><span class="p">()</span>
+  <span class="nf">poll</span><span class="p">()</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
   <span class="p">});</span>
 
   <span class="kd">var</span> <span class="nx">poll</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">poll</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nf">setTimeout</span><span class="p">(</span><span class="nx">poll</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
   <span class="p">}</span>
-  <span class="nx">poll</span><span class="p">()</span>
+  <span class="nf">poll</span><span class="p">()</span>
   </code></pre></figure>
 
   </div>
 
-  <p>Note that our <code class="highlighter-rouge">poll()</code> function <strong>never assigns or updates <code class="highlighter-rouge">person</code></strong>.
-But if the server returns an updated <code class="highlighter-rouge">name</code> attribute, <strong><code class="highlighter-rouge">person.name</code>
-will be automatically updated</strong>. This is true even if <code class="highlighter-rouge">person.name</code>
+  <p>Note that our <code class="language-plaintext highlighter-rouge">poll()</code> function <strong>never assigns or updates <code class="language-plaintext highlighter-rouge">person</code></strong>.
+But if the server returns an updated <code class="language-plaintext highlighter-rouge">name</code> attribute, <strong><code class="language-plaintext highlighter-rouge">person.name</code>
+will be automatically updated</strong>. This is true even if <code class="language-plaintext highlighter-rouge">person.name</code>
 is bound in 17 different nested components.</p>
 
   <p>Instances can still update their attributes independently - we only sync
@@ -189,37 +189,37 @@ when the server returns updated data:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">instanceA</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
-  <span class="kd">let</span> <span class="nx">instanceB</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">let</span> <span class="nx">instanceA</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
+  <span class="kd">let</span> <span class="nx">instanceB</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">data</span>
 
   <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
   <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
 
-  <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">"Silvia"</span>
+  <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Silvia</span><span class="dl">"</span>
   <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
   <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
 
-  <span class="k">await</span> <span class="nx">instanceB</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="k">await</span> <span class="nx">instanceB</span><span class="p">.</span><span class="nf">save</span><span class="p">()</span>
   <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
   <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
   </code></pre></figure>
 
     <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">instanceA</span><span class="p">,</span> <span class="nx">instanceB</span><span class="p">;</span>
-  <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">instanceA</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
   <span class="p">});</span>
-  <span class="nx">Person</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Person</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">instanceB</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
   <span class="p">});</span>
 
   <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
   <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
 
-  <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">"Silvia"</span>
+  <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Silvia</span><span class="dl">"</span>
   <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Jane"</span>
   <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
 
-  <span class="nx">instanceB</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">instanceB</span><span class="p">.</span><span class="nf">save</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">instanceA</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
     <span class="nx">instanceB</span><span class="p">.</span><span class="nx">name</span> <span class="c1">// "Silvia"</span>
   <span class="p">});</span>
@@ -234,9 +234,9 @@ store. This means that you’ll want to remove listeners whenever you no
 longer need the instance - otherwise it will never be garbage collected
 properly. To remove a listener:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">instance</span><span class="p">.</span><span class="nx">unlisten</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">instance</span><span class="p">.</span><span class="nf">unlisten</span><span class="p">()</span></code></pre></figure>
 
-  <p>In practice, when developing in a SPA, you’ll want to <code class="highlighter-rouge">#unlisten()</code>
+  <p>In practice, when developing in a SPA, you’ll want to <code class="language-plaintext highlighter-rouge">#unlisten()</code>
 whenever a view is destroyed and model instances no longer need to be referenced. If
 you are using VueJS, this is done automatically by adding <a href="https://github.com/graphiti-api/spraypaint-vue">spraypaint-vue</a>
 to your application.</p>

@@ -128,23 +128,23 @@
   <h3 id="authentication">Authentication</h3>
 
   <p>Spraypaint supports <a href="https://jwt.io/introduction">JSON Web Tokens</a>. These can
-be set manually, or automatically fetched from <code class="highlighter-rouge">localStorage</code>.</p>
+be set manually, or automatically fetched from <code class="language-plaintext highlighter-rouge">localStorage</code>.</p>
 
   <p>To set manually:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwt</span> <span class="o">=</span> <span class="s1">'myt0k3n'</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwt</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">myt0k3n</span><span class="dl">'</span></code></pre></figure>
 
   <blockquote>
     <p>All requests will now send the header:<br />
-<code class="highlighter-rouge">Authorization: Token token="myt0k3n"</code>.</p>
+<code class="language-plaintext highlighter-rouge">Authorization: Token token="myt0k3n"</code>.</p>
   </blockquote>
 
-  <p>To set via <code class="highlighter-rouge">localStorage</code>, simply store the token with a key of <code class="highlighter-rouge">jwt</code>
-and it will be set automatically. To customize the <code class="highlighter-rouge">localStorage</code> key:</p>
+  <p>To set via <code class="language-plaintext highlighter-rouge">localStorage</code>, simply store the token with a key of <code class="language-plaintext highlighter-rouge">jwt</code>
+and it will be set automatically. To customize the <code class="language-plaintext highlighter-rouge">localStorage</code> key:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwtStorage</span> <span class="o">=</span> <span class="s2">"authtoken"</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwtStorage</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">authtoken</span><span class="dl">"</span></code></pre></figure>
 
-  <p>…or to opt-out of <code class="highlighter-rouge">localStorage</code> altogether:</p>
+  <p>…or to opt-out of <code class="language-plaintext highlighter-rouge">localStorage</code> altogether:</p>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwtStorage</span> <span class="o">=</span> <span class="kc">false</span></code></pre></figure>
 
@@ -162,19 +162,19 @@ server:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kr">class</span> <span class="nx">ApplicationRecord</span> <span class="k">extends</span> <span class="nx">SpraypaintBase</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">class</span> <span class="nc">ApplicationRecord</span> <span class="kd">extends</span> <span class="nc">SpraypaintBase</span> <span class="p">{</span>
     <span class="c1">// ... code ...</span>
-    <span class="k">static</span> <span class="nx">generateAuthHeader</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="err">`</span><span class="nx">Bearer</span> <span class="nx">$</span><span class="p">{</span><span class="nx">token</span><span class="p">}</span><span class="err">`</span>
+    <span class="k">static</span> <span class="nf">generateAuthHeader</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
     <span class="p">}</span>
   <span class="p">}</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
     <span class="c1">// ... code ...</span>
     <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">generateAuthHeader</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s2">"Bearer "</span> <span class="o">+</span> <span class="nx">token</span><span class="p">;</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">token</span><span class="p">;</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">});</span>
@@ -182,8 +182,8 @@ server:</p>
 
   </div>
 
-  <p>Finally, if your server returns a refreshed JWT within the <code class="highlighter-rouge">X-JWT</code>
-header, it will be used in all subsequent requests (and <code class="highlighter-rouge">localStorage</code>
+  <p>Finally, if your server returns a refreshed JWT within the <code class="language-plaintext highlighter-rouge">X-JWT</code>
+header, it will be used in all subsequent requests (and <code class="language-plaintext highlighter-rouge">localStorage</code>
 will be updated automatically if you’re using it).</p>
 
   <div class="clearfix">

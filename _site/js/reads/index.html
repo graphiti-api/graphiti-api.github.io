@@ -133,7 +133,7 @@ Instead of generating SQL, we’ll be generating JSONAPI requests.</p>
 
   <h3 id="basic-finders">Basic Finders</h3>
 
-  <p>Execute queries with <code class="highlighter-rouge">.all()</code>, <code class="highlighter-rouge">find()</code>, or <code class="highlighter-rouge">.first()</code>:</p>
+  <p>Execute queries with <code class="language-plaintext highlighter-rouge">.all()</code>, <code class="language-plaintext highlighter-rouge">find()</code>, or <code class="language-plaintext highlighter-rouge">.first()</code>:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -146,11 +146,11 @@ Instead of generating SQL, we’ll be generating JSONAPI requests.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
 <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// array of Post instances</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// array of Post instances</span>
 <span class="p">});</span>
   </code></pre></figure>
@@ -171,11 +171,11 @@ Instead of generating SQL, we’ll be generating JSONAPI requests.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
 <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// Post instance</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="mi">123</span><span class="p">).</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// Post instance</span>
 <span class="p">});</span>
   </code></pre></figure>
@@ -196,11 +196,11 @@ Instead of generating SQL, we’ll be generating JSONAPI requests.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">first</span><span class="p">()</span>
 <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// Post instance</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nx">first</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nf">first</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// Post instance</span>
 <span class="p">});</span>
   </code></pre></figure>
@@ -213,9 +213,9 @@ Instead of generating SQL, we’ll be generating JSONAPI requests.</p>
   <h3 id="composable-queries-with-scopes">Composable Queries with Scopes</h3>
 
   <p>The beauty of ORMs is their ability to compose queries. We’ll be doing
-this by chaining together <code class="highlighter-rouge">Scope</code>s (query fragments). All of the methods
+this by chaining together <code class="language-plaintext highlighter-rouge">Scope</code>s (query fragments). All of the methods
 you see on this page can be chained together - the request will not fire
-until the chain ends with <code class="highlighter-rouge">all()</code>, <code class="highlighter-rouge">first()</code>, or <code class="highlighter-rouge">find</code>. Example:</p>
+until the chain ends with <code class="language-plaintext highlighter-rouge">all()</code>, <code class="language-plaintext highlighter-rouge">first()</code>, or <code class="language-plaintext highlighter-rouge">find</code>. Example:</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -228,26 +228,26 @@ until the chain ends with <code class="highlighter-rouge">all()</code>, <code cl
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">})</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">desc</span><span class="dl">"</span> <span class="p">})</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="nx">someCheckboxIsChecked</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">someCheckboxIsChecked</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">})</span>
+  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">})</span>
 <span class="p">}</span>
 
-<span class="nx">scope</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span> <span class="c1">// request fires</span>
+<span class="nx">scope</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span> <span class="c1">// request fires</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">});</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">desc</span><span class="dl">"</span> <span class="p">});</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="nx">someCheckboxIsChecked</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">someCheckboxIsChecked</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+  <span class="nx">scope</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">important</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
 <span class="p">}</span>
 
-<span class="nx">scope</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span> <span class="c1">// request fires</span>
+<span class="nx">scope</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span> <span class="c1">// request fires</span>
   </code></pre></figure>
 
   </div>
@@ -271,36 +271,36 @@ methods (static methods) in the model:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">class</span> <span class="nx">Post</span> <span class="k">extends</span> <span class="nx">ApplicationRecord</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">class</span> <span class="nc">Post</span> <span class="kd">extends</span> <span class="nc">ApplicationRecord</span> <span class="p">{</span>
   <span class="c1">// ... code ...</span>
-  <span class="k">static</span> <span class="nx">superImportant</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">static</span> <span class="nf">superImportant</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span>
-      <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">ranking_gt</span><span class="p">:</span> <span class="mi">8</span> <span class="p">})</span>
-      <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="s1">'desc'</span> <span class="p">})</span>
-      <span class="p">.</span><span class="nx">stats</span><span class="p">({</span> <span class="nx">total</span> <span class="s1">'count'</span> <span class="p">})</span>
+      <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">ranking_gt</span><span class="p">:</span> <span class="mi">8</span> <span class="p">})</span>
+      <span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">})</span>
+      <span class="p">.</span><span class="nf">stats</span><span class="p">({</span> <span class="nx">total</span> <span class="dl">'</span><span class="s1">count</span><span class="dl">'</span> <span class="p">})</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// get 10 super important posts</span>
-<span class="kd">let</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">superImportant</span><span class="p">().</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="nx">scope</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span> <span class="c1">// fire query</span>
+<span class="kd">let</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">superImportant</span><span class="p">().</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">scope</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span> <span class="c1">// fire query</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">const</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
   <span class="c1">// ... code ...</span>
   <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nx">superImportant</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">superImportant</span><span class="p">()</span> <span class="p">{</span>
       <span class="k">return</span> <span class="k">this</span>
-        <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">ranking_gt</span><span class="p">:</span> <span class="mi">8</span> <span class="p">})</span>
-        <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="s1">'desc'</span> <span class="p">})</span>
-        <span class="p">.</span><span class="nx">stats</span><span class="p">({</span> <span class="nx">total</span> <span class="s1">'count'</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nf">where</span><span class="p">({</span> <span class="na">ranking_gt</span><span class="p">:</span> <span class="mi">8</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">ranking</span><span class="p">:</span> <span class="dl">'</span><span class="s1">desc</span><span class="dl">'</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nf">stats</span><span class="p">({</span> <span class="nx">total</span> <span class="dl">'</span><span class="s1">count</span><span class="dl">'</span> <span class="p">})</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">})</span>
 
 <span class="c1">// get 10 super important posts</span>
-<span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">superImportant</span><span class="p">().</span><span class="nx">per</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="nx">scope</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span> <span class="c1">// fire query</span>
+<span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">superImportant</span><span class="p">().</span><span class="nf">per</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nx">scope</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span> <span class="c1">// fire query</span>
   </code></pre></figure>
 
   </div>
@@ -324,11 +324,11 @@ JSONAPI response is available as a POJO on the response:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
 <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span> <span class="c1">// { stats: { total: { count: 100 } } }</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span> <span class="c1">// { stats: { total: { count: 100 } } }</span>
 <span class="p">})</span>
   </code></pre></figure>
@@ -337,11 +337,11 @@ JSONAPI response is available as a POJO on the response:</p>
 
   <h3 id="promises-and-asyncawait">Promises and Async/Await</h3>
 
-  <p>The result of <code class="highlighter-rouge">all()</code>, <code class="highlighter-rouge">first()</code> or <code class="highlighter-rouge">find</code> is a <a href="https://developers.google.com/web/fundamentals/primers/promises">Promise</a>. The promise will resolve to a <code class="highlighter-rouge">Response</code> object.</p>
+  <p>The result of <code class="language-plaintext highlighter-rouge">all()</code>, <code class="language-plaintext highlighter-rouge">first()</code> or <code class="language-plaintext highlighter-rouge">find</code> is a <a href="https://developers.google.com/web/fundamentals/primers/promises">Promise</a>. The promise will resolve to a <code class="language-plaintext highlighter-rouge">Response</code> object.</p>
 
-  <p>A <code class="highlighter-rouge">Response</code> object has three keys - <code class="highlighter-rouge">data</code>, <code class="highlighter-rouge">meta</code>, and <code class="highlighter-rouge">raw</code>. <code class="highlighter-rouge">data</code> - the one
-you’ll be using the most - will be a <code class="highlighter-rouge">Model</code> instance (or array of
-<code class="highlighter-rouge">Model</code>) instances. <code class="highlighter-rouge">meta</code> will be the <a href="http://jsonapi.org/format/#document-meta">Meta Information</a> returned by the API (mostly used for statistics in our case). <code class="highlighter-rouge">raw</code> is only used to introspect the raw response document.</p>
+  <p>A <code class="language-plaintext highlighter-rouge">Response</code> object has three keys - <code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">meta</code>, and <code class="language-plaintext highlighter-rouge">raw</code>. <code class="language-plaintext highlighter-rouge">data</code> - the one
+you’ll be using the most - will be a <code class="language-plaintext highlighter-rouge">Model</code> instance (or array of
+<code class="language-plaintext highlighter-rouge">Model</code>) instances. <code class="language-plaintext highlighter-rouge">meta</code> will be the <a href="http://jsonapi.org/format/#document-meta">Meta Information</a> returned by the API (mostly used for statistics in our case). <code class="language-plaintext highlighter-rouge">raw</code> is only used to introspect the raw response document.</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -354,14 +354,14 @@ you’ll be using the most - will be a <code class="highlighter-rouge">Model</co
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// array of Post instances</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span> <span class="c1">// js object from the server</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">raw</span> <span class="c1">// js response document</span>
 <span class="p">})</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">().</span><span class="nf">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">data</span> <span class="c1">// array of Post instances</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span> <span class="c1">// js object from the server</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">raw</span> <span class="c1">// js response document</span>
@@ -376,12 +376,12 @@ you’ll be using the most - will be a <code class="highlighter-rouge">Model</co
   <p>Hopefully you’re running in an environment that supports
 ES7’s <a href="https://hackernoon.com/6-reasons-why-javascripts-async-await-blows-promises-away-tutorial-c7ec10518dd9">Async/Await</a>. This makes things even easier:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="p">{</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">()</span>
 <span class="nx">data</span> <span class="c1">// array of Post instances</span>
 
 <span class="c1">// alternatively</span>
 
-<span class="kd">let</span> <span class="nx">posts</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">all</span><span class="p">()).</span><span class="nx">data</span>
+<span class="kd">let</span> <span class="nx">posts</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">Post</span><span class="p">.</span><span class="nf">all</span><span class="p">()).</span><span class="nx">data</span>
 <span class="nx">posts</span> <span class="c1">// array of Post instances</span></code></pre></figure>
 
   <blockquote class="url">

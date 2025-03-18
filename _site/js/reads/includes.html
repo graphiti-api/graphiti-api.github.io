@@ -127,9 +127,9 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="includes">Includes</h3>
 
-  <p>Use <code class="highlighter-rouge">#includes()</code> to <a href="http://jsonapi.org/format/#fetching-includes">“sideload”</a> associations:</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#includes()</code> to <a href="http://jsonapi.org/format/#fetching-includes">“sideload”</a> associations:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">"comments"</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?include=comments</p>
@@ -137,7 +137,7 @@
 
   <p>You can also pass an array of associations:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">includes</span><span class="p">([</span><span class="s2">"blog"</span><span class="p">,</span> <span class="s2">"comments"</span><span class="p">]).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">includes</span><span class="p">([</span><span class="dl">"</span><span class="s2">blog</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">comments</span><span class="dl">"</span><span class="p">]).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?include=blog,comments</p>
@@ -145,7 +145,7 @@
 
   <p>Or an object for nested associations:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">includes</span><span class="p">([</span><span class="s2">"blog"</span><span class="p">,</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="s2">"author"</span> <span class="p">}]).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">includes</span><span class="p">([</span><span class="dl">"</span><span class="s2">blog</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">comments</span><span class="p">:</span> <span class="dl">"</span><span class="s2">author</span><span class="dl">"</span> <span class="p">}]).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?include=blog,comments.author</p>

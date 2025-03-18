@@ -111,9 +111,9 @@ Resources are the same concept, without an association: a single
 Resource can resolve to many different sub-Resources. It’s a very similar
 to <a href="https://api.rubyonrails.org/classes/ActiveRecord/Inheritance.html">Single-Table Inheritance in ActiveRecord</a>.</p>
 
-  <p>To illustrate this, we’ll add a <code class="highlighter-rouge">tasks</code> table and corresponding <code class="highlighter-rouge">Task</code>
-superclass. Each record in this table will resolve to one of <code class="highlighter-rouge">Bug</code>,
-<code class="highlighter-rouge">Epic</code>, or <code class="highlighter-rouge">Feature</code>.</p>
+  <p>To illustrate this, we’ll add a <code class="language-plaintext highlighter-rouge">tasks</code> table and corresponding <code class="language-plaintext highlighter-rouge">Task</code>
+superclass. Each record in this table will resolve to one of <code class="language-plaintext highlighter-rouge">Bug</code>,
+<code class="language-plaintext highlighter-rouge">Epic</code>, or <code class="language-plaintext highlighter-rouge">Feature</code>.</p>
 
   <table class="table table-small text-center">
   <thead>
@@ -146,17 +146,17 @@ superclass. Each record in this table will resolve to one of <code class="highli
   </tbody>
 </table>
 
-  <p>Why not just stick with a single <code class="highlighter-rouge">Task</code> model? Because each of these
-types has specific behavior: only <code class="highlighter-rouge">Feature</code>s have a <code class="highlighter-rouge">points</code> attribute,
-and only <code class="highlighter-rouge">Epic</code>s have a <code class="highlighter-rouge">milestones</code> relationship.</p>
+  <p>Why not just stick with a single <code class="language-plaintext highlighter-rouge">Task</code> model? Because each of these
+types has specific behavior: only <code class="language-plaintext highlighter-rouge">Feature</code>s have a <code class="language-plaintext highlighter-rouge">points</code> attribute,
+and only <code class="language-plaintext highlighter-rouge">Epic</code>s have a <code class="language-plaintext highlighter-rouge">milestones</code> relationship.</p>
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <p>Let’s create our <code class="highlighter-rouge">Task</code> model:</p>
+  <p>Let’s create our <code class="language-plaintext highlighter-rouge">Task</code> model:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g model Task employee:belongs_to team:belongs_to <span class="nb">type</span>:string
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g model Task employee:belongs_to team:belongs_to <span class="nb">type</span>:string
 title:string
-<span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+<span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
   <p>And create models to reflect our STI logic:</p>
 
@@ -201,13 +201,13 @@ title:string
 <span class="n">has_many</span> <span class="ss">:features</span>
 <span class="n">has_many</span> <span class="ss">:epics</span></code></pre></figure>
 
-  <p>Finally <a href="https://github.com/graphiti-api/employee_directory/compare/step_8_polymorphic_belongs_to...step_9_polymorphic_resource">view the diff</a> to edit your <code class="highlighter-rouge">seeds.rb</code> file.</p>
+  <p>Finally <a href="https://github.com/graphiti-api/employee_directory/compare/step_8_polymorphic_belongs_to...step_9_polymorphic_resource">view the diff</a> to edit your <code class="language-plaintext highlighter-rouge">seeds.rb</code> file.</p>
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
   <p>Start by creating our Resource as normal:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Task title:string</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Task title:string</code></pre></figure>
 
   <p>Now edit to support polymorphism and associations:</p>
 
@@ -223,7 +223,7 @@ title:string
 <span class="k">end</span></code></pre></figure>
 
   <p>The point of this was to show how responses could be specific to type,
-so let’s customize <code class="highlighter-rouge">Features</code>:</p>
+so let’s customize <code class="language-plaintext highlighter-rouge">Features</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">FeatureResource</span> <span class="o">&lt;</span> <span class="no">TaskResource</span>
   <span class="n">attribute</span> <span class="ss">:points</span><span class="p">,</span> <span class="ss">:integer</span> <span class="k">do</span>
@@ -233,7 +233,7 @@ so let’s customize <code class="highlighter-rouge">Features</code>:</p>
 
   <p>Only Epics have milestones, but let’s support those as well:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Milestone name:string</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Milestone name:string</code></pre></figure>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MilestoneResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
   <span class="n">attribute</span> <span class="ss">:epic_id</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:filterable</span><span class="p">]</span>
@@ -251,14 +251,14 @@ so let’s customize <code class="highlighter-rouge">Features</code>:</p>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
-  <p>We can now resolve <code class="highlighter-rouge">Tasks</code>, either as a relationship or through the
-<code class="highlighter-rouge">/tasks</code> endpoint directly. When <code class="highlighter-rouge">Task</code> is type <code class="highlighter-rouge">'Feature'</code> it will have
-an extra attribute of <code class="highlighter-rouge">points</code>. When it’s an <code class="highlighter-rouge">Epic</code>, it will have an
-additional relationship <code class="highlighter-rouge">Milestone</code>.</p>
+  <p>We can now resolve <code class="language-plaintext highlighter-rouge">Tasks</code>, either as a relationship or through the
+<code class="language-plaintext highlighter-rouge">/tasks</code> endpoint directly. When <code class="language-plaintext highlighter-rouge">Task</code> is type <code class="language-plaintext highlighter-rouge">'Feature'</code> it will have
+an extra attribute of <code class="language-plaintext highlighter-rouge">points</code>. When it’s an <code class="language-plaintext highlighter-rouge">Epic</code>, it will have an
+additional relationship <code class="language-plaintext highlighter-rouge">Milestone</code>.</p>
 
   <p>Graphiti is smart enough to fetch the appropriate relationships. A hit
-to <code class="highlighter-rouge">/tasks?include=milestones</code> will only query for milestones when the
-resulting <code class="highlighter-rouge">Task</code> records are <code class="highlighter-rouge">Epic</code>s.</p>
+to <code class="language-plaintext highlighter-rouge">/tasks?include=milestones</code> will only query for milestones when the
+resulting <code class="language-plaintext highlighter-rouge">Task</code> records are <code class="language-plaintext highlighter-rouge">Epic</code>s.</p>
 
   <p><br />
 <br />

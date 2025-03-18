@@ -127,11 +127,11 @@
 <div class="col-md-8 col-md-offset-1">
   <h3 id="sorting">Sorting</h3>
 
-  <p>Use <code class="highlighter-rouge">#order()</code> to sort.</p>
+  <p>Use <code class="language-plaintext highlighter-rouge">#order()</code> to sort.</p>
 
   <p>If passed a string, it will default to <strong>ascending</strong>:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">(</span><span class="s2">"title"</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="dl">"</span><span class="s2">title</span><span class="dl">"</span><span class="p">).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?sort=title</p>
@@ -139,18 +139,18 @@
 
   <p>Otherwise, pass an object:</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">}).</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span><span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">desc</span><span class="dl">"</span> <span class="p">}).</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?sort=-title</p>
 </blockquote>
 
-  <p>For multisort, simply chain multiple <code class="highlighter-rouge">#order()</code> clauses:</p>
+  <p>For multisort, simply chain multiple <code class="language-plaintext highlighter-rouge">#order()</code> clauses:</p>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">Post</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="s2">"desc"</span> <span class="p">})</span>
-  <span class="p">.</span><span class="nx">order</span><span class="p">(</span><span class="s2">"ranking"</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">all</span><span class="p">()</span></code></pre></figure>
+  <span class="p">.</span><span class="nf">order</span><span class="p">({</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">desc</span><span class="dl">"</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nf">order</span><span class="p">(</span><span class="dl">"</span><span class="s2">ranking</span><span class="dl">"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nf">all</span><span class="p">()</span></code></pre></figure>
 
   <blockquote class="url">
   <p>/posts?sort=-title,ranking</p>

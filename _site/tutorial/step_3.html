@@ -105,7 +105,7 @@
     <p><a href="https://github.com/graphiti-api/employee_directory/compare/step_2_positions...step_3_departments">View the Diff</a></p>
   </blockquote>
 
-  <p>We’ll be adding the database table <code class="highlighter-rouge">departments</code>:</p>
+  <p>We’ll be adding the database table <code class="language-plaintext highlighter-rouge">departments</code>:</p>
 
   <table class="table table-small text-center">
   <thead>
@@ -130,20 +130,20 @@
   </tbody>
 </table>
 
-  <p>We’ll also be adding a <code class="highlighter-rouge">department_id:integer</code> foreign key column to
-the <code class="highlighter-rouge">positions</code> table.</p>
+  <p>We’ll also be adding a <code class="language-plaintext highlighter-rouge">department_id:integer</code> foreign key column to
+the <code class="language-plaintext highlighter-rouge">positions</code> table.</p>
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <p>Generate the <code class="highlighter-rouge">Department</code> model:</p>
+  <p>Generate the <code class="language-plaintext highlighter-rouge">Department</code> model:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g model Department name:string</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g model Department name:string</code></pre></figure>
 
-  <p>To add the foreign key to <code class="highlighter-rouge">positions</code>:</p>
+  <p>To add the foreign key to <code class="language-plaintext highlighter-rouge">positions</code>:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g migration add_department_id_to_positions</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g migration add_department_id_to_positions</code></pre></figure>
 
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">AddDepartmentIdToPositions</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mi">5</span><span class="o">.</span><span class="mi">2</span><span class="p">]</span>
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">AddDepartmentIdToPositions</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mf">5.2</span><span class="p">]</span>
   <span class="k">def</span> <span class="nf">change</span>
     <span class="n">add_foreign_key</span> <span class="ss">:positions</span><span class="p">,</span> <span class="ss">:departments</span>
   <span class="k">end</span>
@@ -151,7 +151,7 @@ the <code class="highlighter-rouge">positions</code> table.</p>
 
   <p>Update the database:</p>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
   <p>Update our seed file:</p>
 
@@ -165,9 +165,9 @@ the <code class="highlighter-rouge">positions</code> table.</p>
 <span class="mi">100</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
   <span class="n">employee</span> <span class="o">=</span> <span class="no">Employee</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">first_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span><span class="p">,</span>
     <span class="ss">last_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span><span class="p">,</span>
-    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="nf">.</span><span class="mi">80</span><span class="p">)</span>
+    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="o">..</span><span class="mi">80</span><span class="p">)</span>
 
-  <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
     <span class="n">employee</span><span class="p">.</span><span class="nf">positions</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">title: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span>
       <span class="ss">historical_index: </span><span class="n">i</span><span class="p">,</span>
       <span class="ss">active: </span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>
@@ -175,9 +175,9 @@ the <code class="highlighter-rouge">positions</code> table.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>Make sure to update <code class="highlighter-rouge">spec/factories/departments.rb</code> with randomized
+  <p>Make sure to update <code class="language-plaintext highlighter-rouge">spec/factories/departments.rb</code> with randomized
 data. Then, since this is also a required relationship, update
-<code class="highlighter-rouge">spec/factories/positions.rb</code> to always seed a department when we ask to
+<code class="language-plaintext highlighter-rouge">spec/factories/positions.rb</code> to always seed a department when we ask to
 create a position:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">factory</span> <span class="ss">:position</span> <span class="k">do</span>
@@ -204,7 +204,7 @@ passing (add the department to the request payload). Practice makes perfect!</p>
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
   <p>Note that we didn’t need a filter like we did in step two. That’s
-because the primary key connecting the Resources is <code class="highlighter-rouge">id</code> by
+because the primary key connecting the Resources is <code class="language-plaintext highlighter-rouge">id</code> by
 default. In other words, the Link would be something like:</p>
 
   <figure class="highlight"><pre><code class="language-bash" data-lang="bash">/departments?filter[id]<span class="o">=</span>1</code></pre></figure>
@@ -212,7 +212,7 @@ default. In other words, the Link would be something like:</p>
   <p>Which we get out-of-the-📦</p>
 
   <p>But remember, you can customize these relationships just like the
-previous <code class="highlighter-rouge">has_many</code> section.</p>
+previous <code class="language-plaintext highlighter-rouge">has_many</code> section.</p>
 
 </div>
 
