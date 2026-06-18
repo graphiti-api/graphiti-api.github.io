@@ -142,8 +142,8 @@ the concept of <a href="https://guides.rubyonrails.org/v5.2/association_basics.h
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails generate model Note notable:references<span class="o">{</span>polymorphic<span class="o">}</span>:index
-<span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails generate model Note notable:references<span class="o">{</span>polymorphic<span class="o">}</span>:index
+<span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
   <p>Make sure to add the corresponding model relationships:</p>
 
@@ -161,9 +161,9 @@ the concept of <a href="https://guides.rubyonrails.org/v5.2/association_basics.h
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Note body:text</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Note body:text</code></pre></figure>
 
-  <p>Let’s create our <code class="highlighter-rouge">NoteResource</code>:</p>
+  <p>Let’s create our <code class="language-plaintext highlighter-rouge">NoteResource</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">NoteResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
   <span class="n">attribute</span> <span class="ss">:body</span><span class="p">,</span> <span class="ss">:string</span>
@@ -192,13 +192,13 @@ the concept of <a href="https://guides.rubyonrails.org/v5.2/association_basics.h
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
   <p>When defining a polymorphic relationship for our API, we’re saying “grab
-all the parent records, group them by a <code class="highlighter-rouge">type</code> column, and execute
-different queries for each type”. This way records with <code class="highlighter-rouge">notable_type ==
-'Employee'</code> can hit the <code class="highlighter-rouge">employees</code> table, but records with
-<code class="highlighter-rouge">notable_type == 'Department'</code> could in theory load from a different API
+all the parent records, group them by a <code class="language-plaintext highlighter-rouge">type</code> column, and execute
+different queries for each type”. This way records with <code class="language-plaintext highlighter-rouge">notable_type ==
+'Employee'</code> can hit the <code class="language-plaintext highlighter-rouge">employees</code> table, but records with
+<code class="language-plaintext highlighter-rouge">notable_type == 'Department'</code> could in theory load from a different API
 altogether.</p>
 
-  <p>Each of the <code class="highlighter-rouge">on</code> lines defines a new <code class="highlighter-rouge">belongs_to</code> association. That
+  <p>Each of the <code class="language-plaintext highlighter-rouge">on</code> lines defines a new <code class="language-plaintext highlighter-rouge">belongs_to</code> association. That
 means you can customize just like always:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">on</span><span class="p">(</span><span class="ss">:Team</span><span class="p">).</span><span class="nf">belongs_to</span> <span class="ss">:team</span><span class="p">,</span> <span class="ss">resource: </span><span class="no">SomeCustomTeamResource</span> <span class="k">do</span>

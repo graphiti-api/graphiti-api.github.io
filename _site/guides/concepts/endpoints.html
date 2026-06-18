@@ -134,11 +134,11 @@ completely independently of a request or response:</p>
   <p>And Resources connect to other Resources. Our graph of data is defined
 <strong>outside</strong> of the actual API.</p>
 
-  <p>Endpoints expose this graph to the world. We might choose to have a <code class="highlighter-rouge">/employees</code>
-endpoint that can eager load comments (<code class="highlighter-rouge">?include=comments</code>), but never expose
-<code class="highlighter-rouge">/comments</code> directly. Or, we could do the opposite: expose lazy-loading <code class="highlighter-rouge">/comments</code>,
-but disallow eager loading from <code class="highlighter-rouge">/employees</code>. We can add caching rules,
-or add an <code class="highlighter-rouge">/exemplary_employees</code> endpoint with special query overrides.</p>
+  <p>Endpoints expose this graph to the world. We might choose to have a <code class="language-plaintext highlighter-rouge">/employees</code>
+endpoint that can eager load comments (<code class="language-plaintext highlighter-rouge">?include=comments</code>), but never expose
+<code class="language-plaintext highlighter-rouge">/comments</code> directly. Or, we could do the opposite: expose lazy-loading <code class="language-plaintext highlighter-rouge">/comments</code>,
+but disallow eager loading from <code class="language-plaintext highlighter-rouge">/employees</code>. We can add caching rules,
+or add an <code class="language-plaintext highlighter-rouge">/exemplary_employees</code> endpoint with special query overrides.</p>
 
   <p>Finally, Endpoints are in charge of the <a href="https://tools.ietf.org/html/rfc2616">HTTP specification</a>:
 request processing, response codes, caching, MIME types, and so on. If you’re thinking
@@ -159,8 +159,8 @@ concerns:</p>
   <ul>
     <li>Caching</li>
     <li>Side-effect behavior specific to the endpoint (e.g.: sending a
-welcome email from <code class="highlighter-rouge">/users#create</code> but not <code class="highlighter-rouge">/admin/users#create</code>)</li>
-    <li>Authorization (e.g <code class="highlighter-rouge">before_action</code>)</li>
+welcome email from <code class="language-plaintext highlighter-rouge">/users#create</code> but not <code class="language-plaintext highlighter-rouge">/admin/users#create</code>)</li>
+    <li>Authorization (e.g <code class="language-plaintext highlighter-rouge">before_action</code>)</li>
     <li>Custom query parameter handling</li>
     <li>Validation handling</li>
     <li>Error handling</li>
@@ -221,8 +221,8 @@ our application generator):</p>
 <a href="https://www.graphiti.dev/guides/concepts/resources#base-scope">base scope</a>. This causes a new
 “starting point” for query building.</p>
 
-  <p>Consider the endpoints <code class="highlighter-rouge">/posts</code> (basic CRUD) and <code class="highlighter-rouge">/top_posts</code>. Though
-both are associated to PostResource, <code class="highlighter-rouge">/top_posts</code> ensures that only
+  <p>Consider the endpoints <code class="language-plaintext highlighter-rouge">/posts</code> (basic CRUD) and <code class="language-plaintext highlighter-rouge">/top_posts</code>. Though
+both are associated to PostResource, <code class="language-plaintext highlighter-rouge">/top_posts</code> ensures that only
 Posts with a certain number of upvotes get returned:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">index</span>
@@ -246,7 +246,7 @@ all of those relationships exposed at a given endpoint.</p>
 
   <p>Let’s say we’ve defined relationships:</p>
 
-  <p><code class="highlighter-rouge">Employee &gt; Position &gt; Department &gt; Hardware &gt; CostHistory</code></p>
+  <p><code class="language-plaintext highlighter-rouge">Employee &gt; Position &gt; Department &gt; Hardware &gt; CostHistory</code></p>
 
   <p>It’s reasonable to get an Employee, their Positions, and Departments for
 those positions in a single request. But is it really valid to <em>also</em> pull down
@@ -255,7 +255,7 @@ in a single request? Allowing the entire graph to be pulled down in a single req
 servers (and this is probably a better fit for lazy-loading via
 <a href="https://www.graphiti.dev/guides/concepts/links">Links</a>).</p>
 
-  <p>Let’s instead say that if we’re entering the graph at <code class="highlighter-rouge">/employees</code>, the
+  <p>Let’s instead say that if we’re entering the graph at <code class="language-plaintext highlighter-rouge">/employees</code>, the
 furthest we can go is Department:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
@@ -304,7 +304,7 @@ has changed.</p>
   <p>From the <a href="https://api.rubyonrails.org/v5.2.1/classes/ActionController/ConditionalGet.html#method-i-stale-3F">documentation on #stale?</a>:</p>
 
   <blockquote>
-    <p><em>In this case last_modified will be set by calling <code class="highlighter-rouge">maximum(:updated_at)</code> on the collection (the timestamp of the most recently updated record) and the etag by passing the object itself.</em></p>
+    <p><em>In this case last_modified will be set by calling <code class="language-plaintext highlighter-rouge">maximum(:updated_at)</code> on the collection (the timestamp of the most recently updated record) and the etag by passing the object itself.</em></p>
   </blockquote>
 
   <p>Also consider the use case where data is ingested hourly. We can avoid a

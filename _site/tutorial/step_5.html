@@ -110,7 +110,7 @@ the model layer. Let’s now expose that relationship to the API.</p>
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <p>We already defined a <code class="highlighter-rouge">Position.current</code> scope that we’ll re-use -
+  <p>We already defined a <code class="language-plaintext highlighter-rouge">Position.current</code> scope that we’ll re-use -
 let’s just make a small tweak to support the opposite use case as
 well:</p>
 
@@ -123,8 +123,8 @@ well:</p>
 
   <p>You might already have an idea how this might work from the prior step</p>
   <ul>
-    <li>we’ll use the <code class="highlighter-rouge">params</code> block to customize the relationship. The
-<code class="highlighter-rouge">has_one</code> macro ensures the result is treated as a single object and
+    <li>we’ll use the <code class="language-plaintext highlighter-rouge">params</code> block to customize the relationship. The
+<code class="language-plaintext highlighter-rouge">has_one</code> macro ensures the result is treated as a single object and
 not an array.</li>
   </ul>
 
@@ -145,16 +145,16 @@ ActiveRecord scope we already defined!</p>
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
   <p>In this example, we’re able to return only a single record because we
-have a <code class="highlighter-rouge">historical_index</code> column. If this column didn’t exist - maybe
-we’re just ordering on <code class="highlighter-rouge">created_at</code> and taking the first record - we’d
+have a <code class="language-plaintext highlighter-rouge">historical_index</code> column. If this column didn’t exist - maybe
+we’re just ordering on <code class="language-plaintext highlighter-rouge">created_at</code> and taking the first record - we’d
 have a problem. What if we were loading 20 employees and wanted the
-<code class="highlighter-rouge">current_position</code> of each - what SQL would limit the resultset
+<code class="language-plaintext highlighter-rouge">current_position</code> of each - what SQL would limit the resultset
 correctly?</p>
 
   <p>We call this a <a href="https://www.graphiti.dev/guides/concepts/resources#faux-has-one">faux has_one</a> and there’s nothing easily done here. Graphiti will ensure only one record
 is returned by the API, but the query will take longer and loading extra
 records will eat memory. If there are lots of records in the
-association, look into adding a column like <code class="highlighter-rouge">historical_index</code>.</p>
+association, look into adding a column like <code class="language-plaintext highlighter-rouge">historical_index</code>.</p>
 
 </div>
 
