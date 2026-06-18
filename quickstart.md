@@ -369,7 +369,7 @@ learn more about advanced usage and customization, we suggest following
 the [Tutorial]({{site.github.url}}/tutorial) and reading through the
 [Guides]({{site.github.url}}/guides).
 
-For help with specific use cases, [join our Slack chat](https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM)!
+For help with specific use cases, [join our Discord chat](https://discord.gg/wgqkMBsSRV)!
 
 {% include h.html tag="h2" text="Testing" a="testing" %}
 
