@@ -546,7 +546,7 @@ Another example is lazy-loading data with Links:
   </div>
 </p>
 
-Instead of loading everying up-front, we want to defer loading for
+Instead of loading everything up-front, we want to defer loading for
 performance reasons. Maybe we want to render our `Employee` detail page
 super quick, and we don't need to list the `Position`s until the user
 clicks something.
