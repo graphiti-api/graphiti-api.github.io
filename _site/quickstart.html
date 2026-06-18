@@ -105,14 +105,14 @@ sensible defaults to get started quickly.</p>
 
 <p>Let’s start with a classic Rails blog. We’ll use a <a href="http://guides.rubyonrails.org/rails_application_templates.html">template</a> to handle some of the boilerplate. Just run this command and accept all the defaults for now:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>rails new blog --api -m https://www.graphiti.dev/template</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>rails new blog <span class="nt">--api</span> <span class="nt">-m</span> https://www.graphiti.dev/template</code></pre></figure>
 
-<p>Feel free to run <code class="highlighter-rouge">git diff</code> if you’re interested in the
+<p>Feel free to run <code class="language-plaintext highlighter-rouge">git diff</code> if you’re interested in the
 particulars; this is mostly just installing gems and including modules.</p>
 
 <blockquote>
   <p>Note: if a network issue prevents you from pointing to this URL
-directly, you can download the file and and run this command as <code class="highlighter-rouge">-m
+directly, you can download the file and and run this command as <code class="language-plaintext highlighter-rouge">-m
 /path/to/template</code></p>
 </blockquote>
 
@@ -129,20 +129,20 @@ directly, you can download the file and and run this command as <code class="hig
 words: a Model is to the database as Resource is to the API. So
 first, let’s define our Model:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails generate model Post title:string upvotes:integer active:boolean
-<span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:migrate</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails generate model Post title:string upvotes:integer active:boolean
+<span class="nv">$ </span>bundle <span class="nb">exec </span>rails db:migrate</code></pre></figure>
 
 <p>Now we can use the built-in <a href="https://www.graphiti.dev/guides/concepts/resources#generators">generator</a> to define our Resource,
 corresponding <a href="https://www.graphiti.dev/guides/concepts/endpoints"><strong>Endpoint</strong></a>, and
 <a href="https://www.graphiti.dev/guides/concepts/testing"><strong>Integration Tests</strong></a>.</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails g graphiti:resource Post title:string upvotes:integer active:boolean</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails g graphiti:resource Post title:string upvotes:integer active:boolean</code></pre></figure>
 
 <p>You’ll see a number of files created. Now run your app!:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails s</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails s</code></pre></figure>
 
-<p>Verify <code class="highlighter-rouge">http://localhost:3000/api/v1/posts</code> renders JSON correctly.
+<p>Verify <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/posts</code> renders JSON correctly.
 Now we just need data.</p>
 
 <a class="anchor" id="seeding-data" />
@@ -152,7 +152,7 @@ Now we just need data.</p>
     </h5>
   </a>
 
-<p>Edit <code class="highlighter-rouge">db/seeds.rb</code> to create a few <code class="highlighter-rouge">Post</code>s:</p>
+<p>Edit <code class="language-plaintext highlighter-rouge">db/seeds.rb</code> to create a few <code class="language-plaintext highlighter-rouge">Post</code>s:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Post</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'My title'</span><span class="p">,</span> <span class="ss">upvotes: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">active: </span><span class="kp">true</span><span class="p">)</span>
 <span class="no">Post</span><span class="p">.</span><span class="nf">create!</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'Another title'</span><span class="p">,</span> <span class="ss">upvotes: </span><span class="mi">20</span><span class="p">,</span> <span class="ss">active: </span><span class="kp">false</span><span class="p">)</span>
@@ -160,9 +160,9 @@ Now we just need data.</p>
 
 <p>And run the script:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:seed</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails db:seed</code></pre></figure>
 
-<p>Now load <code class="highlighter-rouge">http://localhost:3000/api/v1/posts</code>. You should have 3 <code class="highlighter-rouge">Post</code>s in
+<p>Now load <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/posts</code>. You should have 3 <code class="language-plaintext highlighter-rouge">Post</code>s in
 your database!</p>
 
 <hr />
@@ -175,22 +175,22 @@ your database!</p>
   </a>
 
 <p>Now that we’ve defined our Resource and seeded some data, let’s see
-what query functionality we have. We’ve listed all <code class="highlighter-rouge">Post</code>s at
-<code class="highlighter-rouge">http://localhost:3000/api/v1/posts</code>. Let’s see what we can do:</p>
+what query functionality we have. We’ve listed all <code class="language-plaintext highlighter-rouge">Post</code>s at
+<code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/posts</code>. Let’s see what we can do:</p>
 
 <ul>
   <li><strong>Sort</strong>
     <ul>
       <li>By title, ascending:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?sort=title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts ORDER BY title ASC</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?sort=title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts ORDER BY title ASC</code></li>
         </ul>
       </li>
       <li>By title, descending:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?sort=-title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts ORDER BY title DESC</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?sort=-title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts ORDER BY title DESC</code></li>
         </ul>
       </li>
     </ul>
@@ -199,24 +199,24 @@ what query functionality we have. We’ve listed all <code class="highlighter-ro
     <ul>
       <li>2 Per page:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?page[size]=2</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts LIMIT 2</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?page[size]=2</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts LIMIT 2</code></li>
         </ul>
       </li>
       <li>2 Per page, second page:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?page[size]=2&amp;page[number]=2</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts LIMIT 2 OFFSET 2</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?page[size]=2&amp;page[number]=2</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts LIMIT 2 OFFSET 2</code></li>
         </ul>
       </li>
     </ul>
   </li>
   <li><strong>Sparse Fieldsets</strong>:
     <ul>
-      <li>Only render <code class="highlighter-rouge">title</code>, not <code class="highlighter-rouge">active</code>:
+      <li>Only render <code class="language-plaintext highlighter-rouge">title</code>, not <code class="language-plaintext highlighter-rouge">active</code>:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?fields[posts]=title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * from posts</code> (<em>optimizing this query is on the roadmap</em>)</li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?fields[posts]=title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * from posts</code> (<em>optimizing this query is on the roadmap</em>)</li>
         </ul>
       </li>
     </ul>
@@ -225,59 +225,59 @@ what query functionality we have. We’ve listed all <code class="highlighter-ro
     <ul>
       <li>Simple:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[title]=my title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE title = "My title!"</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[title]=my title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE title = "My title!"</code></li>
         </ul>
       </li>
       <li>Case Sensitive:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[title][eql]=My title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE lower(title) = "my title!"</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[title][eql]=My title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE lower(title) = "my title!"</code></li>
         </ul>
       </li>
       <li>Prefix:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[title][prefix]=my</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE 'my%'</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[title][prefix]=my</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE 'my%'</code></li>
         </ul>
       </li>
       <li>Suffix:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[title][suffix]=title</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE '%title!'</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[title][suffix]=title</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE '%title!'</code></li>
         </ul>
       </li>
       <li>Contains:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[title][match]=itl</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE '%itl%'</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[title][match]=itl</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE lower(title) LIKE '%itl%'</code></li>
         </ul>
       </li>
       <li>Greater Than:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[upvotes][gt]=20</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE upvotes &gt; 20</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[upvotes][gt]=20</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE upvotes &gt; 20</code></li>
         </ul>
       </li>
       <li>Greater Than or Equal To:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[upvotes][gte]=20</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE upvotes &gt;= 20</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[upvotes][gte]=20</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE upvotes &gt;= 20</code></li>
         </ul>
       </li>
       <li>Less Than:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[upvotes][lt]=20</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE upvotes &lt; 20</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[upvotes][lt]=20</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE upvotes &lt; 20</code></li>
         </ul>
       </li>
       <li>Less Than or Equal To:
         <ul>
-          <li>URL: <code class="highlighter-rouge">/api/v1/posts?filter[upvotes][lte]=20</code></li>
-          <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts WHERE upvotes &lt;= 20</code></li>
+          <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?filter[upvotes][lte]=20</code></li>
+          <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts WHERE upvotes &lt;= 20</code></li>
         </ul>
       </li>
-      <li>Any filter not whitelisted will raise <code class="highlighter-rouge">JsonapiCompliable::BadFilter</code>
+      <li>Any filter not whitelisted will raise <code class="language-plaintext highlighter-rouge">JsonapiCompliable::BadFilter</code>
 error.</li>
       <li><a href="https://www.graphiti.dev/guides/concepts/resources#filter">All filter logic can be customized</a></li>
       <li>Customizations can be DRYed up and packaged into <strong>Adapters</strong>.</li>
@@ -298,8 +298,8 @@ response (perhaps they are computationally expensive).</li>
 <span class="k">end</span></code></pre></figure>
 
 <ul>
-  <li>URL: <code class="highlighter-rouge">/api/v1/posts?extra_fields[posts]=description</code></li>
-  <li>SQL: <code class="highlighter-rouge">SELECT * FROM posts</code></li>
+  <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?extra_fields[posts]=description</code></li>
+  <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM posts</code></li>
   <li>
     <p>You can conditionally eager load data or further customize this
   logic.</p>
@@ -308,12 +308,12 @@ response (perhaps they are computationally expensive).</li>
     <ul>
       <li>Useful for search grids - “Find me the first 10 active posts, and
 the total count of all posts”.</li>
-      <li>URL: <code class="highlighter-rouge">/api/v1/posts?stats[total]=count</code></li>
-      <li>SQL: <code class="highlighter-rouge">SELECT count(*) from posts</code></li>
+      <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?stats[total]=count</code></li>
+      <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT count(*) from posts</code></li>
       <li>Combine with filters and the count will adjust accordingly.</li>
       <li>There are a number of built-in stats, you can also add your own.</li>
       <li>
-        <p>This is rendered in the <code class="highlighter-rouge">meta</code> section of the response:</p>
+        <p>This is rendered in the <code class="language-plaintext highlighter-rouge">meta</code> section of the response:</p>
 
         <p><img src="https://www.graphiti.dev/assets/img/meta_total_count.png" alt="meta_total_count" /></p>
       </li>
@@ -395,8 +395,8 @@ to take a look at the tests the generator created. One example:</p>
 
 <p>Let’s start by defining our Model:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails g model Comment post_id:integer body:text active:boolean
-<span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:migrate</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails g model Comment post_id:integer body:text active:boolean
+<span class="nv">$ </span>bundle <span class="nb">exec </span>rails db:migrate</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/post.rb</span>
 <span class="n">has_many</span> <span class="ss">:comments</span>
@@ -406,14 +406,14 @@ to take a look at the tests the generator created. One example:</p>
 
 <p>…and corresponding Resource object:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails g graphiti:resource Comment body:string active:boolean created_at:datetime</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails g graphiti:resource Comment body:string active:boolean created_at:datetime</code></pre></figure>
 
-<p>Configure the relationship in <code class="highlighter-rouge">PostResource</code>:</p>
+<p>Configure the relationship in <code class="language-plaintext highlighter-rouge">PostResource</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/post_resource.rb</span>
 <span class="n">has_many</span> <span class="ss">:comments</span></code></pre></figure>
 
-<p>And allow filtering Comments based on the Post <code class="highlighter-rouge">id</code>:</p>
+<p>And allow filtering Comments based on the Post <code class="language-plaintext highlighter-rouge">id</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/comment_resource.rb</span>
 <span class="n">attribute</span> <span class="ss">:post_id</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:filterable</span><span class="p">]</span></code></pre></figure>
@@ -423,20 +423,20 @@ to take a look at the tests the generator created. One example:</p>
 <ul>
   <li>Allows eager-loading the relationship.
     <ul>
-      <li>URL: <code class="highlighter-rouge">/api/v1/posts?include=comments</code></li>
-      <li>SQL: <code class="highlighter-rouge">SELECT * FROM comments WHERE post_id = 123</code></li>
+      <li>URL: <code class="language-plaintext highlighter-rouge">/api/v1/posts?include=comments</code></li>
+      <li>SQL: <code class="language-plaintext highlighter-rouge">SELECT * FROM comments WHERE post_id = 123</code></li>
     </ul>
   </li>
   <li>Generates a <a href="https://www.graphiti.dev/guides/concepts/links"><strong>Link</strong></a> for
 lazy-loading.</li>
-  <li>Will use <code class="highlighter-rouge">CommentResource</code> for querying logic (so we can <a href="https://www.graphiti.dev/guides/concepts/resources#deep-queries">Deep
+  <li>Will use <code class="language-plaintext highlighter-rouge">CommentResource</code> for querying logic (so we can <a href="https://www.graphiti.dev/guides/concepts/resources#deep-queries">Deep
 Query</a>, e.g.
 “only return the latest 3 active comments”).</li>
-  <li>By default, this will generate the query <code class="highlighter-rouge">CommentResource.all(filter:
+  <li>By default, this will generate the query <code class="language-plaintext highlighter-rouge">CommentResource.all(filter:
 { post_id: 123 })</code>, but <a href="https://www.graphiti.dev/guides/concepts/resources#relationships">relationships can be customized</a></li>
 </ul>
 
-<p>You should now be able to hit <code class="highlighter-rouge">/api/v1/comments</code> with all the same
+<p>You should now be able to hit <code class="language-plaintext highlighter-rouge">/api/v1/comments</code> with all the same
 functionality as before. We just need to seed data.</p>
 
 <a class="anchor" id="seeding-relationships" />
@@ -448,10 +448,10 @@ functionality as before. We just need to seed data.</p>
 
 <p>Start by clearing out your database:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:migrate:reset</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails db:migrate:reset</code></pre></figure>
 
-<p>Replace your <code class="highlighter-rouge">db/seeds.rb</code> with this code to persist one <code class="highlighter-rouge">Post</code> and
-three <code class="highlighter-rouge">Comment</code>s:</p>
+<p>Replace your <code class="language-plaintext highlighter-rouge">db/seeds.rb</code> with this code to persist one <code class="language-plaintext highlighter-rouge">Post</code> and
+three <code class="language-plaintext highlighter-rouge">Comment</code>s:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">comment1</span> <span class="o">=</span> <span class="no">Comment</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">body: </span><span class="s1">'comment one'</span><span class="p">,</span> <span class="ss">active: </span><span class="kp">true</span><span class="p">)</span>
 <span class="n">comment2</span> <span class="o">=</span> <span class="no">Comment</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">body: </span><span class="s1">'comment two'</span><span class="p">,</span> <span class="ss">active: </span><span class="kp">false</span><span class="p">)</span>
@@ -464,7 +464,7 @@ three <code class="highlighter-rouge">Comment</code>s:</p>
 
 <p>And run it:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bundle <span class="nb">exec </span>rails db:seed</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bundle <span class="nb">exec </span>rails db:seed</code></pre></figure>
 
 <a class="anchor" id="relationship-usage" />
   <a class="header" href="#relationship-usage">
@@ -473,21 +473,21 @@ three <code class="highlighter-rouge">Comment</code>s:</p>
     </h2>
   </a>
 
-<p>Now let’s fetch a <code class="highlighter-rouge">Post</code> and filtered <code class="highlighter-rouge">Comment</code>s in a single request:</p>
+<p>Now let’s fetch a <code class="language-plaintext highlighter-rouge">Post</code> and filtered <code class="language-plaintext highlighter-rouge">Comment</code>s in a single request:</p>
 
-<p><code class="highlighter-rouge">/api/v1/posts?include=comments</code></p>
+<p><code class="language-plaintext highlighter-rouge">/api/v1/posts?include=comments</code></p>
 
-<p>Any logic in <code class="highlighter-rouge">CommentResource</code> is available to us. Let’s sort the
-comments by <code class="highlighter-rouge">created_at</code> descending:</p>
+<p>Any logic in <code class="language-plaintext highlighter-rouge">CommentResource</code> is available to us. Let’s sort the
+comments by <code class="language-plaintext highlighter-rouge">created_at</code> descending:</p>
 
-<p><code class="highlighter-rouge">/api/v1/posts?include=comments&amp;sort=-comments.created_at</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">/api/v1/posts?include=comments&amp;sort=-comments.created_at</code>.</p>
 
-<p>Logic from <code class="highlighter-rouge">CommentResource</code> is accessible at the <code class="highlighter-rouge">/api/v1/comments</code>
-endpoint, and reusable when eager-loading Comments at <code class="highlighter-rouge">/api/v1/posts:</code></p>
+<p>Logic from <code class="language-plaintext highlighter-rouge">CommentResource</code> is accessible at the <code class="language-plaintext highlighter-rouge">/api/v1/comments</code>
+endpoint, and reusable when eager-loading Comments at <code class="language-plaintext highlighter-rouge">/api/v1/posts:</code></p>
 
 <ul>
-  <li><code class="highlighter-rouge">/api/v1/comments?filter[active]=true</code></li>
-  <li><code class="highlighter-rouge">/api/v1/posts?include=comments&amp;filter[comments.active]=true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/api/v1/comments?filter[active]=true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/api/v1/posts?include=comments&amp;filter[comments.active]=true</code></li>
 </ul>
 
 <p>This is why Resource objects exist: they provide an interface to
@@ -512,12 +512,12 @@ request, we can <em>persist</em> a graph of Resources in a single request. See
 exploration a breeze. The above screenshot shows Vandal fetching posts
 and comments from our blog.</p>
 
-<p>To run Vandal, hit <code class="highlighter-rouge">http://localhost:3000/api/v1/vandal</code>. Click a
+<p>To run Vandal, hit <code class="language-plaintext highlighter-rouge">http://localhost:3000/api/v1/vandal</code>. Click a
 relationship once to include it in the response, click a second time to
 edit deep query logic for the associated Resource.</p>
 
 <p>If you’ve included an association, you can click a table row to view associated data.
-The below screenshot is hitting <code class="highlighter-rouge">/posts</code>, and including only comments
+The below screenshot is hitting <code class="language-plaintext highlighter-rouge">/posts</code>, and including only comments
 with the text “two”:</p>
 
 <p align="center">
@@ -536,7 +536,7 @@ with the text “two”:</p>
 <p>We have a full CRUD API with robust querying functionality, and the
 ability to combine relationships for both reads and writes. But what
 happens when you need to customize the sorting logic? What about replacing
-<code class="highlighter-rouge">ActiveRecord</code> with an alternate persistence layer, or avoiding Rails
+<code class="language-plaintext highlighter-rouge">ActiveRecord</code> with an alternate persistence layer, or avoiding Rails
 altogether?</p>
 
 <p>These are important topics that Graphiti was built to address. To

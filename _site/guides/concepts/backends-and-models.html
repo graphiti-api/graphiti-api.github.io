@@ -131,7 +131,7 @@ that accepts a hash of options to perform a query:</p>
   <p>And a PORO Model that encapsulates those results, holding business logic:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Employee</span>
-  <span class="kp">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:rank</span>
+  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:rank</span>
 
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attrs</span> <span class="o">=</span> <span class="p">{})</span>
     <span class="n">attrs</span><span class="p">.</span><span class="nf">each_pair</span> <span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="o">|</span> <span class="nb">send</span><span class="p">(</span><span class="ss">:"</span><span class="si">#{</span><span class="n">k</span><span class="si">}</span><span class="ss">="</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="p">}</span>
@@ -184,7 +184,7 @@ that accepts a hash of options to perform a query:</p>
 <span class="k">end</span></code></pre></figure>
 
   <p>As you see above, a <strong>scope</strong> can be anything from an
-<code class="highlighter-rouge">ActiveRecord::Relation</code> to a plain Ruby Hash. We want to adjust
+<code class="language-plaintext highlighter-rouge">ActiveRecord::Relation</code> to a plain Ruby Hash. We want to adjust
 <em>something</em> based on the request parameters and pass it to our backend.
 From the raw backend results, we can instantiate Models. <strong>Note that we
 always return the full scope at the end of each block.</strong></p>
@@ -228,9 +228,9 @@ combine them. See the ActiveRecord doppelgänger of the above at our
     </h3>
   </a>
 
-  <p>The only hard requirement of a Model is that it responds to <code class="highlighter-rouge">id</code>. We use
-<code class="highlighter-rouge">model.id</code> to determine uniqueness when rendering a JSONAPI response.
-<strong>You will get incorrect results if <code class="highlighter-rouge">model.id</code> is not unique</strong>.</p>
+  <p>The only hard requirement of a Model is that it responds to <code class="language-plaintext highlighter-rouge">id</code>. We use
+<code class="language-plaintext highlighter-rouge">model.id</code> to determine uniqueness when rendering a JSONAPI response.
+<strong>You will get incorrect results if <code class="language-plaintext highlighter-rouge">model.id</code> is not unique</strong>.</p>
 
   <p>Models should also respond to any readable attributes. Remember that:</p>
 
@@ -243,7 +243,7 @@ combine them. See the ActiveRecord doppelgänger of the above at our
   <span class="vi">@object</span><span class="p">.</span><span class="nf">name</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>If your Model does not respond to <code class="highlighter-rouge">#name</code>, either pass a block to <code class="highlighter-rouge">attribute</code> or
+  <p>If your Model does not respond to <code class="language-plaintext highlighter-rouge">#name</code>, either pass a block to <code class="language-plaintext highlighter-rouge">attribute</code> or
 look into <a href="https://blog.bigbinary.com/2012/01/08/alias-vs-alias-method.html">aliasing</a>.</p>
 
 <a class="anchor" id="validations" />
@@ -259,7 +259,7 @@ To get this functionality, your model must adhere to the
 <a href="https://api.rubyonrails.org/classes/ActiveModel/Validations.html">ActiveModel::Validations API</a>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">model</span><span class="p">.</span><span class="nf">valid?</span>
-<span class="n">object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">each_pair</span> <span class="p">{</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span> <span class="p">}</span></code></pre></figure>
+<span class="n">object</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">messages</span><span class="p">.</span><span class="nf">each_pair</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span></code></pre></figure>
 
   <p>It is highly recommended to mix in:</p>
 
@@ -286,7 +286,7 @@ below are a few examples.</p>
   </a>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Employee</span>
-  <span class="kp">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span>
+  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span>
     <span class="ss">:first_name</span><span class="p">,</span>
     <span class="ss">:last_name</span><span class="p">,</span>
     <span class="ss">:age</span>
@@ -296,7 +296,7 @@ below are a few examples.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>This is a common Ruby example. <code class="highlighter-rouge">attr_accessor</code> defines getters and
+  <p>This is a common Ruby example. <code class="language-plaintext highlighter-rouge">attr_accessor</code> defines getters and
 setters for our properties, and we assign those properties in the
 constructor:</p>
 
@@ -315,7 +315,7 @@ constructor:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Employee</span>
   <span class="kp">include</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Model</span>
 
-  <span class="kp">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span>
+  <span class="nb">attr_accessor</span> <span class="ss">:id</span><span class="p">,</span>
     <span class="ss">:first_name</span><span class="p">,</span>
     <span class="ss">:last_name</span><span class="p">,</span>
     <span class="ss">:age</span>
@@ -361,7 +361,7 @@ constructor:</p>
     </h3>
   </a>
 
-  <p>If your Model does not have an <code class="highlighter-rouge">id</code> property, using a random UUID is
+  <p>If your Model does not have an <code class="language-plaintext highlighter-rouge">id</code> property, using a random UUID is
 perfectly acceptable:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">id</span>

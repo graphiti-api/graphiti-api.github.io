@@ -142,12 +142,12 @@ we can <strong><em>automate</em></strong> it.</p>
 
   <blockquote>
     <p>Note: Remote Resources are for <strong>read</strong> operations only. The exception
-is associating to an existing <code class="highlighter-rouge">belongs_to</code> remote entity.</p>
+is associating to an existing <code class="language-plaintext highlighter-rouge">belongs_to</code> remote entity.</p>
   </blockquote>
 
   <blockquote>
     <p>Note: We use <a href="https://github.com/lostisland/faraday">Faraday</a> to hit
-the remote API. You must add <code class="highlighter-rouge">faraday</code> to your Gemfile to enable
+the remote API. You must add <code class="language-plaintext highlighter-rouge">faraday</code> to your Gemfile to enable
 remote resources.</p>
   </blockquote>
 
@@ -180,7 +180,7 @@ eager-loading</strong>:</p>
 
   <p>OK, and we also know Resources support <a href="https://www.graphiti.dev/guides/concepts/backends-and-models">any backend</a>, and we can build an <a href="https://www.graphiti.dev/cookbooks/without-activerecord#adapters">Adapter</a> if our backend supports common operations like filtering, sorting, and pagination.</p>
 
-  <p>So, that means we can build an Adapter that makes an HTTP request to another Graphiti Resource that lives in a separate API. That adapter is built into Graphiti and comes out-of-the-box: <code class="highlighter-rouge">Graphiti::Adapters::GraphitiAPI</code></p>
+  <p>So, that means we can build an Adapter that makes an HTTP request to another Graphiti Resource that lives in a separate API. That adapter is built into Graphiti and comes out-of-the-box: <code class="language-plaintext highlighter-rouge">Graphiti::Adapters::GraphitiAPI</code></p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">CommentResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
   <span class="nb">self</span><span class="p">.</span><span class="nf">remote</span> <span class="o">=</span> <span class="s2">"http://my-api.com/api/v1/comments"</span>
@@ -209,16 +209,16 @@ eager-loading</strong>:</p>
 <span class="k">end</span></code></pre></figure>
 
   <p>We’ll still support Deep Querying - let’s fetch the Post and its
-active comments, ordered by <code class="highlighter-rouge">created_at</code>:</p>
+active comments, ordered by <code class="language-plaintext highlighter-rouge">created_at</code>:</p>
 
-  <p><code class="highlighter-rouge">/posts?include=comments&amp;sort=comments.created_at&amp;filter[active]=true</code></p>
+  <p><code class="language-plaintext highlighter-rouge">/posts?include=comments&amp;sort=comments.created_at&amp;filter[active]=true</code></p>
 
-  <p>Let’s say <code class="highlighter-rouge">CommentResource</code> has an association to <code class="highlighter-rouge">Author</code>. If
-<code class="highlighter-rouge">AuthorResource</code> is defined in the remote API, we can fetch it as
-normal - no special configuration needed to fetch the <code class="highlighter-rouge">Post</code>, <code class="highlighter-rouge">Comment</code>s
-and <code class="highlighter-rouge">Author</code>s in a single request.</p>
+  <p>Let’s say <code class="language-plaintext highlighter-rouge">CommentResource</code> has an association to <code class="language-plaintext highlighter-rouge">Author</code>. If
+<code class="language-plaintext highlighter-rouge">AuthorResource</code> is defined in the remote API, we can fetch it as
+normal - no special configuration needed to fetch the <code class="language-plaintext highlighter-rouge">Post</code>, <code class="language-plaintext highlighter-rouge">Comment</code>s
+and <code class="language-plaintext highlighter-rouge">Author</code>s in a single request.</p>
 
-  <p>But maybe only <code class="highlighter-rouge">CommentResource</code> is remote, and <code class="highlighter-rouge">Authors</code> are local.
+  <p>But maybe only <code class="language-plaintext highlighter-rouge">CommentResource</code> is remote, and <code class="language-plaintext highlighter-rouge">Authors</code> are local.
 We need only define the association locally:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">CommentResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
@@ -245,7 +245,7 @@ add a property to the remote API and deploy it, it will be reflected in
 the local API response.</p>
 
   <p>For the typical use case, we don’t even <em>need</em> to create this Resource
-class. The sideload definition accepts a <code class="highlighter-rouge">remote:</code> option, which will
+class. The sideload definition accepts a <code class="language-plaintext highlighter-rouge">remote:</code> option, which will
 create a Remote Resource under-the-hood:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">PostResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
@@ -264,7 +264,7 @@ create a Remote Resource under-the-hood:</p>
 
   <blockquote>
     <p>NOTE: When sending a request to a remote API, we request page size
-<code class="highlighter-rouge">999</code> so results don’t get accidentally cut off. If you need
+<code class="language-plaintext highlighter-rouge">999</code> so results don’t get accidentally cut off. If you need
 successive requests, please <a href="https://github.com/graphiti-api/graphiti/issues">submit an issue</a>.</p>
   </blockquote>
 
@@ -323,7 +323,7 @@ which allows for various adapters and middleware. In addition:</p>
     </h4>
   </a>
 
-  <p>By default we’re going to <em>forward</em> the <code class="highlighter-rouge">Authorization</code> header of the request to the remote API. To override the default headers sent:</p>
+  <p>By default we’re going to <em>forward</em> the <code class="language-plaintext highlighter-rouge">Authorization</code> header of the request to the remote API. To override the default headers sent:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/comment_resource.rb</span>
 <span class="k">def</span> <span class="nf">request_headers</span>
@@ -351,7 +351,7 @@ user:</p>
 stacktrace. If raw errors are not enabled, we’ll raise whatever
 information is given.</p>
 
-  <p>Both styles will be wrapped in <code class="highlighter-rouge">Graphiti::Errors::Remote</code>, so you can
+  <p>Both styles will be wrapped in <code class="language-plaintext highlighter-rouge">Graphiti::Errors::Remote</code>, so you can
 differentiate between a local error and a remote one.</p>
 
 <a class="anchor" id="testing" />
@@ -363,7 +363,7 @@ differentiate between a local error and a remote one.</p>
 
   <p>When testing a remote resource, we need to mock the API request and
 response. Graphiti gives you a spec helper to do just that -
-<code class="highlighter-rouge">include_context "remote api"</code>:</p>
+<code class="language-plaintext highlighter-rouge">include_context "remote api"</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'comments'</span> <span class="k">do</span>
   <span class="n">include_context</span> <span class="s1">'remote api'</span>
@@ -398,8 +398,8 @@ return the foreign key as part of the response. Otherwise, we won’t
 know how to associate these children to their parents.</p>
   </blockquote>
 
-  <p>Here’s a slightly longer version, showing that <code class="highlighter-rouge">Post</code> can sideload
-<code class="highlighter-rouge">Comment</code>s:</p>
+  <p>Here’s a slightly longer version, showing that <code class="language-plaintext highlighter-rouge">Post</code> can sideload
+<code class="language-plaintext highlighter-rouge">Comment</code>s:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="s1">'sideloading'</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s1">'comments'</span> <span class="k">do</span>
@@ -435,7 +435,7 @@ know how to associate these children to their parents.</p>
 <span class="k">end</span></code></pre></figure>
 
   <blockquote>
-    <p>Make sure to include <code class="highlighter-rouge">page[size]=999</code> in the test URL!</p>
+    <p>Make sure to include <code class="language-plaintext highlighter-rouge">page[size]=999</code> in the test URL!</p>
   </blockquote>
 </div>
 

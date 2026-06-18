@@ -90,23 +90,23 @@ is only a few simple steps.</p>
 <p>First, bump to Graphiti 1.2 - everything should work as-is, but you’ll
 start seeing deprecation notices.</p>
 
-<p>Then add <code class="highlighter-rouge">graphiti-rails</code> to your <code class="highlighter-rouge">Gemfile</code>:</p>
+<p>Then add <code class="language-plaintext highlighter-rouge">graphiti-rails</code> to your <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">'graphiti-rails'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1'</span></code></pre></figure>
 
 <p>You’ll see slightly different deprecation notices at this point. To fix:</p>
 
 <ul>
-  <li>Remove <code class="highlighter-rouge">include Graphiti::Rails</code> from <code class="highlighter-rouge">ApplicationController</code></li>
-  <li>Remove <code class="highlighter-rouge">include Graphiti::Responders</code> from <code class="highlighter-rouge">ApplicationController</code></li>
-  <li>Remove the <code class="highlighter-rouge">register_exception</code> for <code class="highlighter-rouge">404</code> errors if you have one. Keep
+  <li>Remove <code class="language-plaintext highlighter-rouge">include Graphiti::Rails</code> from <code class="language-plaintext highlighter-rouge">ApplicationController</code></li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">include Graphiti::Responders</code> from <code class="language-plaintext highlighter-rouge">ApplicationController</code></li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">register_exception</code> for <code class="language-plaintext highlighter-rouge">404</code> errors if you have one. Keep
 anything else, but this is now built-in by default.</li>
-  <li>If you’re using <a href="https://github.com/plataformatec/responders">responders</a>, Add <code class="highlighter-rouge">include Graphiti::Rails::Responders</code> from <code class="highlighter-rouge">ApplicationController</code>.</li>
-  <li>Remove the <code class="highlighter-rouge">rescue_from</code> block.</li>
+  <li>If you’re using <a href="https://github.com/plataformatec/responders">responders</a>, Add <code class="language-plaintext highlighter-rouge">include Graphiti::Rails::Responders</code> from <code class="language-plaintext highlighter-rouge">ApplicationController</code>.</li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">rescue_from</code> block.</li>
 </ul>
 
-<p>Finally, if you were passing the <code class="highlighter-rouge">show_raw_error</code> option to
-<code class="highlighter-rouge">#handle_exception</code>, replace this with <code class="highlighter-rouge">#show_detailed_exceptions?</code>:</p>
+<p>Finally, if you were passing the <code class="language-plaintext highlighter-rouge">show_raw_error</code> option to
+<code class="language-plaintext highlighter-rouge">#handle_exception</code>, replace this with <code class="language-plaintext highlighter-rouge">#show_detailed_exceptions?</code>:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">show_detailed_exceptions?</span>
   <span class="n">current_user</span><span class="p">.</span><span class="nf">admin?</span>
@@ -115,20 +115,20 @@ anything else, but this is now built-in by default.</li>
 <blockquote>
   <p>Keep in mind, we’ll always show detailed exceptions in development
 mode, per Rails conventions. If this is confusing or not desirable,
-set <code class="highlighter-rouge">config.consider_all_requests_local = false</code> in
-<code class="highlighter-rouge">config/environments/development.rb</code></p>
+set <code class="language-plaintext highlighter-rouge">config.consider_all_requests_local = false</code> in
+<code class="language-plaintext highlighter-rouge">config/environments/development.rb</code></p>
 </blockquote>
 
 <blockquote>
   <p>If you’re not running Rails in API-only mode, be sure to set
-<code class="highlighter-rouge">config.debug_exception_response_format = :api</code> in
-<code class="highlighter-rouge">config/application.rb</code></p>
+<code class="language-plaintext highlighter-rouge">config.debug_exception_response_format = :api</code> in
+<code class="language-plaintext highlighter-rouge">config/application.rb</code></p>
 </blockquote>
 
 <h2 id="testing">Testing</h2>
 
-<p>Add <code class="highlighter-rouge">config.include Graphiti::Rails::TestHelpers</code> to
-<code class="highlighter-rouge">spec/rails_helper.rb</code>.</p>
+<p>Add <code class="language-plaintext highlighter-rouge">config.include Graphiti::Rails::TestHelpers</code> to
+<code class="language-plaintext highlighter-rouge">spec/rails_helper.rb</code>.</p>
 
 <p>Replace</p>
 
@@ -142,8 +142,8 @@ set <code class="highlighter-rouge">config.consider_all_requests_local = false</
   <span class="n">handle_request_exceptions</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Change any calls to <code class="highlighter-rouge">GraphitiErrors.enable!/disable!</code> with
-<code class="highlighter-rouge">handle_request_exceptions(true|false)</code>.</p>
+<p>Change any calls to <code class="language-plaintext highlighter-rouge">GraphitiErrors.enable!/disable!</code> with
+<code class="language-plaintext highlighter-rouge">handle_request_exceptions(true|false)</code>.</p>
 
         </div>
       </div>

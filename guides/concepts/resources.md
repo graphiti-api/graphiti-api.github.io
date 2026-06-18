@@ -240,7 +240,7 @@ data coming in.
 
 {% include h.html tag="h5" text="2.6 Custom Types" a="custom-types" %}
 
-[Dry Types supports custom types](https://dry-rb.org/gems/dry-types/custom-types). Let's register a "capital letters" type:
+[Dry Types supports custom types](https://dry-rb.org/gems/dry-types/main/custom-types/). Let's register a "capital letters" type:
 
 {% highlight ruby %}
 # Define the Type

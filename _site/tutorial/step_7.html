@@ -105,9 +105,9 @@
     <p><a href="https://github.com/graphiti-api/employee_directory/compare/step_6_write_customization...step_7_many_to_many">View the Diff</a></p>
   </blockquote>
 
-  <p>Let’s add a <code class="highlighter-rouge">Team</code> relationship: a <code class="highlighter-rouge">Team</code> can have many <code class="highlighter-rouge">Employee</code>s, an
-<code class="highlighter-rouge">Employee</code> can have many <code class="highlighter-rouge">Team</code>s. Let’s also say a <code class="highlighter-rouge">Team</code> belongs to a
-<code class="highlighter-rouge">Department</code>.</p>
+  <p>Let’s add a <code class="language-plaintext highlighter-rouge">Team</code> relationship: a <code class="language-plaintext highlighter-rouge">Team</code> can have many <code class="language-plaintext highlighter-rouge">Employee</code>s, an
+<code class="language-plaintext highlighter-rouge">Employee</code> can have many <code class="language-plaintext highlighter-rouge">Team</code>s. Let’s also say a <code class="language-plaintext highlighter-rouge">Team</code> belongs to a
+<code class="language-plaintext highlighter-rouge">Department</code>.</p>
 
   <table class="table table-small text-center">
   <thead>
@@ -137,7 +137,7 @@
 </table>
 
   <p>To satisfy this many-to-many use case, we’ll need a join model,
-<code class="highlighter-rouge">TeamMembership</code>:</p>
+<code class="language-plaintext highlighter-rouge">TeamMembership</code>:</p>
 
   <table class="table table-small text-center">
   <thead>
@@ -168,11 +168,11 @@
 
   <h3 id="the-rails-stuff-">The Rails Stuff 🚂</h3>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g model Team name:string department:belongs_to
-<span class="gp">$ </span>bin/rails g model TeamMembership employee:belongs_to team:belongs_to
-<span class="gp">$ </span>bin/rails db:migrate</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g model Team name:string department:belongs_to
+<span class="nv">$ </span>bin/rails g model TeamMembership employee:belongs_to team:belongs_to
+<span class="nv">$ </span>bin/rails db:migrate</code></pre></figure>
 
-  <p>Graphiti supports <code class="highlighter-rouge">has_many :through</code>:</p>
+  <p>Graphiti supports <code class="language-plaintext highlighter-rouge">has_many :through</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
 <span class="n">has_many</span> <span class="ss">:team_memberships</span>
@@ -217,9 +217,9 @@
 <span class="mi">100</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span>
   <span class="n">employee</span> <span class="o">=</span> <span class="no">Employee</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">first_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">first_name</span><span class="p">,</span>
     <span class="ss">last_name: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">last_name</span><span class="p">,</span>
-    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">.</span><span class="nf">.</span><span class="mi">80</span><span class="p">)</span>
+    <span class="ss">age: </span><span class="nb">rand</span><span class="p">(</span><span class="mi">20</span><span class="o">..</span><span class="mi">80</span><span class="p">)</span>
 
-  <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">2</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
     <span class="n">employee</span><span class="p">.</span><span class="nf">positions</span><span class="p">.</span><span class="nf">create!</span> <span class="ss">title: </span><span class="no">Faker</span><span class="o">::</span><span class="no">Job</span><span class="p">.</span><span class="nf">title</span><span class="p">,</span>
       <span class="ss">historical_index: </span><span class="n">i</span><span class="p">,</span>
       <span class="ss">active: </span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>
@@ -231,9 +231,9 @@
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>bin/rails g graphiti:resource Team name:string</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Team name:string</code></pre></figure>
 
-  <p>Let’s flesh out our <code class="highlighter-rouge">TeamResource</code>:</p>
+  <p>Let’s flesh out our <code class="language-plaintext highlighter-rouge">TeamResource</code>:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/team_resource.rb</span>
 <span class="k">class</span> <span class="nc">TeamResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
@@ -244,7 +244,7 @@
   <span class="n">many_to_many</span> <span class="ss">:employees</span>
 <span class="k">end</span></code></pre></figure>
 
-  <p>The trick here is the <code class="highlighter-rouge">many_to_many</code> relationship. Let’s add the reverse
+  <p>The trick here is the <code class="language-plaintext highlighter-rouge">many_to_many</code> relationship. Let’s add the reverse
 as well:</p>
 
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
@@ -260,25 +260,25 @@ Teams in a single request (or vice versa).</p>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
 
-  <p>The <code class="highlighter-rouge">many_to_many</code> relationship is the only one where Graphiti modifies
-a separate Resource “under the hood”. When we said <code class="highlighter-rouge">many_to_many
-:employees</code>, the <code class="highlighter-rouge">EmployeeResource</code> got a <code class="highlighter-rouge">team_id</code> filter, and
-<code class="highlighter-rouge">many_to_many :teams</code> created an <code class="highlighter-rouge">employee_id</code> filter on <code class="highlighter-rouge">TeamResource</code>.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">many_to_many</code> relationship is the only one where Graphiti modifies
+a separate Resource “under the hood”. When we said <code class="language-plaintext highlighter-rouge">many_to_many
+:employees</code>, the <code class="language-plaintext highlighter-rouge">EmployeeResource</code> got a <code class="language-plaintext highlighter-rouge">team_id</code> filter, and
+<code class="language-plaintext highlighter-rouge">many_to_many :teams</code> created an <code class="language-plaintext highlighter-rouge">employee_id</code> filter on <code class="language-plaintext highlighter-rouge">TeamResource</code>.</p>
 
   <p>This is because the logic is more complex than the default use case. We
-don’t have a simple <code class="highlighter-rouge">WHERE</code> clause; we need to join tables and look at
+don’t have a simple <code class="language-plaintext highlighter-rouge">WHERE</code> clause; we need to join tables and look at
 the appropriate primary/foreign keys. If the name of your API
 association doesn’t match the name of your ActiveRecord association, try
-<code class="highlighter-rouge">has_many :things, as: :my_activerecord_relationship</code> to make the
+<code class="language-plaintext highlighter-rouge">has_many :things, as: :my_activerecord_relationship</code> to make the
 introspection work correctly - or, write your own filter.</p>
 
-  <p>Sometimes you’ll have multiple levels of <code class="highlighter-rouge">has_many :through</code>. In this
-case, a simple <code class="highlighter-rouge">many_to_many</code> isn’t enough - check out our <a href="https://www.graphiti.dev/cookbooks/hopping-relationships">Hopping
+  <p>Sometimes you’ll have multiple levels of <code class="language-plaintext highlighter-rouge">has_many :through</code>. In this
+case, a simple <code class="language-plaintext highlighter-rouge">many_to_many</code> isn’t enough - check out our <a href="https://www.graphiti.dev/cookbooks/hopping-relationships">Hopping
 Relationships</a> Cookbook.</p>
 
-  <p>Think hard before reaching for <code class="highlighter-rouge">many_to_many</code>. Imagine one Team is the
-“primary” Team for an Employee. We’d add a <code class="highlighter-rouge">primary</code> boolean column to
-the <code class="highlighter-rouge">team_memberships</code> table…but that table isn’t exposed to the API!
+  <p>Think hard before reaching for <code class="language-plaintext highlighter-rouge">many_to_many</code>. Imagine one Team is the
+“primary” Team for an Employee. We’d add a <code class="language-plaintext highlighter-rouge">primary</code> boolean column to
+the <code class="language-plaintext highlighter-rouge">team_memberships</code> table…but that table isn’t exposed to the API!
 Consider if there’s a hidden domain concept there.</p>
 
 </div>

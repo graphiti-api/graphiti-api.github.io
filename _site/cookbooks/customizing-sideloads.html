@@ -92,10 +92,10 @@ conventions, but in my experience this is rarely the case. From legacy
 code to alternate datastores, we need to think in Real World terms.</p>
 
 <p>Our <a href="https://github.com/graphiti-api/employee_directory">Employee Directory</a> sample application
-has a clean schema - let’s screw with it. Let’s say <code class="highlighter-rouge">Department</code> has a
-column called <code class="highlighter-rouge">watcher_emails</code>, which is an array of strings. We want to
-sideload <code class="highlighter-rouge">Department &gt; Watchers</code>. Though the <em>relationship</em> is called
-<code class="highlighter-rouge">watchers</code>, these will be <code class="highlighter-rouge">Employee</code> records.</p>
+has a clean schema - let’s screw with it. Let’s say <code class="language-plaintext highlighter-rouge">Department</code> has a
+column called <code class="language-plaintext highlighter-rouge">watcher_emails</code>, which is an array of strings. We want to
+sideload <code class="language-plaintext highlighter-rouge">Department &gt; Watchers</code>. Though the <em>relationship</em> is called
+<code class="language-plaintext highlighter-rouge">watchers</code>, these will be <code class="language-plaintext highlighter-rouge">Employee</code> records.</p>
 
 <p>Let’s start by adding a spec:</p>
 
@@ -149,12 +149,12 @@ two Resources:</p>
   <p>Note - we’re using <a href="https://github.com/pry/pry">pry</a> to debug here.</p>
 </blockquote>
 
-<p>The value of <code class="highlighter-rouge">hash</code> here is:</p>
+<p>The value of <code class="language-plaintext highlighter-rouge">hash</code> here is:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="p">{</span> <span class="ss">filter: </span><span class="p">{</span> <span class="ss">department_id: </span><span class="s2">"1"</span> <span class="p">}</span> <span class="p">}</span></code></pre></figure>
 
-<p>Which makes sense. If we say <code class="highlighter-rouge">has_many :things</code>, by default we expect
-<code class="highlighter-rouge">Thing</code> to have a <code class="highlighter-rouge">department_id</code> we can query.</p>
+<p>Which makes sense. If we say <code class="language-plaintext highlighter-rouge">has_many :things</code>, by default we expect
+<code class="language-plaintext highlighter-rouge">Thing</code> to have a <code class="language-plaintext highlighter-rouge">department_id</code> we can query.</p>
 
 <p>That’s not our case, though. Instead, let’s customize those parameters
 to fit our use case:</p>
@@ -164,17 +164,17 @@ to fit our use case:</p>
   <span class="nb">hash</span><span class="p">[</span><span class="ss">:filter</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">email: </span><span class="n">emails</span> <span class="p">}</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Instead of querying by <code class="highlighter-rouge">department_id</code>, we need to query by <code class="highlighter-rouge">email</code>. And
+<p>Instead of querying by <code class="language-plaintext highlighter-rouge">department_id</code>, we need to query by <code class="language-plaintext highlighter-rouge">email</code>. And
 the value we pass in will be an array of email addresses</p>
 
-<p>We’d need to add an <code class="highlighter-rouge">email</code> filter to <code class="highlighter-rouge">EmployeeResource</code> to make this
+<p>We’d need to add an <code class="language-plaintext highlighter-rouge">email</code> filter to <code class="language-plaintext highlighter-rouge">EmployeeResource</code> to make this
 work. This gets us <strong><em>querying</em></strong> correctly, but there’s another error:</p>
 
 <figure class="highlight"><pre><code class="language-error" data-lang="error">undefined method `department_id' for #&lt;Employee:0x00007f9652ae6d80&gt;</code></pre></figure>
 
 <p>Here’s the thing to keep in mind: let’s say our request was
-<code class="highlighter-rouge">/departments?include=watchers</code>. We queried all the data, and we now
-have an array of <code class="highlighter-rouge">Department</code>s and an array of <code class="highlighter-rouge">Employee</code>s. Now we need
+<code class="language-plaintext highlighter-rouge">/departments?include=watchers</code>. We queried all the data, and we now
+have an array of <code class="language-plaintext highlighter-rouge">Department</code>s and an array of <code class="language-plaintext highlighter-rouge">Employee</code>s. Now we need
 to specify which employees should be assigned as watchers of which
 department.</p>
 
@@ -191,10 +191,10 @@ department.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>We’re selecting all relevant <code class="highlighter-rouge">Employee</code>s for a given <code class="highlighter-rouge">Department</code> by
-checking the array of <code class="highlighter-rouge">watcher_emails</code>.</p>
+<p>We’re selecting all relevant <code class="language-plaintext highlighter-rouge">Employee</code>s for a given <code class="language-plaintext highlighter-rouge">Department</code> by
+checking the array of <code class="language-plaintext highlighter-rouge">watcher_emails</code>.</p>
 
-<p>This code can be tightened up a little with <code class="highlighter-rouge">assign_each</code> (recommended).
+<p>This code can be tightened up a little with <code class="language-plaintext highlighter-rouge">assign_each</code> (recommended).
 This way we don’t have to iterate departments or worry about the
 assignment ourselves:</p>
 
@@ -206,21 +206,21 @@ assignment ourselves:</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>Note that we’re using <code class="highlighter-rouge">#select</code> to return an array of relevant
-<code class="highlighter-rouge">Employee</code>s. If this was a <code class="highlighter-rouge">belongs_to</code> or <code class="highlighter-rouge">has_one</code> relationship, we’d
-probably want to use <code class="highlighter-rouge">#find</code> to return a single <code class="highlighter-rouge">Employee</code>.</p>
+<p>Note that we’re using <code class="language-plaintext highlighter-rouge">#select</code> to return an array of relevant
+<code class="language-plaintext highlighter-rouge">Employee</code>s. If this was a <code class="language-plaintext highlighter-rouge">belongs_to</code> or <code class="language-plaintext highlighter-rouge">has_one</code> relationship, we’d
+probably want to use <code class="language-plaintext highlighter-rouge">#find</code> to return a single <code class="language-plaintext highlighter-rouge">Employee</code>.</p>
 
 <p>OK there’s <em>one last error</em>:</p>
 
 <figure class="highlight"><pre><code class="language-error" data-lang="error">undefined method `watchers=' for #&lt;Department:0x00007feb625a7468&gt;</code></pre></figure>
 
-<p>This one is simple - the <code class="highlighter-rouge">assign</code> function will call your Adapter’s
-assignment logic, which by default will be a simple <code class="highlighter-rouge">department.watchers
+<p>This one is simple - the <code class="language-plaintext highlighter-rouge">assign</code> function will call your Adapter’s
+assignment logic, which by default will be a simple <code class="language-plaintext highlighter-rouge">department.watchers
 = relevant_employees</code>. That means we need to add a getter/setter for
 this property:</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/department.rb</span>
-<span class="kp">attr_accessor</span> <span class="ss">:watchers</span></code></pre></figure>
+<span class="nb">attr_accessor</span> <span class="ss">:watchers</span></code></pre></figure>
 
 <p>And we’re done! The test should now pass. <a href="https://github.com/graphiti-api/employee_directory/tree/customize_sideloads_cookbook">Check out the working code
 here</a>.</p>
