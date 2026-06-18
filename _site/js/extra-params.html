@@ -126,31 +126,19 @@
 </div>
 
 <div class="col-md-8 col-md-offset-1">
-  <h3 id="authentication">Authentication</h3>
+  <h3 id="extra-params">Extra Params</h3>
 
-  <p>Spraypaint supports <a href="https://jwt.io/introduction">JSON Web Tokens</a>. These can
-be set manually, or automatically fetched from <code class="language-plaintext highlighter-rouge">localStorage</code>.</p>
+  <p>Sometimes you need to submit params that are not standard jsonapi params. One great example would be
+<code class="highlighter-rouge">https://yourdomain.com/users?debug=true</code> which is not a param for the <code class="highlighter-rouge">UserResource</code> you may have, but
+might enable functionality in your controller as needed.</p>
 
-  <p>To set manually:</p>
+  <p>Invoking it is pretty straightforward, just invoke <code class="highlighter-rouge">extraParams</code> and pass in params and values you wish
+to add to your API call when executed.</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwt</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">myt0k3n</span><span class="dl">'</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">YourRecord</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span></code></pre></figure>
 
-  <blockquote>
-    <p>All requests will now send the header:<br />
-<code class="language-plaintext highlighter-rouge">Authorization: Token token="myt0k3n"</code>.</p>
-  </blockquote>
-
-  <p>To set via <code class="language-plaintext highlighter-rouge">localStorage</code>, simply store the token with a key of <code class="language-plaintext highlighter-rouge">jwt</code>
-and it will be set automatically. To customize the <code class="language-plaintext highlighter-rouge">localStorage</code> key:</p>
-
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwtStorage</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">authtoken</span><span class="dl">"</span></code></pre></figure>
-
-  <p>…or to opt-out of <code class="language-plaintext highlighter-rouge">localStorage</code> altogether:</p>
-
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">ApplicationRecord</span><span class="p">.</span><span class="nx">jwtStorage</span> <span class="o">=</span> <span class="kc">false</span></code></pre></figure>
-
-  <p>You can control the format of the header that is sent to the
-server:</p>
+  <p>One common way to use this globally is to put this into a base class so it can be chained as part of 
+every resource.</p>
 
   <div class="tabs">
   <div class="tab typescript active">
@@ -163,39 +151,26 @@ server:</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="kd">class</span> <span class="nc">ApplicationRecord</span> <span class="kd">extends</span> <span class="nc">SpraypaintBase</span> <span class="p">{</span>
-    <span class="c1">// ... code ...</span>
-    <span class="k">static</span> <span class="nf">generateAuthHeader</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="err">@</span><span class="nx">Model</span>
+  <span class="k">export</span> <span class="kr">class</span> <span class="nx">ApplicationRecord</span> <span class="k">extends</span> <span class="nx">SpraypaintBase</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">T</span> <span class="k">extends</span> <span class="nx">ApplicationRecord</span><span class="o">&gt;</span><span class="p">()</span><span class="err">:</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="k">as</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
+  <span class="c1">// unfortunately you will need to pass in the </span>
+  <span class="c1">// implementing class' type as a generic</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">UserRecord</span><span class="o">&gt;</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
-    <span class="c1">// ... code ...</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">generateAuthHeader</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="dl">"</span><span class="s2">Bearer </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">token</span><span class="p">;</span>
-      <span class="p">}</span>
+      <span class="na">withDebug</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
     <span class="p">}</span>
-  <span class="p">});</span>
+  <span class="p">})</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
   </code></pre></figure>
 
   </div>
-
-  <p>Finally, if your server returns a refreshed JWT within the <code class="language-plaintext highlighter-rouge">X-JWT</code>
-header, it will be used in all subsequent requests (and <code class="language-plaintext highlighter-rouge">localStorage</code>
-will be updated automatically if you’re using it).</p>
-
-  <div class="clearfix">
-  <h2 id="next">
-    <a href="https://www.graphiti.dev/js/state-syncing">
-      NEXT:
-      <small>State Syncing</small>
-      &raquo;
-    </a>
-  </h2>
-</div>
 </div>
 
         </div>
