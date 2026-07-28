@@ -161,7 +161,7 @@ the concept of <a href="https://guides.rubyonrails.org/v5.2/association_basics.h
 
   <h3 id="the-graphiti-stuff-">The Graphiti Stuff 🎨</h3>
 
-  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Note body:text</code></pre></figure>
+  <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>bin/rails g graphiti:resource Note body:string</code></pre></figure>
 
   <p>Let’s create our <code class="language-plaintext highlighter-rouge">NoteResource</code>:</p>
 
@@ -182,11 +182,11 @@ the concept of <a href="https://guides.rubyonrails.org/v5.2/association_basics.h
 
   <p>And corresponding associations:</p>
 
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/models/employee.rb</span>
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># app/resources/employee_resource.rb</span>
 <span class="n">polymorphic_has_many</span> <span class="ss">:notes</span><span class="p">,</span> <span class="ss">as: :notable</span>
-<span class="c1"># app/models/team.rb</span>
+<span class="c1"># app/resources/team_resource.rb</span>
 <span class="n">polymorphic_has_many</span> <span class="ss">:notes</span><span class="p">,</span> <span class="ss">as: :notable</span>
-<span class="c1"># app/models/department.rb</span>
+<span class="c1"># app/resources/department_resource.rb</span>
 <span class="n">polymorphic_has_many</span> <span class="ss">:notes</span><span class="p">,</span> <span class="ss">as: :notable</span></code></pre></figure>
 
   <h4 id="digging-deeper-">Digging Deeper 🧐</h4>
@@ -243,7 +243,7 @@ means you can customize just like always:</p>
         <h3>Contact</h3>
         <ul>
           <li>
-            <a target="_blank" href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM">Slack Chat</a>
+            <a target="_blank" href="https://discord.gg/wgqkMBsSRV">Discord Chat</a>
           </li>
           <li>
             <a href="mailto:richmolj@gmail.com">Email</a>

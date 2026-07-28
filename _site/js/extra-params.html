@@ -129,13 +129,13 @@
   <h3 id="extra-params">Extra Params</h3>
 
   <p>Sometimes you need to submit params that are not standard jsonapi params. One great example would be
-<code class="highlighter-rouge">https://yourdomain.com/users?debug=true</code> which is not a param for the <code class="highlighter-rouge">UserResource</code> you may have, but
+<code class="language-plaintext highlighter-rouge">https://yourdomain.com/users?debug=true</code> which is not a param for the <code class="language-plaintext highlighter-rouge">UserResource</code> you may have, but
 might enable functionality in your controller as needed.</p>
 
-  <p>Invoking it is pretty straightforward, just invoke <code class="highlighter-rouge">extraParams</code> and pass in params and values you wish
+  <p>Invoking it is pretty straightforward, just invoke <code class="language-plaintext highlighter-rouge">extraParams</code> and pass in params and values you wish
 to add to your API call when executed.</p>
 
-  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">YourRecord</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="nx">YourRecord</span><span class="p">.</span><span class="nf">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span></code></pre></figure>
 
   <p>One common way to use this globally is to put this into a base class so it can be chained as part of 
 every resource.</p>
@@ -151,23 +151,23 @@ every resource.</p>
 
   <div class="code-tabs">
 
-    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="err">@</span><span class="nx">Model</span>
-  <span class="k">export</span> <span class="kr">class</span> <span class="nx">ApplicationRecord</span> <span class="k">extends</span> <span class="nx">SpraypaintBase</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">T</span> <span class="k">extends</span> <span class="nx">ApplicationRecord</span><span class="o">&gt;</span><span class="p">()</span><span class="err">:</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="k">as</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+    <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript">  <span class="p">@</span><span class="nd">Model</span>
+  <span class="k">export</span> <span class="kd">class</span> <span class="nc">ApplicationRecord</span> <span class="kd">extends</span> <span class="nc">SpraypaintBase</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">ApplicationRecord</span><span class="o">&gt;</span><span class="p">():</span> <span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nf">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span> <span class="kd">as </span><span class="nx">Scope</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
   <span class="c1">// unfortunately you will need to pass in the </span>
   <span class="c1">// implementing class' type as a generic</span>
-  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">UserRecord</span><span class="o">&gt;</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="o">&lt;</span><span class="nx">UserRecord</span><span class="o">&gt;</span><span class="p">().</span><span class="nf">all</span><span class="p">()</span>
   </code></pre></figure>
 
-    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kr">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">const</span> <span class="nx">ApplicationRecord</span> <span class="o">=</span> <span class="nx">SpraypaintBase</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
     <span class="na">static</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">withDebug</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+      <span class="na">withDebug</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nf">extraParams</span><span class="p">({</span> <span class="na">debug</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
     <span class="p">}</span>
   <span class="p">})</span>
-  <span class="nx">UserRecord</span><span class="p">.</span><span class="nx">withDebug</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+  <span class="nx">UserRecord</span><span class="p">.</span><span class="nf">withDebug</span><span class="p">().</span><span class="nf">all</span><span class="p">()</span>
   </code></pre></figure>
 
   </div>
@@ -197,7 +197,7 @@ every resource.</p>
         <h3>Contact</h3>
         <ul>
           <li>
-            <a target="_blank" href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM">Slack Chat</a>
+            <a target="_blank" href="https://discord.gg/wgqkMBsSRV">Discord Chat</a>
           </li>
           <li>
             <a href="mailto:richmolj@gmail.com">Email</a>

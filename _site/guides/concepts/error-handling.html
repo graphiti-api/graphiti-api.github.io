@@ -126,7 +126,7 @@ code. For other errors, we may want to render a helpful error message:</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">API</span>
   <span class="n">register_exception</span> <span class="no">NotAuthorized</span><span class="p">,</span> <span class="ss">status: </span><span class="mi">403</span>
   <span class="n">register_exception</span> <span class="no">ShipmentDelayed</span><span class="p">,</span>
-    <span class="ss">message: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"Contact us at 123-456-7899"</span> <span class="p">}</span>
+    <span class="ss">detail: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"Contact us at 123-456-7899"</span> <span class="p">}</span>
   <span class="c1"># ... code ...</span>
 <span class="k">end</span></code></pre></figure>
 
@@ -209,8 +209,8 @@ message, and backtrace in the JSON response.</p>
   <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">register_exception</span> <span class="no">Errors</span><span class="o">::</span><span class="no">NotAuthorized</span><span class="p">,</span>
   <span class="ss">status: </span><span class="mi">403</span><span class="p">,</span>
   <span class="ss">title: </span><span class="s2">"You cannot perform this action"</span><span class="p">,</span>
-  <span class="ss">message: </span><span class="kp">true</span><span class="p">,</span> <span class="c1"># render the raw error message</span>
-  <span class="ss">message: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"Invalid Action"</span> <span class="p">}</span> <span class="c1"># message via proc</span></code></pre></figure>
+  <span class="ss">detail: :exception</span><span class="p">,</span> <span class="c1"># render the raw error message</span>
+  <span class="ss">detail: </span><span class="o">-&gt;</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"Invalid Action"</span> <span class="p">}</span> <span class="c1"># message via proc</span></code></pre></figure>
 
   <p><a href="https://github.com/wagenet/rescue_registry">See full documentation in the RescueRegistry README</a>.</p>
 
@@ -229,7 +229,7 @@ message, and backtrace in the JSON response.</p>
 
   <p>The final option <code class="language-plaintext highlighter-rouge">register_exception</code> accepts is <code class="language-plaintext highlighter-rouge">handler</code>. Here you can inject your own error handling class that customize <code class="language-plaintext highlighter-rouge">RescueRegistry::ExceptionHandler</code>. For example:</p>
 
-  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MyCustomHandler</span> <span class="o">&lt;</span> <span class="no">GraphitiErrors</span><span class="o">::</span><span class="no">ExceptionHandler</span>
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">MyCustomHandler</span> <span class="o">&lt;</span> <span class="no">RescueRegistry</span><span class="o">::</span><span class="no">ExceptionHandler</span> <span class="c1"># prefer &lt; Graphiti::Rails::ExceptionHandler if using graphiti-rails</span>
   <span class="c1"># self.exception accessible within all instance methods</span>
 
   <span class="k">def</span> <span class="nf">status_code</span>
@@ -321,7 +321,7 @@ error codes, etc):</p>
         <h3>Contact</h3>
         <ul>
           <li>
-            <a target="_blank" href="https://join.slack.com/t/graphiti-api/shared_invite/enQtMjkyMTA3MDgxNTQzLTU5MDI4MDllNTEzOTE1Nzk0ZGJlNTcxZDYzMGY2ZTczMDY2OWZhM2RmNTU0YWNiOWZhZDhkMmU4MzQ5NzIyNWM">Slack Chat</a>
+            <a target="_blank" href="https://discord.gg/wgqkMBsSRV">Discord Chat</a>
           </li>
           <li>
             <a href="mailto:richmolj@gmail.com">Email</a>
