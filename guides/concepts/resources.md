@@ -33,6 +33,7 @@ Resources
 * 5 [Relationships](#relationships)
   * [Deep Queries](#deep-queries)
   * [Customizing Relationships](#customizing-relationships)
+    * [Conditional Relationships](#conditional-relationships)
     * [Customizing Scope](#customizing-scope)
     * [Customizing Assignment](#customizing-assignment)
   * [has_many](#has-many)
@@ -127,6 +128,18 @@ def attribute_allowed?(model_instance, attribute_name)
   PolicyChecker.new(model_instance).attribute_readable?(attribute_name)
 end
 {% endhighlight %}
+
+`:writable` guards mirror this: the guard method (or proc) can optionally accept the model being written and the name of the attribute. On an update, the model is the persisted record being modified; on a create, it is a new unsaved instance. The model is only looked up when a guard actually declares a parameter for it, so zero-argument guards behave exactly as before.
+
+{% highlight ruby %}
+attribute :salary, :integer, writable: :salary_writable?
+
+def salary_writable?(model_instance, attribute_name)
+  PolicyChecker.new(model_instance).attribute_writable?(attribute_name)
+end
+{% endhighlight %}
+
+If the guard returns `false`, the request is rejected with an `unwritable_attribute` validation error before anything is persisted.
 
 {% include h.html tag="h4" text="2.2 Default Behavior" a="default-behavior" %}
 
@@ -959,7 +972,51 @@ has_many :positions,
 
 *note*: Setting `always_include_resource_ids: true` could result in 1+N queries (see [#167](https://github.com/graphiti-api/graphiti/issues/167#issuecomment-686866646))
 
-{% include h.html tag="h5" text="5.2.1 Customizing Scope" a="customizing-scope" %}
+{% include h.html tag="h5" text="5.2.1 Conditional Relationships" a="conditional-relationships" %}
+
+Like attributes, the `readable` and `writable` flags on a relationship accept more than a boolean: pass a symbol, string, or proc and the relationship becomes conditional, evaluated per-request.
+
+{% highlight ruby %}
+class EmployeeResource < ApplicationResource
+  has_many :salary_histories, readable: :admin?, writable: :admin?
+
+  def admin?
+    context.current_user.admin?
+  end
+end
+{% endhighlight %}
+
+When a readable guard returns `false`, the relationship is omitted from the serialized output and any attempt to sideload it via `?include=` is silently scrubbed from the request. When a writable guard returns `false`, sideposting to that relationship is rejected with an `unwritable_relationship` validation error.
+
+Unlike attribute guards, relationship guards take no arguments. Include scrubbing happens before any records have been fetched, so there is no model to hand them — base the decision on `context` alone.
+
+The guard can live on either side of the relationship. Graphiti first looks for the method on the resource declaring the relationship; if it isn't defined there but is defined on the related resource, the related resource's method is used. Defining the guard on the related resource lets a single guard cover every relationship pointing at it:
+
+{% highlight ruby %}
+class SalaryHistoryResource < ApplicationResource
+  # Any resource declaring a relationship to SalaryHistoryResource with
+  # readable: :admin? will use this method, unless it defines its own.
+  def admin?
+    context.current_user.admin?
+  end
+end
+{% endhighlight %}
+
+> **Upgrading to 1.12:** relationship guards are new enforcement, not a new
+> option. Before 1.12, a symbol, string, or proc passed to a relationship's
+> `readable`/`writable` was accepted and silently treated as `true` — the guard
+> was never called. Those guards now run. If your app already passes one of
+> these, a relationship that has been serialized all along may start
+> disappearing from responses.
+>
+> To list every guarded relationship in your app before deploying, run
+> `bin/rails runner 'puts Graphiti.guarded_relationships'`.
+>
+> Apps using `schema.json` also get this for free: guarded relationships are
+> flagged in the schema, and the schema check reports them as
+> `became guarded`.
+
+{% include h.html tag="h5" text="5.2.2 Customizing Scope" a="customizing-scope" %}
 
 Use `params` to change the query parameters that will be passed to the
 associated Resource:
@@ -988,7 +1045,7 @@ If there is no existing AR association for this we would also need to make it a 
 attr_accessor :active_positions
 {% endhighlight %}
 
-{% include h.html tag="h5" text="5.2.1 Customizing Assignment" a="customizing-assignment" %}
+{% include h.html tag="h5" text="5.2.3 Customizing Assignment" a="customizing-assignment" %}
 
 Once we've fetched primary data and its relationship (e.g. we have an
 `employees` array and `positions` array), we need to associate these

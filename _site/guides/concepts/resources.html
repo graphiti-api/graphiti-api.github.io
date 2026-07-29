@@ -128,6 +128,7 @@
         <li><a href="#deep-queries">Deep Queries</a></li>
         <li><a href="#customizing-relationships">Customizing Relationships</a>
           <ul>
+            <li><a href="#conditional-relationships">Conditional Relationships</a></li>
             <li><a href="#customizing-scope">Customizing Scope</a></li>
             <li><a href="#customizing-assignment">Customizing Assignment</a></li>
           </ul>
@@ -243,6 +244,16 @@ model instance and the name of the attribute being serialized as arguments:</p>
 <span class="k">def</span> <span class="nf">attribute_allowed?</span><span class="p">(</span><span class="n">model_instance</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
   <span class="no">PolicyChecker</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">model_instance</span><span class="p">).</span><span class="nf">attribute_readable?</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">)</span>
 <span class="k">end</span></code></pre></figure>
+
+  <p><code class="language-plaintext highlighter-rouge">:writable</code> guards mirror this: the guard method (or proc) can optionally accept the model being written and the name of the attribute. On an update, the model is the persisted record being modified; on a create, it is a new unsaved instance. The model is only looked up when a guard actually declares a parameter for it, so zero-argument guards behave exactly as before.</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">attribute</span> <span class="ss">:salary</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">writable: :salary_writable?</span>
+
+<span class="k">def</span> <span class="nf">salary_writable?</span><span class="p">(</span><span class="n">model_instance</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+  <span class="no">PolicyChecker</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">model_instance</span><span class="p">).</span><span class="nf">attribute_writable?</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">)</span>
+<span class="k">end</span></code></pre></figure>
+
+  <p>If the guard returns <code class="language-plaintext highlighter-rouge">false</code>, the request is rejected with an <code class="language-plaintext highlighter-rouge">unwritable_attribute</code> validation error before anything is persisted.</p>
 
 <a class="anchor" id="default-behavior" />
   <a class="header" href="#default-behavior">
@@ -1117,10 +1128,57 @@ also pass the JSONAPI type in brackets:</p>
 
   <p><em>note</em>: Setting <code class="language-plaintext highlighter-rouge">always_include_resource_ids: true</code> could result in 1+N queries (see <a href="https://github.com/graphiti-api/graphiti/issues/167#issuecomment-686866646">#167</a>)</p>
 
+<a class="anchor" id="conditional-relationships" />
+  <a class="header" href="#conditional-relationships">
+    <h5>
+      5.2.1 Conditional Relationships
+    </h5>
+  </a>
+
+  <p>Like attributes, the <code class="language-plaintext highlighter-rouge">readable</code> and <code class="language-plaintext highlighter-rouge">writable</code> flags on a relationship accept more than a boolean: pass a symbol, string, or proc and the relationship becomes conditional, evaluated per-request.</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">EmployeeResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
+  <span class="n">has_many</span> <span class="ss">:salary_histories</span><span class="p">,</span> <span class="ss">readable: :admin?</span><span class="p">,</span> <span class="ss">writable: :admin?</span>
+
+  <span class="k">def</span> <span class="nf">admin?</span>
+    <span class="n">context</span><span class="p">.</span><span class="nf">current_user</span><span class="p">.</span><span class="nf">admin?</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+  <p>When a readable guard returns <code class="language-plaintext highlighter-rouge">false</code>, the relationship is omitted from the serialized output and any attempt to sideload it via <code class="language-plaintext highlighter-rouge">?include=</code> is silently scrubbed from the request. When a writable guard returns <code class="language-plaintext highlighter-rouge">false</code>, sideposting to that relationship is rejected with an <code class="language-plaintext highlighter-rouge">unwritable_relationship</code> validation error.</p>
+
+  <p>Unlike attribute guards, relationship guards take no arguments. Include scrubbing happens before any records have been fetched, so there is no model to hand them — base the decision on <code class="language-plaintext highlighter-rouge">context</code> alone.</p>
+
+  <p>The guard can live on either side of the relationship. Graphiti first looks for the method on the resource declaring the relationship; if it isn’t defined there but is defined on the related resource, the related resource’s method is used. Defining the guard on the related resource lets a single guard cover every relationship pointing at it:</p>
+
+  <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">SalaryHistoryResource</span> <span class="o">&lt;</span> <span class="no">ApplicationResource</span>
+  <span class="c1"># Any resource declaring a relationship to SalaryHistoryResource with</span>
+  <span class="c1"># readable: :admin? will use this method, unless it defines its own.</span>
+  <span class="k">def</span> <span class="nf">admin?</span>
+    <span class="n">context</span><span class="p">.</span><span class="nf">current_user</span><span class="p">.</span><span class="nf">admin?</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+  <blockquote>
+    <p><strong>Upgrading to 1.12:</strong> relationship guards are new enforcement, not a new
+option. Before 1.12, a symbol, string, or proc passed to a relationship’s
+<code class="language-plaintext highlighter-rouge">readable</code>/<code class="language-plaintext highlighter-rouge">writable</code> was accepted and silently treated as <code class="language-plaintext highlighter-rouge">true</code> — the guard
+was never called. Those guards now run. If your app already passes one of
+these, a relationship that has been serialized all along may start
+disappearing from responses.</p>
+
+    <p>To list every guarded relationship in your app before deploying, run
+<code class="language-plaintext highlighter-rouge">bin/rails runner 'puts Graphiti.guarded_relationships'</code>.</p>
+
+    <p>Apps using <code class="language-plaintext highlighter-rouge">schema.json</code> also get this for free: guarded relationships are
+flagged in the schema, and the schema check reports them as
+<code class="language-plaintext highlighter-rouge">became guarded</code>.</p>
+  </blockquote>
+
 <a class="anchor" id="customizing-scope" />
   <a class="header" href="#customizing-scope">
     <h5>
-      5.2.1 Customizing Scope
+      5.2.2 Customizing Scope
     </h5>
   </a>
 
@@ -1150,7 +1208,7 @@ associated Resource:</p>
 <a class="anchor" id="customizing-assignment" />
   <a class="header" href="#customizing-assignment">
     <h5>
-      5.2.1 Customizing Assignment
+      5.2.3 Customizing Assignment
     </h5>
   </a>
 
