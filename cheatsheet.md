@@ -9,7 +9,7 @@ This is an expanded version of what's "under the hood" of a default
 Resource:
 
 {% highlight ruby %}
-class EmployeeResource < ApplicationRecord
+class EmployeeResource < ApplicationResource
   self.model = Employee
 
   # JSONAPI type
